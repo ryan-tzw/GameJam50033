@@ -31,7 +31,21 @@ namespace Jam50033
                 return;
             }
 
-            float cellSize = stageArea.CellSize;
+            FitToCell(stageArea.CellSize);
+        }
+
+        public void FitToCell(float cellSize)
+        {
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            if (spriteRenderer.sprite == null)
+            {
+                return;
+            }
+
             if (cellSize <= 0f)
             {
                 return;
