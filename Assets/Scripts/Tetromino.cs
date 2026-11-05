@@ -19,6 +19,7 @@ namespace Jam50033
         private float speedUpMultiplier = 3f;
         [SerializeField, Range(0f, 0.5f), Tooltip("Maximum horizontal snap in cells when W/S attaches above or below a brick.")]
         private float verticalAttachmentSnapTolerance = 0.25f;
+        [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Brick[] bricks;
 
@@ -28,6 +29,8 @@ namespace Jam50033
         private float lastMoveSpeed;
         private Vector2Int placedCell;
         private readonly HashSet<Vector2Int> occupiedCells = new();
+        private readonly Vector2Int[] ghostCells = new Vector2Int[4];
+        private TetrominoGhost ghost;
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
@@ -60,6 +63,7 @@ namespace Jam50033
                 (column + 0.5f - stageArea.Columns * 0.5f) * size,
                 (row + 0.5f - stageArea.Rows * 0.5f) * size, 0f));
             UpdateLayout();
+            UpdateGhost();
         }
 
         private static readonly Vector2Int[][] ShapeCells =
@@ -112,7 +116,75 @@ namespace Jam50033
             relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
             speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
             verticalAttachmentSnapTolerance = Mathf.Clamp(verticalAttachmentSnapTolerance, 0f, 0.5f);
+            ghostOpacity = Mathf.Clamp01(ghostOpacity);
             UpdateLayout();
+        }
+
+        private void LateUpdate()
+        {
+            UpdateGhost();
+        }
+
+        private void UpdateGhost()
+        {
+            if (!Application.IsPlaying(gameObject))
+            {
+                return;
+            }
+
+            if (isPlaced || isDiscarded)
+            {
+                if (ghost != null)
+                {
+                    Destroy(ghost.gameObject);
+                    ghost = null;
+                }
+
+                return;
+            }
+
+            if (stageArea == null || stageArea.CellSize <= 0f || bricks == null || bricks.Length != 4 || ghostOpacity <= 0f)
+            {
+                if (ghost != null)
+                {
+                    ghost.Hide();
+                }
+
+                return;
+            }
+
+            RefreshOccupiedCells();
+            float size = stageArea.CellSize;
+            Vector3 origin = GetGridOrigin();
+            Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
+            int row = Mathf.RoundToInt((position.y - origin.y) / size);
+            int minimumX = GetRotatedCell(0, rotationSteps).x;
+            for (int i = 0; i < 4; i++)
+            {
+                ghostCells[i] = GetRotatedCell(i, rotationSteps);
+                minimumX = Mathf.Min(minimumX, ghostCells[i].x);
+            }
+
+            float endX = GetAttachmentEndX(float.NegativeInfinity, minimumX);
+            if (!TryFindAttachment((position.x - origin.x) / size, (endX - origin.x) / size, row, out Vector2Int placement))
+            {
+                if (ghost != null)
+                {
+                    ghost.Hide();
+                }
+
+                return;
+            }
+
+            if (ghost == null)
+            {
+                GameObject ghostObject = new GameObject("Placement Ghost");
+                ghostObject.transform.SetParent(transform, false);
+                ghost = ghostObject.AddComponent<TetrominoGhost>();
+                ghost.Initialize(bricks);
+            }
+
+            ghost.Show(stageArea.CellToWorldPosition(placement), stageArea.transform.rotation, size, ghostCells, ghostOpacity);
         }
 
         private void UpdateMovement(float deltaTime)
@@ -199,16 +271,7 @@ namespace Jam50033
 
             float nextX = position.x - currentSpeed * cellSize * deltaTime;
             lastMoveSpeed = currentSpeed;
-            float attachmentEndX = nextX;
-            Camera mainCamera = Camera.main;
-            if (mainCamera != null)
-            {
-                float screenLeft = GetLeftScreenEdge(mainCamera);
-                Vector3 leftEdgePosition = new Vector3(screenLeft, transform.position.y, transform.position.z);
-                float localScreenLeft = stageArea.transform.InverseTransformPoint(leftEdgePosition).x;
-                float discardX = localScreenLeft - (minimumX - 0.5f) * cellSize;
-                attachmentEndX = Mathf.Max(attachmentEndX, discardX);
-            }
+            float attachmentEndX = GetAttachmentEndX(nextX, minimumX);
 
             if (TryFindAttachment((position.x - origin.x) / cellSize,
                 (attachmentEndX - origin.x) / cellSize, row, out Vector2Int placement))
@@ -222,6 +285,21 @@ namespace Jam50033
             }
 
             transform.position = stageArea.transform.TransformPoint(position);
+        }
+
+        private float GetAttachmentEndX(float requestedX, int minimumX)
+        {
+            Camera mainCamera = Camera.main;
+            if (mainCamera != null)
+            {
+                float screenLeft = GetLeftScreenEdge(mainCamera);
+                Vector3 leftEdgePosition = new Vector3(screenLeft, transform.position.y, transform.position.z);
+                float localScreenLeft = stageArea.transform.InverseTransformPoint(leftEdgePosition).x;
+                float discardX = localScreenLeft - (minimumX - 0.5f) * stageArea.CellSize;
+                return Mathf.Max(requestedX, discardX);
+            }
+
+            return requestedX;
         }
 
         private void PlaceAtCell(Vector2Int cell)
