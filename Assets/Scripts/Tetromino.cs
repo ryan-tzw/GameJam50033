@@ -20,6 +20,15 @@ namespace Jam50033
         [SerializeField, Range(0f, 0.5f), Tooltip("Maximum horizontal snap in cells when W/S attaches above or below a brick.")]
         private float verticalAttachmentSnapTolerance = 0.25f;
         [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
+        [Header("Shape Colors")]
+        [SerializeField] private Color iColor = new Color32(0x28, 0xC8, 0xDF, 0xFF);
+        [SerializeField] private Color oColor = new Color32(0xE9, 0xC8, 0x42, 0xFF);
+        [SerializeField] private Color tColor = new Color32(0xA6, 0x6A, 0xE3, 0xFF);
+        [SerializeField] private Color sColor = new Color32(0x56, 0xC7, 0x77, 0xFF);
+        [SerializeField] private Color zColor = new Color32(0xE6, 0x5C, 0x63, 0xFF);
+        [SerializeField] private Color jColor = new Color32(0x52, 0x7B, 0xDA, 0xFF);
+        [SerializeField] private Color lColor = new Color32(0xE9, 0x9A, 0x47, 0xFF);
+        [Header("References")]
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Brick[] bricks;
 
@@ -584,6 +593,17 @@ namespace Jam50033
                     new Vector3(placedCell.x * cellSize, placedCell.y * cellSize, 0f));
             }
 
+            Color shapeColor = shape switch
+            {
+                Shape.I => iColor,
+                Shape.O => oColor,
+                Shape.T => tColor,
+                Shape.S => sColor,
+                Shape.Z => zColor,
+                Shape.J => jColor,
+                _ => lColor
+            };
+
             for (int i = 0; i < bricks.Length; i++)
             {
                 if (bricks[i] == null)
@@ -594,6 +614,7 @@ namespace Jam50033
                 Vector2Int cell = GetRotatedCell(i, rotationSteps);
                 bricks[i].transform.localPosition = new Vector3(cell.x * cellSize, cell.y * cellSize, 0f);
                 bricks[i].FitToCell(cellSize);
+                bricks[i].SetColor(shapeColor);
             }
         }
     }

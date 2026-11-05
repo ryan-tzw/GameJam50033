@@ -78,6 +78,17 @@ namespace Jam50033
             return gridCell;
         }
 
+        public void SetColor(Color newColor)
+        {
+            color = newColor;
+            if (spriteRenderer == null)
+            {
+                spriteRenderer = GetComponent<SpriteRenderer>();
+            }
+
+            spriteRenderer.color = color;
+        }
+
         public void FitToCell(float cellSize)
         {
             if (spriteRenderer == null)
