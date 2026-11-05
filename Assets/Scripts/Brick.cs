@@ -10,13 +10,16 @@ namespace Jam50033
     {
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Color color = Color.white;
+        [SerializeField, Tooltip("Snap starting bricks to stage cells when you release a Scene-view drag.")]
+        private bool snapInEditor = true;
 
         private SpriteRenderer spriteRenderer;
         private bool gridCellInitialized;
         private Vector2Int gridCell;
 
         internal static readonly HashSet<Brick> ActiveBricks = new();
-        internal StageArea StageArea => stageArea;
+        public StageArea StageArea => stageArea;
+        public bool SnapInEditor => snapInEditor;
 
         private void OnEnable()
         {
@@ -28,6 +31,18 @@ namespace Jam50033
         private void OnDisable()
         {
             ActiveBricks.Remove(this);
+        }
+
+        private void Start()
+        {
+            if (Application.IsPlaying(gameObject) && stageArea != null && GetComponentInParent<Tetromino>() == null)
+            {
+                GetGridCell();
+                if (stageArea.BridgeRoot != null)
+                {
+                    transform.SetParent(stageArea.BridgeRoot, true);
+                }
+            }
         }
 
         private void LateUpdate()

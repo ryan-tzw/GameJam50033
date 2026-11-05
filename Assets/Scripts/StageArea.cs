@@ -16,6 +16,7 @@ namespace Jam50033
         [SerializeField] private LineRenderer rightOutline;
         [SerializeField] private LineRenderer bottomOutline;
         [SerializeField] private LineRenderer leftOutline;
+        [SerializeField] private BridgeController bridge;
 
         private const float DashLength = 0.2f;
 
@@ -24,12 +25,15 @@ namespace Jam50033
 
         public int Columns => columns;
         public int Rows => rows;
+        public Transform BridgeRoot => bridge != null ? bridge.transform : null;
+        public float BridgeOffset => bridge != null ? bridge.Offset : 0f;
+        public float BridgeFrameDisplacement => bridge != null && bridge.isActiveAndEnabled ? bridge.FrameDisplacement : 0f;
 
         public Vector3 CellToWorldPosition(Vector2Int cell)
         {
             float size = CellSize;
             return transform.TransformPoint(new Vector3(
-                (cell.x + 0.5f - columns * 0.5f) * size,
+                (cell.x + 0.5f - columns * 0.5f) * size + BridgeOffset,
                 (cell.y + 0.5f - rows * 0.5f) * size, 0f));
         }
 
@@ -41,7 +45,9 @@ namespace Jam50033
                 return Vector2Int.zero;
             }
 
-            Vector3 position = transform.InverseTransformPoint(worldPosition) / size;
+            Vector3 position = transform.InverseTransformPoint(worldPosition);
+            position.x -= BridgeOffset;
+            position /= size;
             return new Vector2Int(
                 Mathf.RoundToInt(position.x + columns * 0.5f - 0.5f),
                 Mathf.RoundToInt(position.y + rows * 0.5f - 0.5f));

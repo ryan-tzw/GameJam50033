@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Jam50033
 {
@@ -11,8 +12,9 @@ namespace Jam50033
         public enum Shape { I, O, T, S, Z, J, L }
 
         [SerializeField] private Shape shape = Shape.T;
-        [SerializeField, Min(0f), Tooltip("Horizontal movement in stage cells per second.")]
-        private float moveSpeed = 2f;
+        [FormerlySerializedAs("moveSpeed")]
+        [SerializeField, Min(0f), Tooltip("Extra leftward speed relative to the bridge, in cells per second.")]
+        private float relativeMoveSpeed = 2f;
         [SerializeField, Min(1f), Tooltip("Speed multiplier while A is held.")]
         private float speedUpMultiplier = 3f;
         [SerializeField] private StageArea stageArea;
@@ -35,7 +37,7 @@ namespace Jam50033
             rotationSteps = 0;
             isPlaced = false;
             isDiscarded = false;
-            lastMoveSpeed = moveSpeed;
+            lastMoveSpeed = relativeMoveSpeed;
 
             Vector2Int[] cells = ShapeCells[(int)shape];
             int maximumX = cells[0].x;
@@ -51,7 +53,10 @@ namespace Jam50033
             int row = Mathf.Clamp(spawnRow, -minimumY, stageArea.Rows - 1 - maximumY);
             float column = stageArea.Columns - 1 - maximumX - spawnInset;
             float size = stageArea.CellSize;
-            transform.position = stageArea.transform.TransformPoint(GetGridOrigin() + new Vector3(column * size, row * size, 0f));
+            // spawning stays fixed to the stage while the bridge grid scrolls.
+            transform.position = stageArea.transform.TransformPoint(new Vector3(
+                (column + 0.5f - stageArea.Columns * 0.5f) * size,
+                (row + 0.5f - stageArea.Rows * 0.5f) * size, 0f));
             UpdateLayout();
         }
 
@@ -68,7 +73,7 @@ namespace Jam50033
 
         private void OnEnable()
         {
-            lastMoveSpeed = moveSpeed;
+            lastMoveSpeed = relativeMoveSpeed;
             UpdateLayout();
         }
 
@@ -76,6 +81,12 @@ namespace Jam50033
         {
             if (Application.IsPlaying(gameObject))
             {
+                // apply the bridge displacement before evaluating motion relative to its grid.
+                if (!isPlaced && stageArea != null)
+                {
+                    transform.position += stageArea.transform.TransformVector(Vector3.right * stageArea.BridgeFrameDisplacement);
+                }
+
                 if (isDiscarded && stageArea != null)
                 {
                     transform.position += stageArea.transform.TransformVector(Vector3.left * (lastMoveSpeed * stageArea.CellSize * Time.deltaTime));
@@ -96,7 +107,7 @@ namespace Jam50033
 
         private void OnValidate()
         {
-            moveSpeed = Mathf.Max(0f, moveSpeed);
+            relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
             speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
             UpdateLayout();
         }
@@ -171,7 +182,7 @@ namespace Jam50033
             }
 
             position = adjustedPosition;
-            float currentSpeed = moveSpeed;
+            float currentSpeed = relativeMoveSpeed;
             if (keyboard != null && keyboard.aKey.isPressed)
             {
                 currentSpeed *= speedUpMultiplier;
@@ -196,6 +207,10 @@ namespace Jam50033
                 placedCell = placement;
                 isPlaced = true;
                 position = origin + new Vector3(placement.x * cellSize, placement.y * cellSize, 0f);
+                if (stageArea.BridgeRoot != null)
+                {
+                    transform.SetParent(stageArea.BridgeRoot, true);
+                }
             }
             else
             {
@@ -261,7 +276,7 @@ namespace Jam50033
         private Vector3 GetGridOrigin()
         {
             float cellSize = stageArea.CellSize;
-            return new Vector3((0.5f - stageArea.Columns * 0.5f) * cellSize,
+            return new Vector3((0.5f - stageArea.Columns * 0.5f) * cellSize + stageArea.BridgeOffset,
                 (0.5f - stageArea.Rows * 0.5f) * cellSize, 0f);
         }
 

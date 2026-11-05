@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Tetromino
   shape: 2
-  moveSpeed: 2.5
+  relativeMoveSpeed: 2.5
   speedUpMultiplier: 4
   stageArea: {fileID: 0}
   bricks:
