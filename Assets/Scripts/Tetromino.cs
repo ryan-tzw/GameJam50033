@@ -17,6 +17,8 @@ namespace Jam50033
         private float relativeMoveSpeed = 2f;
         [SerializeField, Min(1f), Tooltip("Speed multiplier while A is held.")]
         private float speedUpMultiplier = 3f;
+        [SerializeField, Range(0f, 0.5f), Tooltip("Maximum horizontal snap in cells when W/S attaches above or below a brick.")]
+        private float verticalAttachmentSnapTolerance = 0.25f;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Brick[] bricks;
 
@@ -109,6 +111,7 @@ namespace Jam50033
         {
             relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
             speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
+            verticalAttachmentSnapTolerance = Mathf.Clamp(verticalAttachmentSnapTolerance, 0f, 0.5f);
             UpdateLayout();
         }
 
@@ -158,20 +161,26 @@ namespace Jam50033
 
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
             int previousRow = Mathf.RoundToInt((position.y - origin.y) / cellSize);
-            int row = previousRow;
+            int verticalInput = 0;
             if (keyboard != null)
             {
                 if (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
                 {
-                    row++;
+                    verticalInput++;
                 }
 
                 if (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame)
                 {
-                    row--;
+                    verticalInput--;
                 }
             }
 
+            if (verticalInput != 0 && TryAttachVertically(position, previousRow, verticalInput))
+            {
+                return;
+            }
+
+            int row = previousRow + verticalInput;
             row = Mathf.Clamp(row, firstRow, lastRow);
             Vector3 adjustedPosition = position;
             adjustedPosition.y = origin.y + row * cellSize;
@@ -204,13 +213,8 @@ namespace Jam50033
             if (TryFindAttachment((position.x - origin.x) / cellSize,
                 (attachmentEndX - origin.x) / cellSize, row, out Vector2Int placement))
             {
-                placedCell = placement;
-                isPlaced = true;
-                position = origin + new Vector3(placement.x * cellSize, placement.y * cellSize, 0f);
-                if (stageArea.BridgeRoot != null)
-                {
-                    transform.SetParent(stageArea.BridgeRoot, true);
-                }
+                PlaceAtCell(placement);
+                return;
             }
             else
             {
@@ -218,6 +222,74 @@ namespace Jam50033
             }
 
             transform.position = stageArea.transform.TransformPoint(position);
+        }
+
+        private void PlaceAtCell(Vector2Int cell)
+        {
+            placedCell = cell;
+            isPlaced = true;
+            if (stageArea.BridgeRoot != null)
+            {
+                transform.SetParent(stageArea.BridgeRoot, true);
+            }
+
+            transform.position = stageArea.CellToWorldPosition(cell);
+        }
+
+        private bool CanPlaceAtCell(Vector2Int position)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
+                if (occupiedCells.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool TryAttachVertically(Vector3 position, int row, int direction)
+        {
+            float cellSize = stageArea.CellSize;
+            float column = (position.x - GetGridOrigin().x) / cellSize;
+            Vector2Int placement = new Vector2Int(Mathf.RoundToInt(column), row);
+            if (Mathf.Abs(column - placement.x) > verticalAttachmentSnapTolerance + 0.0001f ||
+                !CanPlaceAtCell(placement))
+            {
+                return false;
+            }
+
+            Camera mainCamera = Camera.main;
+            float screenLeft = mainCamera != null ? GetLeftScreenEdge(mainCamera) : float.NegativeInfinity;
+            bool hasContact = false;
+            Vector2Int contactDirection = direction > 0 ? Vector2Int.up : Vector2Int.down;
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int offset = GetRotatedCell(i, rotationSteps);
+                Vector2Int cell = placement + offset;
+                float currentLeft = stageArea.transform.TransformPoint(position +
+                    new Vector3((offset.x - 0.5f) * cellSize, 0f, 0f)).x;
+                float snappedLeft = stageArea.CellToWorldPosition(cell).x - cellSize * 0.5f;
+                if (currentLeft < screenLeft || snappedLeft < screenLeft)
+                {
+                    return false;
+                }
+
+                if (occupiedCells.Contains(cell + contactDirection))
+                {
+                    hasContact = true;
+                }
+            }
+
+            if (!hasContact)
+            {
+                return false;
+            }
+
+            PlaceAtCell(placement);
+            return true;
         }
 
         private float GetLeftScreenEdge(Camera camera)
@@ -336,51 +408,23 @@ namespace Jam50033
             }
 
             bool found = false;
-            Vector3 origin = GetGridOrigin();
-            float cellSize = stageArea.CellSize;
-            float halfHeight = stageArea.Rows * cellSize * 0.5f;
-
-            // examine every grid position that shares an edge with the existing structure.
+            // leftward movement only locks against a brick directly to the left.
             foreach (Vector2Int existingCell in occupiedCells)
             {
                 for (int i = 0; i < 4; i++)
                 {
                     Vector2Int cell = GetRotatedCell(i, rotationSteps);
-                    for (int side = 0; side < 4; side++)
+                    Vector2Int candidate = existingCell + Vector2Int.right - cell;
+                    if (candidate.y != row || candidate.x > fromX + 0.0001f || candidate.x < toX - 0.0001f ||
+                        (found && candidate.x <= placement.x))
                     {
-                        Vector2Int neighbor = side switch
-                        {
-                            0 => Vector2Int.right,
-                            1 => Vector2Int.up,
-                            2 => Vector2Int.left,
-                            _ => Vector2Int.down
-                        };
-                        Vector2Int candidate = existingCell + neighbor - cell;
-                        if (candidate.y != row || candidate.x > fromX + 0.0001f || candidate.x < toX - 0.0001f ||
-                            (found && candidate.x <= placement.x))
-                        {
-                            continue;
-                        }
+                        continue;
+                    }
 
-                        bool valid = true;
-                        for (int j = 0; j < 4; j++)
-                        {
-                            Vector2Int occupiedCell = candidate + GetRotatedCell(j, rotationSteps);
-                            float y = origin.y + occupiedCell.y * cellSize;
-                            if (occupiedCells.Contains(occupiedCell) ||
-                                y - cellSize * 0.5f < -halfHeight - 0.0001f ||
-                                y + cellSize * 0.5f > halfHeight + 0.0001f)
-                            {
-                                valid = false;
-                                break;
-                            }
-                        }
-
-                        if (valid)
-                        {
-                            placement = candidate;
-                            found = true;
-                        }
+                    if (CanPlaceAtCell(candidate))
+                    {
+                        placement = candidate;
+                        found = true;
                     }
                 }
             }
