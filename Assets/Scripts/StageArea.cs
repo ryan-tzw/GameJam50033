@@ -22,6 +22,24 @@ namespace Jam50033
         private Material outlineMaterial;
         private Texture2D dashTexture;
 
+        public float CellSize
+        {
+            get
+            {
+                Camera mainCamera = Camera.main;
+                if (mainCamera == null || !mainCamera.orthographic)
+                {
+                    return 0f;
+                }
+
+                float visibleHeight = mainCamera.orthographicSize * 2f;
+                float visibleWidth = visibleHeight * mainCamera.aspect;
+                float availableWidth = Mathf.Max(0.01f, visibleWidth - screenPadding * 2f);
+                float availableHeight = Mathf.Max(0.01f, visibleHeight - screenPadding * 2f);
+                return Mathf.Min(availableWidth / columns, availableHeight / rows);
+            }
+        }
+
         private void OnEnable()
         {
             PrepareOutline();
@@ -100,11 +118,7 @@ namespace Jam50033
                 return;
             }
 
-            float visibleHeight = mainCamera.orthographicSize * 2f;
-            float visibleWidth = visibleHeight * mainCamera.aspect;
-            float availableWidth = Mathf.Max(0.01f, visibleWidth - screenPadding * 2f);
-            float availableHeight = Mathf.Max(0.01f, visibleHeight - screenPadding * 2f);
-            float cellSize = Mathf.Min(availableWidth / columns, availableHeight / rows);
+            float cellSize = CellSize;
             float halfWidth = columns * cellSize * 0.5f;
             float halfHeight = rows * cellSize * 0.5f;
 
