@@ -43,6 +43,7 @@ namespace Jam50033
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
+        internal StageArea StageArea => stageArea;
 
         public void Initialize(StageArea stage, Shape selectedShape, int spawnRow, float spawnInset)
         {
@@ -53,26 +54,40 @@ namespace Jam50033
             isDiscarded = false;
             lastMoveSpeed = relativeMoveSpeed;
 
-            Vector2Int[] cells = ShapeCells[(int)shape];
+            transform.position = stage.transform.TransformPoint(
+                GetSpawnPosition(stage, shape, spawnRow, spawnInset, out _));
+            UpdateLayout();
+            UpdateGhost();
+        }
+
+        internal static Vector3 GetSpawnPosition(StageArea stage, Shape selectedShape, int spawnRow,
+            float spawnInset, out Bounds bounds)
+        {
+            Vector2Int[] cells = ShapeCells[(int)selectedShape];
+            int minimumX = cells[0].x;
             int maximumX = cells[0].x;
             int minimumY = cells[0].y;
             int maximumY = cells[0].y;
             foreach (Vector2Int cell in cells)
             {
+                minimumX = Mathf.Min(minimumX, cell.x);
                 maximumX = Mathf.Max(maximumX, cell.x);
                 minimumY = Mathf.Min(minimumY, cell.y);
                 maximumY = Mathf.Max(maximumY, cell.y);
             }
 
-            int row = Mathf.Clamp(spawnRow, -minimumY, stageArea.Rows - 1 - maximumY);
-            float column = stageArea.Columns - 1 - maximumX - spawnInset;
-            float size = stageArea.CellSize;
+            int row = Mathf.Clamp(spawnRow, -minimumY, stage.Rows - 1 - maximumY);
+            float column = stage.Columns - 1 - maximumX - spawnInset;
+            float size = stage.CellSize;
             // spawning stays fixed to the stage while the bridge grid scrolls.
-            transform.position = stageArea.transform.TransformPoint(new Vector3(
-                (column + 0.5f - stageArea.Columns * 0.5f) * size,
-                (row + 0.5f - stageArea.Rows * 0.5f) * size, 0f));
-            UpdateLayout();
-            UpdateGhost();
+            Vector3 position = new Vector3(
+                (column + 0.5f - stage.Columns * 0.5f) * size,
+                (row + 0.5f - stage.Rows * 0.5f) * size, 0f);
+            bounds = new Bounds(position + new Vector3(
+                (minimumX + maximumX) * 0.5f * size,
+                (minimumY + maximumY) * 0.5f * size, 0f),
+                new Vector3((maximumX - minimumX + 1) * size, (maximumY - minimumY + 1) * size, 0f));
+            return position;
         }
 
         private static readonly Vector2Int[][] ShapeCells =
