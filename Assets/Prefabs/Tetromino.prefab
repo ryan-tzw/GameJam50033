@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 523511991812f77eca870846ac1d262d, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Tetromino
   shape: 2
+  moveSpeed: 2.5
+  speedUpMultiplier: 4
   stageArea: {fileID: 0}
   bricks:
   - {fileID: 798040727996638278}
@@ -129,7 +131,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f053ade5e2a0bfcd6926b5effd064a09, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Brick
 --- !u!4 &4814262632449743338 stripped
 Transform:
@@ -215,7 +217,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f053ade5e2a0bfcd6926b5effd064a09, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Brick
 --- !u!1001 &6770592002922001201
 PrefabInstance:
@@ -296,7 +298,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f053ade5e2a0bfcd6926b5effd064a09, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Brick
 --- !u!1001 &8319093838087657546
 PrefabInstance:
@@ -377,5 +379,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f053ade5e2a0bfcd6926b5effd064a09, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Brick

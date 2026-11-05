@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jam50033
@@ -11,10 +12,22 @@ namespace Jam50033
         [SerializeField] private Color color = Color.white;
 
         private SpriteRenderer spriteRenderer;
+        private bool gridCellInitialized;
+        private Vector2Int gridCell;
+
+        internal static readonly HashSet<Brick> ActiveBricks = new();
+        internal StageArea StageArea => stageArea;
 
         private void OnEnable()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            gridCellInitialized = false;
+            ActiveBricks.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            ActiveBricks.Remove(this);
         }
 
         private void LateUpdate()
@@ -32,6 +45,22 @@ namespace Jam50033
             }
 
             FitToCell(stageArea.CellSize);
+
+            if (Application.IsPlaying(gameObject) && GetComponentInParent<Tetromino>() == null)
+            {
+                transform.position = stageArea.CellToWorldPosition(GetGridCell());
+            }
+        }
+
+        internal Vector2Int GetGridCell()
+        {
+            if (!gridCellInitialized)
+            {
+                gridCell = stageArea.WorldPositionToCell(transform.position);
+                gridCellInitialized = true;
+            }
+
+            return gridCell;
         }
 
         public void FitToCell(float cellSize)

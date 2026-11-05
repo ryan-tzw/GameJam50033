@@ -25,6 +25,28 @@ namespace Jam50033
         public int Columns => columns;
         public int Rows => rows;
 
+        public Vector3 CellToWorldPosition(Vector2Int cell)
+        {
+            float size = CellSize;
+            return transform.TransformPoint(new Vector3(
+                (cell.x + 0.5f - columns * 0.5f) * size,
+                (cell.y + 0.5f - rows * 0.5f) * size, 0f));
+        }
+
+        public Vector2Int WorldPositionToCell(Vector3 worldPosition)
+        {
+            float size = CellSize;
+            if (size <= 0f)
+            {
+                return Vector2Int.zero;
+            }
+
+            Vector3 position = transform.InverseTransformPoint(worldPosition) / size;
+            return new Vector2Int(
+                Mathf.RoundToInt(position.x + columns * 0.5f - 0.5f),
+                Mathf.RoundToInt(position.y + rows * 0.5f - 0.5f));
+        }
+
         public float CellSize
         {
             get
