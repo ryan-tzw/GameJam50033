@@ -22,6 +22,9 @@ namespace Jam50033
         private Material outlineMaterial;
         private Texture2D dashTexture;
 
+        public int Columns => columns;
+        public int Rows => rows;
+
         public float CellSize
         {
             get
