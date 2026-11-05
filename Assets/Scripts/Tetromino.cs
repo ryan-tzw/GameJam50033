@@ -17,6 +17,8 @@ namespace Jam50033
         private float relativeMoveSpeed = 2f;
         [SerializeField, Min(1f), Tooltip("Speed multiplier while A is held.")]
         private float speedUpMultiplier = 3f;
+        [SerializeField, Tooltip("Instantly place at the ghost position, or discard if no placement is available.")]
+        private Key hardDropKey = Key.Space;
         [SerializeField, Range(0f, 0.5f), Tooltip("Maximum horizontal snap in cells when W/S attaches above or below a brick.")]
         private float verticalAttachmentSnapTolerance = 0.25f;
         [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
@@ -179,18 +181,12 @@ namespace Jam50033
 
             RefreshOccupiedCells();
             float size = stageArea.CellSize;
-            Vector3 origin = GetGridOrigin();
-            Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
-            int row = Mathf.RoundToInt((position.y - origin.y) / size);
-            int minimumX = GetRotatedCell(0, rotationSteps).x;
             for (int i = 0; i < 4; i++)
             {
                 ghostCells[i] = GetRotatedCell(i, rotationSteps);
-                minimumX = Mathf.Min(minimumX, ghostCells[i].x);
             }
 
-            float endX = GetAttachmentEndX(float.NegativeInfinity, minimumX);
-            if (!TryFindAttachment((position.x - origin.x) / size, (endX - origin.x) / size, row, out Vector2Int placement))
+            if (!TryGetDropPlacement(out Vector2Int placement))
             {
                 if (ghost != null)
                 {
@@ -209,6 +205,41 @@ namespace Jam50033
             }
 
             ghost.Show(stageArea.CellToWorldPosition(placement), stageArea.transform.rotation, size, ghostCells, ghostOpacity);
+        }
+
+        private bool TryGetDropPlacement(out Vector2Int placement)
+        {
+            float size = stageArea.CellSize;
+            Vector3 origin = GetGridOrigin();
+            Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
+            int row = Mathf.RoundToInt((position.y - origin.y) / size);
+            int minimumX = GetRotatedCell(0, rotationSteps).x;
+            for (int i = 1; i < 4; i++)
+            {
+                minimumX = Mathf.Min(minimumX, GetRotatedCell(i, rotationSteps).x);
+            }
+
+            float endX = GetAttachmentEndX(float.NegativeInfinity, minimumX);
+            return TryFindAttachment((position.x - origin.x) / size,
+                (endX - origin.x) / size, row, out placement);
+        }
+
+        private void HardDrop()
+        {
+            if (isPlaced || isDiscarded || stageArea == null || stageArea.CellSize <= 0f)
+            {
+                return;
+            }
+
+            RefreshOccupiedCells();
+            if (TryGetDropPlacement(out Vector2Int placement))
+            {
+                PlaceAtCell(placement);
+                return;
+            }
+
+            isDiscarded = true;
+            Destroy(gameObject);
         }
 
         private void UpdateMovement(float deltaTime)
@@ -287,6 +318,13 @@ namespace Jam50033
             }
 
             position = adjustedPosition;
+            if (keyboard != null && hardDropKey != Key.None && keyboard[hardDropKey].wasPressedThisFrame)
+            {
+                transform.position = stageArea.transform.TransformPoint(position);
+                HardDrop();
+                return;
+            }
+
             float currentSpeed = relativeMoveSpeed;
             if (keyboard != null && keyboard.aKey.isPressed)
             {

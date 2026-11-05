@@ -1265,8 +1265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.TetrominoSpawner
   stageArea: {fileID: 1098233640}
   tetrominoPrefab: {fileID: 7053026960480931781, guid: c122ef960befc3b9a89b95a07a05145e, type: 3}
-  spawnRow: 5
-  spawnInset: 0.5
+  spawnRow: 7
+  spawnInset: 0
+  spawnRightOffset: 2
+  spawnGizmoColor: {r: 0.3, g: 1, b: 1, a: 0.7}
 --- !u!4 &632630809
 Transform:
   m_ObjectHideFlags: 0
