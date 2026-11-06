@@ -23,12 +23,15 @@ namespace Jam50033
         private bool loading;
         private float previousTimeScale;
         private bool menuPending;
+        private PlayerDeathEffect deathEffect;
+        private bool deathEffectStarted;
 
         public bool IsGameOver => gameOver;
 
         private void Awake()
         {
             playerCollider = player != null ? player.GetComponent<Collider2D>() : null;
+            deathEffect = player != null ? player.GetComponent<PlayerDeathEffect>() : null;
             gameOverPanel.SetActive(false);
         }
 
@@ -53,7 +56,8 @@ namespace Jam50033
             }
 
             PauseGameplay();
-            OpenMenu();
+            player.StopForFatalHit();
+            BeginDeathEffect();
         }
 
         public bool BeginFatalHit()
@@ -71,8 +75,29 @@ namespace Jam50033
         {
             if (gameOver)
             {
-                menuPending = true;
+                BeginDeathEffect();
             }
+        }
+
+        private void BeginDeathEffect()
+        {
+            if (deathEffectStarted)
+            {
+                return;
+            }
+
+            deathEffectStarted = true;
+            StartCoroutine(ShowMenuAfterDeath());
+        }
+
+        private IEnumerator ShowMenuAfterDeath()
+        {
+            if (deathEffect != null)
+            {
+                yield return deathEffect.Play();
+            }
+
+            menuPending = true;
         }
 
         private void PauseGameplay()
