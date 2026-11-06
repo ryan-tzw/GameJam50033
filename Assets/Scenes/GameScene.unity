@@ -6081,7 +6081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3085c6a627b3e5bb8b798d6b60b433c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlacementEntryZone
-  placementRightX: 7
+  tilesFromRight: 8
   color: {r: 0.85, g: 0.85, b: 1, a: 1}
   fillOpacity: 0.035
   outlineOpacity: 0.25

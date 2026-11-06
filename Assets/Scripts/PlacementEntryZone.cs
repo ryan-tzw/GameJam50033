@@ -8,8 +8,8 @@ namespace Jam50033
     [RequireComponent(typeof(StageArea))]
     public sealed class PlacementEntryZone : MonoBehaviour
     {
-        [SerializeField, Tooltip("Placement ends at this X relative to the stage centre, in cells. Bricks farther right are ignored by controlled pieces.")]
-        private float placementRightX = 10f;
+        [SerializeField, Min(0f), Tooltip("Width of the entry zone, measured in tiles inward from the stage's right edge. Larger values move the threshold left.")]
+        private float tilesFromRight = 5f;
         [SerializeField] private Color color = new Color(0.85f, 0.85f, 1f, 1f);
         [SerializeField, Range(0f, 1f)] private float fillOpacity = 0.035f;
         [SerializeField, Range(0f, 1f)] private float outlineOpacity = 0.25f;
@@ -29,17 +29,20 @@ namespace Jam50033
         private readonly List<int> triangles = new();
         private readonly List<Color> colors = new();
 
+        private float PlacementRightX => (stage.Columns * 0.5f -
+            Mathf.Clamp(tilesFromRight, 0f, stage.Columns)) * stage.CellSize;
+
         public bool IsActivePlacementPosition(Vector3 worldPosition)
         {
             return !isActiveAndEnabled || stage == null ||
-                transform.InverseTransformPoint(worldPosition).x <= placementRightX * stage.CellSize + 0.0001f;
+                transform.InverseTransformPoint(worldPosition).x <= PlacementRightX + 0.0001f;
         }
 
         public bool AllowsLock(Vector3 cellCenter)
         {
             return !isActiveAndEnabled || stage == null ||
                 transform.InverseTransformPoint(cellCenter).x + stage.CellSize * 0.5f <=
-                placementRightX * stage.CellSize + 0.0001f;
+                PlacementRightX + 0.0001f;
         }
 
         private void OnEnable()
@@ -76,7 +79,7 @@ namespace Jam50033
 
             float size = stage.CellSize;
             float right = stage.Columns * size * 0.5f;
-            float left = Mathf.Clamp(placementRightX * size, -right, right);
+            float left = PlacementRightX;
             float halfHeight = stage.Rows * size * 0.5f;
             Vector4 geometry = new Vector4(left, right, halfHeight, size);
             Vector3 style = new Vector3(fillOpacity, outlineOpacity, lineWidth);
