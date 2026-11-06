@@ -273,7 +273,7 @@ MonoBehaviour:
   stepSpeed: 4
   wallProbeDistance: 0.15
   movementState: 2
-  staggerFallDistance: 3
+  staggerFallDistance: 2
   staggerDuration: 0.375
   staggerClip: {fileID: 7400000, guid: b919ceb1190c88e74a18aa72b42b1ac3, type: 2}
   visualRoot: {fileID: 1346274873048868361}

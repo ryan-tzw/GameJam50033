@@ -48,10 +48,18 @@ namespace Jam50033
         private TetrominoGhost ghost;
         private int heldVerticalDirection;
         private float verticalRepeatRemaining;
+        private TetrominoAudio soundEffects;
+        private bool wasSoftDropping;
+        private float softDropDistance;
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
         internal StageArea StageArea => stageArea;
+
+        internal void SetSoundEffects(TetrominoAudio audio)
+        {
+            soundEffects = audio;
+        }
 
         public void Initialize(StageArea stage, Shape selectedShape, int spawnRow, float spawnInset)
         {
@@ -63,6 +71,8 @@ namespace Jam50033
             lastMoveSpeed = relativeMoveSpeed;
             heldVerticalDirection = 0;
             verticalRepeatRemaining = 0f;
+            wasSoftDropping = false;
+            softDropDistance = 0f;
 
             transform.position = stage.transform.TransformPoint(
                 GetSpawnPosition(stage, shape, spawnRow, spawnInset, out _));
@@ -274,6 +284,7 @@ namespace Jam50033
                 return;
             }
 
+            soundEffects?.PlayHardDrop();
             RefreshOccupiedCells();
             if (TryGetDropPlacement(out Vector2Int placement))
             {
@@ -353,6 +364,10 @@ namespace Jam50033
             }
 
             position = adjustedPosition;
+            if (row != previousRow)
+            {
+                soundEffects?.PlayMove();
+            }
             if (keyboard != null && hardDropKey != Key.None && keyboard[hardDropKey].wasPressedThisFrame)
             {
                 transform.position = stageArea.transform.TransformPoint(position);
@@ -361,11 +376,13 @@ namespace Jam50033
             }
 
             float currentSpeed = relativeMoveSpeed;
-            if (keyboard != null && keyboard.aKey.isPressed)
+            bool softDropping = keyboard != null && keyboard.aKey.isPressed;
+            if (softDropping)
             {
                 currentSpeed *= speedUpMultiplier;
             }
 
+            float previousX = position.x;
             float nextX = position.x - currentSpeed * cellSize * deltaTime;
             lastMoveSpeed = currentSpeed;
             float attachmentEndX = GetAttachmentEndX(nextX, minimumX);
@@ -388,6 +405,21 @@ namespace Jam50033
             }
 
             transform.position = stageArea.transform.TransformPoint(position);
+            float travelled = Mathf.Max(0f, (previousX - position.x) / cellSize);
+            if (softDropping && travelled > 0f)
+            {
+                softDropDistance += travelled;
+                if (!wasSoftDropping || softDropDistance >= 1f)
+                {
+                    soundEffects?.PlaySoftDrop();
+                    softDropDistance = wasSoftDropping ? softDropDistance % 1f : 0f;
+                }
+            }
+            else
+            {
+                softDropDistance = 0f;
+            }
+            wasSoftDropping = softDropping && travelled > 0f;
         }
 
         private int ReadVerticalInput(Keyboard keyboard, float deltaTime)
@@ -447,6 +479,7 @@ namespace Jam50033
             }
 
             transform.position = stageArea.CellToWorldPosition(cell);
+            soundEffects?.PlayConnect();
         }
 
         private bool CanPlaceAtCell(Vector2Int position, bool checkPlayer = true)
@@ -713,6 +746,7 @@ namespace Jam50033
             }
 
             rotationSteps = nextRotation;
+            soundEffects?.PlayRotate();
         }
 
         private Vector2Int GetRotatedCell(int index, int steps)

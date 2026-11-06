@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Jam50033
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(RunDifficulty))]
+    [RequireComponent(typeof(RunDifficulty), typeof(TetrominoAudio))]
     public sealed class TetrominoSpawner : MonoBehaviour
     {
         [SerializeField] private StageArea stageArea;
@@ -59,6 +59,7 @@ namespace Jam50033
             Tetromino.Shape shape = (Tetromino.Shape)Random.Range(0, 7);
             int hazards = spawnedCount < hazardFreePieces ? 0 : difficulty.RollHazardCount();
             activePiece = Instantiate(tetrominoPrefab);
+            activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
             activePiece.name = $"Tetromino {shape}";
             activePiece.Initialize(stageArea, shape, spawnRow, spawnInset - spawnRightOffset);
             activePiece.AssignHazards(hazards, hazardBrickPrefab);
