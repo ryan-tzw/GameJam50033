@@ -718,13 +718,8 @@ namespace Jam50033
         private Vector2Int GetRotatedCell(int index, int steps)
         {
             Vector2Int cell = ShapeCells[(int)shape][index];
-            if (shape == Shape.O)
-            {
-                return cell;
-            }
-
-            // the I-piece turns around a point between cells to stay grid-aligned.
-            Vector2 pivot = shape == Shape.I ? new Vector2(0.5f, 0.5f) : Vector2.zero;
+            // I and O turn around a point between cells; O keeps its footprint while cycling hazard positions.
+            Vector2 pivot = shape == Shape.I || shape == Shape.O ? new Vector2(0.5f, 0.5f) : Vector2.zero;
             Vector2 offset = (Vector2)cell - pivot;
             for (int i = 0; i < steps; i++)
             {
