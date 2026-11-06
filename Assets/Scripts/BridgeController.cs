@@ -4,6 +4,7 @@ namespace Jam50033
 {
     [DefaultExecutionOrder(-100)]
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(Rigidbody2D))]
     public sealed class BridgeController : MonoBehaviour
     {
         [SerializeField] private StageArea stageArea;
@@ -14,6 +15,13 @@ namespace Jam50033
 
         public float Offset => transform.localPosition.x;
         public float FrameDisplacement { get; private set; }
+
+        private void Awake()
+        {
+            Rigidbody2D body = GetComponent<Rigidbody2D>();
+            body.bodyType = RigidbodyType2D.Kinematic;
+            body.gravityScale = 0f;
+        }
 
         private void Update()
         {

@@ -5,7 +5,7 @@ namespace Jam50033
 {
     [ExecuteAlways]
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
     public sealed class Brick : MonoBehaviour
     {
         [SerializeField] private StageArea stageArea;
@@ -14,6 +14,7 @@ namespace Jam50033
         private bool snapInEditor = true;
 
         private SpriteRenderer spriteRenderer;
+        private BoxCollider2D boxCollider;
         private bool gridCellInitialized;
         private Vector2Int gridCell;
 
@@ -24,6 +25,8 @@ namespace Jam50033
         private void OnEnable()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            boxCollider = GetComponent<BoxCollider2D>();
+            UpdateCollider();
             gridCellInitialized = false;
             ActiveBricks.Add(this);
         }
@@ -108,6 +111,21 @@ namespace Jam50033
 
             Vector3 spriteSize = spriteRenderer.sprite.bounds.size;
             transform.localScale = new Vector3(cellSize / spriteSize.x, cellSize / spriteSize.y, 1f);
+            UpdateCollider();
+        }
+
+        private void UpdateCollider()
+        {
+            if (boxCollider == null || spriteRenderer == null || spriteRenderer.sprite == null)
+            {
+                return;
+            }
+
+            boxCollider.size = spriteRenderer.sprite.bounds.size;
+            boxCollider.offset = spriteRenderer.sprite.bounds.center;
+            Tetromino owner = GetComponentInParent<Tetromino>();
+            // only bridge terrain is solid; incoming and discarded pieces remain visual.
+            boxCollider.enabled = owner == null || owner.IsPlaced;
         }
     }
 }
