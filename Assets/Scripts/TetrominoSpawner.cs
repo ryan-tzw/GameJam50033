@@ -3,10 +3,13 @@ using UnityEngine;
 namespace Jam50033
 {
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(RunDifficulty))]
     public sealed class TetrominoSpawner : MonoBehaviour
     {
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Tetromino tetrominoPrefab;
+        [SerializeField] private Brick hazardBrickPrefab;
+        [SerializeField, Min(0)] private int hazardFreePieces = 5;
         [SerializeField, Min(0), Tooltip("Starting row, counted from the bottom of the stage.")]
         private int spawnRow = 5;
         [SerializeField, Min(0f), Tooltip("Space from the stage's right edge, measured in cells.")]
@@ -16,12 +19,21 @@ namespace Jam50033
         [SerializeField] private Color spawnGizmoColor = new Color(0.3f, 1f, 1f, 0.7f);
 
         private Tetromino activePiece;
+        private RunDifficulty difficulty;
+        [SerializeField, Min(0), Tooltip("Successfully spawned pieces this run. Resets when restarting.")]
+        private int spawnedCount;
+
+        private void Awake()
+        {
+            difficulty = GetComponent<RunDifficulty>();
+            spawnedCount = 0;
+        }
 
         private void Start()
         {
-            if (stageArea == null || tetrominoPrefab == null)
+            if (stageArea == null || tetrominoPrefab == null || hazardBrickPrefab == null)
             {
-                Debug.LogError("Assign the stage and Tetromino prefab on the spawner.", this);
+                Debug.LogError("Assign the stage, Tetromino prefab and hazard brick prefab on the spawner.", this);
                 enabled = false;
                 return;
             }
@@ -45,9 +57,12 @@ namespace Jam50033
             }
 
             Tetromino.Shape shape = (Tetromino.Shape)Random.Range(0, 7);
+            int hazards = spawnedCount < hazardFreePieces ? 0 : difficulty.RollHazardCount();
             activePiece = Instantiate(tetrominoPrefab);
             activePiece.name = $"Tetromino {shape}";
             activePiece.Initialize(stageArea, shape, spawnRow, spawnInset - spawnRightOffset);
+            activePiece.AssignHazards(hazards, hazardBrickPrefab);
+            spawnedCount++;
         }
 
         private Bounds GetSpawnRegion()
@@ -128,6 +143,7 @@ namespace Jam50033
         private void OnValidate()
         {
             spawnRow = Mathf.Max(0, spawnRow);
+            hazardFreePieces = Mathf.Max(0, hazardFreePieces);
             spawnInset = Mathf.Max(0f, spawnInset);
             spawnRightOffset = Mathf.Max(0f, spawnRightOffset);
         }

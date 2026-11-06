@@ -6,9 +6,11 @@ namespace Jam50033
     {
         private readonly SpriteRenderer[] sources = new SpriteRenderer[4];
         private readonly SpriteRenderer[] tiles = new SpriteRenderer[4];
+        private MaterialPropertyBlock properties;
 
         public void Initialize(Brick[] bricks)
         {
+            properties = new MaterialPropertyBlock();
             for (int i = 0; i < 4; i++)
             {
                 sources[i] = bricks[i] != null ? bricks[i].GetComponent<SpriteRenderer>() : null;
@@ -35,6 +37,8 @@ namespace Jam50033
                 tile.gameObject.layer = source.gameObject.layer;
                 tile.sprite = source.sprite;
                 tile.sharedMaterial = source.sharedMaterial;
+                source.GetPropertyBlock(properties);
+                tile.SetPropertyBlock(properties);
                 tile.sortingLayerID = source.sortingLayerID;
                 tile.sortingOrder = source.sortingOrder - 1;
                 tile.flipX = source.flipX;

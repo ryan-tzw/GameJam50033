@@ -10,6 +10,7 @@ namespace Jam50033
     {
         [SerializeField] private StageArea stageArea;
         [SerializeField] private PlayerController player;
+        [SerializeField] private RunDifficulty difficulty;
         [FormerlySerializedAs("bridgeSpeed")]
         [SerializeField, Min(0f), Tooltip("Normal leftward speed in stage cells per second.")]
         private float baseSpeed = 0.5f;
@@ -48,10 +49,11 @@ namespace Jam50033
                 return;
             }
 
-            float targetSpeed = GetTargetSpeed();
+            float multiplier = difficulty != null ? difficulty.SpeedMultiplier : 1f;
+            float targetSpeed = GetTargetSpeed() * multiplier;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity,
                 smoothingTime, Mathf.Infinity, Time.deltaTime);
-            currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed, Mathf.Max(baseSpeed, maxSpeed));
+            currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed * multiplier, Mathf.Max(baseSpeed, maxSpeed) * multiplier);
             distanceInCells += currentSpeed * Time.deltaTime;
             float nextOffset = -distanceInCells * stageArea.CellSize;
             FrameDisplacement = nextOffset - Offset;

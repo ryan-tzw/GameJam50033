@@ -93,6 +93,40 @@ namespace Jam50033
             return position;
         }
 
+        public void AssignHazards(int count, Brick hazardPrefab)
+        {
+            if (count <= 0 || hazardPrefab == null || bricks == null || bricks.Length != 4)
+            {
+                return;
+            }
+
+            count = Mathf.Min(count, 2);
+            int[] indices = { 0, 1, 2, 3 };
+            for (int i = 0; i < count; i++)
+            {
+                // Partial shuffle selects distinct bricks with equal probability.
+                int selected = Random.Range(i, indices.Length);
+                int index = indices[selected];
+                indices[selected] = indices[i];
+                indices[i] = index;
+                Brick original = bricks[index];
+                bricks[index] = Instantiate(hazardPrefab, transform);
+                original.gameObject.SetActive(false);
+                Destroy(original.gameObject);
+            }
+
+            // The ghost caches renderer references, so rebuild it after replacing bricks.
+            if (ghost != null)
+            {
+                ghost.gameObject.SetActive(false);
+                Destroy(ghost.gameObject);
+                ghost = null;
+            }
+
+            UpdateLayout();
+            UpdateGhost();
+        }
+
         private static readonly Vector2Int[][] ShapeCells =
         {
             new[] { new Vector2Int(-1, 0), new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(2, 0) },
