@@ -10,6 +10,7 @@ namespace Jam50033
     public sealed class GameOverController : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
+        [SerializeField] private RunScore runScore;
         [SerializeField] private Camera gameplayCamera;
         [SerializeField, Min(0f), Tooltip("Extra distance below the camera, in world units, before the run ends.")]
         private float fallMargin = 0.25f;
@@ -102,6 +103,10 @@ namespace Jam50033
 
         private void PauseGameplay()
         {
+            if (runScore != null)
+            {
+                runScore.FinishRun();
+            }
             gameOver = true;
             previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
@@ -111,6 +116,10 @@ namespace Jam50033
         {
             // Open after this frame's UI update, so a gameplay Space press cannot submit the new menu.
             gameOverPanel.SetActive(true);
+            if (runScore != null)
+            {
+                runScore.FinishRun();
+            }
             restartButton.Select();
         }
 
