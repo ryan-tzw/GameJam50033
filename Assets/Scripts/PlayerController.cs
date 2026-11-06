@@ -8,7 +8,7 @@ namespace Jam50033
     [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
     public sealed class PlayerController : MonoBehaviour
     {
-        public enum MovementState { Running, Climbing, Falling }
+        public enum MovementState { Running, Climbing, Falling, Staggered }
 
         [SerializeField] private StageArea stageArea;
         [SerializeField, Min(0.1f)] private float heightInCells = 2f;
@@ -30,6 +30,12 @@ namespace Jam50033
         [SerializeField, Range(0.01f, 0.5f), Tooltip("Distance ahead to detect a climbable wall, in cells.")]
         private float wallProbeDistance = 0.15f;
         [SerializeField] private MovementState movementState = MovementState.Falling;
+        [Header("Landing Recovery")]
+        [SerializeField, Min(0.1f), Tooltip("Minimum free-fall distance that causes a landing stagger, in stage cells.")]
+        private float staggerFallDistance = 3f;
+        [SerializeField, Min(0.01f), Tooltip("Seconds spent recovering while moving with the bridge.")]
+        private float staggerDuration = 0.375f;
+        [SerializeField] private AnimationClip staggerClip;
         [Header("Visuals")]
         [SerializeField, Tooltip("Automatically sized and aligned parent. Edit the Visual child for sprite adjustments.")]
         private Transform visualRoot;
@@ -46,11 +52,16 @@ namespace Jam50033
         private float normalGravity;
         private bool climbBlocked;
         private bool fatalHit;
+        private float fallStartY;
+        private float staggerRemaining;
         private static readonly int GroundedParameter = Animator.StringToHash("Grounded");
         private static readonly int RunningParameter = Animator.StringToHash("Running");
         private static readonly int ClimbingParameter = Animator.StringToHash("Climbing");
         private static readonly int ClimbPlaybackParameter = Animator.StringToHash("ClimbPlayback");
         private static readonly int ClimbState = Animator.StringToHash("Base Layer.Climb");
+        private static readonly int StaggeredParameter = Animator.StringToHash("Staggered");
+        private static readonly int StaggerPlaybackParameter = Animator.StringToHash("StaggerPlayback");
+        private static readonly int StaggerState = Animator.StringToHash("Base Layer.Stagger");
 
         public bool IsGrounded { get; private set; }
         public MovementState State => movementState;
@@ -63,6 +74,12 @@ namespace Jam50033
             movementState = MovementState.Falling;
             climbBlocked = false;
             fatalHit = false;
+            fallStartY = body.position.y;
+            staggerRemaining = 0f;
+            if (Application.IsPlaying(gameObject) && animator != null)
+            {
+                animator.SetBool(StaggeredParameter, false);
+            }
             FitToStage();
         }
 
@@ -97,22 +114,70 @@ namespace Jam50033
                 }
             }
 
+            if (movementState == MovementState.Staggered)
+            {
+                staggerRemaining -= Time.fixedDeltaTime;
+                if (IsGrounded && staggerRemaining > 0f)
+                {
+                    MoveWithBridge();
+                    return;
+                }
+
+                // Losing support ends recovery immediately and starts a fresh fall.
+                fallStartY = body.position.y;
+                movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
+            }
+
+            if (movementState == MovementState.Falling)
+            {
+                fallStartY = Mathf.Max(fallStartY, body.position.y);
+                if (IsGrounded && fallStartY - body.position.y >= staggerFallDistance * size)
+                {
+                    movementState = MovementState.Staggered;
+                    staggerRemaining = staggerDuration;
+                    if (animator != null)
+                    {
+                        animator.SetBool(StaggeredParameter, true);
+                        animator.SetFloat(StaggerPlaybackParameter,
+                            staggerClip != null ? staggerClip.length / staggerDuration : 1f);
+                        animator.Play(StaggerState, 0, 0f);
+                    }
+
+                    MoveWithBridge();
+                    return;
+                }
+            }
+
             RefreshBridgeCells();
             if (movementState != MovementState.Climbing)
             {
                 TryStartClimbing(filter, size);
             }
 
-            if (movementState == MovementState.Climbing && UpdateClimbing(filter, size))
+            if (movementState == MovementState.Climbing)
             {
-                return;
+                // Climbing and stepping must not accumulate distance toward a landing stagger.
+                fallStartY = body.position.y;
+                if (UpdateClimbing(filter, size))
+                {
+                    return;
+                }
             }
 
+            if (IsGrounded || movementState != MovementState.Falling)
+            {
+                fallStartY = body.position.y;
+            }
             movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
             float speedLimit = maxRecoverySpeed * size;
             // zero displacement means zero forward velocity; recovery only follows a displacement.
             float velocityX = Mathf.Clamp((targetX - body.position.x) * followStrength, -speedLimit, speedLimit);
             body.linearVelocity = new Vector2(velocityX, body.linearVelocity.y);
+        }
+
+        private void MoveWithBridge()
+        {
+            body.linearVelocity = new Vector2(stageArea.BridgeVelocity, body.linearVelocity.y);
         }
 
         private void RefreshBridgeCells()
@@ -271,6 +336,7 @@ namespace Jam50033
             animator.SetBool(RunningParameter, running || climbing);
             animator.SetBool(ClimbingParameter, showClimb);
             animator.SetFloat(ClimbPlaybackParameter, climbBlocked ? 0f : 1f);
+            animator.SetBool(StaggeredParameter, movementState == MovementState.Staggered);
             if (climbing && climbBlocked)
             {
                 animator.Play(ClimbState, 0, 0f);
@@ -347,6 +413,8 @@ namespace Jam50033
             climbSpeed = Mathf.Max(0.1f, climbSpeed);
             stepSpeed = Mathf.Max(0.1f, stepSpeed);
             wallProbeDistance = Mathf.Clamp(wallProbeDistance, 0.01f, 0.5f);
+            staggerFallDistance = Mathf.Max(0.1f, staggerFallDistance);
+            staggerDuration = Mathf.Max(0.01f, staggerDuration);
             FitToStage();
         }
     }

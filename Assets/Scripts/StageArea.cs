@@ -28,6 +28,7 @@ namespace Jam50033
         public Transform BridgeRoot => bridge != null ? bridge.transform : null;
         public float BridgeOffset => bridge != null ? bridge.Offset : 0f;
         public float BridgeFrameDisplacement => bridge != null && bridge.isActiveAndEnabled ? bridge.FrameDisplacement : 0f;
+        public float BridgeVelocity => bridge != null && bridge.isActiveAndEnabled ? -bridge.ScrollSpeed * CellSize : 0f;
 
         public Vector3 CellToWorldPosition(Vector2Int cell)
         {

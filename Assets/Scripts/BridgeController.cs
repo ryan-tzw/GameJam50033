@@ -31,6 +31,7 @@ namespace Jam50033
         private float speedVelocity;
 
         public float Offset => transform.localPosition.x;
+        public float ScrollSpeed => currentSpeed;
         public float FrameDisplacement { get; private set; }
 
         private void Awake()
