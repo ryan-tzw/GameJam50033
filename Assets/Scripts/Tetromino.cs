@@ -20,6 +20,11 @@ namespace Jam50033
         [SerializeField, Tooltip("Instantly place at the ghost position, or discard if no placement is available.")]
         private Key hardDropKey = Key.Space;
         [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
+        [Header("Vertical Input Repeat")]
+        [SerializeField, Min(0f), Tooltip("Seconds before held Up/Down or W/S starts repeating.")]
+        private float verticalRepeatDelay = 0.25f;
+        [SerializeField, Min(0.01f), Tooltip("Seconds between repeated vertical moves while a direction is held.")]
+        private float verticalRepeatInterval = 0.08f;
         [Header("Shape Colors")]
         [SerializeField] private Color iColor = new Color32(0x28, 0xC8, 0xDF, 0xFF);
         [SerializeField] private Color oColor = new Color32(0xE9, 0xC8, 0x42, 0xFF);
@@ -41,6 +46,8 @@ namespace Jam50033
         private readonly List<Collider2D> placementOverlaps = new();
         private readonly Vector2Int[] ghostCells = new Vector2Int[4];
         private TetrominoGhost ghost;
+        private int heldVerticalDirection;
+        private float verticalRepeatRemaining;
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
@@ -54,6 +61,8 @@ namespace Jam50033
             isPlaced = false;
             isDiscarded = false;
             lastMoveSpeed = relativeMoveSpeed;
+            heldVerticalDirection = 0;
+            verticalRepeatRemaining = 0f;
 
             transform.position = stage.transform.TransformPoint(
                 GetSpawnPosition(stage, shape, spawnRow, spawnInset, out _));
@@ -175,6 +184,8 @@ namespace Jam50033
             relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
             speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
             ghostOpacity = Mathf.Clamp01(ghostOpacity);
+            verticalRepeatDelay = Mathf.Max(0f, verticalRepeatDelay);
+            verticalRepeatInterval = Mathf.Max(0.01f, verticalRepeatInterval);
             UpdateLayout();
         }
 
@@ -320,19 +331,7 @@ namespace Jam50033
 
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
             int previousRow = Mathf.RoundToInt((position.y - origin.y) / cellSize);
-            int verticalInput = 0;
-            if (keyboard != null)
-            {
-                if (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
-                {
-                    verticalInput++;
-                }
-
-                if (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame)
-                {
-                    verticalInput--;
-                }
-            }
+            int verticalInput = ReadVerticalInput(keyboard, deltaTime);
 
             if (verticalInput != 0 && TryAttachVertically(position, previousRow, verticalInput))
             {
@@ -390,6 +389,38 @@ namespace Jam50033
             }
 
             transform.position = stageArea.transform.TransformPoint(position);
+        }
+
+        private int ReadVerticalInput(Keyboard keyboard, float deltaTime)
+        {
+            bool upPressed = keyboard != null && (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame);
+            bool downPressed = keyboard != null && (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame);
+            bool upHeld = upPressed || (keyboard != null && (keyboard.wKey.isPressed || keyboard.upArrowKey.isPressed));
+            bool downHeld = downPressed || (keyboard != null && (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed));
+            int direction = (upHeld ? 1 : 0) - (downHeld ? 1 : 0);
+            if (direction == 0)
+            {
+                heldVerticalDirection = 0;
+                verticalRepeatRemaining = 0f;
+                return 0;
+            }
+
+            if (direction != heldVerticalDirection || (direction > 0 ? upPressed : downPressed))
+            {
+                heldVerticalDirection = direction;
+                verticalRepeatRemaining = verticalRepeatDelay;
+                return direction;
+            }
+
+            verticalRepeatRemaining -= deltaTime;
+            if (verticalRepeatRemaining > 0f)
+            {
+                return 0;
+            }
+
+            // Emit at most one move per frame, even after a long frame or a pause.
+            verticalRepeatRemaining = verticalRepeatInterval;
+            return direction;
         }
 
         private float GetAttachmentEndX(float requestedX, int minimumX)
