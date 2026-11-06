@@ -20,6 +20,11 @@ namespace Jam50033
         private float shakeStrength = 0.025f;
         [SerializeField, Min(0f), Tooltip("Shake cycles per second.")]
         private float shakeFrequency = 25f;
+        [Header("Knockback")]
+        [SerializeField, Min(0f), Tooltip("Distance away from the hazard, in stage cells.")]
+        private float knockbackDistance = 1.5f;
+        [SerializeField, Min(0.01f), Tooltip("Seconds to complete knockback, capped by the hurt reaction duration.")]
+        private float knockbackDuration = 0.15f;
 
         private Material originalMaterial;
         private MaterialPropertyBlock originalProperties;
@@ -28,6 +33,10 @@ namespace Jam50033
         private AnimatorUpdateMode originalUpdateMode;
         private float originalSpeed;
         private bool reacting;
+        private Rigidbody2D body;
+        private float originalGravity;
+        private RigidbodyInterpolation2D originalInterpolation;
+        private bool knockbackActive;
         private static readonly int Hurt = Animator.StringToHash("Hurt");
         private static readonly int HurtState = Animator.StringToHash("Base Layer.Hurt");
         private static readonly int FlashAmount = Shader.PropertyToID("_FlashAmount");
@@ -44,12 +53,25 @@ namespace Jam50033
 
             GetComponent<PlayerController>().StopForFatalHit();
             hazard.FlashOnHit();
-            StartCoroutine(PlayHurt());
+            Vector2 direction = GetComponent<Collider2D>().bounds.center -
+                hazard.GetComponent<Collider2D>().bounds.center;
+            direction = direction.sqrMagnitude > 0.000001f ? direction.normalized : Vector2.left;
+            StartCoroutine(PlayHurt(direction));
         }
 
-        private IEnumerator PlayHurt()
+        private IEnumerator PlayHurt(Vector2 direction)
         {
             reacting = true;
+            body = GetComponent<Rigidbody2D>();
+            originalGravity = body.gravityScale;
+            originalInterpolation = body.interpolation;
+            knockbackActive = true;
+            body.gravityScale = 0f;
+            body.interpolation = RigidbodyInterpolation2D.None;
+            Vector2 startPosition = body.position;
+            StageArea stage = GetComponent<PlayerController>().StageArea;
+            float cellSize = stage != null ? stage.CellSize : GetComponent<Collider2D>().bounds.size.y * 0.5f;
+            Vector2 endPosition = startPosition + direction * (knockbackDistance * cellSize);
             originalMaterial = visual.sharedMaterial;
             originalPosition = visual.transform.localPosition;
             originalProperties = new MaterialPropertyBlock();
@@ -69,6 +91,12 @@ namespace Jam50033
             float elapsed = 0f;
             while (elapsed < hurtDuration)
             {
+                // Gameplay physics is paused during death, so move explicitly using unscaled time.
+                float progress = Mathf.Clamp01(elapsed / Mathf.Min(knockbackDuration, hurtDuration));
+                float eased = 1f - Mathf.Pow(1f - progress, 3f);
+                Vector2 position = Vector2.Lerp(startPosition, endPosition, eased);
+                body.position = position;
+                transform.position = new Vector3(position.x, position.y, transform.position.z);
                 float flash = Mathf.Clamp01(1f - elapsed / Mathf.Max(0.01f, whiteFlashDuration));
                 flashProperties.SetFloat(FlashAmount, flash);
                 visual.SetPropertyBlock(flashProperties);
@@ -81,6 +109,9 @@ namespace Jam50033
                 elapsed += Time.unscaledDeltaTime;
             }
 
+            body.position = endPosition;
+            transform.position = new Vector3(endPosition.x, endPosition.y, transform.position.z);
+            Physics2D.SyncTransforms();
             RestoreVisuals();
             gameOver.FinishFatalHit();
         }
@@ -89,6 +120,12 @@ namespace Jam50033
         {
             StopAllCoroutines();
             RestoreVisuals();
+            if (knockbackActive && body != null)
+            {
+                body.gravityScale = originalGravity;
+                body.interpolation = originalInterpolation;
+            }
+            knockbackActive = false;
         }
 
         private void RestoreVisuals()

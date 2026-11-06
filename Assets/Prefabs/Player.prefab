@@ -313,6 +313,8 @@ MonoBehaviour:
   whiteFlashDuration: 0.5
   shakeStrength: 0.03
   shakeFrequency: 12
+  knockbackDistance: 1.2
+  knockbackDuration: 0.4
 --- !u!114 &2173082064071922118
 MonoBehaviour:
   m_ObjectHideFlags: 0
