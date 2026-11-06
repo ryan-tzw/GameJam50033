@@ -51,6 +51,7 @@ namespace Jam50033
         private readonly List<Warning> warnings = new();
         private readonly List<FallingTile> fallingTiles = new();
         private readonly HashSet<Transform> warningRoots = new();
+        private MaterialPropertyBlock visualProperties;
 
         private void LateUpdate()
         {
@@ -115,6 +116,7 @@ namespace Jam50033
 
         private void BeginWarning(Transform root, Brick[] bricks)
         {
+            visualProperties ??= new MaterialPropertyBlock();
             Warning warning = new Warning
             {
                 Root = root,
@@ -138,6 +140,8 @@ namespace Jam50033
                 visual.flipY = original.flipY;
                 visual.sortingLayerID = original.sortingLayerID;
                 visual.sortingOrder = original.sortingOrder;
+                original.GetPropertyBlock(visualProperties);
+                visual.SetPropertyBlock(visualProperties);
                 // Only the visual copy shakes; the real brick keeps its grid position and collider.
                 original.enabled = false;
                 warning.Originals[i] = original;
@@ -167,6 +171,8 @@ namespace Jam50033
                     if (warning.Visuals[j] != null && warning.Bricks[j] != null)
                     {
                         warning.Visuals[j].transform.position = warning.Bricks[j].transform.position + offset;
+                        warning.Originals[j].GetPropertyBlock(visualProperties);
+                        warning.Visuals[j].SetPropertyBlock(visualProperties);
                     }
                 }
 
