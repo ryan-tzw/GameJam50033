@@ -56,6 +56,7 @@ namespace Jam50033
         public bool IsDiscarded => isDiscarded;
         public bool IsHazardCluster { get; private set; }
         internal StageArea StageArea => stageArea;
+        internal int PlacedRow => placedCell.y;
 
         internal void SetSoundEffects(TetrominoAudio audio)
         {

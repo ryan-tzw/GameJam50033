@@ -19,6 +19,7 @@ namespace Jam50033
         [SerializeField] private Color spawnGizmoColor = new Color(0.3f, 1f, 1f, 0.7f);
 
         private Tetromino activePiece;
+        private int preferredSpawnRow;
         private RunDifficulty difficulty;
         [SerializeField, Min(0), Tooltip("Successfully spawned pieces this run. Resets when restarting.")]
         private int spawnedCount;
@@ -27,6 +28,7 @@ namespace Jam50033
         {
             difficulty = GetComponent<RunDifficulty>();
             spawnedCount = 0;
+            preferredSpawnRow = spawnRow;
         }
 
         private void Start()
@@ -43,6 +45,11 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (activePiece != null && activePiece.IsPlaced)
+            {
+                preferredSpawnRow = activePiece.PlacedRow;
+            }
+
             if (activePiece == null || activePiece.IsPlaced || activePiece.IsDiscarded)
             {
                 SpawnNext();
@@ -68,7 +75,7 @@ namespace Jam50033
 
         private bool TryFindSpawnRow(out int row)
         {
-            row = Mathf.Clamp(spawnRow, 0, stageArea.Rows - 1);
+            row = Mathf.Clamp(preferredSpawnRow, 0, stageArea.Rows - 1);
             if (!IsSpawnRegionOccupied(GetSpawnRegion(row)))
             {
                 return true;
@@ -169,7 +176,7 @@ namespace Jam50033
                 return;
             }
 
-            Bounds region = GetSpawnRegion(spawnRow);
+            Bounds region = GetSpawnRegion(Application.isPlaying ? preferredSpawnRow : spawnRow);
             Matrix4x4 previousMatrix = Gizmos.matrix;
             Gizmos.matrix = stageArea.transform.localToWorldMatrix;
             Gizmos.color = spawnGizmoColor;
