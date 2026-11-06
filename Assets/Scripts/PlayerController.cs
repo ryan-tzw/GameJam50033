@@ -182,6 +182,13 @@ namespace Jam50033
                 feetTargetY -= capsule.bounds.size.y;
             }
 
+            // Once supported on top, recover toward targetX instead of chasing the scrolling wall's centre.
+            if (canStand && IsGrounded && capsule.bounds.min.y >= wallTop.y + size * 0.5f - skin)
+            {
+                EndClimbing();
+                return false;
+            }
+
             bool aboveTop = canStand && capsule.bounds.min.y >= feetTargetY - skin * 0.5f;
             float movementSpeed = HasUpperBodyContact() ? climbSpeed : stepSpeed;
             float desiredX = aboveTop ? wallTop.x : wallTop.x - size * 0.5f - capsule.bounds.extents.x - skin;
@@ -214,12 +221,6 @@ namespace Jam50033
                 (needsVerticalMovement && velocity.y < size * 0.001f) ||
                 (needsHorizontalMovement && Mathf.Abs(velocity.x) < size * 0.001f);
             body.linearVelocity = velocity;
-            if (aboveTop && Mathf.Abs(body.position.x - wallTop.x) <= skin * 2f && IsGrounded)
-            {
-                EndClimbing();
-                return false;
-            }
-
             return true;
         }
 

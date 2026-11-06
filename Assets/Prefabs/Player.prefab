@@ -243,7 +243,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.24}
-  m_Size: {x: 0.208, y: 0.48}
+  m_Size: {x: 0.18, y: 0.48}
   m_Direction: 0
 --- !u!114 &5764522197894248706
 MonoBehaviour:
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerController
   stageArea: {fileID: 0}
   heightInCells: 2
-  widthInCells: 0.8
+  widthInCells: 0.75
   targetX: 0
   followStrength: 3
   maxRecoverySpeed: 4
