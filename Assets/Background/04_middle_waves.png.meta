@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 52c83329569c97817944d24ebcf0179b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3895514284693141967
+    second: 04_middle_waves_0
+  - first:
+      213: -8045410128145877896
+    second: 04_middle_waves_1
+  - first:
+      213: 7823203037465218593
+    second: 04_middle_waves_2
+  - first:
+      213: 5622868064539865721
+    second: 04_middle_waves_3
+  - first:
+      213: -1643698105261786749
+    second: 04_middle_waves_4
+  - first:
+      213: -3594029676692340399
+    second: 04_middle_waves_5
+  - first:
+      213: -2667472872494601547
+    second: 04_middle_waves_6
+  - first:
+      213: -826031956629683515
+    second: 04_middle_waves_7
+  - first:
+      213: -8170729518043920677
+    second: 04_middle_waves_8
+  - first:
+      213: -9080359468694113941
+    second: 04_middle_waves_9
+  - first:
+      213: -1763047398728828650
+    second: 04_middle_waves_10
+  - first:
+      213: 6326594259560068716
+    second: 04_middle_waves_11
+  - first:
+      213: 8459893521715417360
+    second: 04_middle_waves_12
+  - first:
+      213: 1995243674595110221
+    second: 04_middle_waves_13
+  - first:
+      213: -5253492298705264643
+    second: 04_middle_waves_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 04_middle_waves_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 399
+        width: 823
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 136c76bb56a50f9c0800000000000000
+      internalID: -3895514284693141967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_1
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 525
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 874f8876d16f85090800000000000000
+      internalID: -8045410128145877896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_2
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 491
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e0fd5a6b9919c60800000000000000
+      internalID: 7823203037465218593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_3
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 490
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97279c5a6b0780e40800000000000000
+      internalID: 5622868064539865721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_4
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 465
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38973ed28496039e0800000000000000
+      internalID: -1643698105261786749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_5
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 465
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1518a801d017f1ec0800000000000000
+      internalID: -3594029676692340399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_6
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 500
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bae7fa2e8b3bfad0800000000000000
+      internalID: -2667472872494601547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_7
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 465
+        width: 127
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c287fbdf485984f0800000000000000
+      internalID: -826031956629683515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_8
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 436
+        width: 499
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd681313bccbb9e80800000000000000
+      internalID: -8170729518043920677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_9
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 520
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b61f1ab4c251cf180800000000000000
+      internalID: -9080359468694113941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_10
+      rect:
+        serializedVersion: 2
+        x: 1268
+        y: 527
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 619779c5bb56887e0800000000000000
+      internalID: -1763047398728828650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_11
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 538
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c667a1795f39cc750800000000000000
+      internalID: 6326594259560068716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_12
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 544
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 011d977e554976570800000000000000
+      internalID: 8459893521715417360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_13
+      rect:
+        serializedVersion: 2
+        x: 1581
+        y: 448
+        width: 324
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d26900d8780bb10800000000000000
+      internalID: 1995243674595110221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 04_middle_waves_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1920
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dff1c69a698d717b0800000000000000
+      internalID: -5253492298705264643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      04_middle_waves_0: -3895514284693141967
+      04_middle_waves_1: -8045410128145877896
+      04_middle_waves_10: -1763047398728828650
+      04_middle_waves_11: 6326594259560068716
+      04_middle_waves_12: 8459893521715417360
+      04_middle_waves_13: 1995243674595110221
+      04_middle_waves_14: -5253492298705264643
+      04_middle_waves_2: 7823203037465218593
+      04_middle_waves_3: 5622868064539865721
+      04_middle_waves_4: -1643698105261786749
+      04_middle_waves_5: -3594029676692340399
+      04_middle_waves_6: -2667472872494601547
+      04_middle_waves_7: -826031956629683515
+      04_middle_waves_8: -8170729518043920677
+      04_middle_waves_9: -9080359468694113941
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,2249 @@
+fileFormatVersion: 2
+guid: 84ce471f19f1c3a6b9ef85b3f4e2374c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5093118822801764084
+    second: 03_far_ocean_base_0
+  - first:
+      213: -5428274153526977756
+    second: 03_far_ocean_base_1
+  - first:
+      213: -1162415373007237876
+    second: 03_far_ocean_base_2
+  - first:
+      213: 3424737687582066411
+    second: 03_far_ocean_base_3
+  - first:
+      213: -3037984175750232070
+    second: 03_far_ocean_base_4
+  - first:
+      213: -4778129534877875722
+    second: 03_far_ocean_base_5
+  - first:
+      213: 3550786097326451969
+    second: 03_far_ocean_base_6
+  - first:
+      213: 3411652057378599458
+    second: 03_far_ocean_base_7
+  - first:
+      213: -5478603433516308007
+    second: 03_far_ocean_base_8
+  - first:
+      213: 4275042400848629651
+    second: 03_far_ocean_base_9
+  - first:
+      213: 957833419532531720
+    second: 03_far_ocean_base_10
+  - first:
+      213: -3124999920999971740
+    second: 03_far_ocean_base_11
+  - first:
+      213: 4699326993246853958
+    second: 03_far_ocean_base_12
+  - first:
+      213: 8420675445144198230
+    second: 03_far_ocean_base_13
+  - first:
+      213: 5537906260981801669
+    second: 03_far_ocean_base_14
+  - first:
+      213: -5890048031578310934
+    second: 03_far_ocean_base_15
+  - first:
+      213: 4035478854382346079
+    second: 03_far_ocean_base_16
+  - first:
+      213: 316016274116813557
+    second: 03_far_ocean_base_17
+  - first:
+      213: 728226575561032660
+    second: 03_far_ocean_base_18
+  - first:
+      213: 8377042036007277196
+    second: 03_far_ocean_base_19
+  - first:
+      213: 7290272591539952941
+    second: 03_far_ocean_base_20
+  - first:
+      213: 5541003794597906295
+    second: 03_far_ocean_base_21
+  - first:
+      213: -5331660667930505453
+    second: 03_far_ocean_base_22
+  - first:
+      213: -8140255849548194123
+    second: 03_far_ocean_base_23
+  - first:
+      213: 169567728689455949
+    second: 03_far_ocean_base_24
+  - first:
+      213: -1124852991317335446
+    second: 03_far_ocean_base_25
+  - first:
+      213: -4904118334575726126
+    second: 03_far_ocean_base_26
+  - first:
+      213: -4498657768891935634
+    second: 03_far_ocean_base_27
+  - first:
+      213: -4645037642578085600
+    second: 03_far_ocean_base_28
+  - first:
+      213: -4900927449925013229
+    second: 03_far_ocean_base_29
+  - first:
+      213: -8892192343856419341
+    second: 03_far_ocean_base_30
+  - first:
+      213: 1157645501101037900
+    second: 03_far_ocean_base_31
+  - first:
+      213: -8452480875423965014
+    second: 03_far_ocean_base_32
+  - first:
+      213: -1712861324741873658
+    second: 03_far_ocean_base_33
+  - first:
+      213: -5797908340402784752
+    second: 03_far_ocean_base_34
+  - first:
+      213: -4925390413200941546
+    second: 03_far_ocean_base_35
+  - first:
+      213: 6071608570769166426
+    second: 03_far_ocean_base_36
+  - first:
+      213: 6134510336318450334
+    second: 03_far_ocean_base_37
+  - first:
+      213: 6456967951686912673
+    second: 03_far_ocean_base_38
+  - first:
+      213: -3602781149513737411
+    second: 03_far_ocean_base_39
+  - first:
+      213: -2953354826084411108
+    second: 03_far_ocean_base_40
+  - first:
+      213: 4285113589039642629
+    second: 03_far_ocean_base_41
+  - first:
+      213: 3916170813050720823
+    second: 03_far_ocean_base_42
+  - first:
+      213: 5905697927013582429
+    second: 03_far_ocean_base_43
+  - first:
+      213: -6254256143619815038
+    second: 03_far_ocean_base_44
+  - first:
+      213: 2969281101925651735
+    second: 03_far_ocean_base_45
+  - first:
+      213: 3795271518861624567
+    second: 03_far_ocean_base_46
+  - first:
+      213: 6919349914072657029
+    second: 03_far_ocean_base_47
+  - first:
+      213: 4194344078536793857
+    second: 03_far_ocean_base_48
+  - first:
+      213: -6988848758744380875
+    second: 03_far_ocean_base_49
+  - first:
+      213: -755397323569563351
+    second: 03_far_ocean_base_50
+  - first:
+      213: 4342505632460582237
+    second: 03_far_ocean_base_51
+  - first:
+      213: -9160932083242172002
+    second: 03_far_ocean_base_52
+  - first:
+      213: -6685522941709306513
+    second: 03_far_ocean_base_53
+  - first:
+      213: -2132909384973131584
+    second: 03_far_ocean_base_54
+  - first:
+      213: -5851614121644528909
+    second: 03_far_ocean_base_55
+  - first:
+      213: 261690127607736239
+    second: 03_far_ocean_base_56
+  - first:
+      213: 3422021321446014482
+    second: 03_far_ocean_base_57
+  - first:
+      213: 2864503228201607369
+    second: 03_far_ocean_base_58
+  - first:
+      213: 6360984003185461655
+    second: 03_far_ocean_base_59
+  - first:
+      213: 5262245132017966682
+    second: 03_far_ocean_base_60
+  - first:
+      213: 4484490011019706644
+    second: 03_far_ocean_base_61
+  - first:
+      213: -8411623742696432929
+    second: 03_far_ocean_base_62
+  - first:
+      213: 1678989676289107953
+    second: 03_far_ocean_base_63
+  - first:
+      213: -8015939161835314397
+    second: 03_far_ocean_base_64
+  - first:
+      213: 8359539758252226439
+    second: 03_far_ocean_base_65
+  - first:
+      213: 4033499737628037426
+    second: 03_far_ocean_base_66
+  - first:
+      213: 1505574815077009480
+    second: 03_far_ocean_base_67
+  - first:
+      213: -588988092756053241
+    second: 03_far_ocean_base_68
+  - first:
+      213: -8551501459390852694
+    second: 03_far_ocean_base_69
+  - first:
+      213: -6948268482518499257
+    second: 03_far_ocean_base_70
+  - first:
+      213: 283529370737391298
+    second: 03_far_ocean_base_71
+  - first:
+      213: -1213140823671284509
+    second: 03_far_ocean_base_72
+  - first:
+      213: 7229113673809202868
+    second: 03_far_ocean_base_73
+  - first:
+      213: 3848642969386296176
+    second: 03_far_ocean_base_74
+  - first:
+      213: 6860357862627337146
+    second: 03_far_ocean_base_75
+  - first:
+      213: -2531616782630688303
+    second: 03_far_ocean_base_76
+  - first:
+      213: 5354082255579080472
+    second: 03_far_ocean_base_77
+  - first:
+      213: -8422515599356385962
+    second: 03_far_ocean_base_78
+  - first:
+      213: -5837672057630076578
+    second: 03_far_ocean_base_79
+  - first:
+      213: 2984979903995223508
+    second: 03_far_ocean_base_80
+  - first:
+      213: 3954559782489492757
+    second: 03_far_ocean_base_81
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 03_far_ocean_base_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 429
+        width: 474
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fe64f7b5946ea640800000000000000
+      internalID: 5093118822801764084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_1
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 464
+        width: 417
+        height: 491
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42b1797ea65eaa4b0800000000000000
+      internalID: -5428274153526977756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_2
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 825
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0d437280654edfe0800000000000000
+      internalID: -1162415373007237876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_3
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 604
+        width: 95
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6c83528cc178f20800000000000000
+      internalID: 3424737687582066411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_4
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 595
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af74623fc79e6d5d0800000000000000
+      internalID: -3037984175750232070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_5
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 606
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f14dcee08ca0bdb0800000000000000
+      internalID: -4778129534877875722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_6
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 613
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10de984842de64130800000000000000
+      internalID: 3550786097326451969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_7
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 613
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2223841787f985f20800000000000000
+      internalID: 3411652057378599458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_8
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 613
+        width: 31
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d96600443718f3b0800000000000000
+      internalID: -5478603433516308007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_9
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 560
+        width: 42
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39fc056d960045b30800000000000000
+      internalID: 4275042400848629651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_10
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 604
+        width: 17
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808fb359b68ea4d00800000000000000
+      internalID: 957833419532531720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_11
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 579
+        width: 39
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4644ca9f025c1a4d0800000000000000
+      internalID: -3124999920999971740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_12
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 606
+        width: 27
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64b12e3900d573140800000000000000
+      internalID: 4699326993246853958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_13
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 542
+        width: 62
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c9ca4e3bf3cd470800000000000000
+      internalID: 8420675445144198230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_14
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 522
+        width: 193
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c26b3d37689adc40800000000000000
+      internalID: 5537906260981801669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_15
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 595
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae639c7a588524ea0800000000000000
+      internalID: -5890048031578310934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_16
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 595
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f5f0e13a6e00830800000000000000
+      internalID: 4035478854382346079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_17
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 596
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f2a9f18027b26400800000000000000
+      internalID: 316016274116813557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_18
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 592
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d38050563e2b1a00800000000000000
+      internalID: 728226575561032660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_19
+      rect:
+        serializedVersion: 2
+        x: 1429
+        y: 603
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c829ab8295b314470800000000000000
+      internalID: 8377042036007277196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_20
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 595
+        width: 34
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2d5186eb404c2560800000000000000
+      internalID: 7290272591539952941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_21
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 592
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 777891cf79995ec40800000000000000
+      internalID: 5541003794597906295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_22
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 588
+        width: 6
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31f8411fed22206b0800000000000000
+      internalID: -5331660667930505453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_23
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 581
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be52ea0f60080f80800000000000000
+      internalID: -8140255849548194123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_24
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 546
+        width: 24
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d43a7e963fc6a5200800000000000000
+      internalID: 169567728689455949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_25
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 561
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62aef30a28b360f0800000000000000
+      internalID: -1124852991317335446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_26
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 566
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1322b9b5211fbb0800000000000000
+      internalID: -4904118334575726126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_27
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 566
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e641527189e8191c0800000000000000
+      internalID: -4498657768891935634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_28
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 542
+        width: 32
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029b0d1efd2898fb0800000000000000
+      internalID: -4645037642578085600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_29
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 562
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311324553786cfbb0800000000000000
+      internalID: -4900927449925013229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_30
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 565
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd6df51d26989480800000000000000
+      internalID: -8892192343856419341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_31
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 576
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49d4f42378c01010800000000000000
+      internalID: 1157645501101037900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_32
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 546
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0629d4d61c2ba80800000000000000
+      internalID: -8452480875423965014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_33
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 558
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600714543b1ba38e0800000000000000
+      internalID: -1712861324741873658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_34
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 567
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01674024511b98fa0800000000000000
+      internalID: -5797908340402784752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_35
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 491
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e1b09d38f75abb0800000000000000
+      internalID: -4925390413200941546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_36
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 542
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a50d9eb83dfa24450800000000000000
+      internalID: 6071608570769166426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_37
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 508
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a293b16a8222550800000000000000
+      internalID: 6134510336318450334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_38
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 558
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa416e3422cb9950800000000000000
+      internalID: 6456967951686912673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_39
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 549
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b92c302a9500ec0800000000000000
+      internalID: -3602781149513737411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_40
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 549
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c199d87ee639307d0800000000000000
+      internalID: -2953354826084411108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_41
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 548
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50838e01b18c77b30800000000000000
+      internalID: 4285113589039642629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_42
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 522
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73214af0b98095630800000000000000
+      internalID: 3916170813050720823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_43
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 520
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56c76299f045f150800000000000000
+      internalID: 5905697927013582429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_44
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 467
+        width: 30
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2898c318c2b6439a0800000000000000
+      internalID: -6254256143619815038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_45
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 508
+        width: 60
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7151f862e61053920800000000000000
+      internalID: 2969281101925651735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_46
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 481
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f487e396538ba430800000000000000
+      internalID: 3795271518861624567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_47
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 474
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c2ee82618760060800000000000000
+      internalID: 6919349914072657029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_48
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 538
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10fd2f287bd453a30800000000000000
+      internalID: 4194344078536793857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_49
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 511
+        width: 51
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53a8c1a151f920f90800000000000000
+      internalID: -6988848758744380875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_50
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 474
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 929fa50f22a4485f0800000000000000
+      internalID: -755397323569563351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_51
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 549
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d22f97ddda34c30800000000000000
+      internalID: 4342505632460582237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_52
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 483
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e910fd69ec4ddd080800000000000000
+      internalID: -9160932083242172002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_53
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 473
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6531b15e404833a0800000000000000
+      internalID: -6685522941709306513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_54
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 542
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c0649a07326662e0800000000000000
+      internalID: -2132909384973131584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_55
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 541
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fae7b4a5f3eacea0800000000000000
+      internalID: -5851614121644528909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_56
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 481
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa72949d8c5b1a300800000000000000
+      internalID: 261690127607736239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_57
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 538
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21e3a9ed2467d7f20800000000000000
+      internalID: 3422021321446014482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_58
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 520
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c0aaee5282c0c720800000000000000
+      internalID: 2864503228201607369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_59
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 538
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 799cfcbbf31c64850800000000000000
+      internalID: 6360984003185461655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_60
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 534
+        width: 12
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5e95f62110470940800000000000000
+      internalID: 5262245132017966682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_61
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 541
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4110e99b7eb1c3e30800000000000000
+      internalID: 4484490011019706644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_62
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 549
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fda5650d5c8e34b80800000000000000
+      internalID: -8411623742696432929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_63
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 558
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7a2c40738fc4710800000000000000
+      internalID: 1678989676289107953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_64
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 526
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 323e9a57dc9a1c090800000000000000
+      internalID: -8015939161835314397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_65
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 429
+        width: 91
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 787f0609e1d030470800000000000000
+      internalID: 8359539758252226439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_66
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 559
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23153f614aed9f730800000000000000
+      internalID: 4033499737628037426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_67
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 483
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84880734150e4e410800000000000000
+      internalID: 1505574815077009480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_68
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 474
+        width: 153
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7033752437e73d7f0800000000000000
+      internalID: -588988092756053241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_69
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 545
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa116c00bb6f25980800000000000000
+      internalID: -8551501459390852694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_70
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 529
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 740417fe0aac29f90800000000000000
+      internalID: -6948268482518499257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_71
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 534
+        width: 6
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c63132e57c4fe300800000000000000
+      internalID: 283529370737391298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_72
+      rect:
+        serializedVersion: 2
+        x: 1509
+        y: 511
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ec5c8e29de0a2fe0800000000000000
+      internalID: -1213140823671284509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_73
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 490
+        width: 13
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4be0158b598f25460800000000000000
+      internalID: 7229113673809202868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_74
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 445
+        width: 30
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0732391c360296530800000000000000
+      internalID: 3848642969386296176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_75
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 483
+        width: 75
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab3e5f9d023e43f50800000000000000
+      internalID: 6860357862627337146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_76
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 469
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d961e303f3eddcd0800000000000000
+      internalID: -2531616782630688303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_77
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 465
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817630eb1758d4a40800000000000000
+      internalID: 5354082255579080472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_78
+      rect:
+        serializedVersion: 2
+        x: 1758
+        y: 465
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6552d21dfa63d1b80800000000000000
+      internalID: -8422515599356385962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_79
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 450
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e515cb1613c6cfea0800000000000000
+      internalID: -5837672057630076578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_80
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 448
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd90575867cc6920800000000000000
+      internalID: 2984979903995223508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 03_far_ocean_base_81
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1920
+        height: 429
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d05568b2b61e630800000000000000
+      internalID: 3954559782489492757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      03_far_ocean_base_0: 5093118822801764084
+      03_far_ocean_base_1: -5428274153526977756
+      03_far_ocean_base_10: 957833419532531720
+      03_far_ocean_base_11: -3124999920999971740
+      03_far_ocean_base_12: 4699326993246853958
+      03_far_ocean_base_13: 8420675445144198230
+      03_far_ocean_base_14: 5537906260981801669
+      03_far_ocean_base_15: -5890048031578310934
+      03_far_ocean_base_16: 4035478854382346079
+      03_far_ocean_base_17: 316016274116813557
+      03_far_ocean_base_18: 728226575561032660
+      03_far_ocean_base_19: 8377042036007277196
+      03_far_ocean_base_2: -1162415373007237876
+      03_far_ocean_base_20: 7290272591539952941
+      03_far_ocean_base_21: 5541003794597906295
+      03_far_ocean_base_22: -5331660667930505453
+      03_far_ocean_base_23: -8140255849548194123
+      03_far_ocean_base_24: 169567728689455949
+      03_far_ocean_base_25: -1124852991317335446
+      03_far_ocean_base_26: -4904118334575726126
+      03_far_ocean_base_27: -4498657768891935634
+      03_far_ocean_base_28: -4645037642578085600
+      03_far_ocean_base_29: -4900927449925013229
+      03_far_ocean_base_3: 3424737687582066411
+      03_far_ocean_base_30: -8892192343856419341
+      03_far_ocean_base_31: 1157645501101037900
+      03_far_ocean_base_32: -8452480875423965014
+      03_far_ocean_base_33: -1712861324741873658
+      03_far_ocean_base_34: -5797908340402784752
+      03_far_ocean_base_35: -4925390413200941546
+      03_far_ocean_base_36: 6071608570769166426
+      03_far_ocean_base_37: 6134510336318450334
+      03_far_ocean_base_38: 6456967951686912673
+      03_far_ocean_base_39: -3602781149513737411
+      03_far_ocean_base_4: -3037984175750232070
+      03_far_ocean_base_40: -2953354826084411108
+      03_far_ocean_base_41: 4285113589039642629
+      03_far_ocean_base_42: 3916170813050720823
+      03_far_ocean_base_43: 5905697927013582429
+      03_far_ocean_base_44: -6254256143619815038
+      03_far_ocean_base_45: 2969281101925651735
+      03_far_ocean_base_46: 3795271518861624567
+      03_far_ocean_base_47: 6919349914072657029
+      03_far_ocean_base_48: 4194344078536793857
+      03_far_ocean_base_49: -6988848758744380875
+      03_far_ocean_base_5: -4778129534877875722
+      03_far_ocean_base_50: -755397323569563351
+      03_far_ocean_base_51: 4342505632460582237
+      03_far_ocean_base_52: -9160932083242172002
+      03_far_ocean_base_53: -6685522941709306513
+      03_far_ocean_base_54: -2132909384973131584
+      03_far_ocean_base_55: -5851614121644528909
+      03_far_ocean_base_56: 261690127607736239
+      03_far_ocean_base_57: 3422021321446014482
+      03_far_ocean_base_58: 2864503228201607369
+      03_far_ocean_base_59: 6360984003185461655
+      03_far_ocean_base_6: 3550786097326451969
+      03_far_ocean_base_60: 5262245132017966682
+      03_far_ocean_base_61: 4484490011019706644
+      03_far_ocean_base_62: -8411623742696432929
+      03_far_ocean_base_63: 1678989676289107953
+      03_far_ocean_base_64: -8015939161835314397
+      03_far_ocean_base_65: 8359539758252226439
+      03_far_ocean_base_66: 4033499737628037426
+      03_far_ocean_base_67: 1505574815077009480
+      03_far_ocean_base_68: -588988092756053241
+      03_far_ocean_base_69: -8551501459390852694
+      03_far_ocean_base_7: 3411652057378599458
+      03_far_ocean_base_70: -6948268482518499257
+      03_far_ocean_base_71: 283529370737391298
+      03_far_ocean_base_72: -1213140823671284509
+      03_far_ocean_base_73: 7229113673809202868
+      03_far_ocean_base_74: 3848642969386296176
+      03_far_ocean_base_75: 6860357862627337146
+      03_far_ocean_base_76: -2531616782630688303
+      03_far_ocean_base_77: 5354082255579080472
+      03_far_ocean_base_78: -8422515599356385962
+      03_far_ocean_base_79: -5837672057630076578
+      03_far_ocean_base_8: -5478603433516308007
+      03_far_ocean_base_80: 2984979903995223508
+      03_far_ocean_base_81: 3954559782489492757
+      03_far_ocean_base_9: 4275042400848629651
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
