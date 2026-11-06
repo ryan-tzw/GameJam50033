@@ -13,6 +13,8 @@ namespace Jam50033
         [SerializeField] private StageArea stageArea;
         [SerializeField, Min(0.1f)] private float heightInCells = 2f;
         [SerializeField, Min(0.1f)] private float widthInCells = 0.8f;
+        [SerializeField, Min(0f), Tooltip("Height removed from the top of the collider, in cells. Keeps the feet and sprite size unchanged.")]
+        private float headClearance = 0.1f;
         [SerializeField, Tooltip("Desired horizontal world position. The bridge scrolls beneath this position.")]
         private float targetX;
         [SerializeField, Min(0f), Tooltip("Horizontal recovery velocity per unit of displacement.")]
@@ -455,12 +457,13 @@ namespace Jam50033
 
             float size = stageArea.CellSize;
             float height = heightInCells * size;
-            Vector2 colliderSize = new Vector2(Mathf.Min(widthInCells, heightInCells) * size, height);
+            float colliderHeight = Mathf.Max(Mathf.Min(widthInCells, heightInCells), heightInCells - headClearance) * size;
+            Vector2 colliderSize = new Vector2(Mathf.Min(widthInCells, heightInCells) * size, colliderHeight);
             if (capsule.size != colliderSize)
             {
                 capsule.size = colliderSize;
-                capsule.offset = Vector2.up * (height * 0.5f);
             }
+            capsule.offset = Vector2.up * (colliderHeight * 0.5f);
 
             float scale = height / standingSprite.bounds.size.y;
             visualRoot.localScale = Vector3.one * scale;
@@ -478,6 +481,7 @@ namespace Jam50033
             fastRunStopSpeed = Mathf.Clamp(fastRunStopSpeed, 0f, fastRunStartSpeed - 0.01f);
             heightInCells = Mathf.Max(0.1f, heightInCells);
             widthInCells = Mathf.Clamp(widthInCells, 0.1f, heightInCells);
+            headClearance = Mathf.Clamp(headClearance, 0f, heightInCells - widthInCells);
             followStrength = Mathf.Max(0f, followStrength);
             maxRecoverySpeed = Mathf.Max(0f, maxRecoverySpeed);
             groundProbeDistance = Mathf.Max(0.001f, groundProbeDistance);

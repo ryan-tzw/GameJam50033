@@ -51,7 +51,7 @@ namespace Jam50033
 
         private void SpawnNext()
         {
-            if (Time.timeScale <= 0f || stageArea.CellSize <= 0f || IsSpawnRegionOccupied(GetSpawnRegion()))
+            if (Time.timeScale <= 0f || stageArea.CellSize <= 0f || !TryFindSpawnRow(out int row))
             {
                 return;
             }
@@ -61,19 +61,49 @@ namespace Jam50033
             activePiece = Instantiate(tetrominoPrefab);
             activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
             activePiece.name = $"Tetromino {shape}";
-            activePiece.Initialize(stageArea, shape, spawnRow, spawnInset - spawnRightOffset);
+            activePiece.Initialize(stageArea, shape, row, spawnInset - spawnRightOffset);
             activePiece.AssignHazards(hazards, hazardBrickPrefab);
             spawnedCount++;
         }
 
-        private Bounds GetSpawnRegion()
+        private bool TryFindSpawnRow(out int row)
         {
-            Tetromino.GetSpawnPosition(stageArea, Tetromino.Shape.I, spawnRow,
+            row = Mathf.Clamp(spawnRow, 0, stageArea.Rows - 1);
+            if (!IsSpawnRegionOccupied(GetSpawnRegion(row)))
+            {
+                return true;
+            }
+
+            // Keep supplying pieces when an obstacle passes through the usual spawn lane.
+            int preferred = row;
+            for (int distance = 1; distance < stageArea.Rows; distance++)
+            {
+                int above = preferred + distance;
+                if (above < stageArea.Rows && !IsSpawnRegionOccupied(GetSpawnRegion(above)))
+                {
+                    row = above;
+                    return true;
+                }
+
+                int below = preferred - distance;
+                if (below >= 0 && !IsSpawnRegionOccupied(GetSpawnRegion(below)))
+                {
+                    row = below;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private Bounds GetSpawnRegion(int row)
+        {
+            Tetromino.GetSpawnPosition(stageArea, Tetromino.Shape.I, row,
                 spawnInset - spawnRightOffset, out Bounds region);
             // reserve enough room for any shape before choosing the next piece.
             for (int i = 1; i < 7; i++)
             {
-                Tetromino.GetSpawnPosition(stageArea, (Tetromino.Shape)i, spawnRow,
+                Tetromino.GetSpawnPosition(stageArea, (Tetromino.Shape)i, row,
                     spawnInset - spawnRightOffset, out Bounds bounds);
                 region.Encapsulate(bounds);
             }
@@ -84,6 +114,7 @@ namespace Jam50033
         private bool IsSpawnRegionOccupied(Bounds region)
         {
             float halfCell = stageArea.CellSize * 0.5f;
+            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
             foreach (Brick brick in Brick.ActiveBricks)
             {
                 if (brick == null || brick.gameObject.scene != gameObject.scene)
@@ -112,6 +143,11 @@ namespace Jam50033
                     worldPosition = stageArea.CellToWorldPosition(brick.GetGridCell());
                 }
 
+                if (entryZone != null && !entryZone.IsActivePlacementPosition(worldPosition))
+                {
+                    continue;
+                }
+
                 Vector3 position = stageArea.transform.InverseTransformPoint(worldPosition);
                 // touching edges are safe; only overlapping cell interiors block spawning.
                 if (position.x + halfCell > region.min.x + 0.0001f &&
@@ -133,7 +169,7 @@ namespace Jam50033
                 return;
             }
 
-            Bounds region = GetSpawnRegion();
+            Bounds region = GetSpawnRegion(spawnRow);
             Matrix4x4 previousMatrix = Gizmos.matrix;
             Gizmos.matrix = stageArea.transform.localToWorldMatrix;
             Gizmos.color = spawnGizmoColor;

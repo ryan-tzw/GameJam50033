@@ -1679,6 +1679,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &528627865
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3973176616428203104, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: stageArea
+      value: 
+      objectReference: {fileID: 1098233640}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.106996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.106996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.753704
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27962965
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742335658790683266, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720433328297262031, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+      propertyPath: m_Name
+      value: HazardBrick
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 380dd6541e65108238e07b8c37475377, type: 3}
 --- !u!1001 &562898108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2004,6 +2073,7 @@ GameObject:
   - component: {fileID: 632630810}
   - component: {fileID: 632630812}
   - component: {fileID: 632630811}
+  - component: {fileID: 882000000000000010}
   m_Layer: 0
   m_Name: TetrominoSpawner
   m_TagString: Untagged
@@ -3254,6 +3324,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -42}
   m_SizeDelta: {x: 400, y: 66}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!4 &1034005208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+  m_PrefabInstance: {fileID: 1331334538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098233639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,6 +3339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1098233642}
   - component: {fileID: 1098233640}
+  - component: {fileID: 882000000000000020}
   m_Layer: 0
   m_Name: StageArea
   m_TagString: Untagged
@@ -3838,6 +3914,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
+--- !u!1001 &1331334538
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1590998852}
+    m_Modifications:
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: stageArea
+      value: 
+      objectReference: {fileID: 1098233640}
+    - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_Name
+      value: Brick (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.106996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.106996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.9148152
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.677778
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5776cf320c553e108ca8801504da875, type: 3}
 --- !u!1001 &1335930341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4132,6 +4277,7 @@ Transform:
   - {fileID: 1172732742}
   - {fileID: 2102591522}
   - {fileID: 466900357}
+  - {fileID: 1034005208}
   - {fileID: 461199874}
   - {fileID: 981488040}
   - {fileID: 903505785}
@@ -5901,6 +6047,46 @@ MonoBehaviour:
   fallSpeed: 1.5
   horizontalDrift: 0.7
   rotationSpeed: 120
+--- !u!114 &882000000000000010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632630807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f1c5d9d1c6446fa6012d8b7cce08bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.HazardClusterSpawner
+  stageArea: {fileID: 1098233640}
+  tetrominoPrefab: {fileID: 7053026960480931781, guid: c122ef960befc3b9a89b95a07a05145e, type: 3}
+  hazardBrickPrefab: {fileID: 3973176616428203104, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+  initialDelay: 8
+  minimumSpawnInterval: 6
+  maximumSpawnInterval: 10
+  minimumSpawnRow: 1
+  maximumSpawnRow: 12
+  spawnOffset: 2
+  spawnGizmoColor: {r: 1, g: 0.3, b: 0.3, a: 0.8}
+--- !u!114 &882000000000000020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098233639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3085c6a627b3e5bb8b798d6b60b433c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlacementEntryZone
+  placementRightX: 7
+  color: {r: 0.85, g: 0.85, b: 1, a: 1}
+  fillOpacity: 0.035
+  outlineOpacity: 0.25
+  lineWidth: 0.04
+  dashLength: 0.35
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5916,3 +6102,4 @@ SceneRoots:
   - {fileID: 825756289}
   - {fileID: 2020321782}
   - {fileID: 286185814}
+  - {fileID: 528627865}

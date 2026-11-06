@@ -54,6 +54,7 @@ namespace Jam50033
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
+        public bool IsHazardCluster { get; private set; }
         internal StageArea StageArea => stageArea;
 
         internal void SetSoundEffects(TetrominoAudio audio)
@@ -67,6 +68,7 @@ namespace Jam50033
             shape = selectedShape;
             rotationSteps = 0;
             isPlaced = false;
+            IsHazardCluster = false;
             isDiscarded = false;
             lastMoveSpeed = relativeMoveSpeed;
             heldVerticalDirection = 0;
@@ -142,6 +144,28 @@ namespace Jam50033
 
             UpdateLayout();
             UpdateGhost();
+        }
+
+        internal void InitializeHazardCluster(StageArea stage, Shape selectedShape, int rotation,
+            Vector2Int cell, Brick hazardPrefab)
+        {
+            stageArea = stage;
+            shape = selectedShape;
+            rotationSteps = rotation;
+            isPlaced = true;
+            IsHazardCluster = true;
+            isDiscarded = false;
+            placedCell = cell;
+            transform.SetParent(stage.BridgeRoot, false);
+            for (int i = 0; i < bricks.Length; i++)
+            {
+                Brick original = bricks[i];
+                bricks[i] = Instantiate(hazardPrefab, transform);
+                original.gameObject.SetActive(false);
+                Destroy(original.gameObject);
+            }
+
+            UpdateLayout();
         }
 
         private static readonly Vector2Int[][] ShapeCells =
@@ -341,6 +365,7 @@ namespace Jam50033
             }
 
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
+            ResolveEntryOverlap(ref position);
             int previousRow = Mathf.RoundToInt((position.y - origin.y) / cellSize);
             int verticalInput = ReadVerticalInput(keyboard, deltaTime);
             bool attachPressed = keyboard != null &&
@@ -484,10 +509,13 @@ namespace Jam50033
 
         private bool CanPlaceAtCell(Vector2Int position, bool checkPlayer = true)
         {
+            // Geometry-only probes may stop at contact in the entry zone; final locks must fit left of it.
+            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
                 if (occupiedCells.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows ||
+                    (checkPlayer && entryZone != null && !entryZone.AllowsLock(stageArea.CellToWorldPosition(cell))) ||
                     (checkPlayer && OverlapsPlayer(cell)))
                 {
                     return false;
@@ -636,6 +664,7 @@ namespace Jam50033
             // Placement runs between physics steps; include the player's latest transform in overlap queries.
             Physics2D.SyncTransforms();
             occupiedCells.Clear();
+            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
             foreach (Brick brick in Brick.ActiveBricks)
             {
                 if (brick == null || brick.gameObject.scene != gameObject.scene)
@@ -652,12 +681,58 @@ namespace Jam50033
                     }
 
                     owner.UpdateLayout();
-                    occupiedCells.Add(stageArea.WorldPositionToCell(brick.transform.position));
+                    if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position))
+                    {
+                        occupiedCells.Add(stageArea.WorldPositionToCell(brick.transform.position));
+                    }
                 }
                 else if (brick.StageArea == stageArea)
                 {
-                    occupiedCells.Add(brick.GetGridCell());
+                    Vector2Int cell = brick.GetGridCell();
+                    if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell)))
+                    {
+                        occupiedCells.Add(cell);
+                    }
                 }
+            }
+        }
+
+        private void ResolveEntryOverlap(ref Vector3 position)
+        {
+            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
+            if (entryZone == null || !entryZone.isActiveAndEnabled || !OverlapsOccupiedCells(position, rotationSteps))
+            {
+                return;
+            }
+
+            // A scrolling tile can become solid at the threshold while intersecting a preview piece.
+            // Separate toward the entry zone without locking, so the player can still move away.
+            Vector3 origin = GetGridOrigin();
+            float size = stageArea.CellSize;
+            for (int attempt = 0; attempt < occupiedCells.Count * 4; attempt++)
+            {
+                float column = (position.x - origin.x) / size;
+                float row = (position.y - origin.y) / size;
+                float nextColumn = column;
+                for (int i = 0; i < 4; i++)
+                {
+                    Vector2Int offset = GetRotatedCell(i, rotationSteps);
+                    foreach (Vector2Int occupied in occupiedCells)
+                    {
+                        if (Mathf.Abs(row + offset.y - occupied.y) < 0.9999f &&
+                            Mathf.Abs(column + offset.x - occupied.x) < 0.9999f)
+                        {
+                            nextColumn = Mathf.Max(nextColumn, occupied.x + 1 - offset.x);
+                        }
+                    }
+                }
+
+                if (nextColumn <= column)
+                {
+                    break;
+                }
+
+                position.x = origin.x + nextColumn * size;
             }
         }
 
@@ -750,6 +825,11 @@ namespace Jam50033
         }
 
         private Vector2Int GetRotatedCell(int index, int steps)
+        {
+            return GetShapeCell(shape, index, steps);
+        }
+
+        internal static Vector2Int GetShapeCell(Shape shape, int index, int steps)
         {
             Vector2Int cell = ShapeCells[(int)shape][index];
             // I and O turn around a point between cells; O keeps its footprint while cycling hazard positions.
