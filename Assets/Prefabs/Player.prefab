@@ -242,8 +242,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.26}
-  m_Size: {x: 0.208, y: 0.52}
+  m_Offset: {x: 0, y: 0.24}
+  m_Size: {x: 0.208, y: 0.48}
   m_Direction: 0
 --- !u!114 &5764522197894248706
 MonoBehaviour:
@@ -256,17 +256,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bef454fb021ceb398bd774ce9d54b040, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.AdventurerController
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerController
   stageArea: {fileID: 0}
   heightInCells: 2
   widthInCells: 0.8
   targetX: 0
-  followStrength: 6
+  followStrength: 3
   maxRecoverySpeed: 4
   groundProbeDistance: 0.08
   groundLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  climbSpeed: 1.5
+  stepSpeed: 4
+  wallProbeDistance: 0.15
+  movementState: 2
   visualRoot: {fileID: 1346274873048868361}
   standingSprite: {fileID: 1768599190028779529, guid: a11535981f9df56ae82e6f61eca4e78d, type: 3}
   visual: {fileID: 1446710395335007330}

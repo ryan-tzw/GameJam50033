@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jam50033
@@ -5,8 +6,10 @@ namespace Jam50033
     [ExecuteAlways]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
-    public sealed class AdventurerController : MonoBehaviour
+    public sealed class PlayerController : MonoBehaviour
     {
+        public enum MovementState { Running, Climbing, Falling }
+
         [SerializeField] private StageArea stageArea;
         [SerializeField, Min(0.1f)] private float heightInCells = 2f;
         [SerializeField, Min(0.1f)] private float widthInCells = 0.8f;
@@ -19,6 +22,14 @@ namespace Jam50033
         [SerializeField, Min(0.001f), Tooltip("Distance below the capsule to check for support, in cells.")]
         private float groundProbeDistance = 0.08f;
         [SerializeField] private LayerMask groundLayers = ~0;
+        [Header("Climbing")]
+        [SerializeField, Min(0.1f), Tooltip("Upward speed while the upper half touches the wall, in stage cells per second.")]
+        private float climbSpeed = 2.5f;
+        [SerializeField, Min(0.1f), Tooltip("Upward speed when only the lower half touches the wall, in stage cells per second.")]
+        private float stepSpeed = 4f;
+        [SerializeField, Range(0.01f, 0.5f), Tooltip("Distance ahead to detect a climbable wall, in cells.")]
+        private float wallProbeDistance = 0.15f;
+        [SerializeField] private MovementState movementState = MovementState.Falling;
         [Header("Visuals")]
         [SerializeField, Tooltip("Automatically sized and aligned parent. Edit the Visual child for sprite adjustments.")]
         private Transform visualRoot;
@@ -29,16 +40,36 @@ namespace Jam50033
         private Rigidbody2D body;
         private CapsuleCollider2D capsule;
         private readonly RaycastHit2D[] groundHits = new RaycastHit2D[8];
+        private readonly RaycastHit2D[] wallHits = new RaycastHit2D[8];
+        private readonly HashSet<Vector2Int> bridgeCells = new();
+        private Vector2Int climbAnchor;
+        private float normalGravity;
+        private bool climbBlocked;
         private static readonly int GroundedParameter = Animator.StringToHash("Grounded");
         private static readonly int RunningParameter = Animator.StringToHash("Running");
+        private static readonly int ClimbingParameter = Animator.StringToHash("Climbing");
+        private static readonly int ClimbPlaybackParameter = Animator.StringToHash("ClimbPlayback");
+        private static readonly int ClimbState = Animator.StringToHash("Base Layer.Climb");
 
         public bool IsGrounded { get; private set; }
+        public MovementState State => movementState;
 
         private void OnEnable()
         {
             body = GetComponent<Rigidbody2D>();
             capsule = GetComponent<CapsuleCollider2D>();
+            normalGravity = body.gravityScale;
+            movementState = MovementState.Falling;
+            climbBlocked = false;
             FitToStage();
+        }
+
+        private void OnDisable()
+        {
+            if (body != null && movementState == MovementState.Climbing)
+            {
+                body.gravityScale = normalGravity;
+            }
         }
 
         private void FixedUpdate()
@@ -49,11 +80,6 @@ namespace Jam50033
             }
 
             float size = stageArea.CellSize;
-            float speedLimit = maxRecoverySpeed * size;
-            // zero displacement means zero forward velocity; recovery only follows a displacement.
-            float velocityX = Mathf.Clamp((targetX - body.position.x) * followStrength, -speedLimit, speedLimit);
-            body.linearVelocity = new Vector2(velocityX, body.linearVelocity.y);
-
             ContactFilter2D filter = new ContactFilter2D();
             filter.SetLayerMask(groundLayers);
             filter.useTriggers = false;
@@ -68,6 +94,161 @@ namespace Jam50033
                     break;
                 }
             }
+
+            RefreshBridgeCells();
+            if (movementState != MovementState.Climbing)
+            {
+                TryStartClimbing(filter, size);
+            }
+
+            if (movementState == MovementState.Climbing && UpdateClimbing(filter, size))
+            {
+                return;
+            }
+
+            movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
+            float speedLimit = maxRecoverySpeed * size;
+            // zero displacement means zero forward velocity; recovery only follows a displacement.
+            float velocityX = Mathf.Clamp((targetX - body.position.x) * followStrength, -speedLimit, speedLimit);
+            body.linearVelocity = new Vector2(velocityX, body.linearVelocity.y);
+        }
+
+        private void RefreshBridgeCells()
+        {
+            bridgeCells.Clear();
+            foreach (Brick brick in Brick.ActiveBricks)
+            {
+                if (brick == null || brick.gameObject.scene != gameObject.scene)
+                {
+                    continue;
+                }
+
+                Tetromino owner = brick.GetComponentInParent<Tetromino>();
+                if ((owner == null && brick.StageArea == stageArea) ||
+                    (owner != null && owner.IsPlaced && owner.StageArea == stageArea))
+                {
+                    bridgeCells.Add(stageArea.WorldPositionToCell(brick.transform.position));
+                }
+            }
+        }
+
+        private void TryStartClimbing(ContactFilter2D filter, float size)
+        {
+            int count = capsule.Cast(Vector2.right, filter, wallHits, wallProbeDistance * size);
+            for (int i = 0; i < count; i++)
+            {
+                RaycastHit2D hit = wallHits[i];
+                Brick brick = hit.collider.GetComponent<Brick>();
+                if (brick == null || hit.normal.x > -0.3f)
+                {
+                    continue;
+                }
+
+                Vector2Int cell = stageArea.WorldPositionToCell(brick.transform.position);
+                if (!bridgeCells.Contains(cell))
+                {
+                    continue;
+                }
+
+                climbAnchor = cell;
+                movementState = MovementState.Climbing;
+                body.gravityScale = 0f;
+                return;
+            }
+        }
+
+        private bool UpdateClimbing(ContactFilter2D filter, float size)
+        {
+            if (!bridgeCells.Contains(climbAnchor))
+            {
+                EndClimbing();
+                return false;
+            }
+
+            // Keep the original wall segment: a gap must not promote us to a disconnected upper tile.
+            Vector2Int topCell = climbAnchor;
+            while (bridgeCells.Contains(topCell + Vector2Int.up))
+            {
+                topCell += Vector2Int.up;
+            }
+
+            Vector3 wallTop = stageArea.CellToWorldPosition(topCell);
+            float skin = size * 0.01f;
+            float feetTargetY = wallTop.y + size * 0.5f + skin;
+            bool canStand = HasStandingClearance(topCell, size);
+            if (!canStand)
+            {
+                // Stop with the head below the break, rather than lifting the body into the gap.
+                feetTargetY -= capsule.bounds.size.y;
+            }
+
+            bool aboveTop = canStand && capsule.bounds.min.y >= feetTargetY - skin * 0.5f;
+            float movementSpeed = HasUpperBodyContact() ? climbSpeed : stepSpeed;
+            float desiredX = aboveTop ? wallTop.x : wallTop.x - size * 0.5f - capsule.bounds.extents.x - skin;
+            float horizontalLimit = aboveTop ? Mathf.Max(maxRecoverySpeed, movementSpeed) * size : float.PositiveInfinity;
+            float velocityX = Mathf.Clamp((desiredX - body.position.x) / Time.fixedDeltaTime,
+                -horizontalLimit, horizontalLimit);
+            float velocityY = Mathf.Clamp((feetTargetY - capsule.bounds.min.y) / Time.fixedDeltaTime,
+                0f, movementSpeed * size);
+
+            Vector2 velocity = new Vector2(velocityX, velocityY);
+            float distance = velocity.magnitude * Time.fixedDeltaTime;
+            if (distance > 0f)
+            {
+                Vector2 direction = velocity.normalized;
+                int count = capsule.Cast(direction, filter, wallHits, distance + skin);
+                for (int i = 0; i < count; i++)
+                {
+                    if (Vector2.Dot(wallHits[i].normal, direction) < -0.1f)
+                    {
+                        distance = Mathf.Min(distance, Mathf.Max(0f, wallHits[i].distance - skin));
+                    }
+                }
+
+                velocity = direction * (distance / Time.fixedDeltaTime);
+            }
+
+            bool needsVerticalMovement = feetTargetY - capsule.bounds.min.y > skin * 0.5f;
+            bool needsHorizontalMovement = aboveTop && Mathf.Abs(desiredX - body.position.x) > skin * 2f;
+            climbBlocked = (!canStand && !needsVerticalMovement) ||
+                (needsVerticalMovement && velocity.y < size * 0.001f) ||
+                (needsHorizontalMovement && Mathf.Abs(velocity.x) < size * 0.001f);
+            body.linearVelocity = velocity;
+            if (aboveTop && Mathf.Abs(body.position.x - wallTop.x) <= skin * 2f && IsGrounded)
+            {
+                EndClimbing();
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool HasStandingClearance(Vector2Int topCell, float size)
+        {
+            float halfWidth = capsule.bounds.extents.x / size;
+            int firstColumn = Mathf.FloorToInt(topCell.x + 0.5f - halfWidth + 0.0001f);
+            int lastColumn = Mathf.CeilToInt(topCell.x + 0.5f + halfWidth - 0.0001f) - 1;
+            int rows = Mathf.CeilToInt(capsule.bounds.size.y / size - 0.0001f);
+            for (int y = 1; y <= rows; y++)
+            {
+                for (int x = firstColumn; x <= lastColumn; x++)
+                {
+                    if (bridgeCells.Contains(new Vector2Int(x, topCell.y + y)))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void EndClimbing()
+        {
+            climbBlocked = false;
+            body.gravityScale = normalGravity;
+            body.linearVelocity = new Vector2(body.linearVelocity.x, 0f);
+            movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
         }
 
         private void Update()
@@ -79,8 +260,40 @@ namespace Jam50033
 
             bool running = Mathf.Abs(stageArea.BridgeFrameDisplacement) > 0.00001f ||
                 Mathf.Abs(body.linearVelocity.x) > 0.01f;
-            animator.SetBool(GroundedParameter, IsGrounded);
-            animator.SetBool(RunningParameter, running);
+            bool climbing = movementState == MovementState.Climbing;
+            bool showClimb = climbing && (climbBlocked || HasUpperBodyContact());
+
+            // Low steps still use climb movement, with a running pose instead of grabbing empty space.
+            animator.SetBool(GroundedParameter, IsGrounded || (climbing && !showClimb));
+            animator.SetBool(RunningParameter, running || climbing);
+            animator.SetBool(ClimbingParameter, showClimb);
+            animator.SetFloat(ClimbPlaybackParameter, climbBlocked ? 0f : 1f);
+            if (climbing && climbBlocked)
+            {
+                animator.Play(ClimbState, 0, 0f);
+            }
+        }
+
+        private bool HasUpperBodyContact()
+        {
+            Bounds bounds = capsule.bounds;
+            float size = stageArea.CellSize;
+            float halfCell = size * 0.5f;
+            float reach = wallProbeDistance * size;
+            // Cover the entire upper half, including the clearance maintained beside the wall.
+            foreach (Vector2Int cell in bridgeCells)
+            {
+                Vector3 center = stageArea.CellToWorldPosition(cell);
+                if (center.y + halfCell > bounds.center.y + size * 0.0001f &&
+                    center.y - halfCell < bounds.max.y &&
+                    center.x + halfCell >= bounds.min.x &&
+                    center.x - halfCell <= bounds.max.x + reach)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void LateUpdate()
@@ -122,6 +335,9 @@ namespace Jam50033
             followStrength = Mathf.Max(0f, followStrength);
             maxRecoverySpeed = Mathf.Max(0f, maxRecoverySpeed);
             groundProbeDistance = Mathf.Max(0.001f, groundProbeDistance);
+            climbSpeed = Mathf.Max(0.1f, climbSpeed);
+            stepSpeed = Mathf.Max(0.1f, stepSpeed);
+            wallProbeDistance = Mathf.Clamp(wallProbeDistance, 0.01f, 0.5f);
             FitToStage();
         }
     }
