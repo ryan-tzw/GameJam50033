@@ -332,8 +332,12 @@ namespace Jam50033
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
             int previousRow = Mathf.RoundToInt((position.y - origin.y) / cellSize);
             int verticalInput = ReadVerticalInput(keyboard, deltaTime);
+            bool attachPressed = keyboard != null &&
+                ((verticalInput > 0 && (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)) ||
+                 (verticalInput < 0 && (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame)));
 
-            if (verticalInput != 0 && TryAttachVertically(position, previousRow, verticalInput))
+            // Connect only on a fresh press from an already adjacent row, never on a move or held repeat.
+            if (attachPressed && TryAttachVertically(position, previousRow, verticalInput))
             {
                 return;
             }
@@ -342,11 +346,6 @@ namespace Jam50033
             row = Mathf.Clamp(row, firstRow, lastRow);
             Vector3 adjustedPosition = position;
             adjustedPosition.y = origin.y + row * cellSize;
-            if (verticalInput != 0 && row != previousRow && TryAttachVertically(adjustedPosition, row, verticalInput))
-            {
-                return;
-            }
-
             if (OverlapsOccupiedCells(adjustedPosition, rotationSteps))
             {
                 row = previousRow;
