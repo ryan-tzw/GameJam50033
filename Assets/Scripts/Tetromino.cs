@@ -19,8 +19,6 @@ namespace Jam50033
         private float speedUpMultiplier = 3f;
         [SerializeField, Tooltip("Instantly place at the ghost position, or discard if no placement is available.")]
         private Key hardDropKey = Key.Space;
-        [SerializeField, Range(0f, 0.5f), Tooltip("Maximum horizontal snap in cells when W/S attaches above or below a brick.")]
-        private float verticalAttachmentSnapTolerance = 0.25f;
         [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
         [Header("Shape Colors")]
         [SerializeField] private Color iColor = new Color32(0x28, 0xC8, 0xDF, 0xFF);
@@ -176,7 +174,6 @@ namespace Jam50033
         {
             relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
             speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
-            verticalAttachmentSnapTolerance = Mathf.Clamp(verticalAttachmentSnapTolerance, 0f, 0.5f);
             ghostOpacity = Mathf.Clamp01(ghostOpacity);
             UpdateLayout();
         }
@@ -346,6 +343,11 @@ namespace Jam50033
             row = Mathf.Clamp(row, firstRow, lastRow);
             Vector3 adjustedPosition = position;
             adjustedPosition.y = origin.y + row * cellSize;
+            if (verticalInput != 0 && row != previousRow && TryAttachVertically(adjustedPosition, row, verticalInput))
+            {
+                return;
+            }
+
             if (OverlapsOccupiedCells(adjustedPosition, rotationSteps))
             {
                 row = previousRow;
@@ -468,9 +470,9 @@ namespace Jam50033
         {
             float cellSize = stageArea.CellSize;
             float column = (position.x - GetGridOrigin().x) / cellSize;
+            // W/S always snaps to the nearest column; only placement validity can reject it.
             Vector2Int placement = new Vector2Int(Mathf.RoundToInt(column), row);
-            if (Mathf.Abs(column - placement.x) > verticalAttachmentSnapTolerance + 0.0001f ||
-                !CanPlaceAtCell(placement))
+            if (!CanPlaceAtCell(placement))
             {
                 return false;
             }

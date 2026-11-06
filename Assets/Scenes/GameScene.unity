@@ -1497,25 +1497,7 @@ MonoBehaviour:
   spawnInset: 0
   spawnRightOffset: 2
   spawnGizmoColor: {r: 0.3, g: 1, b: 1, a: 0.7}
---- !u!114 &632630810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632630807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8433c39137c4647bfbb97b64e1e4e92, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.RunDifficulty
-  progressionDuration: 120
-  initialOneHazardChance: 0.15
-  initialTwoHazardChance: 0.05
-  finalOneHazardChance: 0.25
-  finalTwoHazardChance: 0.15
-  maximumSpeedMultiplier: 1
-  elapsedTime: 0
+  spawnedCount: 0
 --- !u!4 &632630809
 Transform:
   m_ObjectHideFlags: 0
@@ -1531,6 +1513,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &632630810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632630807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8433c39137c4647bfbb97b64e1e4e92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.RunDifficulty
+  progressionDuration: 120
+  initialOneHazardChance: 0.15
+  initialTwoHazardChance: 0.05
+  finalOneHazardChance: 0.25
+  finalTwoHazardChance: 0.15
+  maximumSpeedMultiplier: 2
+  elapsedTime: 0
 --- !u!114 &647416987
 MonoBehaviour:
   m_ObjectHideFlags: 0
