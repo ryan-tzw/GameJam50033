@@ -40,6 +40,7 @@ namespace Jam50033
         private float lastMoveSpeed;
         private Vector2Int placedCell;
         private readonly HashSet<Vector2Int> occupiedCells = new();
+        private readonly List<Collider2D> placementOverlaps = new();
         private readonly Vector2Int[] ghostCells = new Vector2Int[4];
         private TetrominoGhost ghost;
 
@@ -336,10 +337,16 @@ namespace Jam50033
             float attachmentEndX = GetAttachmentEndX(nextX, minimumX);
 
             if (TryFindAttachment((position.x - origin.x) / cellSize,
-                (attachmentEndX - origin.x) / cellSize, row, out Vector2Int placement))
+                (attachmentEndX - origin.x) / cellSize, row, out Vector2Int placement, checkPlayer: false))
             {
-                PlaceAtCell(placement);
-                return;
+                if (CanPlaceAtCell(placement))
+                {
+                    PlaceAtCell(placement);
+                    return;
+                }
+
+                // An unsafe lock must stop at the bridge rather than pass through its occupied cells.
+                position.x = origin.x + placement.x * cellSize;
             }
             else
             {
@@ -376,18 +383,51 @@ namespace Jam50033
             transform.position = stageArea.CellToWorldPosition(cell);
         }
 
-        private bool CanPlaceAtCell(Vector2Int position)
+        private bool CanPlaceAtCell(Vector2Int position, bool checkPlayer = true)
         {
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
-                if (occupiedCells.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows)
+                if (occupiedCells.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows ||
+                    (checkPlayer && OverlapsPlayer(cell)))
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        private bool OverlapsPlayer(Vector2Int cell)
+        {
+            // Ignore exact edge contact so placing a supporting tile beneath the feet remains valid.
+            float size = stageArea.CellSize * 0.9999f;
+            Vector3 scale = stageArea.transform.lossyScale;
+            Vector2 boxSize = new Vector2(size * Mathf.Abs(scale.x), size * Mathf.Abs(scale.y));
+            Vector3 center = stageArea.CellToWorldPosition(cell);
+            Vector3 diagonalA = stageArea.transform.TransformVector(new Vector3(size, size, 0f) * 0.5f);
+            Vector3 diagonalB = stageArea.transform.TransformVector(new Vector3(size, -size, 0f) * 0.5f);
+            Vector2 extents = new Vector2(Mathf.Max(Mathf.Abs(diagonalA.x), Mathf.Abs(diagonalB.x)),
+                Mathf.Max(Mathf.Abs(diagonalA.y), Mathf.Abs(diagonalB.y)));
+            ContactFilter2D filter = new ContactFilter2D { useTriggers = false };
+            int count = Physics2D.OverlapBox(center, boxSize,
+                stageArea.transform.eulerAngles.z, filter, placementOverlaps);
+            for (int i = 0; i < count; i++)
+            {
+                Collider2D overlap = placementOverlaps[i];
+                if (overlap.gameObject.scene == gameObject.scene && overlap.GetComponentInParent<PlayerController>() != null)
+                {
+                    // Capsule queries also report their contact margin; require overlapping interiors.
+                    Bounds bounds = overlap.bounds;
+                    if (bounds.min.x < center.x + extents.x && bounds.max.x > center.x - extents.x &&
+                        bounds.min.y < center.y + extents.y && bounds.max.y > center.y - extents.y)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private bool TryAttachVertically(Vector3 position, int row, int direction)
@@ -494,6 +534,8 @@ namespace Jam50033
 
         private void RefreshOccupiedCells()
         {
+            // Placement runs between physics steps; include the player's latest transform in overlap queries.
+            Physics2D.SyncTransforms();
             occupiedCells.Clear();
             foreach (Brick brick in Brick.ActiveBricks)
             {
@@ -539,7 +581,7 @@ namespace Jam50033
             return false;
         }
 
-        private bool TryFindAttachment(float fromX, float toX, int row, out Vector2Int placement)
+        private bool TryFindAttachment(float fromX, float toX, int row, out Vector2Int placement, bool checkPlayer = true)
         {
             placement = default;
             if (occupiedCells.Count == 0)
@@ -561,7 +603,7 @@ namespace Jam50033
                         continue;
                     }
 
-                    if (CanPlaceAtCell(candidate))
+                    if (CanPlaceAtCell(candidate, checkPlayer: false))
                     {
                         placement = candidate;
                         found = true;
@@ -569,7 +611,7 @@ namespace Jam50033
                 }
             }
 
-            return found;
+            return found && (!checkPlayer || CanPlaceAtCell(placement));
         }
 
         private void TryRotate(int direction)
