@@ -22,6 +22,7 @@ namespace Jam50033
         private bool gameOver;
         private bool loading;
         private float previousTimeScale;
+        private bool menuPending;
 
         public bool IsGameOver => gameOver;
 
@@ -33,6 +34,12 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (menuPending)
+            {
+                menuPending = false;
+                OpenMenu();
+            }
+
             if (gameOver || player == null || playerCollider == null || gameplayCamera == null)
             {
                 return;
@@ -45,10 +52,39 @@ namespace Jam50033
                 return;
             }
 
-            // Open after this frame's UI update, so a gameplay Space press cannot submit the new menu.
+            PauseGameplay();
+            OpenMenu();
+        }
+
+        public bool BeginFatalHit()
+        {
+            if (gameOver)
+            {
+                return false;
+            }
+
+            PauseGameplay();
+            return true;
+        }
+
+        public void FinishFatalHit()
+        {
+            if (gameOver)
+            {
+                menuPending = true;
+            }
+        }
+
+        private void PauseGameplay()
+        {
             gameOver = true;
             previousTimeScale = Time.timeScale;
             Time.timeScale = 0f;
+        }
+
+        private void OpenMenu()
+        {
+            // Open after this frame's UI update, so a gameplay Space press cannot submit the new menu.
             gameOverPanel.SetActive(true);
             restartButton.Select();
         }

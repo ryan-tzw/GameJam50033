@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 1249823188187395148}
   - component: {fileID: 4019441508748373682}
   - component: {fileID: 5764522197894248706}
+  - component: {fileID: 8571693529228432501}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -275,3 +276,24 @@ MonoBehaviour:
   standingSprite: {fileID: 1768599190028779529, guid: a11535981f9df56ae82e6f61eca4e78d, type: 3}
   visual: {fileID: 1446710395335007330}
   animator: {fileID: 5898478463346221795}
+--- !u!114 &8571693529228432501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607790219003509733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e6f139d1e64731b4591b31d949b783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerHitReaction
+  gameOver: {fileID: 0}
+  visual: {fileID: 1446710395335007330}
+  animator: {fileID: 5898478463346221795}
+  hurtClip: {fileID: 7400000, guid: b1021fe8ae816ed8f8f061323777fc60, type: 2}
+  flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
+  hurtDuration: 0.5
+  whiteFlashDuration: 0.5
+  shakeStrength: 0.03
+  shakeFrequency: 12

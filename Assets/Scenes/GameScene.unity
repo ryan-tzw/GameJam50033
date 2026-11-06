@@ -2842,6 +2842,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8571693529228432501, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
+      propertyPath: gameOver
+      value:
+      objectReference: {fileID: 222562186}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

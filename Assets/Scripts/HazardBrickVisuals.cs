@@ -21,12 +21,15 @@ namespace Jam50033
         [SerializeField, Range(0.2f, 1f)] private float symbolSize = 0.95f;
         [SerializeField, ColorUsage(true, true)] private Color symbolColor = new Color(1f, 0.8f, 0.15f);
         [SerializeField] private Color exclamationColor = new Color(0.03f, 0.015f, 0.02f);
+        [Header("Hit Flash")]
+        [SerializeField, Min(0.01f)] private float hitFlashDuration = 0.12f;
 
         private SpriteRenderer spriteRenderer;
         [SerializeField, HideInInspector] private Material originalMaterial;
         private MaterialPropertyBlock properties;
         private MaterialPropertyBlock originalProperties;
         private float phase;
+        private float hitFlashRemaining;
 
         private static readonly int GlowColor = Shader.PropertyToID("_GlowColor");
         private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
@@ -47,17 +50,29 @@ namespace Jam50033
             originalProperties = new MaterialPropertyBlock();
             spriteRenderer.GetPropertyBlock(originalProperties);
             phase = 0f;
+            hitFlashRemaining = 0f;
             ApplyVisuals();
         }
 
         private void LateUpdate()
         {
+            if (Application.IsPlaying(gameObject))
+            {
+                hitFlashRemaining = Mathf.Max(0f, hitFlashRemaining - Time.unscaledDeltaTime);
+            }
+
             if (Application.IsPlaying(gameObject) && Time.timeScale > 0f)
             {
                 // Scaled time keeps the pulse still when game over pauses gameplay.
                 phase = Mathf.Repeat(phase + Time.deltaTime * pulseSpeed, 1f);
             }
 
+            ApplyVisuals();
+        }
+
+        public void FlashOnHit()
+        {
+            hitFlashRemaining = hitFlashDuration;
             ApplyVisuals();
         }
 
@@ -71,13 +86,15 @@ namespace Jam50033
             spriteRenderer.sharedMaterial = hazardMaterial;
             spriteRenderer.GetPropertyBlock(properties);
             float pulse = 0.5f - Mathf.Cos(phase * Mathf.PI * 2f) * 0.5f;
-            properties.SetColor(GlowColor, outlineColor);
+            float flash = Mathf.Clamp01(hitFlashRemaining / Mathf.Max(0.01f, hitFlashDuration));
+            properties.SetColor(GlowColor, Color.Lerp(outlineColor, Color.white, flash));
             properties.SetColor(BaseColor, baseColor);
             properties.SetColor(MarkColor, exclamationColor);
             properties.SetFloat(OutlineWidth, outlineWidth);
-            properties.SetFloat(GlowStrength, Mathf.Lerp(minimumBrightness, maximumBrightness, pulse));
+            float brightness = Mathf.Lerp(minimumBrightness, maximumBrightness, pulse);
+            properties.SetFloat(GlowStrength, Mathf.Lerp(brightness, maximumBrightness, flash));
             properties.SetFloat(SymbolSize, symbolSize);
-            properties.SetColor(SymbolColor, symbolColor);
+            properties.SetColor(SymbolColor, Color.Lerp(symbolColor, Color.white, flash));
             spriteRenderer.SetPropertyBlock(properties);
         }
 

@@ -55,6 +55,19 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            // Hit flashes must reach warning copies even while gameplay is paused.
+            foreach (Warning warning in warnings)
+            {
+                for (int i = 0; i < warning.Visuals.Length; i++)
+                {
+                    if (warning.Originals[i] != null && warning.Visuals[i] != null)
+                    {
+                        warning.Originals[i].GetPropertyBlock(visualProperties);
+                        warning.Visuals[i].SetPropertyBlock(visualProperties);
+                    }
+                }
+            }
+
             if (Time.timeScale <= 0f || stageArea == null || stageArea.CellSize <= 0f || Time.deltaTime <= 0f)
             {
                 return;
@@ -171,8 +184,6 @@ namespace Jam50033
                     if (warning.Visuals[j] != null && warning.Bricks[j] != null)
                     {
                         warning.Visuals[j].transform.position = warning.Bricks[j].transform.position + offset;
-                        warning.Originals[j].GetPropertyBlock(visualProperties);
-                        warning.Visuals[j].SetPropertyBlock(visualProperties);
                     }
                 }
 

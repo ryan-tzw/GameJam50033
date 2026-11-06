@@ -1,0 +1,117 @@
+using System.Collections;
+using UnityEngine;
+
+namespace Jam50033
+{
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(PlayerController))]
+    public sealed class PlayerHitReaction : MonoBehaviour
+    {
+        [SerializeField] private GameOverController gameOver;
+        [SerializeField] private SpriteRenderer visual;
+        [SerializeField] private Animator animator;
+        [SerializeField] private AnimationClip hurtClip;
+        [SerializeField] private Material flashMaterial;
+        [Header("Hurt Reaction")]
+        [SerializeField, Min(0.01f), Tooltip("How long to hold the hit pose before finishing the reaction.")]
+        private float hurtDuration = 0.375f;
+        [SerializeField, Min(0.01f)] private float whiteFlashDuration = 0.1f;
+        [SerializeField, Min(0f), Tooltip("Maximum sprite displacement as a fraction of the player's collider height.")]
+        private float shakeStrength = 0.025f;
+        [SerializeField, Min(0f), Tooltip("Shake cycles per second.")]
+        private float shakeFrequency = 25f;
+
+        private Material originalMaterial;
+        private MaterialPropertyBlock originalProperties;
+        private MaterialPropertyBlock flashProperties;
+        private Vector3 originalPosition;
+        private AnimatorUpdateMode originalUpdateMode;
+        private float originalSpeed;
+        private bool reacting;
+        private static readonly int Hurt = Animator.StringToHash("Hurt");
+        private static readonly int HurtState = Animator.StringToHash("Base Layer.Hurt");
+        private static readonly int FlashAmount = Shader.PropertyToID("_FlashAmount");
+
+        public bool IsReacting => reacting;
+
+        public void Hit(HazardBrickVisuals hazard)
+        {
+            if (!isActiveAndEnabled || reacting || gameOver == null || visual == null || animator == null ||
+                hurtClip == null || flashMaterial == null || !gameOver.BeginFatalHit())
+            {
+                return;
+            }
+
+            GetComponent<PlayerController>().StopForFatalHit();
+            hazard.FlashOnHit();
+            StartCoroutine(PlayHurt());
+        }
+
+        private IEnumerator PlayHurt()
+        {
+            reacting = true;
+            originalMaterial = visual.sharedMaterial;
+            originalPosition = visual.transform.localPosition;
+            originalProperties = new MaterialPropertyBlock();
+            flashProperties = new MaterialPropertyBlock();
+            visual.GetPropertyBlock(originalProperties);
+            visual.GetPropertyBlock(flashProperties);
+            originalUpdateMode = animator.updateMode;
+            originalSpeed = animator.speed;
+            visual.sharedMaterial = flashMaterial;
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            animator.speed = hurtClip.length / Mathf.Max(0.01f, hurtDuration);
+            animator.SetBool(Hurt, true);
+            animator.Play(HurtState, 0, 0f);
+            animator.Update(0f);
+
+            float height = GetComponent<Collider2D>().bounds.size.y;
+            float elapsed = 0f;
+            while (elapsed < hurtDuration)
+            {
+                float flash = Mathf.Clamp01(1f - elapsed / Mathf.Max(0.01f, whiteFlashDuration));
+                flashProperties.SetFloat(FlashAmount, flash);
+                visual.SetPropertyBlock(flashProperties);
+                float phase = elapsed * shakeFrequency * Mathf.PI * 2f;
+                float strength = shakeStrength * height * (1f - elapsed / hurtDuration);
+                Vector3 offset = new Vector3(Mathf.Sin(phase), Mathf.Sin(phase * 1.3f), 0f) * strength;
+                // Shake only the authored Visual child; the collider and bridge stay still.
+                visual.transform.localPosition = originalPosition + visual.transform.parent.InverseTransformVector(offset);
+                yield return null;
+                elapsed += Time.unscaledDeltaTime;
+            }
+
+            RestoreVisuals();
+            gameOver.FinishFatalHit();
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            RestoreVisuals();
+        }
+
+        private void RestoreVisuals()
+        {
+            if (!reacting)
+            {
+                return;
+            }
+
+            if (visual != null)
+            {
+                visual.sharedMaterial = originalMaterial;
+                visual.SetPropertyBlock(originalProperties);
+                visual.transform.localPosition = originalPosition;
+            }
+
+            if (animator != null)
+            {
+                animator.updateMode = originalUpdateMode;
+                animator.speed = originalSpeed;
+            }
+
+            reacting = false;
+        }
+    }
+}

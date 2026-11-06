@@ -45,6 +45,7 @@ namespace Jam50033
         private Vector2Int climbAnchor;
         private float normalGravity;
         private bool climbBlocked;
+        private bool fatalHit;
         private static readonly int GroundedParameter = Animator.StringToHash("Grounded");
         private static readonly int RunningParameter = Animator.StringToHash("Running");
         private static readonly int ClimbingParameter = Animator.StringToHash("Climbing");
@@ -61,6 +62,7 @@ namespace Jam50033
             normalGravity = body.gravityScale;
             movementState = MovementState.Falling;
             climbBlocked = false;
+            fatalHit = false;
             FitToStage();
         }
 
@@ -74,7 +76,7 @@ namespace Jam50033
 
         private void FixedUpdate()
         {
-            if (!Application.IsPlaying(gameObject) || stageArea == null || stageArea.CellSize <= 0f)
+            if (fatalHit || !Application.IsPlaying(gameObject) || stageArea == null || stageArea.CellSize <= 0f)
             {
                 return;
             }
@@ -254,7 +256,7 @@ namespace Jam50033
 
         private void Update()
         {
-            if (!Application.IsPlaying(gameObject) || animator == null || stageArea == null)
+            if (fatalHit || !Application.IsPlaying(gameObject) || animator == null || stageArea == null)
             {
                 return;
             }
@@ -300,6 +302,12 @@ namespace Jam50033
         private void LateUpdate()
         {
             FitToStage();
+        }
+
+        public void StopForFatalHit()
+        {
+            fatalHit = true;
+            body.linearVelocity = Vector2.zero;
         }
 
         private void FitToStage()
