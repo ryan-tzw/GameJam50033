@@ -39,7 +39,7 @@ namespace Jam50033
 
         private void SpawnNext()
         {
-            if (stageArea.CellSize <= 0f || IsSpawnRegionOccupied(GetSpawnRegion()))
+            if (Time.timeScale <= 0f || stageArea.CellSize <= 0f || IsSpawnRegionOccupied(GetSpawnRegion()))
             {
                 return;
             }

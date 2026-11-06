@@ -244,7 +244,7 @@ namespace Jam50033
 
         private void UpdateMovement(float deltaTime)
         {
-            if (isPlaced || isDiscarded || stageArea == null || stageArea.CellSize <= 0f)
+            if (Time.timeScale <= 0f || isPlaced || isDiscarded || stageArea == null || stageArea.CellSize <= 0f)
             {
                 return;
             }
