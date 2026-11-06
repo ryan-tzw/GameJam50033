@@ -13,6 +13,8 @@ namespace Jam50033
         private bool scrolling;
         [SerializeField, Range(0f, 1f), Tooltip("Fraction of bridge scrolling applied to this layer. Larger values feel closer.")]
         private float scrollMultiplier = 0.2f;
+        [SerializeField, Min(0f), Tooltip("World units per second before the layer multiplier, when no stage is assigned (for menus).")]
+        private float menuScrollSpeed = 0.6f;
         [SerializeField, Range(0f, 1f)] private float opacity = 1f;
         [SerializeField, Min(0.1f)] private float scaleMultiplier = 1f;
         [SerializeField, Tooltip("World-space adjustment from the camera centre.")]
@@ -30,9 +32,12 @@ namespace Jam50033
 
         private void LateUpdate()
         {
-            if (Application.IsPlaying(gameObject) && scrolling && stageArea != null)
+            if (Application.IsPlaying(gameObject) && scrolling)
             {
-                scrollOffset += stageArea.BridgeFrameDisplacement * scrollMultiplier;
+                float displacement = stageArea != null
+                    ? stageArea.BridgeFrameDisplacement
+                    : -menuScrollSpeed * Time.deltaTime;
+                scrollOffset += displacement * scrollMultiplier;
             }
 
             FitToCamera();

@@ -51,6 +51,7 @@ namespace Jam50033
             }
 
             float multiplier = difficulty != null ? difficulty.SpeedMultiplier : 1f;
+            multiplier *= player != null && player.isActiveAndEnabled ? player.MomentumSpeedMultiplier : 1f;
             float targetSpeed = GetTargetSpeed() * multiplier;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity,
                 smoothingTime, Mathf.Infinity, Time.deltaTime);

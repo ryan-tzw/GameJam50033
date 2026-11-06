@@ -36,6 +36,23 @@ namespace Jam50033
         [SerializeField, Min(0.01f), Tooltip("Seconds spent recovering while moving with the bridge.")]
         private float staggerDuration = 0.375f;
         [SerializeField] private AnimationClip staggerClip;
+        [Header("Momentum")]
+        [SerializeField, Range(0f, 1f)] private float initialMomentum;
+        [SerializeField, Min(0.1f), Tooltip("Seconds of flat running to build from zero to full momentum.")]
+        private float momentumBuildTime = 5f;
+        [SerializeField, Min(0f), Tooltip("Momentum lost per second while climbing or stepping.")]
+        private float climbMomentumDecay = 0.35f;
+        [SerializeField, Min(0f)] private float fallMomentumDecay = 0.25f;
+        [SerializeField, Min(0f)] private float staggerMomentumDecay = 0.5f;
+        [SerializeField, Range(0f, 1f)] private float landingMomentumPenalty = 0.3f;
+        [SerializeField, Range(0f, 1f), Tooltip("Additional bridge speed at full momentum while running. 0.1 means 10%.")]
+        private float maximumMomentumSpeedBonus = 0.1f;
+        [SerializeField, Range(0f, 1f)] private float momentum;
+        [Header("Running Animation")]
+        [SerializeField, Min(0.01f), Tooltip("Actual bridge scrolling speed, in cells per second, that switches to fast running and dust.")]
+        private float fastRunStartSpeed = 1.2f;
+        [SerializeField, Min(0f), Tooltip("Switch back to the slow run below this speed, in cells per second.")]
+        private float fastRunStopSpeed = 1.1f;
         [Header("Visuals")]
         [SerializeField, Tooltip("Automatically sized and aligned parent. Edit the Visual child for sprite adjustments.")]
         private Transform visualRoot;
@@ -54,6 +71,8 @@ namespace Jam50033
         private bool fatalHit;
         private float fallStartY;
         private float staggerRemaining;
+        private bool fastRunReady;
+        private static readonly int FastRunningParameter = Animator.StringToHash("FastRunning");
         private static readonly int GroundedParameter = Animator.StringToHash("Grounded");
         private static readonly int RunningParameter = Animator.StringToHash("Running");
         private static readonly int ClimbingParameter = Animator.StringToHash("Climbing");
@@ -65,6 +84,11 @@ namespace Jam50033
 
         public bool IsGrounded { get; private set; }
         public MovementState State => movementState;
+        public StageArea StageArea => stageArea;
+        public float Momentum => momentum;
+        public bool IsFastRunning => !fatalHit && IsGrounded && movementState == MovementState.Running && fastRunReady;
+        public float MomentumSpeedMultiplier => !fatalHit && IsGrounded && movementState == MovementState.Running
+            ? 1f + momentum * maximumMomentumSpeedBonus : 1f;
 
         private void OnEnable()
         {
@@ -72,10 +96,13 @@ namespace Jam50033
             capsule = GetComponent<CapsuleCollider2D>();
             normalGravity = body.gravityScale;
             movementState = MovementState.Falling;
+            IsGrounded = false;
             climbBlocked = false;
             fatalHit = false;
             fallStartY = body.position.y;
             staggerRemaining = 0f;
+            momentum = initialMomentum;
+            fastRunReady = false;
             if (Application.IsPlaying(gameObject) && animator != null)
             {
                 animator.SetBool(StaggeredParameter, false);
@@ -85,6 +112,8 @@ namespace Jam50033
 
         private void OnDisable()
         {
+            momentum = 0f;
+            fastRunReady = false;
             if (body != null && movementState == MovementState.Climbing)
             {
                 body.gravityScale = normalGravity;
@@ -134,6 +163,7 @@ namespace Jam50033
                 if (IsGrounded && fallStartY - body.position.y >= staggerFallDistance * size)
                 {
                     movementState = MovementState.Staggered;
+                    momentum = Mathf.Max(0f, momentum - landingMomentumPenalty);
                     staggerRemaining = staggerDuration;
                     if (animator != null)
                     {
@@ -321,6 +351,12 @@ namespace Jam50033
 
         private void Update()
         {
+            if (Application.IsPlaying(gameObject) && !fatalHit && stageArea != null)
+            {
+                UpdateMomentum(Time.deltaTime);
+                UpdateRunningAnimationSpeed();
+            }
+
             if (fatalHit || !Application.IsPlaying(gameObject) || animator == null || stageArea == null)
             {
                 return;
@@ -337,9 +373,40 @@ namespace Jam50033
             animator.SetBool(ClimbingParameter, showClimb);
             animator.SetFloat(ClimbPlaybackParameter, climbBlocked ? 0f : 1f);
             animator.SetBool(StaggeredParameter, movementState == MovementState.Staggered);
+            animator.SetBool(FastRunningParameter, IsFastRunning);
             if (climbing && climbBlocked)
             {
                 animator.Play(ClimbState, 0, 0f);
+            }
+        }
+
+        private void UpdateMomentum(float deltaTime)
+        {
+            bool running = movementState == MovementState.Running && IsGrounded &&
+                Mathf.Abs(stageArea.BridgeVelocity) > 0.00001f;
+            float rate = running ? 1f / Mathf.Max(0.1f, momentumBuildTime) :
+                movementState == MovementState.Climbing ? -climbMomentumDecay :
+                movementState == MovementState.Staggered ? -staggerMomentumDecay :
+                movementState == MovementState.Falling ? -fallMomentumDecay : 0f;
+            momentum = Mathf.Clamp01(momentum + rate * deltaTime);
+        }
+
+        private void UpdateRunningAnimationSpeed()
+        {
+            if (!IsGrounded || movementState != MovementState.Running || stageArea.CellSize <= 0f)
+            {
+                fastRunReady = false;
+                return;
+            }
+
+            float speed = Mathf.Abs(stageArea.BridgeVelocity) / stageArea.CellSize;
+            if (speed >= fastRunStartSpeed)
+            {
+                fastRunReady = true;
+            }
+            else if (speed < fastRunStopSpeed)
+            {
+                fastRunReady = false;
             }
         }
 
@@ -373,6 +440,8 @@ namespace Jam50033
         public void StopForFatalHit()
         {
             fatalHit = true;
+            momentum = 0f;
+            fastRunReady = false;
             body.linearVelocity = Vector2.zero;
         }
 
@@ -405,6 +474,8 @@ namespace Jam50033
 
         private void OnValidate()
         {
+            fastRunStartSpeed = Mathf.Max(0.01f, fastRunStartSpeed);
+            fastRunStopSpeed = Mathf.Clamp(fastRunStopSpeed, 0f, fastRunStartSpeed - 0.01f);
             heightInCells = Mathf.Max(0.1f, heightInCells);
             widthInCells = Mathf.Clamp(widthInCells, 0.1f, heightInCells);
             followStrength = Mathf.Max(0f, followStrength);

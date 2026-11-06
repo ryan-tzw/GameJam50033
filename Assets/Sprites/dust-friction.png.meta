@@ -1,0 +1,345 @@
+fileFormatVersion: 2
+guid: 2133fc4c32669c5088ca61f91c39e778
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -662114749134144608
+    second: dust-friction_0
+  - first:
+      213: 3935753800758297965
+    second: dust-friction_1
+  - first:
+      213: -2981551147060892193
+    second: dust-friction_2
+  - first:
+      213: -264264527511080198
+    second: dust-friction_3
+  - first:
+      213: 8009697918553009082
+    second: dust-friction_4
+  - first:
+      213: -1056031234974939230
+    second: dust-friction_5
+  - first:
+      213: 8928536379597597173
+    second: dust-friction_6
+  - first:
+      213: -656447771196618522
+    second: dust-friction_7
+  - first:
+      213: 3458516353153934472
+    second: dust-friction_8
+  - first:
+      213: -4250120334661427036
+    second: dust-friction_9
+  - first:
+      213: 5504277752807883409
+    second: dust-friction_10
+  - first:
+      213: 1931290762606268786
+    second: dust-friction_11
+  - first:
+      213: -2110224601219122855
+    second: dust-friction_12
+  - first:
+      213: -8772092227919778827
+    second: dust-friction_13
+  - first:
+      213: -8845134243197377785
+    second: dust-friction_14
+  - first:
+      213: -4510338750237349936
+    second: dust-friction_15
+  - first:
+      213: 3997188878202535393
+    second: dust-friction_16
+  - first:
+      213: 9051752858954936826
+    second: dust-friction_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dust-friction_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 9
+        width: 23
+        height: 21
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0abff49c422bfc6f0800000000000000
+      internalID: -662114749134144608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_3
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 9
+        width: 23
+        height: 21
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d658791ba3b9e9630800000000000000
+      internalID: 3935753800758297965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 9
+        width: 23
+        height: 21
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdde6c757076f96d0800000000000000
+      internalID: -2981551147060892193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 5
+        width: 23
+        height: 21
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271d32757b25dca10800000000000000
+      internalID: 1931290762606268786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 6
+        width: 23
+        height: 21
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9593b08d7e9f6b2e0800000000000000
+      internalID: -2110224601219122855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_5
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 84
+        width: 11
+        height: 12
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f4f9a43cfcaa68994c1cbb16be509b
+      internalID: -1056031234974939230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dust-friction_6
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 84
+        width: 11
+        height: 12
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e10d6590022d259df96240c6d569ccaf
+      internalID: 8928536379597597173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e4409df59d70620a98ffe8964dfbc4d6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      dust-friction_0: 1931290762606268786
+      dust-friction_1: -2110224601219122855
+      dust-friction_10: 5504277752807883409
+      dust-friction_13: -8772092227919778827
+      dust-friction_14: -8845134243197377785
+      dust-friction_15: -4510338750237349936
+      dust-friction_16: 3997188878202535393
+      dust-friction_17: 9051752858954936826
+      dust-friction_2: -662114749134144608
+      dust-friction_3: 3935753800758297965
+      dust-friction_4: -2981551147060892193
+      dust-friction_5: -1056031234974939230
+      dust-friction_6: 8928536379597597173
+      dust-friction_7: -656447771196618522
+      dust-friction_8: 3458516353153934472
+      dust-friction_9: -4250120334661427036
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
