@@ -2269,6 +2269,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
+--- !u!114 &1321940082 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5764522197894248706, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
+  m_PrefabInstance: {fileID: 1321940081}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef454fb021ceb398bd774ce9d54b040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerController
 --- !u!1001 &1335930341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3257,7 +3268,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.BridgeController
   stageArea: {fileID: 1098233640}
-  bridgeSpeed: 1
+  player: {fileID: 1321940082}
+  baseSpeed: 0.5
+  maxSpeed: 3
+  lowerLeadThreshold: 7
+  upperLeadThreshold: 17.1
+  smoothingTime: 1
+  lowerThresholdColor: {r: 1, g: 0.85, b: 0.1, a: 0.8}
+  upperThresholdColor: {r: 1, g: 0.25, b: 0.2, a: 0.8}
 --- !u!4 &2129436070
 Transform:
   m_ObjectHideFlags: 0
