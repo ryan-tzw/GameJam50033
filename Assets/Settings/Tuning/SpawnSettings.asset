@@ -20,6 +20,14 @@ MonoBehaviour:
   m_Name: SpawnSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.SpawnSettings
   minimumGroupGapInTiles: 1
+  islands:
+    islandPrefab: {fileID: 1966309135127576212, guid: 96e467f3b4b7f6650882c825a5dbc102, type: 3}
+    initialDelay: 12
+    minimumSpawnInterval: 12
+    maximumSpawnInterval: 18
+    minimumSpawnRow: 3
+    maximumSpawnRow: 12
+    spawnOffset: 2
   pieces:
     tetrominoPrefab:
       fileID: 7053026960480931781

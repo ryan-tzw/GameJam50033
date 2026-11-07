@@ -7,7 +7,7 @@ namespace Jam50033
     public sealed class SpawnSettings : ScriptableObject
     {
         [Header("Spawn Clearance")]
-        [Min(0f), Tooltip("Empty tiles between newly spawned coin/hazard groups and existing bricks or coins. Does not restrict manual placement.")]
+        [Min(0f), Tooltip("Empty tiles between automatically spawned coin, hazard or island groups and existing bricks, coins or chests. Does not restrict manual placement.")]
         public float minimumGroupGapInTiles = 1f;
         [Header("Pieces")]
         public PiecesData pieces = new();
@@ -17,6 +17,22 @@ namespace Jam50033
         public HazardClustersData hazardClusters = new();
         [Header("Coins")]
         public CoinsData coins = new();
+        [Header("Floating Islands")]
+        public IslandsData islands = new();
+
+        [Serializable]
+        public sealed class IslandsData
+        {
+            public FloatingIsland islandPrefab;
+            [Min(0f)] public float initialDelay = 12f;
+            [Min(0.1f)] public float minimumSpawnInterval = 12f;
+            [Min(0.1f)] public float maximumSpawnInterval = 18f;
+            [Min(0), Tooltip("Bottom row of the island, counted from the stage bottom.")]
+            public int minimumSpawnRow = 3;
+            [Min(0)] public int maximumSpawnRow = 12;
+            [Min(0f), Tooltip("Distance beyond the camera's right edge, in tiles.")]
+            public float spawnOffset = 2f;
+        }
 
         [Serializable]
         public sealed class PiecesData
@@ -102,6 +118,9 @@ namespace Jam50033
         private void OnValidate()
         {
             minimumGroupGapInTiles = Mathf.Max(0f, minimumGroupGapInTiles);
+            islands.minimumSpawnInterval = Mathf.Max(0.1f, islands.minimumSpawnInterval);
+            islands.maximumSpawnInterval = Mathf.Max(islands.minimumSpawnInterval, islands.maximumSpawnInterval);
+            islands.maximumSpawnRow = Mathf.Max(islands.minimumSpawnRow, islands.maximumSpawnRow);
             pieces.spawnRow = Mathf.Max(0, pieces.spawnRow);
             pieces.hazardFreePieces = Mathf.Max(0, pieces.hazardFreePieces);
             pieces.spawnInset = Mathf.Max(0f, pieces.spawnInset);

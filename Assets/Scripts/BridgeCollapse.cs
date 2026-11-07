@@ -93,13 +93,14 @@ namespace Jam50033
                     continue;
                 }
 
-                Transform root = owner != null ? owner.transform : brick.transform;
+                FloatingIsland island = brick.GetComponentInParent<FloatingIsland>();
+                Transform root = owner != null ? owner.transform : island != null ? island.transform : brick.transform;
                 if (warningRoots.Contains(root))
                 {
                     continue;
                 }
 
-                Brick[] bricks = owner != null ? owner.GetComponentsInChildren<Brick>() : new[] { brick };
+                Brick[] bricks = owner != null || island != null ? root.GetComponentsInChildren<Brick>() : new[] { brick };
                 if (GetRightEdgeX(bricks) > gameplayCollapse.warningX)
                 {
                     continue;
@@ -204,22 +205,37 @@ namespace Jam50033
                     visual.transform.SetParent(null, true);
                     brick.enabled = false;
                     brick.GetComponent<BoxCollider2D>().enabled = false;
-                    fallingTiles.Add(new FallingTile
-                    {
-                        Visual = visual,
-                        Velocity = new Vector3(Random.Range(-gameplayCollapse.horizontalDrift, gameplayCollapse.horizontalDrift), -gameplayCollapse.fallSpeed, 0f) * stageArea.CellSize,
-                        Spin = Random.Range(-gameplayCollapse.rotationSpeed, gameplayCollapse.rotationSpeed)
-                    });
+                    AddFallingVisual(visual);
                 }
 
                 if (warning.Root != null)
                 {
+                    FloatingIsland island = warning.Root.GetComponent<FloatingIsland>();
+                    if (island != null)
+                    {
+                        SpriteRenderer chest = island.DetachChest();
+                        if (chest != null)
+                        {
+                            AddFallingVisual(chest);
+                        }
+                    }
                     Destroy(warning.Root.gameObject);
                 }
 
                 warningRoots.Remove(warning.Root);
                 warnings.RemoveAt(i);
             }
+        }
+
+        private void AddFallingVisual(SpriteRenderer visual)
+        {
+            fallingTiles.Add(new FallingTile
+            {
+                Visual = visual,
+                Velocity = new Vector3(Random.Range(-gameplayCollapse.horizontalDrift, gameplayCollapse.horizontalDrift),
+                    -gameplayCollapse.fallSpeed, 0f) * stageArea.CellSize,
+                Spin = Random.Range(-gameplayCollapse.rotationSpeed, gameplayCollapse.rotationSpeed)
+            });
         }
 
         private void UpdateFallingTiles()

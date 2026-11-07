@@ -45,7 +45,7 @@ namespace Jam50033
             if (Application.IsPlaying(gameObject) && stageArea != null && GetComponentInParent<Tetromino>() == null)
             {
                 GetGridCell();
-                if (stageArea.BridgeRoot != null)
+                if (stageArea.BridgeRoot != null && GetComponentInParent<FloatingIsland>() == null)
                 {
                     transform.SetParent(stageArea.BridgeRoot, true);
                 }
@@ -103,6 +103,15 @@ namespace Jam50033
             gridCell = cell;
             gridCellInitialized = true;
             CacheStageGrid();
+        }
+
+        internal void Initialize(StageArea stage, Vector2Int cell, Color tint)
+        {
+            stageArea = stage;
+            SetGridCell(cell);
+            transform.position = stage.CellToWorldPosition(cell);
+            SetColor(tint);
+            FitToCell(stage.CellSize);
         }
 
         private void CacheStageGrid()

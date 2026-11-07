@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 632630810}
   - component: {fileID: 632630812}
   - component: {fileID: 632630811}
+  - component: {fileID: 882000000000000200}
   m_Layer: 0
   m_Name: TetrominoSpawner
   m_TagString: Untagged
@@ -3559,6 +3560,20 @@ MonoBehaviour:
   images:
   - target: {fileID: 2010202880}
     style: 1
+--- !u!114 &882000000000000200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632630807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51384a5d57a846a8ba86f87d6168a1c4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.FloatingIslandSpawner
+  spawnSettings: {fileID: 11400000, guid: d2be8ae8fbe451b1d965d2279ff67b8b, type: 2}
+  stageArea: {fileID: 1098233640}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

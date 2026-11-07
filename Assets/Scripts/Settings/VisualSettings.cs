@@ -17,6 +17,8 @@ namespace Jam50033
         public TetrominoData tetromino = new();
         [Header("Coin")]
         public CoinData coin = new();
+        [Header("Floating Islands and Chests")]
+        public IslandData island = new();
         [Header("Coin Flight")]
         public CoinFlightData coinFlight = new();
         [Header("Entry Zone")]
@@ -121,6 +123,18 @@ namespace Jam50033
             public Color zColor = new Color32(0xEE, 0x7B, 0x82, 0xFF);
             public Color jColor = new Color32(0x52, 0x7B, 0xDA, 0xFF);
             public Color lColor = new Color32(0xE9, 0x9A, 0x47, 0xFF);
+        }
+
+        [Serializable]
+        public sealed class IslandData
+        {
+            public Color brickColor = new Color32(0x56, 0xC7, 0x77, 0xFF);
+            public Sprite[] chestFrames;
+            [Min(1f)] public float chestFramesPerSecond = 8f;
+            [Min(0.1f), Tooltip("Height of the chest sprite in tiles.")]
+            public float chestSizeInTiles = 1f;
+            [Tooltip("Chest offset from the top middle brick, in tiles.")]
+            public Vector2 chestOffsetInTiles;
         }
 
         [Serializable]

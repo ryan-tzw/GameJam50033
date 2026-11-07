@@ -42,6 +42,15 @@ namespace Jam50033
                 }
             }
 
+            foreach (IslandChest chest in IslandChest.ActiveChests)
+            {
+                if (chest != null && chest.StageArea == stage && TooClose(position,
+                    stage.transform.InverseTransformPoint(chest.SpawnCheckPosition), minimumSeparation))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 

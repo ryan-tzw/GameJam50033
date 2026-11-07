@@ -19,6 +19,15 @@ MonoBehaviour:
     type: 3
   m_Name: VisualSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.VisualSettings
+  island:
+    brickColor: {r: 0.3372549, g: 0.78039217, b: 0.46666667, a: 1}
+    chestFrames:
+    - {fileID: 5930751672855658006, guid: 2fa5a6e3bcb57ea268798901c4d7c0f1, type: 3}
+    - {fileID: 9054580220565639399, guid: 5990dd3762d34f369b6b007b84b5a9bc, type: 3}
+    - {fileID: -5871772598039865606, guid: f02709056386f4298b3ba4022ace3193, type: 3}
+    chestFramesPerSecond: 8
+    chestSizeInTiles: 1
+    chestOffsetInTiles: {x: 0, y: 0}
   stageOutline:
     lineWidth: 0.03
     outlineOpacity: 0.05
