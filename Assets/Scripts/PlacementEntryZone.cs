@@ -38,13 +38,6 @@ namespace Jam50033
                 transform.InverseTransformPoint(worldPosition).x <= PlacementRightX + 0.0001f;
         }
 
-        public bool AllowsLock(Vector3 cellCenter)
-        {
-            return !isActiveAndEnabled || stage == null ||
-                transform.InverseTransformPoint(cellCenter).x + stage.CellSize * 0.5f <=
-                PlacementRightX + 0.0001f;
-        }
-
         private void OnEnable()
         {
             stage = GetComponent<StageArea>();

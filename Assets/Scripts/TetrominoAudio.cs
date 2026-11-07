@@ -14,6 +14,8 @@ namespace Jam50033
         [SerializeField, Range(0f, 1f)] private float softDropVolume = 0.5f;
         [SerializeField] private AudioClip hardDropClip;
         [SerializeField, Range(0f, 1f)] private float hardDropVolume = 0.8f;
+        [SerializeField] private AudioClip rejectClip;
+        [SerializeField, Range(0f, 1f)] private float rejectVolume = 0.5f;
         [SerializeField] private AudioClip[] connectClips = new AudioClip[0];
         [SerializeField, Range(0f, 1f)] private float connectVolume = 0.8f;
 
@@ -31,6 +33,7 @@ namespace Jam50033
         public void PlayRotate() => Play(rotateClip, rotateVolume);
         public void PlaySoftDrop() => Play(softDropClip, softDropVolume);
         public void PlayHardDrop() => Play(hardDropClip, hardDropVolume);
+        public void PlayReject() => Play(rejectClip, rejectVolume);
         public void PlayConnect()
         {
             if (connectClips != null && connectClips.Length > 0)

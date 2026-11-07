@@ -20,7 +20,8 @@ namespace Jam50033
             }
         }
 
-        public void Show(Vector3 position, Quaternion rotation, float cellSize, Vector2Int[] cells, float opacity)
+        public void Show(Vector3 position, Quaternion rotation, float cellSize, Vector2Int[] cells, float opacity,
+            Color? tint = null)
         {
             transform.SetPositionAndRotation(position, rotation);
             gameObject.SetActive(true);
@@ -38,13 +39,21 @@ namespace Jam50033
                 tile.sprite = source.sprite;
                 tile.sharedMaterial = source.sharedMaterial;
                 source.GetPropertyBlock(properties);
+                if (tint.HasValue && source.sharedMaterial != null && source.sharedMaterial.HasProperty("_GlowStrength"))
+                {
+                    // Hazard sprites use shader colours instead of vertex RGB.
+                    properties.SetColor("_BaseColor", tint.Value);
+                    properties.SetColor("_GlowColor", tint.Value);
+                    properties.SetColor("_SymbolColor", tint.Value);
+                    properties.SetFloat("_GlowStrength", 1f);
+                }
                 tile.SetPropertyBlock(properties);
                 tile.sortingLayerID = source.sortingLayerID;
                 tile.sortingOrder = source.sortingOrder - 1;
                 tile.flipX = source.flipX;
                 tile.flipY = source.flipY;
-                Color color = source.color;
-                color.a *= opacity;
+                Color color = tint ?? source.color;
+                color.a = source.color.a * opacity * (tint.HasValue ? tint.Value.a : 1f);
                 tile.color = color;
                 Vector3 spriteSize = source.sprite.bounds.size;
                 tile.transform.localPosition = new Vector3(cells[i].x * cellSize, cells[i].y * cellSize, 0f);

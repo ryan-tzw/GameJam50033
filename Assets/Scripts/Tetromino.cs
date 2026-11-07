@@ -20,6 +20,12 @@ namespace Jam50033
         [SerializeField, Tooltip("Instantly place at the ghost position, or discard if no placement is available.")]
         private Key hardDropKey = Key.Space;
         [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
+        [Header("Rejected Placement")]
+        [SerializeField] private Color invalidGhostColor = new Color32(0xA5, 0x1D, 0x35, 0xFF);
+        [SerializeField, Min(0.01f)] private float rejectShakeDuration = 0.12f;
+        [SerializeField, Min(0f), Tooltip("Visual shake distance in cells; the logical piece position stays fixed.")]
+        private float rejectShakeStrength = 0.08f;
+        [SerializeField, Min(1f)] private float rejectShakeFrequency = 30f;
         [Header("Vertical Input Repeat")]
         [SerializeField, Min(0f), Tooltip("Seconds before held Up/Down or W/S starts repeating.")]
         private float verticalRepeatDelay = 0.25f;
@@ -30,7 +36,7 @@ namespace Jam50033
         [SerializeField] private Color oColor = new Color32(0xE9, 0xC8, 0x42, 0xFF);
         [SerializeField] private Color tColor = new Color32(0xA6, 0x6A, 0xE3, 0xFF);
         [SerializeField] private Color sColor = new Color32(0x56, 0xC7, 0x77, 0xFF);
-        [SerializeField] private Color zColor = new Color32(0xE6, 0x5C, 0x63, 0xFF);
+        [SerializeField] private Color zColor = new Color32(0xEE, 0x7B, 0x82, 0xFF);
         [SerializeField] private Color jColor = new Color32(0x52, 0x7B, 0xDA, 0xFF);
         [SerializeField] private Color lColor = new Color32(0xE9, 0x9A, 0x47, 0xFF);
         [Header("References")]
@@ -42,7 +48,10 @@ namespace Jam50033
         private bool isDiscarded;
         private float lastMoveSpeed;
         private Vector2Int placedCell;
+        // Geometry, eligible attachment contacts, and final-placement blockers have different entry-zone rules.
         private readonly HashSet<Vector2Int> occupiedCells = new();
+        private readonly HashSet<Vector2Int> attachmentCells = new();
+        private readonly HashSet<Vector2Int> allOccupiedCells = new();
         private readonly List<Collider2D> placementOverlaps = new();
         private readonly Vector2Int[] ghostCells = new Vector2Int[4];
         private TetrominoGhost ghost;
@@ -51,6 +60,7 @@ namespace Jam50033
         private TetrominoAudio soundEffects;
         private bool wasSoftDropping;
         private float softDropDistance;
+        private float rejectShakeRemaining;
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
@@ -76,6 +86,7 @@ namespace Jam50033
             verticalRepeatRemaining = 0f;
             wasSoftDropping = false;
             softDropDistance = 0f;
+            rejectShakeRemaining = 0f;
 
             transform.position = stage.transform.TransformPoint(
                 GetSpawnPosition(stage, shape, spawnRow, spawnInset, out _));
@@ -182,6 +193,7 @@ namespace Jam50033
 
         private void OnEnable()
         {
+            rejectShakeRemaining = 0f;
             lastMoveSpeed = relativeMoveSpeed;
             UpdateLayout();
         }
@@ -226,6 +238,11 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (Application.IsPlaying(gameObject) && rejectShakeRemaining > 0f)
+            {
+                rejectShakeRemaining = Mathf.Max(0f, rejectShakeRemaining - Time.unscaledDeltaTime);
+                UpdateLayout();
+            }
             UpdateGhost();
         }
 
@@ -264,7 +281,7 @@ namespace Jam50033
                 ghostCells[i] = GetRotatedCell(i, rotationSteps);
             }
 
-            if (!TryGetDropPlacement(out Vector2Int placement))
+            if (!TryGetDropPlacement(out Vector2Int placement, checkValidity: false))
             {
                 if (ghost != null)
                 {
@@ -282,14 +299,18 @@ namespace Jam50033
                 ghost.Initialize(bricks);
             }
 
-            ghost.Show(stageArea.CellToWorldPosition(placement), stageArea.transform.rotation, size, ghostCells, ghostOpacity);
+            bool valid = CanPlaceAtCell(placement);
+            ghost.Show(stageArea.CellToWorldPosition(placement), stageArea.transform.rotation, size, ghostCells,
+                ghostOpacity, valid ? null : (Color?)invalidGhostColor);
         }
 
-        private bool TryGetDropPlacement(out Vector2Int placement)
+        private bool TryGetDropPlacement(out Vector2Int placement, bool checkValidity = true)
         {
             float size = stageArea.CellSize;
             Vector3 origin = GetGridOrigin();
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position);
+            // Separate from built terrain, while bypassing incoming hazard clusters in the entry zone.
+            ResolveEntryOverlap(ref position);
             int row = Mathf.RoundToInt((position.y - origin.y) / size);
             int minimumX = GetRotatedCell(0, rotationSteps).x;
             for (int i = 1; i < 4; i++)
@@ -298,8 +319,11 @@ namespace Jam50033
             }
 
             float endX = GetAttachmentEndX(float.NegativeInfinity, minimumX);
-            return TryFindAttachment((position.x - origin.x) / size,
-                (endX - origin.x) / size, row, out placement);
+            float fromX = (position.x - origin.x) / size;
+            float toX = (endX - origin.x) / size;
+            bool found = TryFindAttachment(fromX, toX, row, out placement, checkPlayer: false);
+
+            return found && (!checkValidity || CanPlaceAtCell(placement));
         }
 
         private void HardDrop()
@@ -309,14 +333,22 @@ namespace Jam50033
                 return;
             }
 
+            RefreshOccupiedCells();
+            bool hasTarget = TryGetDropPlacement(out Vector2Int placement, checkValidity: false);
+            if (hasTarget && !CanPlaceAtCell(placement))
+            {
+                soundEffects?.PlayReject();
+                rejectShakeRemaining = rejectShakeDuration;
+                return;
+            }
+
             soundEffects?.PlayHardDrop();
             Camera camera = Camera.main;
             if (camera != null && camera.TryGetComponent(out ScreenShake shake))
             {
                 shake.Play();
             }
-            RefreshOccupiedCells();
-            if (TryGetDropPlacement(out Vector2Int placement))
+            if (hasTarget)
             {
                 PlaceAtCell(placement);
                 return;
@@ -502,6 +534,7 @@ namespace Jam50033
 
         private void PlaceAtCell(Vector2Int cell)
         {
+            rejectShakeRemaining = 0f;
             placedCell = cell;
             isPlaced = true;
             if (stageArea.BridgeRoot != null)
@@ -510,25 +543,40 @@ namespace Jam50033
             }
 
             transform.position = stageArea.CellToWorldPosition(cell);
+            UpdateLayout();
             soundEffects?.PlayConnect();
         }
 
         private bool CanPlaceAtCell(Vector2Int position, bool checkPlayer = true)
         {
-            // Geometry-only probes may stop at contact in the entry zone; final locks must fit left of it.
-            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
+            // Find contact against active terrain, then validate the destination against every brick.
+            HashSet<Vector2Int> blockers = checkPlayer ? allOccupiedCells : occupiedCells;
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
-                if (occupiedCells.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows ||
-                    (checkPlayer && entryZone != null && !entryZone.AllowsLock(stageArea.CellToWorldPosition(cell))) ||
+                if (blockers.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows ||
                     (checkPlayer && OverlapsPlayer(cell)))
                 {
                     return false;
                 }
             }
 
-            return true;
+            return !checkPlayer || HasActiveAttachment(position);
+        }
+
+        private bool HasActiveAttachment(Vector2Int position)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
+                if (attachmentCells.Contains(cell + Vector2Int.left) || attachmentCells.Contains(cell + Vector2Int.right) ||
+                    attachmentCells.Contains(cell + Vector2Int.up) || attachmentCells.Contains(cell + Vector2Int.down))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool OverlapsPlayer(Vector2Int cell)
@@ -590,7 +638,7 @@ namespace Jam50033
                     return false;
                 }
 
-                if (occupiedCells.Contains(cell + contactDirection))
+                if (attachmentCells.Contains(cell + contactDirection))
                 {
                     hasContact = true;
                 }
@@ -670,6 +718,8 @@ namespace Jam50033
             // Placement runs between physics steps; include the player's latest transform in overlap queries.
             Physics2D.SyncTransforms();
             occupiedCells.Clear();
+            attachmentCells.Clear();
+            allOccupiedCells.Clear();
             PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
             foreach (Brick brick in Brick.ActiveBricks)
             {
@@ -687,26 +737,56 @@ namespace Jam50033
                     }
 
                     owner.UpdateLayout();
-                    if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position))
+                    Vector2Int cell = stageArea.WorldPositionToCell(brick.transform.position);
+                    allOccupiedCells.Add(cell);
+                    if (!owner.IsHazardCluster || owner.HasCrossedEntryZone(entryZone))
                     {
-                        occupiedCells.Add(stageArea.WorldPositionToCell(brick.transform.position));
+                        occupiedCells.Add(cell);
+                        if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position))
+                        {
+                            attachmentCells.Add(cell);
+                        }
                     }
                 }
                 else if (brick.StageArea == stageArea)
                 {
                     Vector2Int cell = brick.GetGridCell();
+                    allOccupiedCells.Add(cell);
+                    occupiedCells.Add(cell);
                     if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell)))
                     {
-                        occupiedCells.Add(cell);
+                        attachmentCells.Add(cell);
                     }
                 }
             }
         }
 
+        private bool HasCrossedEntryZone(PlacementEntryZone entryZone)
+        {
+            if (entryZone == null)
+            {
+                return true;
+            }
+
+            // Check tile edges, not centres: the entire cluster must leave the entry zone together.
+            Vector3 halfTile = stageArea.transform.TransformVector(Vector3.right * stageArea.CellSize * 0.5f);
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2Int cell = placedCell + GetRotatedCell(i, rotationSteps);
+                if (!entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell) + halfTile))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private void ResolveEntryOverlap(ref Vector3 position)
         {
             PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
-            if (entryZone == null || !entryZone.isActiveAndEnabled || !OverlapsOccupiedCells(position, rotationSteps))
+            if (entryZone == null || !entryZone.isActiveAndEnabled ||
+                !OverlapsOccupiedCells(position, rotationSteps))
             {
                 return;
             }
@@ -715,7 +795,8 @@ namespace Jam50033
             // Separate toward the entry zone without locking, so the player can still move away.
             Vector3 origin = GetGridOrigin();
             float size = stageArea.CellSize;
-            for (int attempt = 0; attempt < occupiedCells.Count * 4; attempt++)
+            HashSet<Vector2Int> blockers = occupiedCells;
+            for (int attempt = 0; attempt < blockers.Count * 4; attempt++)
             {
                 float column = (position.x - origin.x) / size;
                 float row = (position.y - origin.y) / size;
@@ -723,7 +804,7 @@ namespace Jam50033
                 for (int i = 0; i < 4; i++)
                 {
                     Vector2Int offset = GetRotatedCell(i, rotationSteps);
-                    foreach (Vector2Int occupied in occupiedCells)
+                    foreach (Vector2Int occupied in blockers)
                     {
                         if (Mathf.Abs(row + offset.y - occupied.y) < 0.9999f &&
                             Mathf.Abs(column + offset.x - occupied.x) < 0.9999f)
@@ -745,10 +826,11 @@ namespace Jam50033
         private bool OverlapsOccupiedCells(Vector3 position, int rotation)
         {
             Vector3 offset = (position - GetGridOrigin()) / stageArea.CellSize;
+            HashSet<Vector2Int> blockers = occupiedCells;
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = GetRotatedCell(i, rotation);
-                foreach (Vector2Int occupiedCell in occupiedCells)
+                foreach (Vector2Int occupiedCell in blockers)
                 {
                     if (Mathf.Abs(offset.x + cell.x - occupiedCell.x) < 0.9999f &&
                         Mathf.Abs(offset.y + cell.y - occupiedCell.y) < 0.9999f)
@@ -764,14 +846,15 @@ namespace Jam50033
         private bool TryFindAttachment(float fromX, float toX, int row, out Vector2Int placement, bool checkPlayer = true)
         {
             placement = default;
-            if (occupiedCells.Count == 0)
+            HashSet<Vector2Int> targets = occupiedCells;
+            if (targets.Count == 0)
             {
                 return false;
             }
 
             bool found = false;
             // leftward movement only locks against a brick directly to the left.
-            foreach (Vector2Int existingCell in occupiedCells)
+            foreach (Vector2Int existingCell in targets)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -892,6 +975,14 @@ namespace Jam50033
                 _ => lColor
             };
 
+            Vector3 shakeOffset = Vector3.zero;
+            if (Application.IsPlaying(gameObject) && !isPlaced && !isDiscarded && rejectShakeRemaining > 0f)
+            {
+                float phase = (rejectShakeDuration - rejectShakeRemaining) * rejectShakeFrequency * Mathf.PI * 2f;
+                float strength = rejectShakeStrength * cellSize * rejectShakeRemaining / Mathf.Max(0.01f, rejectShakeDuration);
+                shakeOffset = new Vector3(Mathf.Sin(phase), Mathf.Sin(phase * 1.3f), 0f) * strength;
+            }
+
             for (int i = 0; i < bricks.Length; i++)
             {
                 if (bricks[i] == null)
@@ -900,7 +991,7 @@ namespace Jam50033
                 }
 
                 Vector2Int cell = GetRotatedCell(i, rotationSteps);
-                bricks[i].transform.localPosition = new Vector3(cell.x * cellSize, cell.y * cellSize, 0f);
+                bricks[i].transform.localPosition = new Vector3(cell.x * cellSize, cell.y * cellSize, 0f) + shakeOffset;
                 bricks[i].FitToCell(cellSize);
                 bricks[i].SetColor(shapeColor);
             }

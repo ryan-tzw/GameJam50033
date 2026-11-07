@@ -1221,7 +1221,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 006a32a0a642a9374be4b29b6b5eca08, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2088,6 +2088,8 @@ MonoBehaviour:
   softDropVolume: 0.5
   hardDropClip: {fileID: 8300000, guid: 50048a79eef93b5328d2a06d0a3ec613, type: 3}
   hardDropVolume: 0.316
+  rejectClip: {fileID: 8300000, guid: 2df09c31ca7071fa8ae56ec05c8ea789, type: 3}
+  rejectVolume: 0.5
   connectClips: []
   connectVolume: 1
 --- !u!82 &632630812
@@ -6007,7 +6009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3085c6a627b3e5bb8b798d6b60b433c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlacementEntryZone
-  tilesFromRight: 7
+  tilesFromRight: 5
   color: {r: 0.85, g: 0.85, b: 1, a: 1}
   fillOpacity: 0.035
   outlineOpacity: 0.25
@@ -6023,7 +6025,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75380afac22b465db267687f34842c14, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ScreenShake
   stageArea: {fileID: 1098233640}
   strength: 0.08
