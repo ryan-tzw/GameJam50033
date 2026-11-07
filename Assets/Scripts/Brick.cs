@@ -15,8 +15,12 @@ namespace Jam50033
 
         private SpriteRenderer spriteRenderer;
         private BoxCollider2D boxCollider;
-        private bool gridCellInitialized;
-        private Vector2Int gridCell;
+        [SerializeField, HideInInspector] private bool gridCellInitialized;
+        [SerializeField, HideInInspector] private Vector2Int gridCell;
+        private bool stageGridCached;
+        private int cachedColumns;
+        private int cachedRows;
+        private float cachedCellSize;
 
         internal static readonly HashSet<Brick> ActiveBricks = new();
         public StageArea StageArea => stageArea;
@@ -27,7 +31,7 @@ namespace Jam50033
             spriteRenderer = GetComponent<SpriteRenderer>();
             boxCollider = GetComponent<BoxCollider2D>();
             UpdateCollider();
-            gridCellInitialized = false;
+            CacheStageGrid();
             ActiveBricks.Add(this);
         }
 
@@ -64,9 +68,22 @@ namespace Jam50033
 
             FitToCell(stageArea.CellSize);
 
-            if (Application.IsPlaying(gameObject) && GetComponentInParent<Tetromino>() == null)
+            if (GetComponentInParent<Tetromino>() == null)
             {
-                transform.position = stageArea.CellToWorldPosition(GetGridCell());
+                if (!gridCellInitialized)
+                {
+                    SetGridCell(stageArea.WorldPositionToCell(transform.position));
+                }
+
+                bool gridChanged = stageGridCached &&
+                    (cachedColumns != stageArea.Columns || cachedRows != stageArea.Rows ||
+                     !Mathf.Approximately(cachedCellSize, stageArea.CellSize));
+                if (Application.IsPlaying(gameObject) || gridChanged)
+                {
+                    transform.position = stageArea.CellToWorldPosition(gridCell);
+                }
+
+                CacheStageGrid();
             }
         }
 
@@ -79,6 +96,26 @@ namespace Jam50033
             }
 
             return gridCell;
+        }
+
+        public void SetGridCell(Vector2Int cell)
+        {
+            gridCell = cell;
+            gridCellInitialized = true;
+            CacheStageGrid();
+        }
+
+        private void CacheStageGrid()
+        {
+            if (stageArea == null || stageArea.CellSize <= 0f)
+            {
+                return;
+            }
+
+            cachedColumns = stageArea.Columns;
+            cachedRows = stageArea.Rows;
+            cachedCellSize = stageArea.CellSize;
+            stageGridCached = true;
         }
 
         public void SetColor(Color newColor)

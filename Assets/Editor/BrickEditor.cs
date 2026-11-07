@@ -38,13 +38,11 @@ namespace Jam50033
 
                 Vector2Int cell = brick.StageArea.WorldPositionToCell(brick.transform.position);
                 Vector3 position = brick.StageArea.CellToWorldPosition(cell);
-                if ((brick.transform.position - position).sqrMagnitude < 0.00000001f)
-                {
-                    continue;
-                }
-
+                Undo.RecordObject(brick, "Snap bricks to stage grid");
                 Undo.RecordObject(brick.transform, "Snap bricks to stage grid");
+                brick.SetGridCell(cell);
                 brick.transform.position = position;
+                PrefabUtility.RecordPrefabInstancePropertyModifications(brick);
                 PrefabUtility.RecordPrefabInstancePropertyModifications(brick.transform);
             }
 
