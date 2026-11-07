@@ -721,6 +721,8 @@ namespace Jam50033
             attachmentCells.Clear();
             allOccupiedCells.Clear();
             PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
+            // An attachment tile becomes eligible only when its trailing edge clears the zone.
+            Vector3 halfTile = stageArea.transform.TransformVector(Vector3.right * stageArea.CellSize * 0.5f);
             foreach (Brick brick in Brick.ActiveBricks)
             {
                 if (brick == null || brick.gameObject.scene != gameObject.scene)
@@ -742,7 +744,7 @@ namespace Jam50033
                     if (!owner.IsHazardCluster || owner.HasCrossedEntryZone(entryZone))
                     {
                         occupiedCells.Add(cell);
-                        if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position))
+                        if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position + halfTile))
                         {
                             attachmentCells.Add(cell);
                         }
@@ -753,7 +755,7 @@ namespace Jam50033
                     Vector2Int cell = brick.GetGridCell();
                     allOccupiedCells.Add(cell);
                     occupiedCells.Add(cell);
-                    if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell)))
+                    if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell) + halfTile))
                     {
                         attachmentCells.Add(cell);
                     }
