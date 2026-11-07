@@ -6,6 +6,9 @@ namespace Jam50033
     [CreateAssetMenu(fileName = "SpawnSettings", menuName = "Neverland/Settings/Spawn")]
     public sealed class SpawnSettings : ScriptableObject
     {
+        [Header("Spawn Clearance")]
+        [Min(0f), Tooltip("Empty tiles between newly spawned coin/hazard groups and existing bricks or coins. Does not restrict manual placement.")]
+        public float minimumGroupGapInTiles = 1f;
         [Header("Pieces")]
         public PiecesData pieces = new();
         [Header("Difficulty")]
@@ -98,6 +101,7 @@ namespace Jam50033
 
         private void OnValidate()
         {
+            minimumGroupGapInTiles = Mathf.Max(0f, minimumGroupGapInTiles);
             pieces.spawnRow = Mathf.Max(0, pieces.spawnRow);
             pieces.hazardFreePieces = Mathf.Max(0, pieces.hazardFreePieces);
             pieces.spawnInset = Mathf.Max(0f, pieces.spawnInset);

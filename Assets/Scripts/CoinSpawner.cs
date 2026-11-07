@@ -99,24 +99,12 @@ namespace Jam50033
             int column = Mathf.CeilToInt((localX - stageArea.BridgeOffset) / stageArea.CellSize +
                 stageArea.Columns * 0.5f + spawnCoins.spawnOffset);
             Vector2Int origin = new Vector2Int(column, Random.Range(firstRow, lastRow + 1));
-            // Keep each pattern intact; skip a group if any coin would start buried in terrain.
+            // Validate the whole group before creating coins, so its own members may stay adjacent.
             foreach (Vector2Int offset in pattern)
             {
                 Vector2Int cell = origin + offset;
-                Vector3 world = stageArea.CellToWorldPosition(cell);
-                bool blocked = false;
-                foreach (Brick brick in Brick.ActiveBricks)
-                {
-                    if (brick != null && brick.gameObject.scene == gameObject.scene &&
-                        Mathf.Abs(brick.transform.position.x - world.x) < stageArea.CellSize * 0.9f &&
-                        Mathf.Abs(brick.transform.position.y - world.y) < stageArea.CellSize * 0.9f)
-                    {
-                        blocked = true;
-                        break;
-                    }
-                }
-
-                if (blocked)
+                if (!SpawnClearance.IsClear(stageArea, cell,
+                    spawnSettings != null ? spawnSettings.minimumGroupGapInTiles : 1f))
                 {
                     return;
                 }

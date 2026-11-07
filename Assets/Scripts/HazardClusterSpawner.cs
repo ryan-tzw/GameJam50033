@@ -101,7 +101,9 @@ namespace Jam50033
                 bool blocked = false;
                 for (int i = 0; i < 4; i++)
                 {
-                    if (occupiedCells.Contains(origin + Tetromino.GetShapeCell(shape, i, rotation)))
+                    Vector2Int cell = origin + Tetromino.GetShapeCell(shape, i, rotation);
+                    if (occupiedCells.Contains(cell) || !SpawnClearance.IsClear(stageArea, cell,
+                        spawnSettings != null ? spawnSettings.minimumGroupGapInTiles : 1f))
                     {
                         blocked = true;
                         break;

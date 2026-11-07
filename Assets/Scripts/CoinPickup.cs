@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jam50033
@@ -20,14 +21,24 @@ namespace Jam50033
         private SpriteRenderer visual;
         private bool cellInitialized;
         private bool collected;
+        internal static readonly HashSet<CoinPickup> ActiveCoins = new();
+        internal StageArea StageArea => stageArea;
+        internal Vector3 SpawnCheckPosition => cellInitialized && stageArea != null
+            ? stageArea.CellToWorldPosition(cell) : transform.position;
 
         private void OnEnable()
         {
+            ActiveCoins.Add(this);
             visual = GetComponent<SpriteRenderer>();
             GetComponent<CircleCollider2D>().isTrigger = true;
             cellInitialized = false;
             collected = false;
             FindStage();
+        }
+
+        private void OnDisable()
+        {
+            ActiveCoins.Remove(this);
         }
 
         private void FindStage()

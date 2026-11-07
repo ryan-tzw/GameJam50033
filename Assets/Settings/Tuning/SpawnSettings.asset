@@ -19,6 +19,7 @@ MonoBehaviour:
     type: 3
   m_Name: SpawnSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.SpawnSettings
+  minimumGroupGapInTiles: 1
   pieces:
     tetrominoPrefab:
       fileID: 7053026960480931781
