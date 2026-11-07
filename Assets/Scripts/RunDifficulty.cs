@@ -8,11 +8,11 @@ namespace Jam50033
     {
         [SerializeField, Min(0.01f)] private float progressionDuration = 120f;
         [Header("Initial Hazard Probabilities")]
-        [SerializeField, Range(0f, 1f)] private float initialOneHazardChance = 0.15f;
-        [SerializeField, Range(0f, 1f)] private float initialTwoHazardChance = 0.05f;
+        [SerializeField, Range(0f, 1f)] private float initialOneHazardChance = 0.075f;
+        [SerializeField, Range(0f, 1f)] private float initialTwoHazardChance = 0.025f;
         [Header("Final Hazard Probabilities")]
-        [SerializeField, Range(0f, 1f)] private float finalOneHazardChance = 0.25f;
-        [SerializeField, Range(0f, 1f)] private float finalTwoHazardChance = 0.15f;
+        [SerializeField, Range(0f, 1f)] private float finalOneHazardChance = 0.125f;
+        [SerializeField, Range(0f, 1f)] private float finalTwoHazardChance = 0.075f;
         [Header("Scrolling Speed")]
         [SerializeField, Min(1f), Tooltip("Maximum multiplier on bridge scrolling. Leave at 1 for unchanged speeds; use 1.5 for the planned progression.")]
         private float maximumSpeedMultiplier = 1f;

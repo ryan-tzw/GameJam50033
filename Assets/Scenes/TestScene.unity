@@ -1366,10 +1366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.RunDifficulty
   progressionDuration: 120
-  initialOneHazardChance: 0.15
-  initialTwoHazardChance: 0.05
-  finalOneHazardChance: 0.25
-  finalTwoHazardChance: 0.15
+  initialOneHazardChance: 0.075
+  initialTwoHazardChance: 0.025
+  finalOneHazardChance: 0.125
+  finalTwoHazardChance: 0.075
   maximumSpeedMultiplier: 2
   elapsedTime: 0
 --- !u!114 &632630811
