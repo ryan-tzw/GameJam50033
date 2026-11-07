@@ -98,6 +98,12 @@ namespace Jam50033
                 yield return deathEffect.Play();
             }
 
+            // Flights keep using unscaled time while gameplay and the final score are frozen.
+            while (runScore != null && runScore.HasFlyingCoins)
+            {
+                yield return null;
+            }
+
             menuPending = true;
         }
 

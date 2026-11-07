@@ -13,18 +13,33 @@ namespace Jam50033
         [SerializeField, Min(1), Tooltip("Points awarded for each full stage tile of forward progress.")]
         private int pointsPerTile = 10;
 
+        [SerializeField] private CoinScoreAnimation coinAnimation;
+
         private float startingColumn;
         private int tilesPassed;
         private bool finished;
         private int bonusPoints;
+        private int pendingCoinPoints;
+
+        public bool HasFlyingCoins => coinAnimation != null && coinAnimation.HasFlyingCoins;
 
         public int Score => tilesPassed * pointsPerTile + bonusPoints;
+
+        private void OnEnable()
+        {
+            // Keep pickups connected when an existing scene gains the animation child.
+            if (coinAnimation == null)
+            {
+                coinAnimation = GetComponentInChildren<CoinScoreAnimation>(true);
+            }
+        }
 
         private void Start()
         {
             startingColumn = GetPlayerColumn();
             tilesPassed = 0;
             bonusPoints = 0;
+            pendingCoinPoints = 0;
             finished = false;
             RefreshLabels();
         }
@@ -70,6 +85,29 @@ namespace Jam50033
             RefreshLabels();
         }
 
+        public void CollectCoin(int points, Vector3 position, float height, Sprite[] frames, float fps)
+        {
+            if (finished || Time.timeScale <= 0f || points <= 0)
+            {
+                return;
+            }
+
+            // Secure the reward immediately; only its HUD presentation waits for arrival.
+            bonusPoints += points;
+            if (coinAnimation != null && coinAnimation.TryFly(position, height, frames, fps, points,
+                () => RevealCoinPoints(points)))
+            {
+                pendingCoinPoints += points;
+            }
+            RefreshLabels();
+        }
+
+        private void RevealCoinPoints(int points)
+        {
+            pendingCoinPoints = Mathf.Max(0, pendingCoinPoints - points);
+            RefreshLabels();
+        }
+
         public void FinishRun()
         {
             if (!finished)
@@ -87,7 +125,7 @@ namespace Jam50033
             string text = Score.ToString();
             if (scoreLabel != null)
             {
-                scoreLabel.text = text;
+                scoreLabel.text = (Score - pendingCoinPoints).ToString();
             }
 
             if (finalScoreLabel != null)

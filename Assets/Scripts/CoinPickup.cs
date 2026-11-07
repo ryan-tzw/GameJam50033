@@ -130,7 +130,7 @@ namespace Jam50033
             }
 
             collected = true;
-            runScore.AddPoints(points);
+            runScore.CollectCoin(points, transform.position, visual.bounds.size.y, frames, framesPerSecond);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
