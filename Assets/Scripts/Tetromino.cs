@@ -427,8 +427,9 @@ namespace Jam50033
                 return;
             }
 
-            float currentSpeed = gameplayTetromino.relativeMoveSpeed;
-            bool softDropping = keyboard != null && (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed);
+            bool pauseApproach = keyboard != null && (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed);
+            float currentSpeed = pauseApproach ? 0f : gameplayTetromino.relativeMoveSpeed;
+            bool softDropping = !pauseApproach && keyboard != null && (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed);
             if (softDropping)
             {
                 currentSpeed *= gameplayTetromino.speedUpMultiplier;
