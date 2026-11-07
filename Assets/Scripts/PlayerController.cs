@@ -31,6 +31,8 @@ namespace Jam50033
         private float stepSpeed = 4f;
         [SerializeField, Range(0.01f, 0.5f), Tooltip("Distance ahead to detect a climbable wall, in cells.")]
         private float wallProbeDistance = 0.15f;
+        [SerializeField, Range(0, 1), Tooltip("Empty wall tiles the player can climb past. Set to 0 to require a continuous wall.")]
+        private int climbGapAllowance = 1;
         [SerializeField] private MovementState movementState = MovementState.Falling;
         [Header("Landing Recovery")]
         [SerializeField, Min(0.1f), Tooltip("Minimum free-fall distance that causes a landing stagger, in stage cells.")]
@@ -264,11 +266,22 @@ namespace Jam50033
                 return false;
             }
 
-            // Keep the original wall segment: a gap must not promote us to a disconnected upper tile.
+            // Follow the wall upward, bridging a single missing tile when allowed.
             Vector2Int topCell = climbAnchor;
-            while (bridgeCells.Contains(topCell + Vector2Int.up))
+            while (true)
             {
-                topCell += Vector2Int.up;
+                if (bridgeCells.Contains(topCell + Vector2Int.up))
+                {
+                    topCell += Vector2Int.up;
+                }
+                else if (climbGapAllowance > 0 && bridgeCells.Contains(topCell + Vector2Int.up * 2))
+                {
+                    topCell += Vector2Int.up * 2;
+                }
+                else
+                {
+                    break;
+                }
             }
 
             Vector3 wallTop = stageArea.CellToWorldPosition(topCell);
