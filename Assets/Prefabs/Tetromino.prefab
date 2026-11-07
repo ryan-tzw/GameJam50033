@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Tetromino
   shape: 2
-  relativeMoveSpeed: 2.5
-  speedUpMultiplier: 4
+  relativeMoveSpeed: 1.5
+  speedUpMultiplier: 16
   hardDropKey: 1
   ghostOpacity: 0.4
-  verticalRepeatDelay: 0.2
-  verticalRepeatInterval: 0.08
+  verticalRepeatDelay: 0.16
+  verticalRepeatInterval: 0.04
   iColor: {r: 0.15686275, g: 0.78431374, b: 0.8745098, a: 1}
   oColor: {r: 0.9137255, g: 0.78431374, b: 0.25882354, a: 1}
   tColor: {r: 0.6509804, g: 0.41568628, b: 0.8901961, a: 1}

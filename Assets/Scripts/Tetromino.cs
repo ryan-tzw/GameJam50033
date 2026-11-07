@@ -310,6 +310,11 @@ namespace Jam50033
             }
 
             soundEffects?.PlayHardDrop();
+            Camera camera = Camera.main;
+            if (camera != null && camera.TryGetComponent(out ScreenShake shake))
+            {
+                shake.Play();
+            }
             RefreshOccupiedCells();
             if (TryGetDropPlacement(out Vector2Int placement))
             {
@@ -802,26 +807,38 @@ namespace Jam50033
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position) / cellSize;
             float halfWidth = stageArea.Columns * 0.5f;
             float halfHeight = stageArea.Rows * 0.5f;
+            int minimumY = int.MaxValue;
+            int maximumY = int.MinValue;
 
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = GetRotatedCell(i, nextRotation);
                 float x = position.x + cell.x;
-                float y = position.y + cell.y;
-                if (x + 0.5f > halfWidth + 0.0001f ||
-                    y - 0.5f < -halfHeight - 0.0001f || y + 0.5f > halfHeight + 0.0001f)
+                if (x + 0.5f > halfWidth + 0.0001f)
                 {
                     return;
                 }
+                minimumY = Mathf.Min(minimumY, cell.y);
+                maximumY = Mathf.Max(maximumY, cell.y);
+            }
+
+            float lowestY = -halfHeight + 0.5f - minimumY;
+            float highestY = halfHeight - 0.5f - maximumY;
+            if (lowestY > highestY)
+            {
+                return;
             }
 
             Vector3 localPosition = stageArea.transform.InverseTransformPoint(transform.position);
+            // Shift only as far as needed to keep the rotated shape inside the top/bottom boundaries.
+            localPosition.y = Mathf.Clamp(position.y, lowestY, highestY) * cellSize;
             if (OverlapsOccupiedCells(localPosition, nextRotation))
             {
                 return;
             }
 
             rotationSteps = nextRotation;
+            transform.position = stageArea.transform.TransformPoint(localPosition);
             soundEffects?.PlayRotate();
         }
 
