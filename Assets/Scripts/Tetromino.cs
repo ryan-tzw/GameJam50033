@@ -112,6 +112,7 @@ namespace Jam50033
 
             count = Mathf.Min(count, 2);
             int[] indices = { 0, 1, 2, 3 };
+            int mask = 0;
             for (int i = 0; i < count; i++)
             {
                 // Partial shuffle selects distinct bricks with equal probability.
@@ -119,6 +120,20 @@ namespace Jam50033
                 int index = indices[selected];
                 indices[selected] = indices[i];
                 indices[i] = index;
+                mask |= 1 << index;
+            }
+            AssignHazardMask(mask, hazardPrefab);
+        }
+
+        internal void AssignHazardMask(int mask, Brick hazardPrefab)
+        {
+            if (mask == 0 || hazardPrefab == null || bricks == null || bricks.Length != 4)
+            {
+                return;
+            }
+            for (int index = 0; index < 4; index++)
+            {
+                if ((mask & (1 << index)) == 0) continue;
                 Brick original = bricks[index];
                 bricks[index] = Instantiate(hazardPrefab, transform);
                 original.gameObject.SetActive(false);

@@ -15,6 +15,8 @@ namespace Jam50033
         public CollapseGizmosData collapseGizmos = new();
         [Header("Tetromino")]
         public TetrominoData tetromino = new();
+        [Header("Next Piece Preview")]
+        public NextPreviewData nextPreview = new();
         [Header("Coin")]
         public CoinData coin = new();
         [Header("Gem")]
@@ -41,6 +43,28 @@ namespace Jam50033
         public OutlineData[] outlines = Array.Empty<OutlineData>();
         [Header("UI Images")]
         public ImageData[] images = Array.Empty<ImageData>();
+
+        [Serializable]
+        public sealed class NextPreviewData
+        {
+            public Font font;
+            public Sprite blockSprite;
+            public Sprite panelFillSprite;
+            public Sprite panelOutlineSprite;
+            [Tooltip("Panel width and height in Canvas units.")]
+            public Vector2 panelSize = new Vector2(400f, 82f);
+            [Tooltip("Inset from the top-right corner in Canvas units.")]
+            public Vector2 margin = new Vector2(18f, 20f);
+            public Color panelColor = new Color(0.06f, 0.04f, 0.13f, 1f);
+            [Range(0f, 1f)] public float panelOpacity = 0.45f;
+            public Color outlineColor = new Color(0.84f, 0.82f, 1f, 1f);
+            [Min(0f)] public float outlineWidth = 2f;
+            [Min(0f)] public float cornerRadius = 14f;
+            [Min(1f)] public float tileSize = 14f;
+            [Min(0f)] public float tileGap = 0f;
+            [Min(1)] public int labelFontSize = 14;
+            [Min(1f)] public float labelWidth = 120f;
+        }
 
         [Serializable]
         public sealed class TextData

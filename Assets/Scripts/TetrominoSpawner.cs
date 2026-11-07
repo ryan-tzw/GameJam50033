@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Jam50033
@@ -14,6 +15,19 @@ namespace Jam50033
         private Tetromino activePiece;
         private int preferredSpawnRow;
         private RunDifficulty difficulty;
+        public readonly struct QueuedPiece
+        {
+            public readonly Tetromino.Shape shape;
+            public readonly int hazardMask;
+            public QueuedPiece(Tetromino.Shape shape, int hazardMask)
+            {
+                this.shape = shape;
+                this.hazardMask = hazardMask;
+            }
+        }
+
+        private readonly List<QueuedPiece> upcoming = new();
+        public IReadOnlyList<QueuedPiece> Upcoming => upcoming;
         [SerializeField, Min(0), Tooltip("Successfully spawned pieces this run. Resets when restarting.")]
         private int spawnedCount;
 
@@ -22,6 +36,8 @@ namespace Jam50033
             difficulty = GetComponent<RunDifficulty>();
             spawnedCount = 0;
             preferredSpawnRow = spawnPieces.spawnRow;
+            upcoming.Clear();
+            FillQueue();
         }
 
         private void Start()
@@ -56,14 +72,35 @@ namespace Jam50033
                 return;
             }
 
-            Tetromino.Shape shape = (Tetromino.Shape)Random.Range(0, 7);
-            int hazards = spawnedCount < spawnPieces.hazardFreePieces ? 0 : difficulty.RollHazardCount();
+            QueuedPiece next = upcoming[0];
+            Tetromino.Shape shape = next.shape;
             activePiece = Instantiate(spawnPieces.tetrominoPrefab);
             activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
             activePiece.name = $"Tetromino {shape}";
             activePiece.Initialize(stageArea, shape, row, spawnPieces.spawnInset - spawnPieces.spawnRightOffset);
-            activePiece.AssignHazards(hazards, spawnPieces.hazardBrickPrefab);
+            activePiece.AssignHazardMask(next.hazardMask, spawnPieces.hazardBrickPrefab);
             spawnedCount++;
+            upcoming.RemoveAt(0);
+            FillQueue();
+        }
+
+        private void FillQueue()
+        {
+            while (upcoming.Count < 5)
+            {
+                Tetromino.Shape shape = (Tetromino.Shape)Random.Range(0, 7);
+                int hazards = spawnedCount + upcoming.Count < spawnPieces.hazardFreePieces
+                    ? 0 : difficulty.RollHazardCount();
+                int mask = 0;
+                for (int i = 0; i < hazards; i++)
+                {
+                    int index;
+                    do { index = Random.Range(0, 4); } while ((mask & (1 << index)) != 0);
+                    mask |= 1 << index;
+                }
+                // Freeze both shape and hazard positions so the preview stays truthful as difficulty changes.
+                upcoming.Add(new QueuedPiece(shape, mask));
+            }
         }
 
         private bool TryFindSpawnRow(out int row)
