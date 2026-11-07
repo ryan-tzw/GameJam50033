@@ -139,8 +139,9 @@ namespace Jam50033
             IsGrounded = false;
             for (int i = 0; i < count; i++)
             {
-                // side contacts must not turn a wall into standing ground.
-                if (groundHits[i].normal.y > 0.65f && body.linearVelocity.y <= 0.1f)
+                // Floor contact remains valid during small upward corrections at brick seams.
+                // Side contacts must not turn a wall into standing ground.
+                if (groundHits[i].normal.y > 0.65f)
                 {
                     IsGrounded = true;
                     break;

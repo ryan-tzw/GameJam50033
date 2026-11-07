@@ -198,6 +198,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45603904}
   m_CullTransparentMesh: 1
+--- !u!1001 &134783147
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1590998852}
+    m_Modifications:
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: stageArea
+      value: 
+      objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_Name
+      value: Brick (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.330247
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.330247
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.6199074
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.69907403
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5776cf320c553e108ca8801504da875, type: 3}
 --- !u!114 &137727587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,8 +360,8 @@ LineRenderer:
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Positions:
-  - {x: -8.388889, y: 4.4740744, z: 0}
-  - {x: 8.388889, y: 4.4740744, z: 0}
+  - {x: -8.388889, y: 4.404167, z: 0}
+  - {x: 8.388889, y: 4.404167, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -375,25 +456,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.4740744
+      value: -5.103241
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -504,8 +597,8 @@ LineRenderer:
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Positions:
-  - {x: 8.388889, y: -4.4740744, z: 0}
-  - {x: -8.388889, y: -4.4740744, z: 0}
+  - {x: 8.388889, y: -4.404167, z: 0}
+  - {x: -8.388889, y: -4.404167, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1019,25 +1112,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (28)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9148152
+      value: -4.683797
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5592592
+      value: -1.1185186
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1193,6 +1298,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!4 &281856808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+  m_PrefabInstance: {fileID: 872351963}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &286185812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1432,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &329379304 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+  m_PrefabInstance: {fileID: 134783147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &461199873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1334,25 +1449,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (9)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1408,25 +1535,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9148152
+      value: -4.683797
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1482,25 +1621,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (27)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3555558
+      value: -4.264352
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1185186
+      value: -1.5379629
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1694,25 +1845,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (8)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7962964
+      value: -3.8449075
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1768,25 +1931,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (10)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.6777778
+      value: -3.0060189
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2238,19 +2413,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.3555558
+      value: -3.215741
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2306,25 +2481,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (26)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7962964
+      value: -3.8449075
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6777778
+      value: -1.9574075
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2508,25 +2695,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2703705
+      value: -7.2004633
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2577,25 +2776,33 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.711111
+      value: -6.7810183
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2639,6 +2846,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
   m_PrefabInstance: {fileID: 861676054}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &872351963
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1590998852}
+    m_Modifications:
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: stageArea
+      value: 
+      objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_Name
+      value: Brick (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.330247
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.330247
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.039352
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.69907403
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5776cf320c553e108ca8801504da875, type: 3}
 --- !u!1001 &884640938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2651,25 +2939,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (31)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.6777778
+      value: -3.0060189
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6777778
+      value: -1.9574075
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2725,25 +3025,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (13)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.7476852
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2878,25 +3190,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (14)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5592592
+      value: -1.1185186
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2952,21 +3276,29 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (18)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3105,25 +3437,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (12)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5592592
+      value: -2.1671298
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3291,8 +3635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13570ae08eb8467abac7a6b58a3ca93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.StageArea
-  columns: 30
-  rows: 16
+  columns: 40
+  rows: 21
   screenPadding: 0.5
   lineWidth: 0.03
   outlineOpacity: 0.05
@@ -3333,25 +3677,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.1518526
+      value: -6.361574
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3519,25 +3875,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (32)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5592592
+      value: -2.1671298
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5592592
+      value: -1.1185186
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3702,11 +4070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115894897560422619, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -9.07
       objectReference: {fileID: 0}
     - target: {fileID: 1115894897560422619, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.116
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 1115894897560422619, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3742,15 +4110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1346274873048868361, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.301995
+      value: 3.226496
       objectReference: {fileID: 0}
     - target: {fileID: 1346274873048868361, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.301995
+      value: 3.226496
       objectReference: {fileID: 0}
     - target: {fileID: 1346274873048868361, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.301995
+      value: 3.226496
       objectReference: {fileID: 0}
     - target: {fileID: 1346274873048868361, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3758,19 +4126,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1346274873048868361, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5592593
-      objectReference: {fileID: 0}
-    - target: {fileID: 4019441508748373682, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
-      propertyPath: m_Size.x
       value: 0.41944447
       objectReference: {fileID: 0}
     - target: {fileID: 4019441508748373682, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.31458336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4019441508748373682, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_Size.y
-      value: 1.0625926
+      value: 0.7969445
       objectReference: {fileID: 0}
     - target: {fileID: 4019441508748373682, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_Offset.y
-      value: 0.5312963
+      value: 0.39847225
       objectReference: {fileID: 0}
     - target: {fileID: 4607790219003509733, guid: 007cb1bcdb12232a6af5dd1a2352488b, type: 3}
       propertyPath: m_Name
@@ -3858,25 +4226,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.033334
+      value: -5.522685
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3946,25 +4326,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.592593
+      value: -5.94213
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4117,6 +4509,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1826178803}
+  - {fileID: 281856808}
+  - {fileID: 329379304}
   - {fileID: 861676055}
   - {fileID: 1148422307}
   - {fileID: 1412942080}
@@ -4552,8 +4946,8 @@ LineRenderer:
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Positions:
-  - {x: -8.388889, y: -4.4740744, z: 0}
-  - {x: -8.388889, y: 4.4740744, z: 0}
+  - {x: -8.388889, y: -4.404167, z: 0}
+  - {x: -8.388889, y: 4.404167, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -4648,25 +5042,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (30)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1185186
+      value: -2.586574
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1185186
+      value: -1.5379629
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4722,25 +5128,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (17)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2370372
+      value: -2.376852
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5173,8 +5591,8 @@ LineRenderer:
   m_SortingOrder: 100
   m_MaskInteraction: 0
   m_Positions:
-  - {x: 8.388889, y: 4.4740744, z: 0}
-  - {x: 8.388889, y: -4.4740744, z: 0}
+  - {x: 8.388889, y: 4.404167, z: 0}
+  - {x: 8.388889, y: -4.404167, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -5283,25 +5701,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (20)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3555558
+      value: -4.264352
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5518,25 +5948,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (15)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1185186
+      value: -1.5379629
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5592,25 +6034,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (11)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1185186
+      value: -2.586574
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5666,25 +6120,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (29)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.55925936
+      value: -1.3282409
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.69907403
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5740,25 +6206,37 @@ PrefabInstance:
       propertyPath: stageArea
       value: 
       objectReference: {fileID: 1098233640}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCell.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 591159877590938056, guid: d5776cf320c553e108ca8801504da875, type: 3}
+      propertyPath: gridCellInitialized
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127732120868573967, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_Name
       value: Brick (16)
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.106996
+      value: 2.330247
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2370372
+      value: -3.425463
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6777778
+      value: -1.9574075
       objectReference: {fileID: 0}
     - target: {fileID: 4749256148779486308, guid: d5776cf320c553e108ca8801504da875, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5838,8 +6316,8 @@ MonoBehaviour:
   difficulty: {fileID: 632630810}
   baseSpeed: 1
   maxSpeed: 1.3
-  lowerLeadThreshold: 9.82
-  upperLeadThreshold: 17.2
+  lowerLeadThreshold: 0
+  upperLeadThreshold: 0.3492593
   smoothingTime: 1
   lowerThresholdColor: {r: 1, g: 0.85, b: 0.1, a: 0.8}
   upperThresholdColor: {r: 1, g: 0.25, b: 0.2, a: 0.8}
@@ -5898,8 +6376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.BridgeCollapse
   stageArea: {fileID: 1098233640}
-  warningX: -10.1
-  collapseX: -13
+  warningX: -5.6485186
+  collapseX: -7.2703705
+  initialCollapseDelay: 2
   warningThresholdColor: {r: 1, g: 0.85, b: 0.1, a: 0.8}
   thresholdColor: {r: 1, g: 0.5, b: 0.2, a: 0.8}
   initialShakeStrength: 0.01
@@ -6037,7 +6516,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee3995464abf438ca4ce90bd46e49dce, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.CoinScoreAnimation
   effectLayer: {fileID: 882000000000000061}
   scoreTarget: {fileID: 1031651631}

@@ -16,10 +16,10 @@ namespace Jam50033
         private float baseSpeed = 0.5f;
         [SerializeField, Min(0f), Tooltip("Maximum leftward speed when the bridge extends far ahead, in cells per second.")]
         private float maxSpeed = 3f;
-        [SerializeField, Min(0f), Tooltip("Bridge lead in cells where acceleration starts, measured ahead of the player.")]
-        private float lowerLeadThreshold = 8f;
-        [SerializeField, Min(0f), Tooltip("Bridge lead in cells where the target speed reaches maximum.")]
-        private float upperLeadThreshold = 16f;
+        [SerializeField, InspectorName("Speed Up Start X"), Tooltip("Fixed X relative to the stage centre, in Unity units. Acceleration starts when the bridge's right edge passes this line.")]
+        private float lowerLeadThreshold = 0f;
+        [SerializeField, InspectorName("Maximum Speed X"), Tooltip("Fixed X relative to the stage centre, in Unity units. The target speed reaches maximum when the bridge's right edge reaches this line.")]
+        private float upperLeadThreshold = 4f;
         [SerializeField, Min(0.01f), Tooltip("Approximate time in seconds to approach the target scrolling speed.")]
         private float smoothingTime = 1f;
         [Header("Threshold Gizmos")]
@@ -71,14 +71,13 @@ namespace Jam50033
                 return baseSpeed;
             }
 
-            float blend = Mathf.InverseLerp(lowerLeadThreshold, upperLeadThreshold, GetBridgeLead());
+            float blend = Mathf.InverseLerp(lowerLeadThreshold, upperLeadThreshold, GetBridgeRightEdgeX());
             return Mathf.Lerp(baseSpeed, Mathf.Max(baseSpeed, maxSpeed), blend);
         }
 
-        private float GetBridgeLead()
+        private float GetBridgeRightEdgeX()
         {
-            float playerX = stageArea.transform.InverseTransformPoint(player.transform.position).x;
-            float rightmostX = playerX;
+            float rightmostX = float.NegativeInfinity;
             float size = stageArea.CellSize;
             foreach (Brick brick in Brick.ActiveBricks)
             {
@@ -105,12 +104,12 @@ namespace Jam50033
                 rightmostX = Mathf.Max(rightmostX, tileRight);
             }
 
-            return (rightmostX - playerX) / size;
+            return rightmostX;
         }
 
         private void OnDrawGizmosSelected()
         {
-            if (stageArea == null || player == null || stageArea.CellSize <= 0f)
+            if (stageArea == null || stageArea.CellSize <= 0f)
             {
                 return;
             }
@@ -124,10 +123,8 @@ namespace Jam50033
             Gizmos.color = previousColor;
         }
 
-        private void DrawThresholdLine(float lead, Color color)
+        private void DrawThresholdLine(float x, Color color)
         {
-            float playerX = stageArea.transform.InverseTransformPoint(player.transform.position).x;
-            float x = playerX + lead * stageArea.CellSize;
             float halfHeight = stageArea.Rows * stageArea.CellSize * 0.5f;
             Gizmos.color = color;
             Gizmos.DrawLine(new Vector3(x, -halfHeight, 0f), new Vector3(x, halfHeight, 0f));
@@ -137,7 +134,6 @@ namespace Jam50033
         {
             baseSpeed = Mathf.Max(0f, baseSpeed);
             maxSpeed = Mathf.Max(baseSpeed, maxSpeed);
-            lowerLeadThreshold = Mathf.Max(0f, lowerLeadThreshold);
             upperLeadThreshold = Mathf.Max(lowerLeadThreshold + 0.01f, upperLeadThreshold);
             smoothingTime = Mathf.Max(0.01f, smoothingTime);
         }

@@ -3455,8 +3455,8 @@ MonoBehaviour:
   difficulty: {fileID: 632630810}
   baseSpeed: 1
   maxSpeed: 1.3
-  lowerLeadThreshold: 9.82
-  upperLeadThreshold: 17.2
+  lowerLeadThreshold: -0.5080741
+  upperLeadThreshold: 3.6192594
   smoothingTime: 1
   lowerThresholdColor: {r: 1, g: 0.85, b: 0.1, a: 0.8}
   upperThresholdColor: {r: 1, g: 0.25, b: 0.2, a: 0.8}
@@ -3515,8 +3515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.BridgeCollapse
   stageArea: {fileID: 1098233640}
-  warningX: -10.1
-  collapseX: -13
+  warningX: -5.6485186
+  collapseX: -7.2703705
   warningThresholdColor: {r: 1, g: 0.85, b: 0.1, a: 0.8}
   thresholdColor: {r: 1, g: 0.5, b: 0.2, a: 0.8}
   initialShakeStrength: 0.01
