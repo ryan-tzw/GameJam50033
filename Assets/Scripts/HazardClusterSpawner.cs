@@ -6,31 +6,24 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class HazardClusterSpawner : MonoBehaviour
     {
+        [SerializeField] private SpawnSettings spawnSettings;
+        private static readonly SpawnSettings.HazardClustersData defaultSpawnHazardClusters = new();
+        private SpawnSettings.HazardClustersData spawnHazardClusters => spawnSettings != null ? spawnSettings.hazardClusters : defaultSpawnHazardClusters;
         [SerializeField] private StageArea stageArea;
-        [SerializeField] private Tetromino tetrominoPrefab;
-        [SerializeField] private Brick hazardBrickPrefab;
-        [SerializeField, Min(0f)] private float initialDelay = 8f;
-        [SerializeField, Min(0.1f)] private float minimumSpawnInterval = 6f;
-        [SerializeField, Min(0.1f)] private float maximumSpawnInterval = 10f;
-        [SerializeField, Min(0)] private int minimumSpawnRow = 1;
-        [SerializeField, Min(0)] private int maximumSpawnRow = 12;
-        [SerializeField, Min(0f), Tooltip("Distance beyond the camera's right edge, in cells.")]
-        private float spawnOffset = 2f;
-        [SerializeField] private Color spawnGizmoColor = new Color(1f, 0.3f, 0.3f, 0.8f);
 
         private float spawnRemaining;
         private readonly HashSet<Vector2Int> occupiedCells = new();
 
         private void Start()
         {
-            if (stageArea == null || tetrominoPrefab == null || hazardBrickPrefab == null)
+            if (stageArea == null || spawnHazardClusters.tetrominoPrefab == null || spawnHazardClusters.hazardBrickPrefab == null)
             {
                 Debug.LogError("Assign the stage, Tetromino prefab and hazard brick prefab for hazard clusters.", this);
                 enabled = false;
                 return;
             }
 
-            spawnRemaining = initialDelay;
+            spawnRemaining = spawnHazardClusters.initialDelay;
         }
 
         private void Update()
@@ -48,7 +41,7 @@ namespace Jam50033
 
             // If the incoming region is crowded, wait instead of spawning overlapping terrain.
             spawnRemaining = TrySpawn()
-                ? Random.Range(minimumSpawnInterval, maximumSpawnInterval) : 0.5f;
+                ? Random.Range(spawnHazardClusters.minimumSpawnInterval, spawnHazardClusters.maximumSpawnInterval) : 0.5f;
         }
 
         private bool TrySpawn()
@@ -64,8 +57,8 @@ namespace Jam50033
                 maximum = Vector2Int.Max(maximum, cell);
             }
 
-            int firstRow = Mathf.Max(minimumSpawnRow, -minimum.y);
-            int lastRow = Mathf.Min(maximumSpawnRow, stageArea.Rows - 1 - maximum.y);
+            int firstRow = Mathf.Max(spawnHazardClusters.minimumSpawnRow, -minimum.y);
+            int lastRow = Mathf.Min(spawnHazardClusters.maximumSpawnRow, stageArea.Rows - 1 - maximum.y);
             if (firstRow > lastRow)
             {
                 return false;
@@ -120,9 +113,9 @@ namespace Jam50033
                     continue;
                 }
 
-                Tetromino cluster = Instantiate(tetrominoPrefab, stageArea.BridgeRoot);
+                Tetromino cluster = Instantiate(spawnHazardClusters.tetrominoPrefab, stageArea.BridgeRoot);
                 cluster.name = $"Hazard Cluster {shape}";
-                cluster.InitializeHazardCluster(stageArea, shape, rotation, origin, hazardBrickPrefab);
+                cluster.InitializeHazardCluster(stageArea, shape, rotation, origin, spawnHazardClusters.hazardBrickPrefab);
                 return true;
             }
 
@@ -135,7 +128,7 @@ namespace Jam50033
             float depth = camera.WorldToViewportPoint(stageArea.transform.position).z;
             Vector3 rightEdge = camera.ViewportToWorldPoint(new Vector3(1f, 0.5f, depth));
             return stageArea.transform.InverseTransformPoint(rightEdge).x +
-                (spawnOffset + 0.5f) * stageArea.CellSize;
+                (spawnHazardClusters.spawnOffset + 0.5f) * stageArea.CellSize;
         }
 
         private void OnDrawGizmosSelected()
@@ -147,20 +140,14 @@ namespace Jam50033
 
             float size = stageArea.CellSize;
             float x = GetSpawnX();
-            float bottom = (Mathf.Clamp(minimumSpawnRow, 0, stageArea.Rows - 1) - stageArea.Rows * 0.5f) * size;
-            float top = (Mathf.Clamp(maximumSpawnRow, 0, stageArea.Rows - 1) + 1 - stageArea.Rows * 0.5f) * size;
+            float bottom = (Mathf.Clamp(spawnHazardClusters.minimumSpawnRow, 0, stageArea.Rows - 1) - stageArea.Rows * 0.5f) * size;
+            float top = (Mathf.Clamp(spawnHazardClusters.maximumSpawnRow, 0, stageArea.Rows - 1) + 1 - stageArea.Rows * 0.5f) * size;
             Color previous = Gizmos.color;
-            Gizmos.color = spawnGizmoColor;
+            Gizmos.color = spawnHazardClusters.spawnGizmoColor;
             Gizmos.DrawLine(stageArea.transform.TransformPoint(new Vector3(x, bottom, 0f)),
                 stageArea.transform.TransformPoint(new Vector3(x, top, 0f)));
             Gizmos.color = previous;
         }
 
-        private void OnValidate()
-        {
-            minimumSpawnInterval = Mathf.Max(0.1f, minimumSpawnInterval);
-            maximumSpawnInterval = Mathf.Max(minimumSpawnInterval, maximumSpawnInterval);
-            maximumSpawnRow = Mathf.Max(minimumSpawnRow, maximumSpawnRow);
-        }
     }
 }

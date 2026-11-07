@@ -6,18 +6,9 @@ namespace Jam50033
     [RequireComponent(typeof(AudioSource))]
     public sealed class TetrominoAudio : MonoBehaviour
     {
-        [SerializeField] private AudioClip moveClip;
-        [SerializeField, Range(0f, 1f)] private float moveVolume = 0.7f;
-        [SerializeField] private AudioClip rotateClip;
-        [SerializeField, Range(0f, 1f)] private float rotateVolume = 0.7f;
-        [SerializeField] private AudioClip softDropClip;
-        [SerializeField, Range(0f, 1f)] private float softDropVolume = 0.5f;
-        [SerializeField] private AudioClip hardDropClip;
-        [SerializeField, Range(0f, 1f)] private float hardDropVolume = 0.8f;
-        [SerializeField] private AudioClip rejectClip;
-        [SerializeField, Range(0f, 1f)] private float rejectVolume = 0.5f;
-        [SerializeField] private AudioClip[] connectClips = new AudioClip[0];
-        [SerializeField, Range(0f, 1f)] private float connectVolume = 0.8f;
+        [SerializeField] private AudioSettings audioSettings;
+        private static readonly AudioSettings.TetrominoData defaultAudioTetromino = new();
+        private AudioSettings.TetrominoData audioTetromino => audioSettings != null ? audioSettings.tetromino : defaultAudioTetromino;
 
         private AudioSource source;
 
@@ -29,16 +20,16 @@ namespace Jam50033
             source.spatialBlend = 0f;
         }
 
-        public void PlayMove() => Play(moveClip, moveVolume);
-        public void PlayRotate() => Play(rotateClip, rotateVolume);
-        public void PlaySoftDrop() => Play(softDropClip, softDropVolume);
-        public void PlayHardDrop() => Play(hardDropClip, hardDropVolume);
-        public void PlayReject() => Play(rejectClip, rejectVolume);
+        public void PlayMove() => Play(audioTetromino.moveClip, audioTetromino.moveVolume);
+        public void PlayRotate() => Play(audioTetromino.rotateClip, audioTetromino.rotateVolume);
+        public void PlaySoftDrop() => Play(audioTetromino.softDropClip, audioTetromino.softDropVolume);
+        public void PlayHardDrop() => Play(audioTetromino.hardDropClip, audioTetromino.hardDropVolume);
+        public void PlayReject() => Play(audioTetromino.rejectClip, audioTetromino.rejectVolume);
         public void PlayConnect()
         {
-            if (connectClips != null && connectClips.Length > 0)
+            if (audioTetromino.connectClips != null && audioTetromino.connectClips.Length > 0)
             {
-                Play(connectClips[Random.Range(0, connectClips.Length)], connectVolume);
+                Play(audioTetromino.connectClips[Random.Range(0, audioTetromino.connectClips.Length)], audioTetromino.connectVolume);
             }
         }
 
@@ -47,6 +38,7 @@ namespace Jam50033
             if (isActiveAndEnabled && source != null && clip != null)
             {
                 // The scene owns this source so a discarded piece cannot cut its sound short.
+                if (audioSettings != null) source.outputAudioMixerGroup = audioSettings.effectsMixer;
                 source.PlayOneShot(clip, volume);
             }
         }

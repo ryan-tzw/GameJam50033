@@ -7,15 +7,17 @@ namespace Jam50033
     [RequireComponent(typeof(PlayerController))]
     public sealed class PlayerDeathEffect : MonoBehaviour
     {
+        [SerializeField] private PlayerSettings playerSettings;
+        [SerializeField] private AudioSettings audioSettings;
+        private static readonly PlayerSettings.DeathData defaultPlayerDeath = new();
+        private PlayerSettings.DeathData playerDeath => playerSettings != null ? playerSettings.death : defaultPlayerDeath;
+        private static readonly AudioSettings.PlayerData defaultAudioPlayer = new();
+        private AudioSettings.PlayerData audioPlayer => audioSettings != null ? audioSettings.player : defaultAudioPlayer;
         [SerializeField] private SpriteRenderer visual;
-        [SerializeField] private Material flashMaterial;
-        [SerializeField] private PlayerDeathBurst burstPrefab;
-        [SerializeField, Min(0f)] private float flashDuration = 0.035f;
+
         [Header("Audio")]
         [SerializeField, Tooltip("Scene-owned SFX source so playback continues after the player is disabled.")]
         private AudioSource audioSource;
-        [SerializeField] private AudioClip deathSound;
-        [SerializeField, Range(0f, 1f)] private float deathVolume = 1f;
 
         public IEnumerator Play()
         {
@@ -23,25 +25,26 @@ namespace Jam50033
             float height = playerCollider.bounds.size.y;
             // Keep the origin at the dying character, including when that position is offscreen.
             Vector3 position = playerCollider.bounds.center;
-            if (visual != null && flashMaterial != null && flashDuration > 0f)
+            if (visual != null && playerDeath.flashMaterial != null && playerDeath.flashDuration > 0f)
             {
-                visual.sharedMaterial = flashMaterial;
+                visual.sharedMaterial = playerDeath.flashMaterial;
                 MaterialPropertyBlock properties = new MaterialPropertyBlock();
                 visual.GetPropertyBlock(properties);
                 properties.SetFloat("_FlashAmount", 1f);
                 visual.SetPropertyBlock(properties);
-                yield return new WaitForSecondsRealtime(flashDuration);
+                yield return new WaitForSecondsRealtime(playerDeath.flashDuration);
             }
 
-            if (audioSource != null && deathSound != null)
+            if (audioSource != null && audioPlayer.deathSound != null)
             {
-                audioSource.PlayOneShot(deathSound, deathVolume);
+                if (audioSettings != null) audioSource.outputAudioMixerGroup = audioSettings.effectsMixer;
+                audioSource.PlayOneShot(audioPlayer.deathSound, audioPlayer.deathVolume);
             }
 
             PlayerDeathBurst burst = null;
-            if (burstPrefab != null)
+            if (playerDeath.burstPrefab != null)
             {
-                burst = Instantiate(burstPrefab, position, Quaternion.identity);
+                burst = Instantiate(playerDeath.burstPrefab, position, Quaternion.identity);
                 burst.Play(height, visual != null ? visual.sortingLayerID : 0,
                     visual != null ? visual.sortingOrder + 1 : 1);
             }

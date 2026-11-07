@@ -7,13 +7,14 @@ namespace Jam50033
     [RequireComponent(typeof(SpriteRenderer), typeof(CircleCollider2D))]
     public sealed class CoinPickup : MonoBehaviour
     {
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.ScoringData defaultGameplayScoring = new();
+        private GameplaySettings.ScoringData gameplayScoring => gameplaySettings != null ? gameplaySettings.scoring : defaultGameplayScoring;
+        private static readonly VisualSettings.CoinData defaultVisualCoin = new();
+        private VisualSettings.CoinData visualCoin => visualSettings != null ? visualSettings.coin : defaultVisualCoin;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private RunScore runScore;
-        [SerializeField] private Sprite[] frames;
-        [SerializeField, Min(1f)] private float framesPerSecond = 8f;
-        [SerializeField, Min(0.1f), Tooltip("Coin diameter in stage tiles.")]
-        private float sizeInTiles = 0.65f;
-        [SerializeField, Min(1)] private int points = 50;
 
         private Vector2Int cell;
         private SpriteRenderer visual;
@@ -103,11 +104,11 @@ namespace Jam50033
 
         private void UpdateVisual()
         {
-            if (frames != null && frames.Length > 0)
+            if (visualCoin.frames != null && visualCoin.frames.Length > 0)
             {
                 // A shared clock keeps even newly spawned coins on the same animation frame.
                 float time = Application.IsPlaying(gameObject) ? Time.time : 0f;
-                visual.sprite = frames[Mathf.FloorToInt(time * framesPerSecond) % frames.Length];
+                visual.sprite = visualCoin.frames[Mathf.FloorToInt(time * visualCoin.framesPerSecond) % visualCoin.frames.Length];
             }
 
             if (Application.IsPlaying(gameObject) && cellInitialized)
@@ -116,7 +117,7 @@ namespace Jam50033
             }
             if (visual.sprite != null)
             {
-                float scale = stageArea.CellSize * sizeInTiles / visual.sprite.bounds.size.y;
+                float scale = stageArea.CellSize * visualCoin.sizeInTiles / visual.sprite.bounds.size.y;
                 transform.localScale = Vector3.one * scale;
             }
         }
@@ -130,7 +131,7 @@ namespace Jam50033
             }
 
             collected = true;
-            runScore.CollectCoin(points, transform.position, visual.bounds.size.y, frames, framesPerSecond);
+            runScore.CollectCoin(gameplayScoring.points, transform.position, visual.bounds.size.y, visualCoin.frames, visualCoin.framesPerSecond);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

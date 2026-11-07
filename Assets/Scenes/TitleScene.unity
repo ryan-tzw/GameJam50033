@@ -164,14 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 6
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 1
-  scrollMultiplier: 0.45
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &218430985
 SpriteRenderer:
   serializedVersion: 2
@@ -290,14 +286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 7
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 0
-  scrollMultiplier: 0
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &265438489
 SpriteRenderer:
   serializedVersion: 2
@@ -581,6 +573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 978569411}
   - component: {fileID: 978569410}
+  - component: {fileID: 882000000000000103}
   m_Layer: 0
   m_Name: Background Music
   m_TagString: Untagged
@@ -600,7 +593,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3354677552789489752, guid: 274b3b5ae8782b3e5914e5627895d25b, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0e52114e36a94fd42a8c51ac363423c9, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
@@ -986,14 +979,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 8
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 0
-  scrollMultiplier: 0
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &1156962704
 SpriteRenderer:
   serializedVersion: 2
@@ -1284,14 +1273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 9
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 1
-  scrollMultiplier: 0.12
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &1643442250
 SpriteRenderer:
   serializedVersion: 2
@@ -1410,14 +1395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 10
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 1
-  scrollMultiplier: 0.25
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &1820435254
 SpriteRenderer:
   serializedVersion: 2
@@ -1522,14 +1503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddc359d525f3ec248afaefd95844722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.ParallaxLayer
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  layerIndex: 11
   backgroundCamera: {fileID: 1049462689}
   stageArea: {fileID: 0}
-  scrolling: 1
-  scrollMultiplier: 0.08
-  menuScrollSpeed: 0.6
-  opacity: 1
-  scaleMultiplier: 1
-  offset: {x: 0, y: 0}
 --- !u!212 &1848372190
 SpriteRenderer:
   serializedVersion: 2
@@ -1773,8 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475ee5e9b1d14fa6ad2c3c7287576647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.BackgroundTint
-  tintColour: {r: 0.35955858, g: 0.5158849, b: 0.754717, a: 1}
-  tintStrength: 0.2
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
 --- !u!114 &2020321784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,7 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da84d80eb7ab4a39abd54fc6a812ced8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.BackgroundBlur
-  blurRadius: 4
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
 --- !u!114 &2055287422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1802,6 +1778,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
+--- !u!114 &882000000000000103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978569409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14df0e57103da63f985cc4360b91f00d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.SettingsMusic
+  audioSettings: {fileID: 11400000, guid: 76f8f369c97de19a19d7853912976721, type: 2}
+  titleScreen: 1
+--- !u!1 &882000000000000100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882000000000000101}
+  - component: {fileID: 882000000000000102}
+  m_Layer: 0
+  m_Name: Shared Settings UI
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &882000000000000101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882000000000000100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &882000000000000102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882000000000000100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50cf772a191c02701ba234200d1792aa, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.SettingsUI
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  texts:
+  - target: {fileID: 316386967}
+    style: 9
+  - target: {fileID: 596318315}
+    style: 10
+  - target: {fileID: 1430193226}
+    style: 11
+  buttons:
+  - target: {fileID: 1014169770}
+    style: 2
+  outlines:
+  - target: {fileID: 1014169771}
+    style: 2
+  images: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1811,3 +1855,4 @@ SceneRoots:
   - {fileID: 1175853725}
   - {fileID: 978569411}
   - {fileID: 2020321782}
+  - {fileID: 882000000000000101}

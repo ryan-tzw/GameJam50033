@@ -6,26 +6,9 @@ namespace Jam50033
     [RequireComponent(typeof(ParticleSystem))]
     public sealed class PlayerDeathBurst : MonoBehaviour
     {
-        [SerializeField, Range(4, 64)] private int particleCount = 18;
-        [SerializeField, Min(0.01f)] private float duration = 0.35f;
-        [SerializeField, Min(0.1f), Tooltip("Final burst radius in player heights. A large radius keeps offscreen deaths visible.")]
-        private float radius = 2.5f;
-        [SerializeField, Range(0.01f, 1f), Tooltip("Final speed relative to initial speed.")]
-        private float endSpeedFraction = 0.08f;
-        [SerializeField, Range(0f, 0.3f)] private float speedVariation = 0.1f;
-        [SerializeField, Min(0.01f), Tooltip("Smallest square size in player heights.")]
-        private float minimumSize = 0.14f;
-        [SerializeField, Min(0.01f), Tooltip("Largest square size in player heights.")]
-        private float maximumSize = 0.22f;
-        [SerializeField] private Color[] palette =
-        {
-            Color.white,
-            new Color32(219, 205, 190, 255),
-            new Color32(74, 109, 150, 255),
-            new Color32(130, 184, 208, 255),
-            new Color32(241, 212, 190, 255),
-            new Color32(43, 47, 95, 255)
-        };
+        [SerializeField] private PlayerSettings playerSettings;
+        private static readonly PlayerSettings.DeathBurstData defaultPlayerDeathBurst = new();
+        private PlayerSettings.DeathBurstData playerDeathBurst => playerSettings != null ? playerSettings.deathBurst : defaultPlayerDeathBurst;
 
         private ParticleSystem particles;
 
@@ -38,11 +21,11 @@ namespace Jam50033
             var main = particles.main;
             main.loop = false;
             main.playOnAwake = false;
-            main.duration = duration;
-            main.startLifetime = duration;
+            main.duration = playerDeathBurst.duration;
+            main.startLifetime = playerDeathBurst.duration;
             main.startSpeed = 0f;
             main.gravityModifier = 0f;
-            main.maxParticles = particleCount;
+            main.maxParticles = playerDeathBurst.particleCount;
             main.simulationSpace = ParticleSystemSimulationSpace.World;
             main.useUnscaledTime = true;
             main.cullingMode = ParticleSystemCullingMode.AlwaysSimulate;
@@ -56,7 +39,7 @@ namespace Jam50033
             velocity.enabled = true;
             velocity.space = ParticleSystemSimulationSpace.World;
             velocity.speedModifier = new ParticleSystem.MinMaxCurve(1f,
-                AnimationCurve.EaseInOut(0f, 1f, 1f, endSpeedFraction));
+                AnimationCurve.EaseInOut(0f, 1f, 1f, playerDeathBurst.endSpeedFraction));
             var size = particles.sizeOverLifetime;
             size.enabled = true;
             size.size = new ParticleSystem.MinMaxCurve(1f, new AnimationCurve(
@@ -75,28 +58,24 @@ namespace Jam50033
             particles.Play();
 
             // The symmetric slowdown curve averages its two end speeds over the lifetime.
-            float speed = radius * playerHeight / (duration * (1f + endSpeedFraction) * 0.5f);
+            float speed = playerDeathBurst.radius * playerHeight / (playerDeathBurst.duration * (1f + playerDeathBurst.endSpeedFraction) * 0.5f);
             float phase = Random.Range(0f, Mathf.PI * 2f);
-            for (int i = 0; i < particleCount; i++)
+            for (int i = 0; i < playerDeathBurst.particleCount; i++)
             {
-                float angle = phase + i * Mathf.PI * 2f / particleCount;
+                float angle = phase + i * Mathf.PI * 2f / playerDeathBurst.particleCount;
                 Vector3 direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
                 var particle = new ParticleSystem.EmitParams
                 {
                     position = transform.position + direction * (playerHeight * 0.04f),
-                    velocity = direction * (speed * Random.Range(1f - speedVariation, 1f + speedVariation)),
-                    startLifetime = duration,
-                    startSize = Random.Range(minimumSize, maximumSize) * playerHeight,
-                    startColor = palette != null && palette.Length > 0 ? palette[i % palette.Length] : Color.white,
+                    velocity = direction * (speed * Random.Range(1f - playerDeathBurst.speedVariation, 1f + playerDeathBurst.speedVariation)),
+                    startLifetime = playerDeathBurst.duration,
+                    startSize = Random.Range(playerDeathBurst.minimumSize, playerDeathBurst.maximumSize) * playerHeight,
+                    startColor = playerDeathBurst.palette != null && playerDeathBurst.palette.Length > 0 ? playerDeathBurst.palette[i % playerDeathBurst.palette.Length] : Color.white,
                     rotation = 0f
                 };
                 particles.Emit(particle, 1);
             }
         }
 
-        private void OnValidate()
-        {
-            maximumSize = Mathf.Max(minimumSize, maximumSize);
-        }
     }
 }

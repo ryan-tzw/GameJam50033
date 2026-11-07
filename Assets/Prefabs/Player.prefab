@@ -159,16 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3463866c0d4f869e31aaf4fab5129d, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerMovementAudio
+  audioSettings: {fileID: 11400000, guid: 76f8f369c97de19a19d7853912976721, type: 2}
   player: {fileID: 5764522197894248706}
   audioSource: {fileID: 0}
-  stepSound: {fileID: 8300000, guid: e10f65099ae0dd610bc2290ed0be4bc5, type: 3}
-  stepVolume: 0.3
-  stepInterval: 0.33333334
-  climbSound: {fileID: 8300000, guid: c5b3489d63ec805a0870862a78c9b35a, type: 3}
-  climbVolume: 0.5
-  climbInterval: 0.375
-  landingSound: {fileID: 8300000, guid: 7ad0d9d5c51070ebb9145bc5e2133152, type: 3}
-  landingVolume: 0.7
 --- !u!1 &4607790219003509733
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,36 +276,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef454fb021ceb398bd774ce9d54b040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerController
+  playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}
   stageArea: {fileID: 0}
-  heightInCells: 2
-  widthInCells: 0.75
-  headClearance: 0.1
-  targetX: 0
-  followStrength: 3
-  maxRecoverySpeed: 4
-  groundProbeDistance: 0.08
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  climbSpeed: 1.5
-  stepSpeed: 4
-  wallProbeDistance: 0.15
   movementState: 2
-  staggerFallDistance: 2
-  staggerDuration: 0.375
-  staggerClip: {fileID: 7400000, guid: b919ceb1190c88e74a18aa72b42b1ac3, type: 2}
-  initialMomentum: 0
-  momentumBuildTime: 5
-  climbMomentumDecay: 0.35
-  fallMomentumDecay: 0.25
-  staggerMomentumDecay: 0.5
-  landingMomentumPenalty: 0.3
-  maximumMomentumSpeedBonus: 0.3
   momentum: 0
-  fastRunStartSpeed: 1.2
-  fastRunStopSpeed: 1.1
   visualRoot: {fileID: 1346274873048868361}
-  standingSprite: {fileID: 1768599190028779529, guid: a11535981f9df56ae82e6f61eca4e78d, type: 3}
   visual: {fileID: 1446710395335007330}
   animator: {fileID: 5898478463346221795}
 --- !u!114 &8571693529228432501
@@ -327,20 +295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e6f139d1e64731b4591b31d949b783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerHitReaction
+  playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}
+  audioSettings: {fileID: 11400000, guid: 76f8f369c97de19a19d7853912976721, type: 2}
   gameOver: {fileID: 0}
   visual: {fileID: 1446710395335007330}
   animator: {fileID: 5898478463346221795}
-  hurtClip: {fileID: 7400000, guid: b1021fe8ae816ed8f8f061323777fc60, type: 2}
-  flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
-  hurtDuration: 0.5
-  whiteFlashDuration: 0.5
-  shakeStrength: 0.03
-  shakeFrequency: 12
-  knockbackDistance: 1.2
-  knockbackDuration: 0.4
   audioSource: {fileID: 0}
-  hitSound: {fileID: 8300000, guid: 46bc17417ce359dcbb0b48f3904680ef, type: 3}
-  hitVolume: 1
 --- !u!114 &2173082064071922118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,13 +313,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da1b7fcfc944ef38e0e283587f9ad7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerDeathEffect
+  playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}
+  audioSettings: {fileID: 11400000, guid: 76f8f369c97de19a19d7853912976721, type: 2}
   visual: {fileID: 1446710395335007330}
-  flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
-  burstPrefab: {fileID: 315514531842761780, guid: 9694f3a19985d12ab9b0c950c7ac24fb, type: 3}
-  flashDuration: 0.035
   audioSource: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: b55b090f2ef033f7f96058f7ee958b15, type: 3}
-  deathVolume: 1
 --- !u!114 &882000000000000001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,17 +329,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1101958f5b934381945a6fc572ea4c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerRunningDust
-  frames:
-  - {fileID: 1931290762606268786, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
-  - {fileID: -2110224601219122855, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
-  - {fileID: -662114749134144608, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
-  - {fileID: 3935753800758297965, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
-  - {fileID: -2981551147060892193, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
+  playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}
   playerVisual: {fileID: 1446710395335007330}
-  flipX: 0
-  framesPerSecond: 12
-  burstSize: 2
-  offsetInCells: {x: -0.35, y: 0.15}
-  opacity: 0.7
-  spawnGizmoColor: {r: 0, g: 1, b: 1, a: 1}
-  spawnGizmoSize: 0.58

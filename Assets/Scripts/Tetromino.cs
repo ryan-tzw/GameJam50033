@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Jam50033
 {
@@ -9,36 +8,16 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class Tetromino : MonoBehaviour
     {
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.TetrominoData defaultGameplayTetromino = new();
+        private GameplaySettings.TetrominoData gameplayTetromino => gameplaySettings != null ? gameplaySettings.tetromino : defaultGameplayTetromino;
+        private static readonly VisualSettings.TetrominoData defaultVisualTetromino = new();
+        private VisualSettings.TetrominoData visualTetromino => visualSettings != null ? visualSettings.tetromino : defaultVisualTetromino;
         public enum Shape { I, O, T, S, Z, J, L }
 
         [SerializeField] private Shape shape = Shape.T;
-        [FormerlySerializedAs("moveSpeed")]
-        [SerializeField, Min(0f), Tooltip("Extra leftward speed relative to the bridge, in cells per second.")]
-        private float relativeMoveSpeed = 2f;
-        [SerializeField, Min(1f), Tooltip("Speed multiplier while A is held.")]
-        private float speedUpMultiplier = 3f;
-        [SerializeField, Tooltip("Instantly place at the ghost position, or discard if no placement is available.")]
-        private Key hardDropKey = Key.Space;
-        [SerializeField, Range(0f, 1f)] private float ghostOpacity = 0.2f;
-        [Header("Rejected Placement")]
-        [SerializeField] private Color invalidGhostColor = new Color32(0xA5, 0x1D, 0x35, 0xFF);
-        [SerializeField, Min(0.01f)] private float rejectShakeDuration = 0.12f;
-        [SerializeField, Min(0f), Tooltip("Visual shake distance in cells; the logical piece position stays fixed.")]
-        private float rejectShakeStrength = 0.08f;
-        [SerializeField, Min(1f)] private float rejectShakeFrequency = 30f;
-        [Header("Vertical Input Repeat")]
-        [SerializeField, Min(0f), Tooltip("Seconds before held Up/Down or W/S starts repeating.")]
-        private float verticalRepeatDelay = 0.25f;
-        [SerializeField, Min(0.01f), Tooltip("Seconds between repeated vertical moves while a direction is held.")]
-        private float verticalRepeatInterval = 0.08f;
-        [Header("Shape Colors")]
-        [SerializeField] private Color iColor = new Color32(0x28, 0xC8, 0xDF, 0xFF);
-        [SerializeField] private Color oColor = new Color32(0xE9, 0xC8, 0x42, 0xFF);
-        [SerializeField] private Color tColor = new Color32(0xA6, 0x6A, 0xE3, 0xFF);
-        [SerializeField] private Color sColor = new Color32(0x56, 0xC7, 0x77, 0xFF);
-        [SerializeField] private Color zColor = new Color32(0xEE, 0x7B, 0x82, 0xFF);
-        [SerializeField] private Color jColor = new Color32(0x52, 0x7B, 0xDA, 0xFF);
-        [SerializeField] private Color lColor = new Color32(0xE9, 0x9A, 0x47, 0xFF);
+
         [Header("References")]
         [SerializeField] private StageArea stageArea;
         [SerializeField] private Brick[] bricks;
@@ -81,7 +60,7 @@ namespace Jam50033
             isPlaced = false;
             IsHazardCluster = false;
             isDiscarded = false;
-            lastMoveSpeed = relativeMoveSpeed;
+            lastMoveSpeed = gameplayTetromino.relativeMoveSpeed;
             heldVerticalDirection = 0;
             verticalRepeatRemaining = 0f;
             wasSoftDropping = false;
@@ -194,7 +173,7 @@ namespace Jam50033
         private void OnEnable()
         {
             rejectShakeRemaining = 0f;
-            lastMoveSpeed = relativeMoveSpeed;
+            lastMoveSpeed = gameplayTetromino.relativeMoveSpeed;
             UpdateLayout();
         }
 
@@ -228,11 +207,6 @@ namespace Jam50033
 
         private void OnValidate()
         {
-            relativeMoveSpeed = Mathf.Max(0f, relativeMoveSpeed);
-            speedUpMultiplier = Mathf.Max(1f, speedUpMultiplier);
-            ghostOpacity = Mathf.Clamp01(ghostOpacity);
-            verticalRepeatDelay = Mathf.Max(0f, verticalRepeatDelay);
-            verticalRepeatInterval = Mathf.Max(0.01f, verticalRepeatInterval);
             UpdateLayout();
         }
 
@@ -264,7 +238,7 @@ namespace Jam50033
                 return;
             }
 
-            if (stageArea == null || stageArea.CellSize <= 0f || bricks == null || bricks.Length != 4 || ghostOpacity <= 0f)
+            if (stageArea == null || stageArea.CellSize <= 0f || bricks == null || bricks.Length != 4 || visualTetromino.ghostOpacity <= 0f)
             {
                 if (ghost != null)
                 {
@@ -301,7 +275,7 @@ namespace Jam50033
 
             bool valid = CanPlaceAtCell(placement);
             ghost.Show(stageArea.CellToWorldPosition(placement), stageArea.transform.rotation, size, ghostCells,
-                ghostOpacity, valid ? null : (Color?)invalidGhostColor);
+                visualTetromino.ghostOpacity, valid ? null : (Color?)visualTetromino.invalidGhostColor);
         }
 
         private bool TryGetDropPlacement(out Vector2Int placement, bool checkValidity = true)
@@ -338,7 +312,7 @@ namespace Jam50033
             if (hasTarget && !CanPlaceAtCell(placement))
             {
                 soundEffects?.PlayReject();
-                rejectShakeRemaining = rejectShakeDuration;
+                rejectShakeRemaining = visualTetromino.rejectShakeDuration;
                 return;
             }
 
@@ -431,18 +405,18 @@ namespace Jam50033
             {
                 soundEffects?.PlayMove();
             }
-            if (keyboard != null && hardDropKey != Key.None && keyboard[hardDropKey].wasPressedThisFrame)
+            if (keyboard != null && gameplayTetromino.hardDropKey != Key.None && keyboard[gameplayTetromino.hardDropKey].wasPressedThisFrame)
             {
                 transform.position = stageArea.transform.TransformPoint(position);
                 HardDrop();
                 return;
             }
 
-            float currentSpeed = relativeMoveSpeed;
+            float currentSpeed = gameplayTetromino.relativeMoveSpeed;
             bool softDropping = keyboard != null && (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed);
             if (softDropping)
             {
-                currentSpeed *= speedUpMultiplier;
+                currentSpeed *= gameplayTetromino.speedUpMultiplier;
             }
 
             float previousX = position.x;
@@ -502,7 +476,7 @@ namespace Jam50033
             if (direction != heldVerticalDirection || (direction > 0 ? upPressed : downPressed))
             {
                 heldVerticalDirection = direction;
-                verticalRepeatRemaining = verticalRepeatDelay;
+                verticalRepeatRemaining = gameplayTetromino.verticalRepeatDelay;
                 return direction;
             }
 
@@ -513,7 +487,7 @@ namespace Jam50033
             }
 
             // Emit at most one move per frame, even after a long frame or a pause.
-            verticalRepeatRemaining = verticalRepeatInterval;
+            verticalRepeatRemaining = gameplayTetromino.verticalRepeatInterval;
             return direction;
         }
 
@@ -968,20 +942,20 @@ namespace Jam50033
 
             Color shapeColor = shape switch
             {
-                Shape.I => iColor,
-                Shape.O => oColor,
-                Shape.T => tColor,
-                Shape.S => sColor,
-                Shape.Z => zColor,
-                Shape.J => jColor,
-                _ => lColor
+                Shape.I => visualTetromino.iColor,
+                Shape.O => visualTetromino.oColor,
+                Shape.T => visualTetromino.tColor,
+                Shape.S => visualTetromino.sColor,
+                Shape.Z => visualTetromino.zColor,
+                Shape.J => visualTetromino.jColor,
+                _ => visualTetromino.lColor
             };
 
             Vector3 shakeOffset = Vector3.zero;
             if (Application.IsPlaying(gameObject) && !isPlaced && !isDiscarded && rejectShakeRemaining > 0f)
             {
-                float phase = (rejectShakeDuration - rejectShakeRemaining) * rejectShakeFrequency * Mathf.PI * 2f;
-                float strength = rejectShakeStrength * cellSize * rejectShakeRemaining / Mathf.Max(0.01f, rejectShakeDuration);
+                float phase = (visualTetromino.rejectShakeDuration - rejectShakeRemaining) * visualTetromino.rejectShakeFrequency * Mathf.PI * 2f;
+                float strength = visualTetromino.rejectShakeStrength * cellSize * rejectShakeRemaining / Mathf.Max(0.01f, visualTetromino.rejectShakeDuration);
                 shakeOffset = new Vector3(Mathf.Sin(phase), Mathf.Sin(phase * 1.3f), 0f) * strength;
             }
 

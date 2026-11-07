@@ -8,59 +8,21 @@ namespace Jam50033
     [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
     public sealed class PlayerController : MonoBehaviour
     {
+        [SerializeField] private PlayerSettings playerSettings;
+        private static readonly PlayerSettings.MovementData defaultPlayerMovement = new();
+        private PlayerSettings.MovementData playerMovement => playerSettings != null ? playerSettings.movement : defaultPlayerMovement;
         public enum MovementState { Running, Climbing, Falling, Staggered }
 
         [SerializeField] private StageArea stageArea;
-        [SerializeField, Min(0.1f)] private float heightInCells = 2f;
-        [SerializeField, Min(0.1f)] private float widthInCells = 0.8f;
-        [SerializeField, Min(0f), Tooltip("Height removed from the top of the collider, in cells. Keeps the feet and sprite size unchanged.")]
-        private float headClearance = 0.1f;
-        [SerializeField, Tooltip("Desired horizontal world position. The bridge scrolls beneath this position.")]
-        private float targetX;
-        [SerializeField, Min(0f), Tooltip("Horizontal recovery velocity per unit of displacement.")]
-        private float followStrength = 6f;
-        [SerializeField, Min(0f), Tooltip("Maximum horizontal recovery speed, in stage cells per second.")]
-        private float maxRecoverySpeed = 4f;
-        [SerializeField, Min(0.001f), Tooltip("Distance below the capsule to check for support, in cells.")]
-        private float groundProbeDistance = 0.08f;
-        [SerializeField] private LayerMask groundLayers = ~0;
-        [Header("Climbing")]
-        [SerializeField, Min(0.1f), Tooltip("Upward speed while the upper half touches the wall, in stage cells per second.")]
-        private float climbSpeed = 2.5f;
-        [SerializeField, Min(0.1f), Tooltip("Upward speed when only the lower half touches the wall, in stage cells per second.")]
-        private float stepSpeed = 4f;
-        [SerializeField, Range(0.01f, 0.5f), Tooltip("Distance ahead to detect a climbable wall, in cells.")]
-        private float wallProbeDistance = 0.15f;
-        [SerializeField, Range(0, 1), Tooltip("Empty wall tiles the player can climb past. Set to 0 to require a continuous wall.")]
-        private int climbGapAllowance = 1;
+
         [SerializeField] private MovementState movementState = MovementState.Falling;
-        [Header("Landing Recovery")]
-        [SerializeField, Min(0.1f), Tooltip("Minimum free-fall distance that causes a landing stagger, in stage cells.")]
-        private float staggerFallDistance = 3f;
-        [SerializeField, Min(0.01f), Tooltip("Seconds spent recovering while moving with the bridge.")]
-        private float staggerDuration = 0.375f;
-        [SerializeField] private AnimationClip staggerClip;
-        [Header("Momentum")]
-        [SerializeField, Range(0f, 1f)] private float initialMomentum;
-        [SerializeField, Min(0.1f), Tooltip("Seconds of flat running to build from zero to full momentum.")]
-        private float momentumBuildTime = 5f;
-        [SerializeField, Min(0f), Tooltip("Momentum lost per second while climbing or stepping.")]
-        private float climbMomentumDecay = 0.35f;
-        [SerializeField, Min(0f)] private float fallMomentumDecay = 0.25f;
-        [SerializeField, Min(0f)] private float staggerMomentumDecay = 0.5f;
-        [SerializeField, Range(0f, 1f)] private float landingMomentumPenalty = 0.3f;
-        [SerializeField, Range(0f, 1f), Tooltip("Additional bridge speed at full momentum while running. 0.1 means 10%.")]
-        private float maximumMomentumSpeedBonus = 0.1f;
+
         [SerializeField, Range(0f, 1f)] private float momentum;
-        [Header("Running Animation")]
-        [SerializeField, Min(0.01f), Tooltip("Actual bridge scrolling speed, in cells per second, that switches to fast running and dust.")]
-        private float fastRunStartSpeed = 1.2f;
-        [SerializeField, Min(0f), Tooltip("Switch back to the slow run below this speed, in cells per second.")]
-        private float fastRunStopSpeed = 1.1f;
+
         [Header("Visuals")]
         [SerializeField, Tooltip("Automatically sized and aligned parent. Edit the Visual child for sprite adjustments.")]
         private Transform visualRoot;
-        [SerializeField] private Sprite standingSprite;
+
         [SerializeField] private SpriteRenderer visual;
         [SerializeField] private Animator animator;
 
@@ -93,7 +55,7 @@ namespace Jam50033
         public float Momentum => momentum;
         public bool IsFastRunning => !fatalHit && IsGrounded && movementState == MovementState.Running && fastRunReady;
         public float MomentumSpeedMultiplier => !fatalHit && IsGrounded && movementState == MovementState.Running
-            ? 1f + momentum * maximumMomentumSpeedBonus : 1f;
+            ? 1f + momentum * playerMovement.maximumMomentumSpeedBonus : 1f;
 
         private void OnEnable()
         {
@@ -106,7 +68,7 @@ namespace Jam50033
             fatalHit = false;
             fallStartY = body.position.y;
             staggerRemaining = 0f;
-            momentum = initialMomentum;
+            momentum = playerMovement.initialMomentum;
             fastRunReady = false;
             if (Application.IsPlaying(gameObject) && animator != null)
             {
@@ -134,9 +96,9 @@ namespace Jam50033
 
             float size = stageArea.CellSize;
             ContactFilter2D filter = new ContactFilter2D();
-            filter.SetLayerMask(groundLayers);
+            filter.SetLayerMask(playerMovement.groundLayers);
             filter.useTriggers = false;
-            int count = capsule.Cast(Vector2.down, filter, groundHits, groundProbeDistance * size);
+            int count = capsule.Cast(Vector2.down, filter, groundHits, playerMovement.groundProbeDistance * size);
             bool wasGrounded = IsGrounded;
             IsGrounded = false;
             for (int i = 0; i < count; i++)
@@ -172,16 +134,16 @@ namespace Jam50033
             if (movementState == MovementState.Falling)
             {
                 fallStartY = Mathf.Max(fallStartY, body.position.y);
-                if (IsGrounded && fallStartY - body.position.y >= staggerFallDistance * size)
+                if (IsGrounded && fallStartY - body.position.y >= playerMovement.staggerFallDistance * size)
                 {
                     movementState = MovementState.Staggered;
-                    momentum = Mathf.Max(0f, momentum - landingMomentumPenalty);
-                    staggerRemaining = staggerDuration;
+                    momentum = Mathf.Max(0f, momentum - playerMovement.landingMomentumPenalty);
+                    staggerRemaining = playerMovement.staggerDuration;
                     if (animator != null)
                     {
                         animator.SetBool(StaggeredParameter, true);
                         animator.SetFloat(StaggerPlaybackParameter,
-                            staggerClip != null ? staggerClip.length / staggerDuration : 1f);
+                            playerMovement.staggerClip != null ? playerMovement.staggerClip.length / playerMovement.staggerDuration : 1f);
                         animator.Play(StaggerState, 0, 0f);
                     }
 
@@ -211,9 +173,9 @@ namespace Jam50033
                 fallStartY = body.position.y;
             }
             movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
-            float speedLimit = maxRecoverySpeed * size;
+            float speedLimit = playerMovement.maxRecoverySpeed * size;
             // zero displacement means zero forward velocity; recovery only follows a displacement.
-            float velocityX = Mathf.Clamp((targetX - body.position.x) * followStrength, -speedLimit, speedLimit);
+            float velocityX = Mathf.Clamp((playerMovement.targetX - body.position.x) * playerMovement.followStrength, -speedLimit, speedLimit);
             body.linearVelocity = new Vector2(velocityX, body.linearVelocity.y);
         }
 
@@ -243,7 +205,7 @@ namespace Jam50033
 
         private void TryStartClimbing(ContactFilter2D filter, float size)
         {
-            int count = capsule.Cast(Vector2.right, filter, wallHits, wallProbeDistance * size);
+            int count = capsule.Cast(Vector2.right, filter, wallHits, playerMovement.wallProbeDistance * size);
             for (int i = 0; i < count; i++)
             {
                 RaycastHit2D hit = wallHits[i];
@@ -282,7 +244,7 @@ namespace Jam50033
                 {
                     topCell += Vector2Int.up;
                 }
-                else if (climbGapAllowance > 0 && bridgeCells.Contains(topCell + Vector2Int.up * 2))
+                else if (playerMovement.climbGapAllowance > 0 && bridgeCells.Contains(topCell + Vector2Int.up * 2))
                 {
                     topCell += Vector2Int.up * 2;
                 }
@@ -302,7 +264,7 @@ namespace Jam50033
                 feetTargetY -= capsule.bounds.size.y;
             }
 
-            // Once supported on top, recover toward targetX instead of chasing the scrolling wall's centre.
+            // Once supported on top, recover toward playerMovement.targetX instead of chasing the scrolling wall's centre.
             if (canStand && IsGrounded && capsule.bounds.min.y >= wallTop.y + size * 0.5f - skin)
             {
                 EndClimbing();
@@ -310,9 +272,9 @@ namespace Jam50033
             }
 
             bool aboveTop = canStand && capsule.bounds.min.y >= feetTargetY - skin * 0.5f;
-            float movementSpeed = HasUpperBodyContact() ? climbSpeed : stepSpeed;
+            float movementSpeed = HasUpperBodyContact() ? playerMovement.climbSpeed : playerMovement.stepSpeed;
             float desiredX = aboveTop ? wallTop.x : wallTop.x - size * 0.5f - capsule.bounds.extents.x - skin;
-            float horizontalLimit = aboveTop ? Mathf.Max(maxRecoverySpeed, movementSpeed) * size : float.PositiveInfinity;
+            float horizontalLimit = aboveTop ? Mathf.Max(playerMovement.maxRecoverySpeed, movementSpeed) * size : float.PositiveInfinity;
             float velocityX = Mathf.Clamp((desiredX - body.position.x) / Time.fixedDeltaTime,
                 -horizontalLimit, horizontalLimit);
             float velocityY = Mathf.Clamp((feetTargetY - capsule.bounds.min.y) / Time.fixedDeltaTime,
@@ -407,10 +369,10 @@ namespace Jam50033
         {
             bool running = movementState == MovementState.Running && IsGrounded &&
                 Mathf.Abs(stageArea.BridgeVelocity) > 0.00001f;
-            float rate = running ? 1f / Mathf.Max(0.1f, momentumBuildTime) :
-                movementState == MovementState.Climbing ? -climbMomentumDecay :
-                movementState == MovementState.Staggered ? -staggerMomentumDecay :
-                movementState == MovementState.Falling ? -fallMomentumDecay : 0f;
+            float rate = running ? 1f / Mathf.Max(0.1f, playerMovement.momentumBuildTime) :
+                movementState == MovementState.Climbing ? -playerMovement.climbMomentumDecay :
+                movementState == MovementState.Staggered ? -playerMovement.staggerMomentumDecay :
+                movementState == MovementState.Falling ? -playerMovement.fallMomentumDecay : 0f;
             momentum = Mathf.Clamp01(momentum + rate * deltaTime);
         }
 
@@ -423,11 +385,11 @@ namespace Jam50033
             }
 
             float speed = Mathf.Abs(stageArea.BridgeVelocity) / stageArea.CellSize;
-            if (speed >= fastRunStartSpeed)
+            if (speed >= playerMovement.fastRunStartSpeed)
             {
                 fastRunReady = true;
             }
-            else if (speed < fastRunStopSpeed)
+            else if (speed < playerMovement.fastRunStopSpeed)
             {
                 fastRunReady = false;
             }
@@ -438,7 +400,7 @@ namespace Jam50033
             Bounds bounds = capsule.bounds;
             float size = stageArea.CellSize;
             float halfCell = size * 0.5f;
-            float reach = wallProbeDistance * size;
+            float reach = playerMovement.wallProbeDistance * size;
             // Cover the entire upper half, including the clearance maintained beside the wall.
             foreach (Vector2Int cell in bridgeCells)
             {
@@ -470,23 +432,23 @@ namespace Jam50033
 
         private void FitToStage()
         {
-            if (stageArea == null || capsule == null || visualRoot == null || visual == null || standingSprite == null ||
+            if (stageArea == null || capsule == null || visualRoot == null || visual == null || playerMovement.standingSprite == null ||
                 stageArea.CellSize <= 0f)
             {
                 return;
             }
 
             float size = stageArea.CellSize;
-            float height = heightInCells * size;
-            float colliderHeight = Mathf.Max(Mathf.Min(widthInCells, heightInCells), heightInCells - headClearance) * size;
-            Vector2 colliderSize = new Vector2(Mathf.Min(widthInCells, heightInCells) * size, colliderHeight);
+            float height = playerMovement.heightInCells * size;
+            float colliderHeight = Mathf.Max(Mathf.Min(playerMovement.widthInCells, playerMovement.heightInCells), playerMovement.heightInCells - playerMovement.headClearance) * size;
+            Vector2 colliderSize = new Vector2(Mathf.Min(playerMovement.widthInCells, playerMovement.heightInCells) * size, colliderHeight);
             if (capsule.size != colliderSize)
             {
                 capsule.size = colliderSize;
             }
             capsule.offset = Vector2.up * (colliderHeight * 0.5f);
 
-            float scale = height / standingSprite.bounds.size.y;
+            float scale = height / playerMovement.standingSprite.bounds.size.y;
             visualRoot.localScale = Vector3.one * scale;
             if (visual.sprite != null)
             {
@@ -498,19 +460,6 @@ namespace Jam50033
 
         private void OnValidate()
         {
-            fastRunStartSpeed = Mathf.Max(0.01f, fastRunStartSpeed);
-            fastRunStopSpeed = Mathf.Clamp(fastRunStopSpeed, 0f, fastRunStartSpeed - 0.01f);
-            heightInCells = Mathf.Max(0.1f, heightInCells);
-            widthInCells = Mathf.Clamp(widthInCells, 0.1f, heightInCells);
-            headClearance = Mathf.Clamp(headClearance, 0f, heightInCells - widthInCells);
-            followStrength = Mathf.Max(0f, followStrength);
-            maxRecoverySpeed = Mathf.Max(0f, maxRecoverySpeed);
-            groundProbeDistance = Mathf.Max(0.001f, groundProbeDistance);
-            climbSpeed = Mathf.Max(0.1f, climbSpeed);
-            stepSpeed = Mathf.Max(0.1f, stepSpeed);
-            wallProbeDistance = Mathf.Clamp(wallProbeDistance, 0.01f, 0.5f);
-            staggerFallDistance = Mathf.Max(0.1f, staggerFallDistance);
-            staggerDuration = Mathf.Max(0.01f, staggerDuration);
             FitToStage();
         }
     }

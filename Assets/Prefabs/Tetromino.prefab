@@ -48,24 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523511991812f77eca870846ac1d262d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Tetromino
+  gameplaySettings: {fileID: 11400000, guid: dfbe9b2acec748abea94d3ca9368def3, type: 2}
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
   shape: 2
-  relativeMoveSpeed: 1.5
-  speedUpMultiplier: 20
-  hardDropKey: 1
-  ghostOpacity: 0.4
-  invalidGhostColor: {r: 0.64705884, g: 0.11372549, b: 0.20784314, a: 1}
-  rejectShakeDuration: 0.12
-  rejectShakeStrength: 0.1
-  rejectShakeFrequency: 8
-  verticalRepeatDelay: 0.16
-  verticalRepeatInterval: 0.04
-  iColor: {r: 0.15686275, g: 0.78431374, b: 0.8745098, a: 1}
-  oColor: {r: 0.9137255, g: 0.78431374, b: 0.25882354, a: 1}
-  tColor: {r: 0.6509804, g: 0.41568628, b: 0.8901961, a: 1}
-  sColor: {r: 0.3372549, g: 0.78039217, b: 0.46666667, a: 1}
-  zColor: {r: 0.93333334, g: 0.48235294, b: 0.50980395, a: 1}
-  jColor: {r: 0.32156864, g: 0.48235294, b: 0.85490197, a: 1}
-  lColor: {r: 0.9137255, g: 0.6039216, b: 0.2784314, a: 1}
   stageArea: {fileID: 0}
   bricks:
   - {fileID: 798040727996638278}

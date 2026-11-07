@@ -8,23 +8,11 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class CoinScoreAnimation : MonoBehaviour
     {
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly VisualSettings.CoinFlightData defaultVisualCoinFlight = new();
+        private VisualSettings.CoinFlightData visualCoinFlight => visualSettings != null ? visualSettings.coinFlight : defaultVisualCoinFlight;
         [SerializeField] private RectTransform effectLayer;
         [SerializeField] private RectTransform scoreTarget;
-        [SerializeField] private Image flyingCoinPrefab;
-        [SerializeField, Min(0.05f)] private float flightDuration = 0.5f;
-        [SerializeField, Min(0f), Tooltip("Curve bend in Canvas units.")]
-        private float curvature = 100f;
-        [SerializeField] private AnimationCurve flightProgress = new AnimationCurve(
-            new Keyframe(0f, 0f, 0f, 0f), new Keyframe(1f, 1f, 3f, 3f));
-        [SerializeField, Range(0f, 1f)] private float arrivalScale = 0.1f;
-        [Header("Counter Feedback")]
-        [SerializeField, Min(0f)] private float pulseStrength = 0.15f;
-        [SerializeField, Min(0.01f)] private float pulseDuration = 0.18f;
-        [SerializeField, Min(0.05f)] private float popupDuration = 0.55f;
-        [SerializeField] private Vector2 popupOffset = new Vector2(90f, 0f);
-        [SerializeField, Min(0f)] private float popupRise = 40f;
-        [SerializeField, Min(1)] private int popupFontSize = 26;
-        [SerializeField] private Color popupColor = new Color(1f, 0.85f, 0.4f);
 
         private sealed class Flight
         {
@@ -63,14 +51,14 @@ namespace Jam50033
         {
             Camera camera = Camera.main;
             if (!isActiveAndEnabled || canvas == null || effectLayer == null || scoreTarget == null ||
-                flyingCoinPrefab == null || camera == null || frames == null || frames.Length == 0)
+                visualCoinFlight.flyingCoinPrefab == null || camera == null || frames == null || frames.Length == 0)
             {
                 return false;
             }
 
             Vector3 screen = camera.WorldToScreenPoint(worldPosition);
             Vector3 top = camera.WorldToScreenPoint(worldPosition + camera.transform.up * worldHeight);
-            Image image = Instantiate(flyingCoinPrefab, effectLayer);
+            Image image = Instantiate(visualCoinFlight.flyingCoinPrefab, effectLayer);
             image.raycastTarget = false;
             image.rectTransform.sizeDelta = Vector2.one * Mathf.Abs(top.y - screen.y) / canvas.scaleFactor;
             image.sprite = frames[Mathf.FloorToInt(Time.time * fps) % frames.Length];
@@ -79,7 +67,7 @@ namespace Jam50033
             {
                 image = image, frames = frames, fps = fps, spinStart = Time.time,
                 viewportStart = new Vector2(screen.x / Screen.width, screen.y / Screen.height),
-                bend = curvature * UnityEngine.Random.Range(0.7f, 1.3f) *
+                bend = visualCoinFlight.curvature * UnityEngine.Random.Range(0.7f, 1.3f) *
                     (UnityEngine.Random.value < 0.5f ? -1f : 1f),
                 points = points, arrived = arrived
             });
@@ -107,8 +95,8 @@ namespace Jam50033
             {
                 Flight flight = flights[i];
                 flight.elapsed += delta;
-                float t = Mathf.Clamp01(flight.elapsed / flightDuration);
-                float progress = Mathf.Clamp01(flightProgress.Evaluate(t));
+                float t = Mathf.Clamp01(flight.elapsed / visualCoinFlight.flightDuration);
+                float progress = Mathf.Clamp01(visualCoinFlight.flightProgress.Evaluate(t));
                 Vector2 start = ScreenToLocal(new Vector2(flight.viewportStart.x * Screen.width,
                     flight.viewportStart.y * Screen.height));
                 Vector2 end = TargetPosition();
@@ -117,7 +105,7 @@ namespace Jam50033
                 flight.image.rectTransform.anchoredPosition = (1f - progress) * (1f - progress) * start +
                     2f * (1f - progress) * progress * control + progress * progress * end;
                 flight.image.rectTransform.localScale = Vector3.one *
-                    Mathf.Lerp(1f, arrivalScale, Mathf.InverseLerp(0.75f, 1f, progress));
+                    Mathf.Lerp(1f, visualCoinFlight.arrivalScale, Mathf.InverseLerp(0.75f, 1f, progress));
                 flight.image.sprite = flight.frames[Mathf.FloorToInt(
                     (flight.spinStart + flight.elapsed) * flight.fps) % flight.frames.Length];
                 if (t >= 1f)
@@ -126,7 +114,7 @@ namespace Jam50033
                     Destroy(flight.image.gameObject);
                     flight.arrived();
                     ShowPopup(flight.points);
-                    pulseRemaining = pulseDuration;
+                    pulseRemaining = visualCoinFlight.pulseDuration;
                 }
             }
 
@@ -134,9 +122,9 @@ namespace Jam50033
             {
                 Popup popup = popups[i];
                 popup.elapsed += delta;
-                float t = Mathf.Clamp01(popup.elapsed / popupDuration);
-                popup.text.rectTransform.anchoredPosition = TargetPosition() + popupOffset + Vector2.up * popupRise * t;
-                Color color = popupColor;
+                float t = Mathf.Clamp01(popup.elapsed / visualCoinFlight.popupDuration);
+                popup.text.rectTransform.anchoredPosition = TargetPosition() + visualCoinFlight.popupOffset + Vector2.up * visualCoinFlight.popupRise * t;
+                Color color = visualCoinFlight.popupColor;
                 color.a *= 1f - t;
                 popup.text.color = color;
                 if (t >= 1f)
@@ -149,8 +137,8 @@ namespace Jam50033
             if (scoreTarget != null)
             {
                 pulseRemaining = Mathf.Max(0f, pulseRemaining - delta);
-                float pulse = Mathf.Sin(Mathf.PI * pulseRemaining / pulseDuration);
-                scoreTarget.localScale = originalTargetScale * (1f + pulseStrength * pulse);
+                float pulse = Mathf.Sin(Mathf.PI * pulseRemaining / visualCoinFlight.pulseDuration);
+                scoreTarget.localScale = originalTargetScale * (1f + visualCoinFlight.pulseStrength * pulse);
             }
         }
 
@@ -161,13 +149,13 @@ namespace Jam50033
             go.transform.SetParent(effectLayer, false);
             Text text = go.GetComponent<Text>();
             text.font = style != null ? style.font : null;
-            text.fontSize = popupFontSize;
+            text.fontSize = visualCoinFlight.popupFontSize;
             text.alignment = TextAnchor.MiddleLeft;
-            text.color = popupColor;
+            text.color = visualCoinFlight.popupColor;
             text.text = $"+{points}";
             text.raycastTarget = false;
             text.rectTransform.sizeDelta = new Vector2(160f, 60f);
-            text.rectTransform.anchoredPosition = TargetPosition() + popupOffset;
+            text.rectTransform.anchoredPosition = TargetPosition() + visualCoinFlight.popupOffset;
             popups.Add(new Popup { text = text });
         }
 

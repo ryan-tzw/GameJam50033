@@ -141,15 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1ffbe8b33491d95ff2c8029b27afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.CoinPickup
-  frames:
-  - {fileID: -8122072913242413145, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: 5482534129934867081, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: 6147009091084832796, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: 1428355629503184229, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: -8846451017778197667, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: -4519656132449830103, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: -5174588625549116208, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  - {fileID: -399705649, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
-  framesPerSecond: 8
-  sizeInTiles: 0.8
-  points: 50
+  gameplaySettings: {fileID: 11400000, guid: dfbe9b2acec748abea94d3ca9368def3, type: 2}
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}

@@ -7,11 +7,10 @@ namespace Jam50033
     [RequireComponent(typeof(Camera))]
     public sealed class ScreenShake : MonoBehaviour
     {
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly VisualSettings.CameraShakeData defaultVisualCameraShake = new();
+        private VisualSettings.CameraShakeData visualCameraShake => visualSettings != null ? visualSettings.cameraShake : defaultVisualCameraShake;
         [SerializeField] private StageArea stageArea;
-        [SerializeField, Min(0f), Tooltip("Maximum camera shake offset in stage cells.")]
-        private float strength = 0.08f;
-        [SerializeField, Min(0.01f)] private float duration = 0.12f;
-        [SerializeField, Min(1f)] private float frequency = 30f;
 
         private Camera targetCamera;
         private float elapsed;
@@ -28,7 +27,7 @@ namespace Jam50033
 
         public void Play()
         {
-            if (!isActiveAndEnabled || stageArea == null || strength <= 0f)
+            if (!isActiveAndEnabled || stageArea == null || visualCameraShake.strength <= 0f)
             {
                 return;
             }
@@ -45,9 +44,9 @@ namespace Jam50033
             }
 
             elapsed += Time.unscaledDeltaTime;
-            float progress = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, duration));
-            float amplitude = strength * stageArea.CellSize * (1f - progress) * (1f - progress);
-            float phase = elapsed * frequency * Mathf.PI * 2f;
+            float progress = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, visualCameraShake.duration));
+            float amplitude = visualCameraShake.strength * stageArea.CellSize * (1f - progress) * (1f - progress);
+            float phase = elapsed * visualCameraShake.frequency * Mathf.PI * 2f;
             offset = new Vector2(Mathf.Sin(phase), Mathf.Cos(phase * 0.83f)) * amplitude;
             if (progress >= 1f)
             {

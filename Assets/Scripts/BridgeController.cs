@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Jam50033
 {
@@ -8,23 +7,15 @@ namespace Jam50033
     [RequireComponent(typeof(Rigidbody2D))]
     public sealed class BridgeController : MonoBehaviour
     {
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.BridgeData defaultGameplayBridge = new();
+        private GameplaySettings.BridgeData gameplayBridge => gameplaySettings != null ? gameplaySettings.bridge : defaultGameplayBridge;
+        private static readonly VisualSettings.BridgeGizmosData defaultVisualBridgeGizmos = new();
+        private VisualSettings.BridgeGizmosData visualBridgeGizmos => visualSettings != null ? visualSettings.bridgeGizmos : defaultVisualBridgeGizmos;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private PlayerController player;
         [SerializeField] private RunDifficulty difficulty;
-        [FormerlySerializedAs("bridgeSpeed")]
-        [SerializeField, Min(0f), Tooltip("Normal leftward speed in stage cells per second.")]
-        private float baseSpeed = 0.5f;
-        [SerializeField, Min(0f), Tooltip("Maximum leftward speed when the bridge extends far ahead, in cells per second.")]
-        private float maxSpeed = 3f;
-        [SerializeField, InspectorName("Speed Up Start X"), Tooltip("Fixed X relative to the stage centre, in Unity units. Acceleration starts when the bridge's right edge passes this line.")]
-        private float lowerLeadThreshold = 0f;
-        [SerializeField, InspectorName("Maximum Speed X"), Tooltip("Fixed X relative to the stage centre, in Unity units. The target speed reaches maximum when the bridge's right edge reaches this line.")]
-        private float upperLeadThreshold = 4f;
-        [SerializeField, Min(0.01f), Tooltip("Approximate time in seconds to approach the target scrolling speed.")]
-        private float smoothingTime = 1f;
-        [Header("Threshold Gizmos")]
-        [SerializeField] private Color lowerThresholdColor = new Color(1f, 0.85f, 0.1f, 0.8f);
-        [SerializeField] private Color upperThresholdColor = new Color(1f, 0.25f, 0.2f, 0.8f);
 
         private float distanceInCells;
         private float currentSpeed;
@@ -39,7 +30,7 @@ namespace Jam50033
             Rigidbody2D body = GetComponent<Rigidbody2D>();
             body.bodyType = RigidbodyType2D.Kinematic;
             body.gravityScale = 0f;
-            currentSpeed = baseSpeed;
+            currentSpeed = gameplayBridge.baseSpeed;
         }
 
         private void Update()
@@ -54,8 +45,8 @@ namespace Jam50033
             multiplier *= player != null && player.isActiveAndEnabled ? player.MomentumSpeedMultiplier : 1f;
             float targetSpeed = GetTargetSpeed() * multiplier;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity,
-                smoothingTime, Mathf.Infinity, Time.deltaTime);
-            currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed * multiplier, Mathf.Max(baseSpeed, maxSpeed) * multiplier);
+                gameplayBridge.smoothingTime, Mathf.Infinity, Time.deltaTime);
+            currentSpeed = Mathf.Clamp(currentSpeed, gameplayBridge.baseSpeed * multiplier, Mathf.Max(gameplayBridge.baseSpeed, gameplayBridge.maxSpeed) * multiplier);
             distanceInCells += currentSpeed * Time.deltaTime;
             float nextOffset = -distanceInCells * stageArea.CellSize;
             FrameDisplacement = nextOffset - Offset;
@@ -68,11 +59,11 @@ namespace Jam50033
             if (player == null || !player.isActiveAndEnabled || !player.IsGrounded ||
                 player.State != PlayerController.MovementState.Running)
             {
-                return baseSpeed;
+                return gameplayBridge.baseSpeed;
             }
 
-            float blend = Mathf.InverseLerp(lowerLeadThreshold, upperLeadThreshold, GetBridgeRightEdgeX());
-            return Mathf.Lerp(baseSpeed, Mathf.Max(baseSpeed, maxSpeed), blend);
+            float blend = Mathf.InverseLerp(gameplayBridge.lowerLeadThreshold, gameplayBridge.upperLeadThreshold, GetBridgeRightEdgeX());
+            return Mathf.Lerp(gameplayBridge.baseSpeed, Mathf.Max(gameplayBridge.baseSpeed, gameplayBridge.maxSpeed), blend);
         }
 
         private float GetBridgeRightEdgeX()
@@ -117,8 +108,8 @@ namespace Jam50033
             Matrix4x4 previousMatrix = Gizmos.matrix;
             Color previousColor = Gizmos.color;
             Gizmos.matrix = stageArea.transform.localToWorldMatrix;
-            DrawThresholdLine(lowerLeadThreshold, lowerThresholdColor);
-            DrawThresholdLine(upperLeadThreshold, upperThresholdColor);
+            DrawThresholdLine(gameplayBridge.lowerLeadThreshold, visualBridgeGizmos.lowerThresholdColor);
+            DrawThresholdLine(gameplayBridge.upperLeadThreshold, visualBridgeGizmos.upperThresholdColor);
             Gizmos.matrix = previousMatrix;
             Gizmos.color = previousColor;
         }
@@ -130,12 +121,5 @@ namespace Jam50033
             Gizmos.DrawLine(new Vector3(x, -halfHeight, 0f), new Vector3(x, halfHeight, 0f));
         }
 
-        private void OnValidate()
-        {
-            baseSpeed = Mathf.Max(0f, baseSpeed);
-            maxSpeed = Mathf.Max(baseSpeed, maxSpeed);
-            upperLeadThreshold = Mathf.Max(lowerLeadThreshold + 0.01f, upperLeadThreshold);
-            smoothingTime = Mathf.Max(0.01f, smoothingTime);
-        }
     }
 }

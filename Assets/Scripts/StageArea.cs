@@ -7,24 +7,26 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class StageArea : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int columns = 20;
-        [SerializeField, Min(1)] private int rows = 10;
-        [SerializeField, Min(0f)] private float screenPadding = 0.5f;
-        [SerializeField, Range(0.01f, 0.1f)] private float lineWidth = 0.05f;
-        [SerializeField, Range(0f, 1f)] private float outlineOpacity = 0.25f;
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.StageData defaultGameplayStage = new();
+        private GameplaySettings.StageData gameplayStage => gameplaySettings != null ? gameplaySettings.stage : defaultGameplayStage;
+        private static readonly VisualSettings.StageOutlineData defaultVisualStageOutline = new();
+        private VisualSettings.StageOutlineData visualStageOutline => visualSettings != null ? visualSettings.stageOutline : defaultVisualStageOutline;
+
         [SerializeField] private LineRenderer topOutline;
         [SerializeField] private LineRenderer rightOutline;
         [SerializeField] private LineRenderer bottomOutline;
         [SerializeField] private LineRenderer leftOutline;
         [SerializeField] private BridgeController bridge;
 
-        private const float DashLength = 0.2f;
+        private float DashLength => visualStageOutline.dashLength;
 
         private Material outlineMaterial;
         private Texture2D dashTexture;
 
-        public int Columns => columns;
-        public int Rows => rows;
+        public int Columns => gameplayStage.columns;
+        public int Rows => gameplayStage.rows;
         public Transform BridgeRoot => bridge != null ? bridge.transform : null;
         public float BridgeOffset => bridge != null ? bridge.Offset : 0f;
         public float BridgeFrameDisplacement => bridge != null && bridge.isActiveAndEnabled ? bridge.FrameDisplacement : 0f;
@@ -34,8 +36,8 @@ namespace Jam50033
         {
             float size = CellSize;
             return transform.TransformPoint(new Vector3(
-                (cell.x + 0.5f - columns * 0.5f) * size + BridgeOffset,
-                (cell.y + 0.5f - rows * 0.5f) * size, 0f));
+                (cell.x + 0.5f - gameplayStage.columns * 0.5f) * size + BridgeOffset,
+                (cell.y + 0.5f - gameplayStage.rows * 0.5f) * size, 0f));
         }
 
         public Vector2Int WorldPositionToCell(Vector3 worldPosition)
@@ -50,8 +52,8 @@ namespace Jam50033
             position.x -= BridgeOffset;
             position /= size;
             return new Vector2Int(
-                Mathf.RoundToInt(position.x + columns * 0.5f - 0.5f),
-                Mathf.RoundToInt(position.y + rows * 0.5f - 0.5f));
+                Mathf.RoundToInt(position.x + gameplayStage.columns * 0.5f - 0.5f),
+                Mathf.RoundToInt(position.y + gameplayStage.rows * 0.5f - 0.5f));
         }
 
         public float CellSize
@@ -66,9 +68,9 @@ namespace Jam50033
 
                 float visibleHeight = mainCamera.orthographicSize * 2f;
                 float visibleWidth = visibleHeight * mainCamera.aspect;
-                float availableWidth = Mathf.Max(0.01f, visibleWidth - screenPadding * 2f);
-                float availableHeight = Mathf.Max(0.01f, visibleHeight - screenPadding * 2f);
-                return Mathf.Min(availableWidth / columns, availableHeight / rows);
+                float availableWidth = Mathf.Max(0.01f, visibleWidth - gameplayStage.screenPadding * 2f);
+                float availableHeight = Mathf.Max(0.01f, visibleHeight - gameplayStage.screenPadding * 2f);
+                return Mathf.Min(availableWidth / gameplayStage.columns, availableHeight / gameplayStage.rows);
             }
         }
 
@@ -80,17 +82,12 @@ namespace Jam50033
 
         private void Update()
         {
+            PrepareOutline();
             DrawOutline();
         }
 
         private void OnValidate()
         {
-            columns = Mathf.Max(1, columns);
-            rows = Mathf.Max(1, rows);
-            screenPadding = Mathf.Max(0f, screenPadding);
-            lineWidth = Mathf.Max(0.01f, lineWidth);
-            outlineOpacity = Mathf.Clamp01(outlineOpacity);
-
             if (!isActiveAndEnabled)
             {
                 return;
@@ -124,9 +121,9 @@ namespace Jam50033
             outline.loop = false;
             outline.useWorldSpace = false;
             outline.positionCount = 2;
-            outline.startWidth = lineWidth;
-            outline.endWidth = lineWidth;
-            Color outlineColor = new(1f, 1f, 1f, outlineOpacity);
+            outline.startWidth = visualStageOutline.lineWidth;
+            outline.endWidth = visualStageOutline.lineWidth;
+            Color outlineColor = new(1f, 1f, 1f, visualStageOutline.outlineOpacity);
             outline.startColor = outlineColor;
             outline.endColor = outlineColor;
             outline.textureMode = LineTextureMode.Tile;
@@ -151,8 +148,8 @@ namespace Jam50033
             }
 
             float cellSize = CellSize;
-            float halfWidth = columns * cellSize * 0.5f;
-            float halfHeight = rows * cellSize * 0.5f;
+            float halfWidth = gameplayStage.columns * cellSize * 0.5f;
+            float halfHeight = gameplayStage.rows * cellSize * 0.5f;
 
             topOutline.SetPosition(0, new Vector3(-halfWidth, halfHeight, 0f));
             topOutline.SetPosition(1, new Vector3(halfWidth, halfHeight, 0f));

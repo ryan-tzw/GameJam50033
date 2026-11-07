@@ -8,15 +8,12 @@ namespace Jam50033
     [RequireComponent(typeof(StageArea))]
     public sealed class PlacementEntryZone : MonoBehaviour
     {
-        [SerializeField, Min(0f), Tooltip("Width of the entry zone, measured in tiles inward from the stage's right edge. Larger values move the threshold left.")]
-        private float tilesFromRight = 5f;
-        [SerializeField] private Color color = new Color(0.85f, 0.85f, 1f, 1f);
-        [SerializeField, Range(0f, 1f)] private float fillOpacity = 0.035f;
-        [SerializeField, Range(0f, 1f)] private float outlineOpacity = 0.25f;
-        [SerializeField, Min(0.001f), Tooltip("Outline thickness in cells.")]
-        private float lineWidth = 0.04f;
-        [SerializeField, Min(0.01f), Tooltip("Dash length and gap in cells.")]
-        private float dashLength = 0.35f;
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.EntryZoneData defaultGameplayEntryZone = new();
+        private GameplaySettings.EntryZoneData gameplayEntryZone => gameplaySettings != null ? gameplaySettings.entryZone : defaultGameplayEntryZone;
+        private static readonly VisualSettings.EntryZoneData defaultVisualEntryZone = new();
+        private VisualSettings.EntryZoneData visualEntryZone => visualSettings != null ? visualSettings.entryZone : defaultVisualEntryZone;
 
         private StageArea stage;
         private GameObject visual;
@@ -30,7 +27,7 @@ namespace Jam50033
         private readonly List<Color> colors = new();
 
         private float PlacementRightX => (stage.Columns * 0.5f -
-            Mathf.Clamp(tilesFromRight, 0f, stage.Columns)) * stage.CellSize;
+            Mathf.Clamp(gameplayEntryZone.tilesFromRight, 0f, stage.Columns)) * stage.CellSize;
 
         public bool IsActivePlacementPosition(Vector3 worldPosition)
         {
@@ -75,23 +72,23 @@ namespace Jam50033
             float left = PlacementRightX;
             float halfHeight = stage.Rows * size * 0.5f;
             Vector4 geometry = new Vector4(left, right, halfHeight, size);
-            Vector3 style = new Vector3(fillOpacity, outlineOpacity, lineWidth);
-            if (!force && geometry == previousGeometry && color == previousColor && style == previousStyle &&
-                previousDashLength == dashLength)
+            Vector3 style = new Vector3(visualEntryZone.fillOpacity, visualEntryZone.outlineOpacity, visualEntryZone.lineWidth);
+            if (!force && geometry == previousGeometry && visualEntryZone.color == previousColor && style == previousStyle &&
+                previousDashLength == visualEntryZone.dashLength)
             {
                 return;
             }
 
             previousGeometry = geometry;
-            previousColor = color;
+            previousColor = visualEntryZone.color;
             previousStyle = style;
-            previousDashLength = dashLength;
+            previousDashLength = visualEntryZone.dashLength;
             vertices.Clear();
             triangles.Clear();
             colors.Clear();
             if (right > left)
             {
-                Color fill = new Color(color.r, color.g, color.b, fillOpacity);
+                Color fill = new Color(visualEntryZone.color.r, visualEntryZone.color.g, visualEntryZone.color.b, visualEntryZone.fillOpacity);
                 AddQuad(new Vector2(left, -halfHeight), new Vector2(right, -halfHeight),
                     new Vector2(right, halfHeight), new Vector2(left, halfHeight), fill);
                 Vector2 bottomLeft = new Vector2(left, -halfHeight);
@@ -117,9 +114,9 @@ namespace Jam50033
         {
             float length = Vector2.Distance(start, end);
             Vector2 direction = (end - start).normalized;
-            Vector2 normal = new Vector2(-direction.y, direction.x) * (lineWidth * size * 0.5f);
-            float dash = Mathf.Max(0.01f, dashLength) * size;
-            Color outline = new Color(color.r, color.g, color.b, outlineOpacity);
+            Vector2 normal = new Vector2(-direction.y, direction.x) * (visualEntryZone.lineWidth * size * 0.5f);
+            float dash = Mathf.Max(0.01f, visualEntryZone.dashLength) * size;
+            Color outline = new Color(visualEntryZone.color.r, visualEntryZone.color.g, visualEntryZone.color.b, visualEntryZone.outlineOpacity);
             for (float distance = 0f; distance < length; distance += dash * 2f)
             {
                 Vector2 a = start + direction * distance;

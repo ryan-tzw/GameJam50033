@@ -168,17 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642732c25b774979b69d4e822a3858d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.HazardBrickVisuals
-  hazardMaterial: {fileID: 2100000, guid: 338b1034b8f19b68c815e5b72ba991ea, type: 2}
-  baseColor: {r: 0.9019608, g: 0.3607843, b: 0.3882353, a: 1}
-  outlineColor: {r: 1, g: 0.45, b: 0.08, a: 1}
-  outlineWidth: 0.055
-  minimumBrightness: 1.25
-  maximumBrightness: 3.5
-  pulseSpeed: 1.5
-  symbolSize: 1
-  symbolColor: {r: 1, g: 0.448, b: 0.07999998, a: 1}
-  exclamationColor: {r: 0.03, g: 0.015, b: 0.02, a: 1}
-  hitFlashDuration: 0.5
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
   originalMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
 --- !u!114 &8607296319960128849
 MonoBehaviour:

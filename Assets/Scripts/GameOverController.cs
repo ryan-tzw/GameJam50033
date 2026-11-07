@@ -9,11 +9,13 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class GameOverController : MonoBehaviour
     {
+        [SerializeField] private PlayerSettings playerSettings;
+        private static readonly PlayerSettings.FallDeathData defaultPlayerFallDeath = new();
+        private PlayerSettings.FallDeathData playerFallDeath => playerSettings != null ? playerSettings.fallDeath : defaultPlayerFallDeath;
         [SerializeField] private PlayerController player;
         [SerializeField] private RunScore runScore;
         [SerializeField] private Camera gameplayCamera;
-        [SerializeField, Min(0f), Tooltip("Extra distance below the camera, in world units, before the run ends.")]
-        private float fallMargin = 0.25f;
+
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
@@ -51,7 +53,7 @@ namespace Jam50033
 
             float depth = gameplayCamera.WorldToViewportPoint(player.transform.position).z;
             float screenBottom = gameplayCamera.ViewportToWorldPoint(new Vector3(0.5f, 0f, depth)).y;
-            if (playerCollider.bounds.max.y >= screenBottom - fallMargin)
+            if (playerCollider.bounds.max.y >= screenBottom - playerFallDeath.fallMargin)
             {
                 return;
             }

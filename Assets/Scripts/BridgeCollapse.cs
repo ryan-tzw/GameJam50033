@@ -7,31 +7,13 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class BridgeCollapse : MonoBehaviour
     {
+        [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly GameplaySettings.CollapseData defaultGameplayCollapse = new();
+        private GameplaySettings.CollapseData gameplayCollapse => gameplaySettings != null ? gameplaySettings.collapse : defaultGameplayCollapse;
+        private static readonly VisualSettings.CollapseGizmosData defaultVisualCollapseGizmos = new();
+        private VisualSettings.CollapseGizmosData visualCollapseGizmos => visualSettings != null ? visualSettings.collapseGizmos : defaultVisualCollapseGizmos;
         [SerializeField] private StageArea stageArea;
-        [SerializeField, Tooltip("X relative to the stage centre, in Unity units. Shaking starts when the piece's right edge reaches this line.")]
-        private float warningX = -5.65f;
-        [SerializeField, Tooltip("X relative to the stage centre, in Unity units. The piece falls when its right edge reaches this line. Must be left of Warning X.")]
-        private float collapseX = -7.27f;
-        [SerializeField, Min(0f), Tooltip("Seconds after the run starts before bridge shaking and collapse can begin.")]
-        private float initialCollapseDelay = 2f;
-        [SerializeField] private Color warningThresholdColor = new Color(1f, 0.85f, 0.1f, 0.8f);
-        [SerializeField] private Color thresholdColor = new Color(1f, 0.5f, 0.2f, 0.8f);
-        [Header("Warning Shake")]
-        [SerializeField, Min(0f), Tooltip("Visual displacement at the warning line, in cells. Colliders stay still.")]
-        private float initialShakeStrength = 0.01f;
-        [SerializeField, Min(0f), Tooltip("Maximum visual displacement at the collapse line, in cells.")]
-        private float shakeStrength = 0.06f;
-        [SerializeField, Min(0f), Tooltip("Shake cycles per second.")]
-        private float shakeFrequency = 25f;
-        [Header("Falling Tiles")]
-        [SerializeField, Min(0.01f), Tooltip("Downward acceleration in cells per second squared.")]
-        private float gravity = 30f;
-        [SerializeField, Min(0f), Tooltip("Initial downward speed in cells per second.")]
-        private float fallSpeed = 1.5f;
-        [SerializeField, Min(0f), Tooltip("Maximum random horizontal speed in cells per second.")]
-        private float horizontalDrift = 0.7f;
-        [SerializeField, Min(0f), Tooltip("Maximum random spin in degrees per second.")]
-        private float rotationSpeed = 120f;
 
         private sealed class Warning
         {
@@ -58,7 +40,7 @@ namespace Jam50033
 
         private void Awake()
         {
-            collapseDelayRemaining = initialCollapseDelay;
+            collapseDelayRemaining = gameplayCollapse.initialCollapseDelay;
         }
 
         private void LateUpdate()
@@ -118,7 +100,7 @@ namespace Jam50033
                 }
 
                 Brick[] bricks = owner != null ? owner.GetComponentsInChildren<Brick>() : new[] { brick };
-                if (GetRightEdgeX(bricks) > warningX)
+                if (GetRightEdgeX(bricks) > gameplayCollapse.warningX)
                 {
                     continue;
                 }
@@ -190,9 +172,9 @@ namespace Jam50033
                 warning.Elapsed += Time.deltaTime;
                 float rightEdge = GetRightEdgeX(warning.Bricks);
                 // Shake strength follows distance to collapse, rather than a countdown.
-                float progress = Mathf.InverseLerp(warningX, collapseX, rightEdge);
-                float strength = Mathf.Lerp(initialShakeStrength, shakeStrength, progress);
-                float phase = warning.Elapsed * shakeFrequency * Mathf.PI * 2f + warning.Phase;
+                float progress = Mathf.InverseLerp(gameplayCollapse.warningX, gameplayCollapse.collapseX, rightEdge);
+                float strength = Mathf.Lerp(gameplayCollapse.initialShakeStrength, gameplayCollapse.shakeStrength, progress);
+                float phase = warning.Elapsed * gameplayCollapse.shakeFrequency * Mathf.PI * 2f + warning.Phase;
                 Vector3 offset = stageArea.transform.TransformVector(new Vector3(
                     Mathf.Sin(phase), Mathf.Cos(phase * 1.3f), 0f) * (strength * stageArea.CellSize));
 
@@ -204,7 +186,7 @@ namespace Jam50033
                     }
                 }
 
-                if (rightEdge > collapseX)
+                if (rightEdge > gameplayCollapse.collapseX)
                 {
                     continue;
                 }
@@ -225,8 +207,8 @@ namespace Jam50033
                     fallingTiles.Add(new FallingTile
                     {
                         Visual = visual,
-                        Velocity = new Vector3(Random.Range(-horizontalDrift, horizontalDrift), -fallSpeed, 0f) * stageArea.CellSize,
-                        Spin = Random.Range(-rotationSpeed, rotationSpeed)
+                        Velocity = new Vector3(Random.Range(-gameplayCollapse.horizontalDrift, gameplayCollapse.horizontalDrift), -gameplayCollapse.fallSpeed, 0f) * stageArea.CellSize,
+                        Spin = Random.Range(-gameplayCollapse.rotationSpeed, gameplayCollapse.rotationSpeed)
                     });
                 }
 
@@ -252,7 +234,7 @@ namespace Jam50033
                     continue;
                 }
 
-                tile.Velocity.y -= gravity * stageArea.CellSize * Time.deltaTime;
+                tile.Velocity.y -= gameplayCollapse.gravity * stageArea.CellSize * Time.deltaTime;
                 tile.Visual.transform.position += tile.Velocity * Time.deltaTime;
                 tile.Visual.transform.Rotate(0f, 0f, tile.Spin * Time.deltaTime);
 
@@ -310,8 +292,8 @@ namespace Jam50033
             }
 
             Color previousColor = Gizmos.color;
-            DrawThresholdLine(warningX, warningThresholdColor);
-            DrawThresholdLine(collapseX, thresholdColor);
+            DrawThresholdLine(gameplayCollapse.warningX, visualCollapseGizmos.warningThresholdColor);
+            DrawThresholdLine(gameplayCollapse.collapseX, visualCollapseGizmos.thresholdColor);
             Gizmos.color = previousColor;
         }
 
@@ -323,12 +305,5 @@ namespace Jam50033
                 stageArea.transform.TransformPoint(new Vector3(threshold, halfHeight, 0f)));
         }
 
-        private void OnValidate()
-        {
-            collapseX = Mathf.Min(collapseX, warningX - 0.01f);
-            initialCollapseDelay = Mathf.Max(0f, initialCollapseDelay);
-            initialShakeStrength = Mathf.Max(0f, initialShakeStrength);
-            shakeStrength = Mathf.Max(initialShakeStrength, shakeStrength);
-        }
     }
 }

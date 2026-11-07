@@ -6,36 +6,25 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class CoinSpawner : MonoBehaviour
     {
+        [SerializeField] private SpawnSettings spawnSettings;
+        private static readonly SpawnSettings.CoinsData defaultSpawnCoins = new();
+        private SpawnSettings.CoinsData spawnCoins => spawnSettings != null ? spawnSettings.coins : defaultSpawnCoins;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private RunScore runScore;
-        [SerializeField] private CoinPickup coinPrefab;
-        [SerializeField, Min(0f)] private float initialDelay = 1f;
-        [SerializeField, Min(0.1f)] private float minimumSpawnInterval = 3f;
-        [SerializeField, Min(0.1f)] private float maximumSpawnInterval = 5f;
-        [SerializeField, Min(0)] private int minimumSpawnRow = 3;
-        [SerializeField, Min(0)] private int maximumSpawnRow = 12;
-        [SerializeField, Min(0f), Tooltip("Distance beyond the camera's right edge, in tiles.")]
-        private float spawnOffset = 2f;
-        [Header("Pattern Weights (relative frequencies)")]
-        [SerializeField, Min(0f)] private float lineWeight = 50f;
-        [SerializeField, Min(0f)] private float singleOrPairWeight = 25f;
-        [SerializeField, Min(0f)] private float tetrominoWeight = 15f;
-        [SerializeField, Min(1)] private int minimumLineLength = 3;
-        [SerializeField, Min(1)] private int maximumLineLength = 6;
 
         private float spawnRemaining;
         private readonly List<Vector2Int> pattern = new();
 
         private void Start()
         {
-            if (stageArea == null || runScore == null || coinPrefab == null)
+            if (stageArea == null || runScore == null || spawnCoins.coinPrefab == null)
             {
                 Debug.LogError("Assign the stage, score and coin prefab for coin patterns.", this);
                 enabled = false;
                 return;
             }
 
-            spawnRemaining = initialDelay;
+            spawnRemaining = spawnCoins.initialDelay;
         }
 
         private void Update()
@@ -49,23 +38,23 @@ namespace Jam50033
             if (spawnRemaining <= 0f)
             {
                 TrySpawn();
-                spawnRemaining = Random.Range(minimumSpawnInterval, maximumSpawnInterval);
+                spawnRemaining = Random.Range(spawnCoins.minimumSpawnInterval, spawnCoins.maximumSpawnInterval);
             }
         }
 
         private void TrySpawn()
         {
             pattern.Clear();
-            float total = lineWeight + singleOrPairWeight + tetrominoWeight;
+            float total = spawnCoins.lineWeight + spawnCoins.singleOrPairWeight + spawnCoins.tetrominoWeight;
             if (total <= 0f)
             {
                 return;
             }
 
             float choice = Random.value * total;
-            if (choice < lineWeight + singleOrPairWeight)
+            if (choice < spawnCoins.lineWeight + spawnCoins.singleOrPairWeight)
             {
-                int count = choice < lineWeight ? Random.Range(minimumLineLength, maximumLineLength + 1)
+                int count = choice < spawnCoins.lineWeight ? Random.Range(spawnCoins.minimumLineLength, spawnCoins.maximumLineLength + 1)
                     : Random.Range(1, 3);
                 for (int i = 0; i < count; i++)
                 {
@@ -96,8 +85,8 @@ namespace Jam50033
                 height = Mathf.Max(height, offset.y);
             }
 
-            int firstRow = Mathf.Clamp(minimumSpawnRow, 0, stageArea.Rows - 1);
-            int lastRow = Mathf.Min(maximumSpawnRow, stageArea.Rows - 1 - height);
+            int firstRow = Mathf.Clamp(spawnCoins.minimumSpawnRow, 0, stageArea.Rows - 1);
+            int lastRow = Mathf.Min(spawnCoins.maximumSpawnRow, stageArea.Rows - 1 - height);
             if (lastRow < firstRow)
             {
                 return;
@@ -108,7 +97,7 @@ namespace Jam50033
             Vector3 right = camera.ViewportToWorldPoint(new Vector3(1f, 0.5f, depth));
             float localX = stageArea.transform.InverseTransformPoint(right).x;
             int column = Mathf.CeilToInt((localX - stageArea.BridgeOffset) / stageArea.CellSize +
-                stageArea.Columns * 0.5f + spawnOffset);
+                stageArea.Columns * 0.5f + spawnCoins.spawnOffset);
             Vector2Int origin = new Vector2Int(column, Random.Range(firstRow, lastRow + 1));
             // Keep each pattern intact; skip a group if any coin would start buried in terrain.
             foreach (Vector2Int offset in pattern)
@@ -135,18 +124,10 @@ namespace Jam50033
 
             foreach (Vector2Int offset in pattern)
             {
-                CoinPickup coin = Instantiate(coinPrefab, stageArea.BridgeRoot);
+                CoinPickup coin = Instantiate(spawnCoins.coinPrefab, stageArea.BridgeRoot);
                 coin.Initialize(stageArea, runScore, origin + offset);
             }
         }
 
-        private void OnValidate()
-        {
-            minimumSpawnInterval = Mathf.Max(0.1f, minimumSpawnInterval);
-            maximumSpawnInterval = Mathf.Max(minimumSpawnInterval, maximumSpawnInterval);
-            maximumSpawnRow = Mathf.Max(minimumSpawnRow, maximumSpawnRow);
-            minimumLineLength = Mathf.Max(1, minimumLineLength);
-            maximumLineLength = Mathf.Max(minimumLineLength, maximumLineLength);
-        }
     }
 }

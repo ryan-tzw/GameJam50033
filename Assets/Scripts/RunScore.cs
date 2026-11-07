@@ -6,12 +6,13 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class RunScore : MonoBehaviour
     {
+        [SerializeField] private GameplaySettings gameplaySettings;
+        private static readonly GameplaySettings.ScoringData defaultGameplayScoring = new();
+        private GameplaySettings.ScoringData gameplayScoring => gameplaySettings != null ? gameplaySettings.scoring : defaultGameplayScoring;
         [SerializeField] private StageArea stageArea;
         [SerializeField] private PlayerController player;
         [SerializeField] private Text scoreLabel;
         [SerializeField] private Text finalScoreLabel;
-        [SerializeField, Min(1), Tooltip("Points awarded for each full stage tile of forward progress.")]
-        private int pointsPerTile = 10;
 
         [SerializeField] private CoinScoreAnimation coinAnimation;
 
@@ -23,7 +24,7 @@ namespace Jam50033
 
         public bool HasFlyingCoins => coinAnimation != null && coinAnimation.HasFlyingCoins;
 
-        public int Score => tilesPassed * pointsPerTile + bonusPoints;
+        public int Score => tilesPassed * gameplayScoring.pointsPerTile + bonusPoints;
 
         private void OnEnable()
         {
@@ -134,9 +135,5 @@ namespace Jam50033
             }
         }
 
-        private void OnValidate()
-        {
-            pointsPerTile = Mathf.Max(1, pointsPerTile);
-        }
     }
 }

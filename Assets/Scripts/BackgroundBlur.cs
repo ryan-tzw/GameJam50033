@@ -6,8 +6,9 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class BackgroundBlur : MonoBehaviour
     {
-        [SerializeField, Range(0f, 8f), Tooltip("Background softness in screen pixels. Set to 0 for the original sharp artwork.")]
-        private float blurRadius = 4f;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly VisualSettings.BackgroundData defaultVisualBackground = new();
+        private VisualSettings.BackgroundData visualBackground => visualSettings != null ? visualSettings.background : defaultVisualBackground;
 
         private SpriteRenderer[] layers;
         private MaterialPropertyBlock properties;
@@ -26,7 +27,7 @@ namespace Jam50033
 
         private void LateUpdate()
         {
-            ApplyBlur(blurRadius);
+            ApplyBlur(visualBackground.blurRadius);
         }
 
         private void OnDisable()
@@ -43,7 +44,7 @@ namespace Jam50033
         {
             layers = GetComponentsInChildren<SpriteRenderer>(true);
             properties ??= new MaterialPropertyBlock();
-            ApplyBlur(isActiveAndEnabled ? blurRadius : 0f);
+            ApplyBlur(isActiveAndEnabled ? visualBackground.blurRadius : 0f);
         }
 
         private void ApplyBlur(float radius)

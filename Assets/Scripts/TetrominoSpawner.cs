@@ -6,17 +6,10 @@ namespace Jam50033
     [RequireComponent(typeof(RunDifficulty), typeof(TetrominoAudio))]
     public sealed class TetrominoSpawner : MonoBehaviour
     {
+        [SerializeField] private SpawnSettings spawnSettings;
+        private static readonly SpawnSettings.PiecesData defaultSpawnPieces = new();
+        private SpawnSettings.PiecesData spawnPieces => spawnSettings != null ? spawnSettings.pieces : defaultSpawnPieces;
         [SerializeField] private StageArea stageArea;
-        [SerializeField] private Tetromino tetrominoPrefab;
-        [SerializeField] private Brick hazardBrickPrefab;
-        [SerializeField, Min(0)] private int hazardFreePieces = 5;
-        [SerializeField, Min(0), Tooltip("Starting row, counted from the bottom of the stage.")]
-        private int spawnRow = 5;
-        [SerializeField, Min(0f), Tooltip("Space from the stage's right edge, measured in cells.")]
-        private float spawnInset = 0.5f;
-        [SerializeField, Min(0f), Tooltip("Move the spawn area farther right, measured in cells.")]
-        private float spawnRightOffset = 1.5f;
-        [SerializeField] private Color spawnGizmoColor = new Color(0.3f, 1f, 1f, 0.7f);
 
         private Tetromino activePiece;
         private int preferredSpawnRow;
@@ -28,12 +21,12 @@ namespace Jam50033
         {
             difficulty = GetComponent<RunDifficulty>();
             spawnedCount = 0;
-            preferredSpawnRow = spawnRow;
+            preferredSpawnRow = spawnPieces.spawnRow;
         }
 
         private void Start()
         {
-            if (stageArea == null || tetrominoPrefab == null || hazardBrickPrefab == null)
+            if (stageArea == null || spawnPieces.tetrominoPrefab == null || spawnPieces.hazardBrickPrefab == null)
             {
                 Debug.LogError("Assign the stage, Tetromino prefab and hazard brick prefab on the spawner.", this);
                 enabled = false;
@@ -64,12 +57,12 @@ namespace Jam50033
             }
 
             Tetromino.Shape shape = (Tetromino.Shape)Random.Range(0, 7);
-            int hazards = spawnedCount < hazardFreePieces ? 0 : difficulty.RollHazardCount();
-            activePiece = Instantiate(tetrominoPrefab);
+            int hazards = spawnedCount < spawnPieces.hazardFreePieces ? 0 : difficulty.RollHazardCount();
+            activePiece = Instantiate(spawnPieces.tetrominoPrefab);
             activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
             activePiece.name = $"Tetromino {shape}";
-            activePiece.Initialize(stageArea, shape, row, spawnInset - spawnRightOffset);
-            activePiece.AssignHazards(hazards, hazardBrickPrefab);
+            activePiece.Initialize(stageArea, shape, row, spawnPieces.spawnInset - spawnPieces.spawnRightOffset);
+            activePiece.AssignHazards(hazards, spawnPieces.hazardBrickPrefab);
             spawnedCount++;
         }
 
@@ -106,12 +99,12 @@ namespace Jam50033
         private Bounds GetSpawnRegion(int row)
         {
             Tetromino.GetSpawnPosition(stageArea, Tetromino.Shape.I, row,
-                spawnInset - spawnRightOffset, out Bounds region);
+                spawnPieces.spawnInset - spawnPieces.spawnRightOffset, out Bounds region);
             // reserve enough room for any shape before choosing the next piece.
             for (int i = 1; i < 7; i++)
             {
                 Tetromino.GetSpawnPosition(stageArea, (Tetromino.Shape)i, row,
-                    spawnInset - spawnRightOffset, out Bounds bounds);
+                    spawnPieces.spawnInset - spawnPieces.spawnRightOffset, out Bounds bounds);
                 region.Encapsulate(bounds);
             }
 
@@ -176,20 +169,13 @@ namespace Jam50033
                 return;
             }
 
-            Bounds region = GetSpawnRegion(Application.isPlaying ? preferredSpawnRow : spawnRow);
+            Bounds region = GetSpawnRegion(Application.isPlaying ? preferredSpawnRow : spawnPieces.spawnRow);
             Matrix4x4 previousMatrix = Gizmos.matrix;
             Gizmos.matrix = stageArea.transform.localToWorldMatrix;
-            Gizmos.color = spawnGizmoColor;
+            Gizmos.color = spawnPieces.spawnGizmoColor;
             Gizmos.DrawWireCube(region.center, region.size);
             Gizmos.matrix = previousMatrix;
         }
 
-        private void OnValidate()
-        {
-            spawnRow = Mathf.Max(0, spawnRow);
-            hazardFreePieces = Mathf.Max(0, hazardFreePieces);
-            spawnInset = Mathf.Max(0f, spawnInset);
-            spawnRightOffset = Mathf.Max(0f, spawnRightOffset);
-        }
     }
 }

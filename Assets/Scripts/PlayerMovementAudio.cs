@@ -6,18 +6,11 @@ namespace Jam50033
     [RequireComponent(typeof(Animator))]
     public sealed class PlayerMovementAudio : MonoBehaviour
     {
+        [SerializeField] private AudioSettings audioSettings;
+        private static readonly AudioSettings.PlayerData defaultAudioPlayer = new();
+        private AudioSettings.PlayerData audioPlayer => audioSettings != null ? audioSettings.player : defaultAudioPlayer;
         [SerializeField] private PlayerController player;
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip stepSound;
-        [SerializeField, Range(0f, 1f)] private float stepVolume = 0.3f;
-        [SerializeField, Min(0.01f), Tooltip("Seconds between running footstep sounds. Larger values play less often.")]
-        private float stepInterval = 0.33333334f;
-        [SerializeField] private AudioClip climbSound;
-        [SerializeField, Range(0f, 1f)] private float climbVolume = 0.5f;
-        [SerializeField, Min(0.01f), Tooltip("Seconds between climbing sounds while moving. Larger values play less often.")]
-        private float climbInterval = 0.375f;
-        [SerializeField] private AudioClip landingSound;
-        [SerializeField, Range(0f, 1f)] private float landingVolume = 0.7f;
 
         private Animator animator;
         private float nextStepTime;
@@ -61,8 +54,8 @@ namespace Jam50033
             if (player != null && player.IsGrounded && player.State == PlayerController.MovementState.Running &&
                 animator.GetBool(Running) && Time.time >= nextStepTime)
             {
-                Play(stepSound, stepVolume);
-                nextStepTime = Time.time + Mathf.Max(0.01f, stepInterval);
+                Play(audioPlayer.stepSound, audioPlayer.stepVolume);
+                nextStepTime = Time.time + Mathf.Max(0.01f, audioPlayer.stepInterval);
             }
         }
 
@@ -71,14 +64,14 @@ namespace Jam50033
             if (player != null && player.State == PlayerController.MovementState.Climbing &&
                 animator.GetBool(Climbing) && animator.GetFloat(ClimbPlayback) > 0f && Time.time >= nextClimbTime)
             {
-                Play(climbSound, climbVolume);
-                nextClimbTime = Time.time + Mathf.Max(0.01f, climbInterval);
+                Play(audioPlayer.climbSound, audioPlayer.climbVolume);
+                nextClimbTime = Time.time + Mathf.Max(0.01f, audioPlayer.climbInterval);
             }
         }
 
         private void PlayLanding()
         {
-            Play(landingSound, landingVolume);
+            Play(audioPlayer.landingSound, audioPlayer.landingVolume);
         }
 
         private void Play(AudioClip clip, float volume)
@@ -86,6 +79,7 @@ namespace Jam50033
             if (Time.timeScale > 0f && player != null && player.isActiveAndEnabled &&
                 audioSource != null && clip != null)
             {
+                if (audioSettings != null) audioSource.outputAudioMixerGroup = audioSettings.effectsMixer;
                 audioSource.PlayOneShot(clip, volume);
             }
         }

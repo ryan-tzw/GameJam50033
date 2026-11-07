@@ -7,18 +7,12 @@ namespace Jam50033
     [RequireComponent(typeof(SpriteRenderer))]
     public sealed class ParallaxLayer : MonoBehaviour
     {
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly VisualSettings.ParallaxData defaultVisualParallax = new();
+        [SerializeField, HideInInspector] private int layerIndex;
+        private VisualSettings.ParallaxData visualParallax => visualSettings != null && layerIndex >= 0 && layerIndex < visualSettings.parallax.Length ? visualSettings.parallax[layerIndex] : defaultVisualParallax;
         [SerializeField] private Camera backgroundCamera;
         [SerializeField] private StageArea stageArea;
-        [SerializeField, Tooltip("Repeat this layer horizontally as it scrolls.")]
-        private bool scrolling;
-        [SerializeField, Range(0f, 1f), Tooltip("Fraction of bridge scrolling applied to this layer. Larger values feel closer.")]
-        private float scrollMultiplier = 0.2f;
-        [SerializeField, Min(0f), Tooltip("World units per second before the layer multiplier, when no stage is assigned (for menus).")]
-        private float menuScrollSpeed = 0.6f;
-        [SerializeField, Range(0f, 1f)] private float opacity = 1f;
-        [SerializeField, Min(0.1f)] private float scaleMultiplier = 1f;
-        [SerializeField, Tooltip("World-space adjustment from the camera centre.")]
-        private Vector2 offset;
 
         private SpriteRenderer spriteRenderer;
         private float scrollOffset;
@@ -32,12 +26,12 @@ namespace Jam50033
 
         private void LateUpdate()
         {
-            if (Application.IsPlaying(gameObject) && scrolling)
+            if (Application.IsPlaying(gameObject) && visualParallax.scrolling)
             {
                 float displacement = stageArea != null
                     ? stageArea.BridgeFrameDisplacement
-                    : -menuScrollSpeed * Time.deltaTime;
-                scrollOffset += displacement * scrollMultiplier;
+                    : -visualParallax.menuScrollSpeed * Time.deltaTime;
+                scrollOffset += displacement * visualParallax.scrollMultiplier;
             }
 
             FitToCamera();
@@ -55,24 +49,23 @@ namespace Jam50033
             float height = backgroundCamera.orthographicSize * 2f;
             float width = height * backgroundCamera.aspect;
             // One shared cover scale preserves the alignment of the full-frame artwork.
-            float scale = Mathf.Max(width / spriteSize.x, height / spriteSize.y) * scaleMultiplier;
+            float scale = Mathf.Max(width / spriteSize.x, height / spriteSize.y) * visualParallax.scaleMultiplier;
             float tileWidth = spriteSize.x * scale;
-            scrollOffset = scrolling ? Mathf.Repeat(scrollOffset, tileWidth) : 0f;
+            scrollOffset = visualParallax.scrolling ? Mathf.Repeat(scrollOffset, tileWidth) : 0f;
             Vector3 centre = backgroundCamera.transform.position;
-            transform.position = new Vector3(centre.x + offset.x + scrollOffset, centre.y + offset.y, transform.position.z);
+            transform.position = new Vector3(centre.x + visualParallax.offset.x + scrollOffset, centre.y + visualParallax.offset.y, transform.position.z);
             transform.localScale = Vector3.one * scale;
-            spriteRenderer.drawMode = scrolling ? SpriteDrawMode.Tiled : SpriteDrawMode.Simple;
+            spriteRenderer.drawMode = visualParallax.scrolling ? SpriteDrawMode.Tiled : SpriteDrawMode.Simple;
             spriteRenderer.tileMode = SpriteTileMode.Continuous;
             // Three complete repeats cover the viewport throughout an entire wrap.
-            spriteRenderer.size = new Vector2(spriteSize.x * (scrolling ? 3f : 1f), spriteSize.y);
+            spriteRenderer.size = new Vector2(spriteSize.x * (visualParallax.scrolling ? 3f : 1f), spriteSize.y);
             Color color = spriteRenderer.color;
-            color.a = opacity;
+            color.a = visualParallax.opacity;
             spriteRenderer.color = color;
         }
 
         private void OnValidate()
         {
-            scaleMultiplier = Mathf.Max(0.1f, scaleMultiplier);
             FitToCamera();
         }
     }

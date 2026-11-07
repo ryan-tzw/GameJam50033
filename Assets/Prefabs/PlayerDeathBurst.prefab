@@ -4849,17 +4849,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b546874b564d8187218d2b26b60961, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerDeathBurst
-  particleCount: 18
-  duration: 0.35
-  radius: 2.5
-  endSpeedFraction: 0.08
-  speedVariation: 0.1
-  minimumSize: 0.14
-  maximumSize: 0.22
-  palette:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.85882354, g: 0.8039216, b: 0.74509805, a: 1}
-  - {r: 0.2901961, g: 0.42745098, b: 0.5882353, a: 1}
-  - {r: 0.50980395, g: 0.72156864, b: 0.8156863, a: 1}
-  - {r: 0.94509804, g: 0.83137256, b: 0.74509805, a: 1}
-  - {r: 0.16862746, g: 0.18431373, b: 0.37254903, a: 1}
+  playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}

@@ -6,9 +6,9 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class BackgroundTint : MonoBehaviour
     {
-        [SerializeField] private Color tintColour = new Color(0.12f, 0.16f, 0.28f, 1f);
-        [SerializeField, Range(0f, 1f), Tooltip("0 shows the original artwork; 1 applies the full tint colour.")]
-        private float tintStrength = 0.25f;
+        [SerializeField] private VisualSettings visualSettings;
+        private static readonly VisualSettings.BackgroundData defaultVisualBackground = new();
+        private VisualSettings.BackgroundData visualBackground => visualSettings != null ? visualSettings.background : defaultVisualBackground;
 
         private SpriteRenderer[] layers;
 
@@ -24,7 +24,7 @@ namespace Jam50033
 
         private void LateUpdate()
         {
-            ApplyTint(tintStrength);
+            ApplyTint(visualBackground.tintStrength);
         }
 
         private void OnDisable()
@@ -40,7 +40,7 @@ namespace Jam50033
         private void RefreshLayers()
         {
             layers = GetComponentsInChildren<SpriteRenderer>(true);
-            ApplyTint(isActiveAndEnabled ? tintStrength : 0f);
+            ApplyTint(isActiveAndEnabled ? visualBackground.tintStrength : 0f);
         }
 
         private void ApplyTint(float strength)
@@ -50,7 +50,7 @@ namespace Jam50033
                 return;
             }
 
-            Color tint = Color.Lerp(Color.white, tintColour, strength);
+            Color tint = Color.Lerp(Color.white, visualBackground.tintColour, strength);
             foreach (SpriteRenderer layer in layers)
             {
                 if (layer == null)
