@@ -43,7 +43,6 @@ namespace Jam50033
 
         public bool IsPlaced => isPlaced;
         public bool IsDiscarded => isDiscarded;
-        public bool IsHazardCluster { get; private set; }
         internal StageArea StageArea => stageArea;
         internal int PlacedRow => placedCell.y;
 
@@ -58,7 +57,6 @@ namespace Jam50033
             shape = selectedShape;
             rotationSteps = 0;
             isPlaced = false;
-            IsHazardCluster = false;
             isDiscarded = false;
             lastMoveSpeed = gameplayTetromino.relativeMoveSpeed;
             heldVerticalDirection = 0;
@@ -159,7 +157,6 @@ namespace Jam50033
             shape = selectedShape;
             rotationSteps = rotation;
             isPlaced = true;
-            IsHazardCluster = true;
             isDiscarded = false;
             placedCell = cell;
             transform.SetParent(stage.BridgeRoot, false);
@@ -172,6 +169,9 @@ namespace Jam50033
             }
 
             UpdateLayout();
+            NaturalStructure structure = GetComponent<NaturalStructure>();
+            if (structure == null) structure = gameObject.AddComponent<NaturalStructure>();
+            structure.Initialize(stage, bricks);
         }
 
         private static readonly Vector2Int[][] ShapeCells =
@@ -730,7 +730,8 @@ namespace Jam50033
                     owner.UpdateLayout();
                     Vector2Int cell = stageArea.WorldPositionToCell(brick.transform.position);
                     allOccupiedCells.Add(cell);
-                    if (!owner.IsHazardCluster || owner.HasCrossedEntryZone(entryZone))
+                    NaturalStructure structure = owner.GetComponent<NaturalStructure>();
+                    if (structure == null || structure.HasCrossedEntryZone(entryZone))
                     {
                         occupiedCells.Add(cell);
                         if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position + halfTile))
@@ -743,6 +744,11 @@ namespace Jam50033
                 {
                     Vector2Int cell = brick.GetGridCell();
                     allOccupiedCells.Add(cell);
+                    NaturalStructure structure = brick.GetComponentInParent<NaturalStructure>();
+                    if (structure != null && !structure.HasCrossedEntryZone(entryZone))
+                    {
+                        continue;
+                    }
                     occupiedCells.Add(cell);
                     if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell) + halfTile))
                     {
@@ -750,27 +756,6 @@ namespace Jam50033
                     }
                 }
             }
-        }
-
-        private bool HasCrossedEntryZone(PlacementEntryZone entryZone)
-        {
-            if (entryZone == null)
-            {
-                return true;
-            }
-
-            // Check tile edges, not centres: the entire cluster must leave the entry zone together.
-            Vector3 halfTile = stageArea.transform.TransformVector(Vector3.right * stageArea.CellSize * 0.5f);
-            for (int i = 0; i < 4; i++)
-            {
-                Vector2Int cell = placedCell + GetRotatedCell(i, rotationSteps);
-                if (!entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell) + halfTile))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         private void ResolveEntryOverlap(ref Vector3 position)

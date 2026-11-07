@@ -79,7 +79,7 @@ namespace Jam50033
 
                 Tetromino owner = brick.GetComponentInParent<Tetromino>();
                 // Floating obstacles must not count as bridge built ahead by the player.
-                if (owner != null && owner.IsHazardCluster)
+                if (owner != null && owner.GetComponent<NaturalStructure>() != null)
                 {
                     continue;
                 }

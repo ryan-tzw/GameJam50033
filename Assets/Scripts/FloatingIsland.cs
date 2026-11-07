@@ -19,6 +19,9 @@ namespace Jam50033
                     visualSettings.island.brickColor);
             }
 
+            NaturalStructure structure = GetComponent<NaturalStructure>();
+            if (structure == null) structure = gameObject.AddComponent<NaturalStructure>();
+            structure.Initialize(stage, bricks);
             chest.Initialize(stage, origin + new Vector2Int(1, 2));
         }
 
