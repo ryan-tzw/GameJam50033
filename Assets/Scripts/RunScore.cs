@@ -16,13 +16,15 @@ namespace Jam50033
         private float startingColumn;
         private int tilesPassed;
         private bool finished;
+        private int bonusPoints;
 
-        public int Score => tilesPassed * pointsPerTile;
+        public int Score => tilesPassed * pointsPerTile + bonusPoints;
 
         private void Start()
         {
             startingColumn = GetPlayerColumn();
             tilesPassed = 0;
+            bonusPoints = 0;
             finished = false;
             RefreshLabels();
         }
@@ -55,6 +57,17 @@ namespace Jam50033
                 tilesPassed = passed;
                 RefreshLabels();
             }
+        }
+
+        public void AddPoints(int points)
+        {
+            if (finished || Time.timeScale <= 0f || points <= 0)
+            {
+                return;
+            }
+
+            bonusPoints += points;
+            RefreshLabels();
         }
 
         public void FinishRun()

@@ -2006,6 +2006,7 @@ GameObject:
   - component: {fileID: 632630812}
   - component: {fileID: 632630811}
   - component: {fileID: 882000000000000010}
+  - component: {fileID: 882000000000000040}
   m_Layer: 0
   m_Name: TetrominoSpawner
   m_TagString: Untagged
@@ -6009,7 +6010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3085c6a627b3e5bb8b798d6b60b433c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlacementEntryZone
-  tilesFromRight: 5
+  tilesFromRight: 6
   color: {r: 0.85, g: 0.85, b: 1, a: 1}
   fillOpacity: 0.035
   outlineOpacity: 0.25
@@ -6031,6 +6032,32 @@ MonoBehaviour:
   strength: 0.08
   duration: 0.12
   frequency: 30
+--- !u!114 &882000000000000040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632630807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f44e5e5e18a4b88b852b1a0a910de72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.CoinSpawner
+  stageArea: {fileID: 1098233640}
+  runScore: {fileID: 222562191}
+  coinPrefab: {fileID: 3701432770085358338, guid: b773ae4b3b2df86a298ce22b94d18032, type: 3}
+  initialDelay: 1
+  minimumSpawnInterval: 3
+  maximumSpawnInterval: 5
+  minimumSpawnRow: 3
+  maximumSpawnRow: 12
+  spawnOffset: 2
+  lineWeight: 50
+  singleOrPairWeight: 25
+  tetrominoWeight: 15
+  minimumLineLength: 3
+  maximumLineLength: 6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
