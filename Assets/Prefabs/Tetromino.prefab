@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.Tetromino
   shape: 2
   relativeMoveSpeed: 1.5
-  speedUpMultiplier: 16
+  speedUpMultiplier: 20
   hardDropKey: 1
   ghostOpacity: 0.4
   invalidGhostColor: {r: 0.64705884, g: 0.11372549, b: 0.20784314, a: 1}

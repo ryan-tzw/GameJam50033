@@ -25,6 +25,11 @@ namespace Jam50033
         private float knockbackDistance = 1.5f;
         [SerializeField, Min(0.01f), Tooltip("Seconds to complete knockback, capped by the hurt reaction duration.")]
         private float knockbackDuration = 0.15f;
+        [Header("Audio")]
+        [SerializeField, Tooltip("Scene-owned SFX source so playback continues after the player is disabled.")]
+        private AudioSource audioSource;
+        [SerializeField] private AudioClip hitSound;
+        [SerializeField, Range(0f, 1f)] private float hitVolume = 1f;
 
         private Material originalMaterial;
         private MaterialPropertyBlock originalProperties;
@@ -52,6 +57,10 @@ namespace Jam50033
             }
 
             GetComponent<PlayerController>().StopForFatalHit();
+            if (audioSource != null && hitSound != null)
+            {
+                audioSource.PlayOneShot(hitSound, hitVolume);
+            }
             hazard.FlashOnHit();
             Vector2 direction = GetComponent<Collider2D>().bounds.center -
                 hazard.GetComponent<Collider2D>().bounds.center;

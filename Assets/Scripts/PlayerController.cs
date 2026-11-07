@@ -87,6 +87,7 @@ namespace Jam50033
         private static readonly int StaggerState = Animator.StringToHash("Base Layer.Stagger");
 
         public bool IsGrounded { get; private set; }
+        public event System.Action Landed;
         public MovementState State => movementState;
         public StageArea StageArea => stageArea;
         public float Momentum => momentum;
@@ -136,6 +137,7 @@ namespace Jam50033
             filter.SetLayerMask(groundLayers);
             filter.useTriggers = false;
             int count = capsule.Cast(Vector2.down, filter, groundHits, groundProbeDistance * size);
+            bool wasGrounded = IsGrounded;
             IsGrounded = false;
             for (int i = 0; i < count; i++)
             {
@@ -146,6 +148,11 @@ namespace Jam50033
                     IsGrounded = true;
                     break;
                 }
+            }
+
+            if (IsGrounded && !wasGrounded && movementState == MovementState.Falling)
+            {
+                Landed?.Invoke();
             }
 
             if (movementState == MovementState.Staggered)

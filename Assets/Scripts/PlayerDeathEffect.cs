@@ -11,6 +11,11 @@ namespace Jam50033
         [SerializeField] private Material flashMaterial;
         [SerializeField] private PlayerDeathBurst burstPrefab;
         [SerializeField, Min(0f)] private float flashDuration = 0.035f;
+        [Header("Audio")]
+        [SerializeField, Tooltip("Scene-owned SFX source so playback continues after the player is disabled.")]
+        private AudioSource audioSource;
+        [SerializeField] private AudioClip deathSound;
+        [SerializeField, Range(0f, 1f)] private float deathVolume = 1f;
 
         public IEnumerator Play()
         {
@@ -26,6 +31,11 @@ namespace Jam50033
                 properties.SetFloat("_FlashAmount", 1f);
                 visual.SetPropertyBlock(properties);
                 yield return new WaitForSecondsRealtime(flashDuration);
+            }
+
+            if (audioSource != null && deathSound != null)
+            {
+                audioSource.PlayOneShot(deathSound, deathVolume);
             }
 
             PlayerDeathBurst burst = null;

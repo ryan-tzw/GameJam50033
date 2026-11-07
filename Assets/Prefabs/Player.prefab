@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6224014569685620897}
   - component: {fileID: 1446710395335007330}
   - component: {fileID: 5898478463346221795}
+  - component: {fileID: 882000000000000002}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -146,6 +147,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &882000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142865315132263982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3463866c0d4f869e31aaf4fab5129d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerMovementAudio
+  player: {fileID: 5764522197894248706}
+  audioSource: {fileID: 0}
+  stepSound: {fileID: 8300000, guid: e10f65099ae0dd610bc2290ed0be4bc5, type: 3}
+  stepVolume: 0.3
+  stepInterval: 0.33333334
+  climbSound: {fileID: 8300000, guid: c5b3489d63ec805a0870862a78c9b35a, type: 3}
+  climbVolume: 0.5
+  climbInterval: 0.375
+  landingSound: {fileID: 8300000, guid: 7ad0d9d5c51070ebb9145bc5e2133152, type: 3}
+  landingVolume: 0.7
 --- !u!1 &4607790219003509733
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +338,9 @@ MonoBehaviour:
   shakeFrequency: 12
   knockbackDistance: 1.2
   knockbackDuration: 0.4
+  audioSource: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 46bc17417ce359dcbb0b48f3904680ef, type: 3}
+  hitVolume: 1
 --- !u!114 &2173082064071922118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +357,9 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
   burstPrefab: {fileID: 315514531842761780, guid: 9694f3a19985d12ab9b0c950c7ac24fb, type: 3}
   flashDuration: 0.035
+  audioSource: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: b55b090f2ef033f7f96058f7ee958b15, type: 3}
+  deathVolume: 1
 --- !u!114 &882000000000000001
 MonoBehaviour:
   m_ObjectHideFlags: 0
