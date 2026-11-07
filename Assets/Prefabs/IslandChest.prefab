@@ -152,3 +152,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.IslandChest
   visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  spawnSettings: {fileID: 11400000, guid: d2be8ae8fbe451b1d965d2279ff67b8b, type: 2}
+  gameplaySettings: {fileID: 11400000, guid: dfbe9b2acec748abea94d3ca9368def3, type: 2}

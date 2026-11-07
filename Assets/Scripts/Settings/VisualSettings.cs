@@ -17,6 +17,8 @@ namespace Jam50033
         public TetrominoData tetromino = new();
         [Header("Coin")]
         public CoinData coin = new();
+        [Header("Gem")]
+        public CoinData gem = new();
         [Header("Floating Islands and Chests")]
         public IslandData island = new();
         [Header("Coin Flight")]
@@ -143,7 +145,7 @@ namespace Jam50033
             public Sprite[] frames;
             [Min(1f)]
             public float framesPerSecond = 8f;
-            [Min(0.1f), Tooltip("Coin diameter in stage tiles.")]
+            [Min(0.1f), Tooltip("Collectible height in stage tiles.")]
             public float sizeInTiles = 0.65f;
         }
 
@@ -175,6 +177,18 @@ namespace Jam50033
             [Min(1)]
             public int popupFontSize = 26;
             public Color popupColor = new Color(1f, 0.85f, 0.4f);
+            [Header("Chest Scatter")]
+            [Min(0.01f), Tooltip("Seconds before the first reward starts attraction. Staggered rewards keep falling longer.")]
+            public float scatterDuration = 0.15f;
+            [Min(0f), Tooltip("Initial launch speed in Canvas units per second, with 20% random variation.")]
+            public float scatterLaunchSpeed = 450f;
+            [Range(0f, 180f), Tooltip("Full launch cone in degrees, centred on upward.")]
+            public float scatterSpread = 120f;
+            [Min(0f), Tooltip("Downward acceleration in Canvas units per second squared, including the staggered wait.")]
+            public float scatterGravity = 1800f;
+            [Min(0f), Tooltip("Minimum time between treasure starting attraction, in seconds.")]
+            public float minimumArrivalStagger = 0.03f;
+            [Min(0f)] public float maximumArrivalStagger = 0.06f;
         }
 
         [Serializable]

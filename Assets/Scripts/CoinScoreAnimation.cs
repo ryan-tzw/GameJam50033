@@ -21,6 +21,8 @@ namespace Jam50033
             public float fps, elapsed, spinStart, bend;
             public int points;
             public Vector2 viewportStart;
+            public Vector2 launchVelocity;
+            public float scatterGravity, scatterDuration, attractionDelay;
             public Action arrived;
         }
 
@@ -49,7 +51,7 @@ namespace Jam50033
         }
 
         public bool TryFly(Vector3 worldPosition, float worldHeight, Sprite[] frames, float fps,
-            int points, Action arrived)
+            int points, Action arrived, bool scatter = false, float attractionDelay = 0f)
         {
             Camera camera = Camera.main;
             if (!isActiveAndEnabled || canvas == null || effectLayer == null || scoreTarget == null ||
@@ -65,12 +67,24 @@ namespace Jam50033
             image.rectTransform.sizeDelta = Vector2.one * Mathf.Abs(top.y - screen.y) / canvas.scaleFactor;
             image.sprite = frames[Mathf.FloorToInt(Time.time * fps) % frames.Length];
             image.rectTransform.anchoredPosition = ScreenToLocal(screen);
+            Vector2 launchVelocity = Vector2.zero;
+            if (scatter)
+            {
+                float angle = UnityEngine.Random.Range(-visualCoinFlight.scatterSpread * 0.5f,
+                    visualCoinFlight.scatterSpread * 0.5f) * Mathf.Deg2Rad;
+                float speed = visualCoinFlight.scatterLaunchSpeed * UnityEngine.Random.Range(0.8f, 1.2f);
+                launchVelocity = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * speed;
+            }
             flights.Add(new Flight
             {
                 image = image, frames = frames, fps = fps, spinStart = Time.time,
                 viewportStart = new Vector2(screen.x / Screen.width, screen.y / Screen.height),
                 bend = visualCoinFlight.curvature * UnityEngine.Random.Range(0.7f, 1.3f) *
                     (UnityEngine.Random.value < 0.5f ? -1f : 1f),
+                launchVelocity = launchVelocity,
+                scatterGravity = scatter ? Mathf.Max(0f, visualCoinFlight.scatterGravity) : 0f,
+                scatterDuration = scatter ? Mathf.Max(0.01f, visualCoinFlight.scatterDuration) : 0f,
+                attractionDelay = Mathf.Max(0f, attractionDelay),
                 points = points, arrived = arrived
             });
             return true;
@@ -97,19 +111,37 @@ namespace Jam50033
             {
                 Flight flight = flights[i];
                 flight.elapsed += delta;
-                float t = Mathf.Clamp01(flight.elapsed / visualCoinFlight.flightDuration);
-                float progress = Mathf.Clamp01(visualCoinFlight.flightProgress.Evaluate(t));
+                // Sprite playback continues during scatter, the staggered wait, and attraction.
+                flight.image.sprite = flight.frames[Mathf.FloorToInt(
+                    (flight.spinStart + flight.elapsed) * flight.fps) % flight.frames.Length];
                 Vector2 start = ScreenToLocal(new Vector2(flight.viewportStart.x * Screen.width,
                     flight.viewportStart.y * Screen.height));
+                float flightElapsed = flight.elapsed - flight.scatterDuration - flight.attractionDelay;
+                Vector2 scatterEndVelocity = Vector2.zero;
+                if (flight.scatterDuration > 0f)
+                {
+                    // Keep falling throughout the staggered wait; freeze only the attraction's starting point.
+                    float scatterTime = Mathf.Min(flight.elapsed, flight.scatterDuration + flight.attractionDelay);
+                    start += flight.launchVelocity * scatterTime +
+                        Vector2.down * (0.5f * flight.scatterGravity * scatterTime * scatterTime);
+                    scatterEndVelocity = flight.launchVelocity + Vector2.down * flight.scatterGravity * scatterTime;
+                    flight.image.rectTransform.anchoredPosition = start;
+                }
+                if (flightElapsed < 0f)
+                {
+                    continue;
+                }
+                float t = Mathf.Clamp01(flightElapsed / visualCoinFlight.flightDuration);
+                float progress = Mathf.Clamp01(visualCoinFlight.flightProgress.Evaluate(t));
                 Vector2 end = TargetPosition();
                 Vector2 direction = (end - start).normalized;
                 Vector2 control = (start + end) * 0.5f + new Vector2(-direction.y, direction.x) * flight.bend;
                 flight.image.rectTransform.anchoredPosition = (1f - progress) * (1f - progress) * start +
-                    2f * (1f - progress) * progress * control + progress * progress * end;
+                    2f * (1f - progress) * progress * control + progress * progress * end +
+                    // Carry launch motion into attraction, then release it smoothly as the counter takes over.
+                    scatterEndVelocity * (flightElapsed * (1f - t) * (1f - t));
                 flight.image.rectTransform.localScale = Vector3.one *
                     Mathf.Lerp(1f, visualCoinFlight.arrivalScale, Mathf.InverseLerp(0.75f, 1f, progress));
-                flight.image.sprite = flight.frames[Mathf.FloorToInt(
-                    (flight.spinStart + flight.elapsed) * flight.fps) % flight.frames.Length];
                 if (t >= 1f)
                 {
                     flights.RemoveAt(i);

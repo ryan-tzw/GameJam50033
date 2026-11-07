@@ -8,6 +8,8 @@ namespace Jam50033
     public sealed class IslandChest : MonoBehaviour
     {
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private SpawnSettings spawnSettings;
+        [SerializeField] private GameplaySettings gameplaySettings;
         internal static readonly HashSet<IslandChest> ActiveChests = new();
         internal StageArea StageArea { get; private set; }
         private Vector2Int cell;
@@ -15,6 +17,7 @@ namespace Jam50033
         private BoxCollider2D trigger;
         private bool opened;
         private float elapsed;
+        private RunScore runScore;
 
         private void OnEnable()
         {
@@ -35,6 +38,14 @@ namespace Jam50033
         {
             StageArea = stage;
             cell = gridCell;
+            foreach (RunScore candidate in FindObjectsByType<RunScore>(FindObjectsSortMode.None))
+            {
+                if (candidate.gameObject.scene == gameObject.scene)
+                {
+                    runScore = candidate;
+                    break;
+                }
+            }
             UpdateVisual();
         }
 
@@ -84,6 +95,33 @@ namespace Jam50033
             {
                 opened = true;
                 elapsed = 0f;
+                ReleaseRewards();
+            }
+        }
+
+        private void ReleaseRewards()
+        {
+            if (runScore == null || spawnSettings == null || gameplaySettings == null)
+            {
+                Debug.LogError("Assign chest reward settings and ensure the scene has a RunScore.", this);
+                return;
+            }
+
+            SpawnSettings.IslandsData rewards = spawnSettings.islands;
+            int coins = Random.Range(rewards.minimumChestCoins, rewards.maximumChestCoins + 1);
+            int gems = Random.Range(rewards.minimumChestGems, rewards.maximumChestGems + 1);
+            Vector3 origin = visual.bounds.center;
+            float delay = 0f;
+            for (int i = 0; i < coins + gems; i++)
+            {
+                bool isGem = i >= coins;
+                VisualSettings.CoinData collectible = isGem ? visualSettings.gem : visualSettings.coin;
+                int points = isGem ? gameplaySettings.scoring.gemPoints : gameplaySettings.scoring.points;
+                // Queue every reward immediately so death or collapse cannot cancel unspawned treasure.
+                runScore.CollectCoin(points, origin, StageArea.CellSize * collectible.sizeInTiles,
+                    collectible.frames, collectible.framesPerSecond, true, delay);
+                float minimum = Mathf.Max(0f, visualSettings.coinFlight.minimumArrivalStagger);
+                delay += Random.Range(minimum, Mathf.Max(minimum, visualSettings.coinFlight.maximumArrivalStagger));
             }
         }
 

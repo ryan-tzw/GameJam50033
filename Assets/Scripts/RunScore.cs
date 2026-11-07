@@ -86,7 +86,8 @@ namespace Jam50033
             RefreshLabels();
         }
 
-        public void CollectCoin(int points, Vector3 position, float height, Sprite[] frames, float fps)
+        public void CollectCoin(int points, Vector3 position, float height, Sprite[] frames, float fps,
+            bool scatter = false, float attractionDelay = 0f)
         {
             if (finished || Time.timeScale <= 0f || points <= 0)
             {
@@ -96,7 +97,7 @@ namespace Jam50033
             // Secure the reward immediately; only its HUD presentation waits for arrival.
             bonusPoints += points;
             if (coinAnimation != null && coinAnimation.TryFly(position, height, frames, fps, points,
-                () => RevealCoinPoints(points)))
+                () => RevealCoinPoints(points), scatter, attractionDelay))
             {
                 pendingCoinPoints += points;
             }

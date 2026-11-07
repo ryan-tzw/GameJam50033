@@ -93,6 +93,7 @@ namespace Jam50033
             public int pointsPerTile = 10;
             [Min(1), InspectorName("Coin Points")]
             public int points = 50;
+            [Min(1)] public int gemPoints = 150;
         }
 
         [Serializable]

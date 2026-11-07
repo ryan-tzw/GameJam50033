@@ -42,5 +42,6 @@ MonoBehaviour:
   scoring:
     pointsPerTile: 10
     points: 50
+    gemPoints: 150
   entryZone:
     tilesFromRight: 10

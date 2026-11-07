@@ -28,6 +28,10 @@ MonoBehaviour:
     minimumSpawnRow: 3
     maximumSpawnRow: 12
     spawnOffset: 2
+    minimumChestCoins: 6
+    maximumChestCoins: 10
+    minimumChestGems: 1
+    maximumChestGems: 3
   pieces:
     tetrominoPrefab:
       fileID: 7053026960480931781

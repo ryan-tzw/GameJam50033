@@ -32,6 +32,11 @@ namespace Jam50033
             [Min(0)] public int maximumSpawnRow = 12;
             [Min(0f), Tooltip("Distance beyond the camera's right edge, in tiles.")]
             public float spawnOffset = 2f;
+            [Header("Chest Rewards")]
+            [Min(0)] public int minimumChestCoins = 6;
+            [Min(0)] public int maximumChestCoins = 10;
+            [Min(0)] public int minimumChestGems = 1;
+            [Min(0)] public int maximumChestGems = 3;
         }
 
         [Serializable]
@@ -121,6 +126,10 @@ namespace Jam50033
             islands.minimumSpawnInterval = Mathf.Max(0.1f, islands.minimumSpawnInterval);
             islands.maximumSpawnInterval = Mathf.Max(islands.minimumSpawnInterval, islands.maximumSpawnInterval);
             islands.maximumSpawnRow = Mathf.Max(islands.minimumSpawnRow, islands.maximumSpawnRow);
+            islands.minimumChestCoins = Mathf.Max(0, islands.minimumChestCoins);
+            islands.maximumChestCoins = Mathf.Max(islands.minimumChestCoins, islands.maximumChestCoins);
+            islands.minimumChestGems = Mathf.Max(0, islands.minimumChestGems);
+            islands.maximumChestGems = Mathf.Max(islands.minimumChestGems, islands.maximumChestGems);
             pieces.spawnRow = Mathf.Max(0, pieces.spawnRow);
             pieces.hazardFreePieces = Mathf.Max(0, pieces.hazardFreePieces);
             pieces.spawnInset = Mathf.Max(0f, pieces.spawnInset);
