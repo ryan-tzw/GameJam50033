@@ -8,10 +8,12 @@ namespace Jam50033
     public sealed class BridgeCollapse : MonoBehaviour
     {
         [SerializeField] private StageArea stageArea;
-        [SerializeField, Tooltip("X relative to the stage centre, in cells. Shaking starts when the piece's right edge reaches this line.")]
-        private float warningX = -10f;
-        [SerializeField, Tooltip("X relative to the stage centre, in cells. The piece falls when its right edge reaches this line. Must be left of Warning X.")]
-        private float collapseX = -11f;
+        [SerializeField, Tooltip("X relative to the stage centre, in Unity units. Shaking starts when the piece's right edge reaches this line.")]
+        private float warningX = -5.65f;
+        [SerializeField, Tooltip("X relative to the stage centre, in Unity units. The piece falls when its right edge reaches this line. Must be left of Warning X.")]
+        private float collapseX = -7.27f;
+        [SerializeField, Min(0f), Tooltip("Seconds after the run starts before bridge shaking and collapse can begin.")]
+        private float initialCollapseDelay = 2f;
         [SerializeField] private Color warningThresholdColor = new Color(1f, 0.85f, 0.1f, 0.8f);
         [SerializeField] private Color thresholdColor = new Color(1f, 0.5f, 0.2f, 0.8f);
         [Header("Warning Shake")]
@@ -52,6 +54,12 @@ namespace Jam50033
         private readonly List<FallingTile> fallingTiles = new();
         private readonly HashSet<Transform> warningRoots = new();
         private MaterialPropertyBlock visualProperties;
+        private float collapseDelayRemaining;
+
+        private void Awake()
+        {
+            collapseDelayRemaining = initialCollapseDelay;
+        }
 
         private void LateUpdate()
         {
@@ -71,6 +79,15 @@ namespace Jam50033
             if (Time.timeScale <= 0f || stageArea == null || stageArea.CellSize <= 0f || Time.deltaTime <= 0f)
             {
                 return;
+            }
+
+            if (collapseDelayRemaining > 0f)
+            {
+                collapseDelayRemaining -= Time.deltaTime;
+                if (collapseDelayRemaining > 0f)
+                {
+                    return;
+                }
             }
 
             UpdateFallingTiles();
@@ -101,7 +118,7 @@ namespace Jam50033
                 }
 
                 Brick[] bricks = owner != null ? owner.GetComponentsInChildren<Brick>() : new[] { brick };
-                if (GetRightEdgeInCells(bricks) > warningX)
+                if (GetRightEdgeX(bricks) > warningX)
                 {
                     continue;
                 }
@@ -110,7 +127,7 @@ namespace Jam50033
             }
         }
 
-        private float GetRightEdgeInCells(Brick[] bricks)
+        private float GetRightEdgeX(Brick[] bricks)
         {
             float rightEdge = float.NegativeInfinity;
             foreach (Brick tile in bricks)
@@ -121,7 +138,7 @@ namespace Jam50033
                 }
 
                 float x = stageArea.transform.InverseTransformPoint(tile.transform.position).x;
-                rightEdge = Mathf.Max(rightEdge, x / stageArea.CellSize + 0.5f);
+                rightEdge = Mathf.Max(rightEdge, x + stageArea.CellSize * 0.5f);
             }
 
             return rightEdge;
@@ -171,7 +188,7 @@ namespace Jam50033
             {
                 Warning warning = warnings[i];
                 warning.Elapsed += Time.deltaTime;
-                float rightEdge = GetRightEdgeInCells(warning.Bricks);
+                float rightEdge = GetRightEdgeX(warning.Bricks);
                 // Shake strength follows distance to collapse, rather than a countdown.
                 float progress = Mathf.InverseLerp(warningX, collapseX, rightEdge);
                 float strength = Mathf.Lerp(initialShakeStrength, shakeStrength, progress);
@@ -300,16 +317,16 @@ namespace Jam50033
 
         private void DrawThresholdLine(float threshold, Color color)
         {
-            float x = threshold * stageArea.CellSize;
             float halfHeight = stageArea.Rows * stageArea.CellSize * 0.5f;
             Gizmos.color = color;
-            Gizmos.DrawLine(stageArea.transform.TransformPoint(new Vector3(x, -halfHeight, 0f)),
-                stageArea.transform.TransformPoint(new Vector3(x, halfHeight, 0f)));
+            Gizmos.DrawLine(stageArea.transform.TransformPoint(new Vector3(threshold, -halfHeight, 0f)),
+                stageArea.transform.TransformPoint(new Vector3(threshold, halfHeight, 0f)));
         }
 
         private void OnValidate()
         {
             collapseX = Mathf.Min(collapseX, warningX - 0.01f);
+            initialCollapseDelay = Mathf.Max(0f, initialCollapseDelay);
             initialShakeStrength = Mathf.Max(0f, initialShakeStrength);
             shakeStrength = Mathf.Max(initialShakeStrength, shakeStrength);
         }
