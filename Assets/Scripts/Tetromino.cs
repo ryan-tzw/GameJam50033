@@ -439,7 +439,7 @@ namespace Jam50033
             }
 
             float currentSpeed = relativeMoveSpeed;
-            bool softDropping = keyboard != null && keyboard.aKey.isPressed;
+            bool softDropping = keyboard != null && (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed);
             if (softDropping)
             {
                 currentSpeed *= speedUpMultiplier;
