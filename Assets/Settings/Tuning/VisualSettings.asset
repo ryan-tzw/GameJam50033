@@ -157,6 +157,8 @@ MonoBehaviour:
       x: 90
       y: 0
     popupRise: 40
+    popupConeAngle: 120
+    popupMaxRotation: 25
     popupFontSize: 26
     popupColor:
       r: 1

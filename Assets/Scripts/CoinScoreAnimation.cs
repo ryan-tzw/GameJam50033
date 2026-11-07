@@ -28,6 +28,8 @@ namespace Jam50033
         {
             public Text text;
             public float elapsed;
+            public Vector2 direction;
+            public float rotation;
         }
 
         private readonly List<Flight> flights = new();
@@ -123,7 +125,9 @@ namespace Jam50033
                 Popup popup = popups[i];
                 popup.elapsed += delta;
                 float t = Mathf.Clamp01(popup.elapsed / visualCoinFlight.popupDuration);
-                popup.text.rectTransform.anchoredPosition = TargetPosition() + visualCoinFlight.popupOffset + Vector2.up * visualCoinFlight.popupRise * t;
+                popup.text.rectTransform.anchoredPosition = TargetPosition() + visualCoinFlight.popupOffset +
+                    popup.direction * visualCoinFlight.popupRise * t;
+                popup.text.rectTransform.localRotation = Quaternion.Euler(0f, 0f, popup.rotation * t);
                 Color color = visualCoinFlight.popupColor;
                 color.a *= 1f - t;
                 popup.text.color = color;
@@ -156,7 +160,17 @@ namespace Jam50033
             text.raycastTarget = false;
             text.rectTransform.sizeDelta = new Vector2(160f, 60f);
             text.rectTransform.anchoredPosition = TargetPosition() + visualCoinFlight.popupOffset;
-            popups.Add(new Popup { text = text });
+            float angle = UnityEngine.Random.Range(-visualCoinFlight.popupConeAngle * 0.5f,
+                visualCoinFlight.popupConeAngle * 0.5f);
+            float radians = angle * Mathf.Deg2Rad;
+            popups.Add(new Popup
+            {
+                text = text,
+                direction = new Vector2(Mathf.Sin(radians), Mathf.Cos(radians)),
+                // Rightward travel tilts clockwise; leftward travel tilts counterclockwise.
+                rotation = -Mathf.Sign(angle) * UnityEngine.Random.Range(0.4f, 1f) *
+                    visualCoinFlight.popupMaxRotation
+            });
         }
 
         private void OnDisable()

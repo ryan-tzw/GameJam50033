@@ -152,8 +152,12 @@ namespace Jam50033
             [Min(0.05f)]
             public float popupDuration = 0.55f;
             public Vector2 popupOffset = new Vector2(90f, 0f);
-            [Min(0f)]
+            [Min(0f), Tooltip("Popup travel distance in Canvas units along its chosen direction.")]
             public float popupRise = 40f;
+            [Range(0f, 180f), Tooltip("Full spread in degrees, centred on upward travel.")]
+            public float popupConeAngle = 120f;
+            [Range(0f, 90f), Tooltip("Maximum final tilt in degrees. Rotation follows the travel direction.")]
+            public float popupMaxRotation = 25f;
             [Min(1)]
             public int popupFontSize = 26;
             public Color popupColor = new Color(1f, 0.85f, 0.4f);
