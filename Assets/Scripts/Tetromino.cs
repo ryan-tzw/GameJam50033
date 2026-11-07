@@ -864,7 +864,6 @@ namespace Jam50033
             RefreshOccupiedCells();
             float cellSize = stageArea.CellSize;
             Vector3 position = stageArea.transform.InverseTransformPoint(transform.position) / cellSize;
-            float halfWidth = stageArea.Columns * 0.5f;
             float halfHeight = stageArea.Rows * 0.5f;
             int minimumY = int.MaxValue;
             int maximumY = int.MinValue;
@@ -872,11 +871,6 @@ namespace Jam50033
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = GetRotatedCell(i, nextRotation);
-                float x = position.x + cell.x;
-                if (x + 0.5f > halfWidth + 0.0001f)
-                {
-                    return;
-                }
                 minimumY = Mathf.Min(minimumY, cell.y);
                 maximumY = Mathf.Max(maximumY, cell.y);
             }
