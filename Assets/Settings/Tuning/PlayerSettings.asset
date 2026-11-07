@@ -26,6 +26,7 @@ MonoBehaviour:
     targetX: -6
     followStrength: 3
     maxRecoverySpeed: 4
+    airDriftAcceleration: 2
     groundProbeDistance: 0.08
     groundLayers:
       serializedVersion: 2

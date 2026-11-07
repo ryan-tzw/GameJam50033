@@ -34,6 +34,8 @@ namespace Jam50033
             public float followStrength = 6f;
             [Min(0f), Tooltip("Maximum horizontal recovery speed, in stage cells per second.")]
             public float maxRecoverySpeed = 4f;
+            [Min(0f), Tooltip("Horizontal acceleration toward bridge velocity while falling, in Unity units per second squared. Target X catch-up pauses until landing.")]
+            public float airDriftAcceleration = 2f;
             [Min(0.001f), Tooltip("Distance below the capsule to check for support, in cells.")]
             public float groundProbeDistance = 0.08f;
             public LayerMask groundLayers = ~0;
@@ -167,6 +169,7 @@ namespace Jam50033
             movement.headClearance = Mathf.Clamp(movement.headClearance, 0f, movement.heightInCells - movement.widthInCells);
             movement.followStrength = Mathf.Max(0f, movement.followStrength);
             movement.maxRecoverySpeed = Mathf.Max(0f, movement.maxRecoverySpeed);
+            movement.airDriftAcceleration = Mathf.Max(0f, movement.airDriftAcceleration);
             movement.groundProbeDistance = Mathf.Max(0.001f, movement.groundProbeDistance);
             movement.climbSpeed = Mathf.Max(0.1f, movement.climbSpeed);
             movement.stepSpeed = Mathf.Max(0.1f, movement.stepSpeed);

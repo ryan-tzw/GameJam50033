@@ -173,6 +173,15 @@ namespace Jam50033
                 fallStartY = body.position.y;
             }
             movementState = IsGrounded ? MovementState.Running : MovementState.Falling;
+            if (movementState == MovementState.Falling)
+            {
+                // Air resistance removes forward motion relative to the scrolling bridge.
+                float driftVelocity = Mathf.MoveTowards(body.linearVelocity.x, stageArea.BridgeVelocity,
+                    playerMovement.airDriftAcceleration * Time.fixedDeltaTime);
+                body.linearVelocity = new Vector2(driftVelocity, body.linearVelocity.y);
+                return;
+            }
+
             float speedLimit = playerMovement.maxRecoverySpeed * size;
             // zero displacement means zero forward velocity; recovery only follows a displacement.
             float velocityX = Mathf.Clamp((playerMovement.targetX - body.position.x) * playerMovement.followStrength, -speedLimit, speedLimit);
