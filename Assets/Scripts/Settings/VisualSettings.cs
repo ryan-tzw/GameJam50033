@@ -17,6 +17,8 @@ namespace Jam50033
         public TetrominoData tetromino = new();
         [Header("Next Piece Preview")]
         public NextPreviewData nextPreview = new();
+        [Header("Score Panel")]
+        public ScorePanelData scorePanel = new();
         [Header("Coin")]
         public CoinData coin = new();
         [Header("Gem")]
@@ -43,6 +45,23 @@ namespace Jam50033
         public OutlineData[] outlines = Array.Empty<OutlineData>();
         [Header("UI Images")]
         public ImageData[] images = Array.Empty<ImageData>();
+
+        [Serializable]
+        public sealed class ScorePanelData
+        {
+            public bool useCommaSeparators = true;
+            [Min(1f), Tooltip("Minimum width in Canvas units. The panel grows to fit larger scores.")]
+            public float minimumWidth = 180f;
+            [Min(0f)] public float horizontalPadding = 24f;
+            [Min(1f)] public float height = 82f;
+            public float topMargin = 20f;
+            public Color panelColor = new Color(0.06f, 0.04f, 0.13f, 1f);
+            [Range(0f, 1f)] public float panelOpacity = 0.45f;
+            public Color outlineColor = new Color(0.84f, 0.82f, 1f, 1f);
+            [Min(0f)] public float outlineWidth = 2f;
+            [Min(0f)] public float cornerRadius = 14f;
+            [Min(1f)] public float labelWidth = 120f;
+        }
 
         [Serializable]
         public sealed class NextPreviewData

@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace Jam50033
     public sealed class RunScore : MonoBehaviour
     {
         [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private VisualSettings visualSettings;
         private static readonly GameplaySettings.ScoringData defaultGameplayScoring = new();
         private GameplaySettings.ScoringData gameplayScoring => gameplaySettings != null ? gameplaySettings.scoring : defaultGameplayScoring;
         [SerializeField] private StageArea stageArea;
@@ -21,6 +23,8 @@ namespace Jam50033
         private bool finished;
         private int bonusPoints;
         private int pendingCoinPoints;
+        private bool formattedWithCommas;
+        private bool UseCommaSeparators => visualSettings == null || visualSettings.scorePanel.useCommaSeparators;
 
         public bool HasFlyingCoins => coinAnimation != null && coinAnimation.HasFlyingCoins;
 
@@ -47,6 +51,10 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (formattedWithCommas != UseCommaSeparators)
+            {
+                RefreshLabels();
+            }
             if (!finished && Time.timeScale > 0f && player != null && player.isActiveAndEnabled)
             {
                 RecordProgress();
@@ -124,10 +132,12 @@ namespace Jam50033
 
         private void RefreshLabels()
         {
-            string text = Score.ToString();
+            formattedWithCommas = UseCommaSeparators;
+            string format = formattedWithCommas ? "N0" : "0";
+            string text = Score.ToString(format, CultureInfo.InvariantCulture);
             if (scoreLabel != null)
             {
-                scoreLabel.text = (Score - pendingCoinPoints).ToString();
+                scoreLabel.text = (Score - pendingCoinPoints).ToString(format, CultureInfo.InvariantCulture);
             }
 
             if (finalScoreLabel != null)
