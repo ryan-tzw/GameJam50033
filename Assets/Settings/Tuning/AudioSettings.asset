@@ -71,5 +71,5 @@ MonoBehaviour:
   gameOverMusic: {fileID: 8300000, guid: 521c6480dfd94ce9581d2837cae5e274, type: 3}
   gameOverMusicVolume: 0.4
   gameOverMusicStartOffset: 0
-  milestoneClip: {fileID: 0}
-  milestoneVolume: 0.7
+  milestoneClip: {fileID: 8300000, guid: 2c078e50114cc403eacd6fbb9a3e8c52, type: 3}
+  milestoneVolume: 0.22

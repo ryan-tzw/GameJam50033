@@ -45,7 +45,9 @@ namespace Jam50033
         }
         private readonly Queue<Milestone> milestoneQueue = new();
         private Text milestoneText;
-        private CanvasGroup milestoneGroup;
+        private RectTransform milestoneRect;
+        private Image milestoneFill, milestoneTopBorder, milestoneBottomBorder, milestoneLeftStar, milestoneRightStar;
+        private bool milestoneMajor;
         private float milestoneElapsed;
         private Canvas canvas;
         private Vector3 originalTargetScale;
@@ -60,6 +62,7 @@ namespace Jam50033
             {
                 originalTargetScale = scoreTarget.localScale;
             }
+            if (effectLayer != null && scoreTarget != null) CreateMilestoneBanner();
         }
 
         public bool TryFly(Vector3 worldPosition, float worldHeight, Sprite[] frames, float fps,
@@ -204,51 +207,134 @@ namespace Jam50033
             if (!isActiveAndEnabled || effectLayer == null || scoreTarget == null) return;
             // Bonuses are already awarded; queue only presentation so crossed milestones stay readable.
             milestoneQueue.Enqueue(new Milestone { tiles = tiles, points = points, major = major });
-            if (milestoneText == null) BeginMilestonePopup();
+            if (!milestoneRect.gameObject.activeSelf) BeginMilestoneBanner();
         }
 
-        private void BeginMilestonePopup()
+        private void CreateMilestoneBanner()
         {
-            Milestone milestone = milestoneQueue.Dequeue();
-            GameObject go = new GameObject("Distance Milestone", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text), typeof(CanvasGroup));
+            var go = new GameObject("Milestone Banner", typeof(RectTransform), typeof(CanvasGroup));
             go.transform.SetParent(effectLayer, false);
-            milestoneText = go.GetComponent<Text>();
-            Text scoreStyle = scoreTarget.GetComponent<Text>();
-            milestoneText.font = scoreStyle != null ? scoreStyle.font : null;
-            milestoneText.fontSize = milestoneStyle.fontSize;
+            milestoneRect = go.GetComponent<RectTransform>();
+            milestoneRect.anchorMin = milestoneRect.anchorMax = new Vector2(0.5f, 1f);
+            milestoneRect.pivot = new Vector2(0.5f, 1f);
+            var group = go.GetComponent<CanvasGroup>();
+            group.blocksRaycasts = group.interactable = false;
+            milestoneFill = BannerImage("Fill");
+            milestoneFill.rectTransform.anchorMin = Vector2.zero;
+            milestoneFill.rectTransform.anchorMax = Vector2.one;
+            milestoneFill.rectTransform.sizeDelta = Vector2.zero;
+            milestoneTopBorder = BannerImage("Top Border");
+            milestoneBottomBorder = BannerImage("Bottom Border");
+            milestoneLeftStar = BannerImage("Left Star");
+            milestoneRightStar = BannerImage("Right Star");
+            var textObject = new GameObject("Milestone Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+            textObject.transform.SetParent(milestoneRect, false);
+            milestoneText = textObject.GetComponent<Text>();
             milestoneText.alignment = TextAnchor.MiddleCenter;
-            milestoneText.color = Color.white;
             milestoneText.supportRichText = true;
             milestoneText.raycastTarget = false;
+            milestoneText.resizeTextForBestFit = true;
+            milestoneText.resizeTextMinSize = 10;
+            milestoneText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            Text scoreStyle = scoreTarget.GetComponent<Text>();
+            milestoneText.font = visualSettings != null ? visualSettings.menuButtons.font : scoreStyle != null ? scoreStyle.font : null;
+            if (milestoneText.font != null && milestoneText.font.dynamic)
+            {
+                const string glyphs = "MILESTONE REACHED / 0123456789 TILES + PTS,";
+                milestoneText.font.RequestCharactersInTexture(glyphs, milestoneStyle.fontSize);
+                milestoneText.font.RequestCharactersInTexture(glyphs, Mathf.RoundToInt(milestoneStyle.fontSize * milestoneStyle.majorScale));
+            }
+            go.SetActive(false);
+        }
+
+        private Image BannerImage(string name)
+        {
+            var go = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(milestoneRect, false);
+            var image = go.GetComponent<Image>();
+            image.raycastTarget = false;
+            return image;
+        }
+
+        private void BeginMilestoneBanner()
+        {
+            Milestone milestone = milestoneQueue.Dequeue();
+            milestoneMajor = milestone.major;
             string format = visualSettings == null || visualSettings.scorePanel.useCommaSeparators ? "N0" : "0";
             string tiles = milestone.tiles.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
             string points = milestone.points.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
-            milestoneText.text = $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.headingColor)}>{tiles} TILES!</color>\n" +
-                $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.bonusColor)}>+{points}</color>";
-            RectTransform rect = milestoneText.rectTransform;
-            rect.sizeDelta = new Vector2(320f, milestoneStyle.fontSize * 3f);
+            string separator = $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.headingColor)}> // </color>";
+            milestoneText.text = $"MILESTONE REACHED{separator}{tiles} TILES{separator}" +
+                $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.bonusColor)}>+{points} PTS</color>";
             float scale = milestone.major ? milestoneStyle.majorScale : 1f;
-            rect.localScale = Vector3.one * scale;
-            rect.anchoredPosition = TargetPosition() + milestoneStyle.offset;
-            milestoneGroup = go.GetComponent<CanvasGroup>();
-            milestoneGroup.blocksRaycasts = false;
-            milestoneGroup.interactable = false;
             milestoneElapsed = 0f;
+            LayoutMilestoneBanner();
+            milestoneRect.anchoredPosition = new Vector2(BannerOffscreenX(true), -milestoneStyle.topInset);
+            milestoneRect.gameObject.SetActive(true);
             PulseScore(scale);
+        }
+
+        private void LayoutMilestoneBanner()
+        {
+            var style = milestoneStyle;
+            float width = effectLayer.rect.width;
+            float emphasis = milestoneMajor ? style.majorScale : 1f;
+            milestoneRect.sizeDelta = new Vector2(width, style.bannerHeight);
+            milestoneFill.color = new Color(style.panelColor.r, style.panelColor.g, style.panelColor.b, style.panelOpacity);
+            for (int i = 0; i < 2; i++)
+            {
+                Image border = i == 0 ? milestoneTopBorder : milestoneBottomBorder;
+                border.color = style.borderColor;
+                border.rectTransform.anchorMin = new Vector2(0f, i == 0 ? 1f : 0f);
+                border.rectTransform.anchorMax = new Vector2(1f, i == 0 ? 1f : 0f);
+                border.rectTransform.pivot = new Vector2(0.5f, i == 0 ? 1f : 0f);
+                border.rectTransform.sizeDelta = new Vector2(0f, style.borderWidth);
+            }
+            Text scoreStyle = scoreTarget.GetComponent<Text>();
+            milestoneText.font = visualSettings != null ? visualSettings.menuButtons.font : scoreStyle != null ? scoreStyle.font : null;
+            milestoneText.color = visualSettings != null ? visualSettings.menuButtons.textColor : Color.white;
+            milestoneText.fontSize = milestoneText.resizeTextMaxSize = Mathf.RoundToInt(style.fontSize * emphasis);
+            float starSize = style.starSprite != null ? style.starSize * emphasis : 0f;
+            float starSpace = starSize > 0f ? starSize + style.starGap : 0f;
+            float textWidth = Mathf.Max(1f, Mathf.Min(milestoneText.preferredWidth + 4f,
+                width - 2f * (style.horizontalPadding + starSpace)));
+            milestoneText.rectTransform.sizeDelta = new Vector2(textWidth, style.bannerHeight);
+            for (int i = 0; i < 2; i++)
+            {
+                Image star = i == 0 ? milestoneLeftStar : milestoneRightStar;
+                star.enabled = style.starSprite != null;
+                star.sprite = style.starSprite;
+                star.color = style.starColor;
+                star.preserveAspect = true;
+                star.rectTransform.sizeDelta = Vector2.one * starSize;
+                star.rectTransform.anchoredPosition = Vector2.right * (i == 0 ? -1f : 1f) *
+                    (textWidth * 0.5f + style.starGap + starSize * 0.5f);
+            }
         }
 
         private void UpdateMilestone(float delta)
         {
-            if (milestoneText == null) return;
+            if (milestoneRect == null || !milestoneRect.gameObject.activeSelf) return;
             milestoneElapsed += delta;
-            float t = Mathf.Clamp01(milestoneElapsed / Mathf.Max(0.05f, milestoneStyle.duration));
-            milestoneGroup.alpha = 1f - Mathf.InverseLerp(0.5f, 1f, t);
-            milestoneText.rectTransform.anchoredPosition = TargetPosition() + milestoneStyle.offset + Vector2.up * milestoneStyle.rise * t;
-            if (t < 1f) return;
-            Destroy(milestoneText.gameObject);
-            milestoneText = null;
-            milestoneGroup = null;
-            if (milestoneQueue.Count > 0) BeginMilestonePopup();
+            LayoutMilestoneBanner();
+            float enter = Mathf.Max(0.01f, milestoneStyle.slideInDuration);
+            float hold = Mathf.Max(0.05f, milestoneStyle.duration);
+            float leave = Mathf.Max(0.01f, milestoneStyle.slideOutDuration);
+            float x = 0f;
+            if (milestoneElapsed < enter) x = BannerOffscreenX(true) * Mathf.Pow(1f - milestoneElapsed / enter, 3f);
+            else if (milestoneElapsed > enter + hold)
+                x = BannerOffscreenX(false) * Mathf.Pow(Mathf.Clamp01((milestoneElapsed - enter - hold) / leave), 3f);
+            milestoneRect.anchoredPosition = new Vector2(x, -milestoneStyle.topInset);
+            if (milestoneElapsed < enter + hold + leave) return;
+            milestoneRect.gameObject.SetActive(false);
+            if (milestoneQueue.Count > 0) BeginMilestoneBanner();
+        }
+
+        private float BannerOffscreenX(bool right)
+        {
+            // The effects layer may be inset; use screen edges so no part of the banner peeks in early.
+            float edge = ScreenToLocal(new Vector2(right ? Screen.width : 0f, Screen.height)).x;
+            return edge - effectLayer.rect.center.x + (right ? 1f : -1f) * (milestoneRect.rect.width * 0.5f + 4f);
         }
 
         private void ShowPopup(int points)
@@ -296,15 +382,18 @@ namespace Jam50033
             }
             popups.Clear();
             milestoneQueue.Clear();
-            if (milestoneText != null) Destroy(milestoneText.gameObject);
-            milestoneText = null;
-            milestoneGroup = null;
+            if (milestoneRect != null) milestoneRect.gameObject.SetActive(false);
             pulseRemaining = 0f;
             pulseScale = 1f;
             if (scoreTarget != null)
             {
                 scoreTarget.localScale = originalTargetScale;
             }
+        }
+
+        private void OnDestroy()
+        {
+            if (milestoneRect != null) Destroy(milestoneRect.gameObject);
         }
     }
 }

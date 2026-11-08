@@ -32,12 +32,12 @@ MonoBehaviour:
     staggerDuration: 0.375
     staggerClip: {fileID: 7400000, guid: b919ceb1190c88e74a18aa72b42b1ac3, type: 2}
     initialMomentum: 0
-    momentumBuildTime: 5
+    momentumBuildTime: 3
     climbMomentumDecay: 0.35
     fallMomentumDecay: 0.25
     staggerMomentumDecay: 0.5
     landingMomentumPenalty: 0.3
-    maximumMomentumSpeedBonus: 0.3
+    maximumMomentumSpeedBonus: 0.2
     fastRunStartSpeed: 1.2
     fastRunStopSpeed: 1.1
     standingSprite: {fileID: 1768599190028779529, guid: a11535981f9df56ae82e6f61eca4e78d, type: 3}

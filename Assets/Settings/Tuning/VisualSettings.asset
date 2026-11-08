@@ -196,12 +196,23 @@ MonoBehaviour:
     fillColor: {r: 0.84, g: 0.82, b: 1, a: 1}
   milestones:
     duration: 1
-    offset: {x: 0, y: -85}
     fontSize: 28
     headingColor: {r: 0.84, g: 0.82, b: 1, a: 1}
     bonusColor: {r: 1, g: 0.95, b: 0.86, a: 1}
-    rise: 12
     majorScale: 1.2
+    slideInDuration: 0.3
+    slideOutDuration: 0.25
+    topInset: 125
+    bannerHeight: 52
+    panelColor: {r: 0.1, g: 0.07, b: 0.24, a: 1}
+    panelOpacity: 0.75
+    borderColor: {r: 0.75, g: 0.65, b: 0.95, a: 1}
+    borderWidth: 2
+    horizontalPadding: 24
+    starSprite: {fileID: 21300000, guid: 2b9e0e36395cad53aac74c83035037a5, type: 3}
+    starColor: {r: 1, g: 0.9, b: 0.55, a: 1}
+    starSize: 28
+    starGap: 14
   coin:
     frames:
     - {fileID: -8122072913242413145, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}

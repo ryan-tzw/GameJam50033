@@ -234,15 +234,25 @@ namespace Jam50033
         [Serializable]
         public sealed class MilestoneData
         {
-            [Min(0.05f)] public float duration = 1f;
-            [Tooltip("Offset from the score number in Canvas UI units.")]
-            public Vector2 offset = new Vector2(0f, -85f);
+            [Min(0.05f), InspectorName("Hold Duration")] public float duration = 1f;
+            [Min(0.01f)] public float slideInDuration = 0.3f;
+            [Min(0.01f)] public float slideOutDuration = 0.25f;
+            [Tooltip("Distance below the top of the screen, in Canvas UI units.")]
+            public float topInset = 125f;
+            [Min(1f)] public float bannerHeight = 52f;
+            public Color panelColor = new Color(0.1f, 0.07f, 0.24f, 1f);
+            [Range(0f, 1f)] public float panelOpacity = 0.75f;
+            public Color borderColor = new Color(0.75f, 0.65f, 0.95f, 1f);
+            [Min(0f)] public float borderWidth = 2f;
+            [Min(0f)] public float horizontalPadding = 24f;
+            public Sprite starSprite;
+            public Color starColor = new Color(1f, 0.9f, 0.55f, 1f);
+            [Min(0f)] public float starSize = 28f;
+            [Min(0f)] public float starGap = 14f;
             [Min(1)] public int fontSize = 28;
             public Color headingColor = new Color(0.84f, 0.82f, 1f, 1f);
             public Color bonusColor = new Color(1f, 0.95f, 0.86f, 1f);
-            [Min(0f), Tooltip("Popup upward travel in Canvas UI units.")]
-            public float rise = 12f;
-            [Min(1f), Tooltip("Popup size and score pulse multiplier for emphasized tiers.")]
+            [Min(1f), Tooltip("Text, star size and score pulse multiplier for emphasized tiers.")]
             public float majorScale = 1.2f;
         }
 

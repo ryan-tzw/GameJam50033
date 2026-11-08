@@ -17,8 +17,8 @@ MonoBehaviour:
     rows: 21
     screenPadding: 0.5
   bridge:
-    baseSpeed: 1
-    maxSpeed: 1.2
+    baseSpeed: 0.8
+    maxSpeed: 1
     lowerLeadThreshold: -1.8
     upperLeadThreshold: 2.72
     smoothingTime: 1

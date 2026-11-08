@@ -22,12 +22,12 @@ MonoBehaviour:
     spawnRightOffset: 2
     spawnGizmoColor: {r: 0.3, g: 1, b: 1, a: 0.7}
   difficulty:
-    progressionDuration: 120
-    initialOneHazardChance: 0.075
-    initialTwoHazardChance: 0.025
-    finalOneHazardChance: 0.125
-    finalTwoHazardChance: 0.075
-    maximumSpeedMultiplier: 1.8
+    progressionDuration: 180
+    initialOneHazardChance: 0.0333
+    initialTwoHazardChance: 0.0166
+    finalOneHazardChance: 0.1
+    finalTwoHazardChance: 0.05
+    maximumSpeedMultiplier: 2.3
   hazardClusters:
     tetrominoPrefab: {fileID: 7053026960480931781, guid: c122ef960befc3b9a89b95a07a05145e, type: 3}
     hazardBrickPrefab: {fileID: 3973176616428203104, guid: 380dd6541e65108238e07b8c37475377, type: 3}
