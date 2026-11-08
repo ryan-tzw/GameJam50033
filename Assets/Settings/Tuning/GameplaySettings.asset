@@ -34,8 +34,8 @@ MonoBehaviour:
     horizontalDrift: 0.7
     rotationSpeed: 120
   tetromino:
-    relativeMoveSpeed: 1.5
-    speedUpMultiplier: 20
+    relativeMoveSpeed: 1
+    speedUpMultiplier: 30
     hardDropKey: 1
     verticalRepeatDelay: 0.13
     verticalRepeatInterval: 0.03
