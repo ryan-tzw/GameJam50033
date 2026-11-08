@@ -9,6 +9,8 @@ namespace Jam50033
     public sealed class MenuButtonStyle : MonoBehaviour
     {
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private bool squareIcon;
+        public bool IsIconButton => squareIcon;
         private SlicedQueuePanel panel;
 
         private void OnEnable()
@@ -27,8 +29,9 @@ namespace Jam50033
             if (panel == null) panel = GetComponent<SlicedQueuePanel>();
             VisualSettings.MenuButtonData style = visualSettings.menuButtons;
             RectTransform rect = (RectTransform)transform;
-            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Max(1f, style.size.x));
-            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(1f, style.size.y));
+            Vector2 size = squareIcon ? Vector2.one * visualSettings.pauseMenu.iconButtonSize : style.size;
+            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Max(1f, size.x));
+            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Max(1f, size.y));
             Color fill = style.panelColor;
             fill.a = style.panelOpacity;
             panel.Configure(fill, style.outlineColor, style.outlineWidth, style.cornerRadius, 0f,

@@ -18,13 +18,13 @@ MonoBehaviour:
     screenPadding: 0.5
   bridge:
     baseSpeed: 1
-    maxSpeed: 1.3
-    lowerLeadThreshold: 0
-    upperLeadThreshold: 0.3492593
+    maxSpeed: 1.2
+    lowerLeadThreshold: -1.8
+    upperLeadThreshold: 2.72
     smoothingTime: 1
   collapse:
-    warningX: -5.6485186
-    collapseX: -7.2703705
+    warningX: -6
+    collapseX: -7.59
     initialCollapseDelay: 2
     initialShakeStrength: 0.01
     shakeStrength: 0.03
@@ -37,8 +37,8 @@ MonoBehaviour:
     relativeMoveSpeed: 1.5
     speedUpMultiplier: 20
     hardDropKey: 1
-    verticalRepeatDelay: 0.16
-    verticalRepeatInterval: 0.04
+    verticalRepeatDelay: 0.13
+    verticalRepeatInterval: 0.03
   scoring:
     pointsPerTile: 10
     points: 50

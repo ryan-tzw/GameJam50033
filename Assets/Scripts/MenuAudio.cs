@@ -41,7 +41,8 @@ namespace Jam50033
             GameObject selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
             Keyboard keyboard = Keyboard.current;
             bool navigating = keyboard != null && (keyboard.upArrowKey.isPressed || keyboard.downArrowKey.isPressed ||
-                keyboard.wKey.isPressed || keyboard.sKey.isPressed);
+                keyboard.wKey.isPressed || keyboard.sKey.isPressed || keyboard.leftArrowKey.isPressed ||
+                keyboard.rightArrowKey.isPressed || keyboard.aKey.isPressed || keyboard.dKey.isPressed);
             // Initial focus and attempts to move past the last item stay silent. Held-key repeats still count.
             if (selected != previousSelection && previousSelection != null && selected != null &&
                 selected.activeInHierarchy && selected.GetComponent<Selectable>() != null && navigating && settings != null)

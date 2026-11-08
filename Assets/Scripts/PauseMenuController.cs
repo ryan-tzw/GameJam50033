@@ -16,8 +16,10 @@ namespace Jam50033
         [SerializeField] private GameObject panel;
         [SerializeField] private Text heading;
         [SerializeField] private Button resumeButton;
+        [SerializeField] private Button audioButton;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
+        [SerializeField] private Image[] icons;
         private static PauseMenuController active;
         private bool paused, opening, leaving;
         private float previousTimeScale;
@@ -26,14 +28,14 @@ namespace Jam50033
 
         private void Awake()
         {
-            buttons = new[] { resumeButton, restartButton, mainMenuButton };
+            buttons = new[] { resumeButton, audioButton, restartButton, mainMenuButton };
             panel.SetActive(false);
             MenuAudio.Initialize(audioSettings);
         }
 
         private void Update()
         {
-            if (StripSceneTransition.IsRunning || leaving || (gameOver != null && gameOver.IsGameOver)) return;
+            if (AudioMenuController.IsOpen || StripSceneTransition.IsRunning || leaving || (gameOver != null && gameOver.IsGameOver)) return;
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 if (paused) Resume();
@@ -65,13 +67,25 @@ namespace Jam50033
             heading.rectTransform.anchoredPosition = style.headingPosition;
             for (int i = 0; i < buttons.Length; i++)
             {
-                buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, style.firstButtonY - i * style.buttonSpacing);
+                buttons[i].GetComponent<RectTransform>().anchoredPosition = i == 0
+                    ? new Vector2(0f, style.firstButtonY)
+                    : new Vector2((i - 2) * (style.iconButtonSize + style.iconButtonGap), style.iconRowY);
                 Text text = buttons[i].GetComponentInChildren<Text>();
                 text.font = visualSettings.menuButtons.font;
-                text.fontSize = visualSettings.menuButtons.fontSize;
+                text.fontSize = i == 0 ? visualSettings.menuButtons.fontSize : style.captionFontSize;
                 text.fontStyle = visualSettings.menuButtons.fontStyle;
                 text.color = visualSettings.menuButtons.textColor;
                 buttons[i].colors = visualSettings.menuButtons.colors;
+                if (i == 0) continue;
+                float captionHeight = style.captionFontSize * 1.8f;
+                text.rectTransform.anchorMin = text.rectTransform.anchorMax = text.rectTransform.pivot = Vector2.one * 0.5f;
+                text.rectTransform.sizeDelta = new Vector2(style.iconButtonSize + style.iconButtonGap, captionHeight);
+                text.rectTransform.anchoredPosition = Vector2.down * (style.iconButtonSize * 0.5f + style.captionGap + captionHeight * 0.5f);
+                Image icon = icons[i - 1];
+                icon.sprite = i == 1 ? style.audioIcon : i == 2 ? style.restartIcon : style.mainMenuIcon;
+                icon.color = style.iconColor;
+                icon.preserveAspect = true;
+                icon.rectTransform.sizeDelta = Vector2.one * style.iconSize;
             }
             if (!opening) return;
             // Focus after the UI update so a gameplay submit cannot activate the newly opened menu.
@@ -113,7 +127,7 @@ namespace Jam50033
         {
             if (!paused || leaving) return;
             leaving = true;
-            resumeButton.interactable = restartButton.interactable = mainMenuButton.interactable = false;
+            foreach (Button button in buttons) button.interactable = false;
             // Keep the old world frozen until the wipe unloads it.
             StripSceneTransition.Load(scene, visualSettings);
         }

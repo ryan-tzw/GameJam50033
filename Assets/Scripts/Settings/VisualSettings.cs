@@ -29,6 +29,8 @@ namespace Jam50033
         public MenuButtonData menuButtons = new();
         [Header("Pause Menu")]
         public PauseMenuData pauseMenu = new();
+        [Header("Audio Menu")]
+        public AudioMenuData audioMenu = new();
         [Header("Score Milestones")]
         public MilestoneData milestones = new();
         [Header("Coin")]
@@ -62,6 +64,19 @@ namespace Jam50033
         public ImageData[] images = Array.Empty<ImageData>();
 
         [Serializable]
+        public sealed class AudioMenuData
+        {
+            public Vector2 headingPosition = new Vector2(0f, 190f);
+            public Vector2 rowSize = new Vector2(600f, 64f);
+            public float firstRowY = 70f;
+            [Min(1f)] public float rowSpacing = 80f;
+            public float backButtonY = -200f;
+            [Min(1)] public int fontSize = 24;
+            public Color trackColor = new Color(0.3f, 0.27f, 0.43f, 1f);
+            public Color fillColor = new Color(0.84f, 0.82f, 1f, 1f);
+        }
+
+        [Serializable]
         public sealed class PauseMenuData
         {
             public Color overlayColor = new Color(0.025f, 0.045f, 0.08f, 0.8f);
@@ -69,8 +84,19 @@ namespace Jam50033
             [Min(1)] public int headingSize = 70;
             public Color headingColor = new Color(1f, 0.95f, 0.86f, 1f);
             public Vector2 headingPosition = new Vector2(0f, 165f);
+            [Tooltip("Resume button Y in Canvas UI units.")]
             public float firstButtonY = 35f;
-            [Min(1f)] public float buttonSpacing = 90f;
+            [Header("Icon Row")]
+            public Sprite audioIcon;
+            public Sprite restartIcon;
+            public Sprite mainMenuIcon;
+            [Min(1f)] public float iconButtonSize = 72f;
+            [Min(0f)] public float iconButtonGap = 32f;
+            public float iconRowY = -75f;
+            [Min(1f)] public float iconSize = 48f;
+            public Color iconColor = new Color(1f, 0.95f, 0.84f, 1f);
+            [Min(1)] public int captionFontSize = 16;
+            [Min(0f)] public float captionGap = 8f;
         }
 
         [Serializable]
