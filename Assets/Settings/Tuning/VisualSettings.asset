@@ -165,6 +165,13 @@ MonoBehaviour:
     calloutOpacity: 0.15
     backButtonSize: {x: 300, y: 54}
     backFontSize: 30
+    zoneScreenshot: {fileID: 6514790310029460337, guid: 9be805a5c3f1eeaa3b1d63ed965efd3c, type: 3}
+    zoneScreenshotSize: {x: 700, y: 394}
+    zoneHeadingSize: 17
+    zoneBodySize: 14
+    entryHelpColor: {r: 0.65, g: 0.9, b: 1, a: 1}
+    noBuildHelpColor: {r: 1, g: 0.8, b: 0.45, a: 1}
+    pageButtonSize: {x: 64, y: 54}
   audioMenu:
     headingPosition: {x: 0, y: 190}
     rowSize: {x: 600, y: 64}

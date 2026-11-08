@@ -100,6 +100,14 @@ namespace Jam50033
             [Range(0f, 1f)] public float calloutOpacity = 0.15f;
             public Vector2 backButtonSize = new Vector2(300f, 54f);
             [Min(1)] public int backFontSize = 30;
+            [Header("Zone Help Page")]
+            public Sprite zoneScreenshot;
+            public Vector2 zoneScreenshotSize = new Vector2(700f, 394f);
+            [Min(1)] public int zoneHeadingSize = 17;
+            [Min(1)] public int zoneBodySize = 14;
+            public Color entryHelpColor = new Color(0.65f, 0.9f, 1f, 1f);
+            public Color noBuildHelpColor = new Color(1f, 0.8f, 0.45f, 1f);
+            public Vector2 pageButtonSize = new Vector2(64f, 54f);
         }
 
         [Serializable]

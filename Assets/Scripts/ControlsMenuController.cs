@@ -22,6 +22,17 @@ namespace Jam50033
         [SerializeField] private Button backButton;
         [SerializeField] private Button returnButton;
         [SerializeField] private GameObject[] sourceWidgets;
+        [SerializeField] private GameObject keysPage;
+        [SerializeField] private GameObject zonesPage;
+        [SerializeField] private Button previousPageButton;
+        [SerializeField] private Button nextPageButton;
+        [SerializeField] private Text pageNumber;
+        [SerializeField] private Image zoneScreenshot;
+        [SerializeField] private Image zoneCaptionBackground;
+        [SerializeField] private Text[] zoneHeadings;
+        [SerializeField] private Text[] zoneBodies;
+        [SerializeField] private Graphic[] entryMarkers;
+        [SerializeField] private Graphic[] noBuildMarkers;
         private static ControlsMenuController active;
         private bool[] sourceStates;
         private bool open, opening, closing;
@@ -30,6 +41,7 @@ namespace Jam50033
         private void Awake()
         {
             panel.SetActive(false);
+            SetPage(0);
             // Generate rounded panel art and load glyphs before the player opens this page.
             ApplyStyle();
             foreach (Text text in panel.GetComponentsInChildren<Text>(true))
@@ -37,6 +49,8 @@ namespace Jam50033
                 if (text.font != null && text.font.dynamic)
                     text.font.RequestCharactersInTexture(text.text, text.fontSize, text.fontStyle);
             }
+            if (heading.font != null && heading.font.dynamic)
+                heading.font.RequestCharactersInTexture("ControlsZone Rules", heading.fontSize, heading.fontStyle);
         }
 
         public void Open()
@@ -51,6 +65,28 @@ namespace Jam50033
             active = this;
             open = opening = true;
             closing = false;
+            SetPage(0);
+        }
+
+        public void NextPage() => SetPage(1);
+        public void PreviousPage() => SetPage(0);
+
+        private void SetPage(int index)
+        {
+            keysPage.SetActive(index == 0);
+            zonesPage.SetActive(index == 1);
+            previousPageButton.interactable = index > 0;
+            nextPageButton.interactable = index < 1;
+            // Explicit navigation can still focus disabled targets, so remove those links.
+            Navigation navigation = backButton.navigation;
+            navigation.selectOnLeft = previousPageButton.interactable ? previousPageButton : null;
+            navigation.selectOnRight = nextPageButton.interactable ? nextPageButton : null;
+            backButton.navigation = navigation;
+            heading.text = index == 0 ? "Controls" : "Zone Rules";
+            subtitle.text = index == 0 ? "The adventurer runs automatically. You control the bridge."
+                : "Where your pieces can pass through and be placed.";
+            pageNumber.text = index == 0 ? "1 / 2" : "2 / 2";
+            if (open) backButton.Select();
         }
 
         public void Back()
@@ -130,6 +166,27 @@ namespace Jam50033
                 backStyle.cornerRadius, 0f, art.panelFillSprite, art.panelOutlineSprite);
             StyleText(backButton.GetComponentInChildren<Text>(), style.backFontSize);
             backButton.colors = backStyle.colors;
+            zoneScreenshot.sprite = style.zoneScreenshot;
+            zoneScreenshot.rectTransform.sizeDelta = style.zoneScreenshotSize;
+            zoneCaptionBackground.color = new Color(style.panelColor.r, style.panelColor.g, style.panelColor.b, 0.96f);
+            StyleText(pageNumber, style.zoneBodySize);
+            for (int i = 0; i < zoneHeadings.Length; i++)
+            {
+                StyleText(zoneHeadings[i], style.zoneHeadingSize);
+                zoneHeadings[i].color = i == 0 ? style.entryHelpColor : style.noBuildHelpColor;
+                StyleText(zoneBodies[i], style.zoneBodySize);
+            }
+            foreach (Graphic marker in entryMarkers) marker.color = style.entryHelpColor;
+            foreach (Graphic marker in noBuildMarkers) marker.color = style.noBuildHelpColor;
+            for (int i = 0; i < 2; i++)
+            {
+                Button button = i == 0 ? previousPageButton : nextPageButton;
+                button.GetComponent<RectTransform>().sizeDelta = style.pageButtonSize;
+                button.GetComponent<SlicedQueuePanel>().Configure(fill, backStyle.outlineColor, backStyle.outlineWidth,
+                    backStyle.cornerRadius, 0f, art.panelFillSprite, art.panelOutlineSprite);
+                button.GetComponentInChildren<KeyArrowGraphic>().color = backStyle.textColor;
+                button.colors = backStyle.colors;
+            }
         }
 
         private void StyleText(Text text, int size)
