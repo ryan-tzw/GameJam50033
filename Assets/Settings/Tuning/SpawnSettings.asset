@@ -22,7 +22,7 @@ MonoBehaviour:
     spawnRightOffset: 2
     spawnGizmoColor: {r: 0.3, g: 1, b: 1, a: 0.7}
   difficulty:
-    progressionDuration: 180
+    progressionDuration: 150
     initialOneHazardChance: 0.0333
     initialTwoHazardChance: 0.0166
     finalOneHazardChance: 0.1

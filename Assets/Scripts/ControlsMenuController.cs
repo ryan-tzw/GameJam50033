@@ -84,7 +84,7 @@ namespace Jam50033
             backButton.navigation = navigation;
             heading.text = index == 0 ? "Controls" : "Zone Rules";
             subtitle.text = index == 0 ? "The adventurer runs automatically. You control the bridge."
-                : "Where your pieces can pass through and be placed.";
+                : "The zones are the shaded areas to the right of each vertical line.";
             pageNumber.text = index == 0 ? "1 / 2" : "2 / 2";
             if (open) backButton.Select();
         }

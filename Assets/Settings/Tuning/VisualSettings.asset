@@ -118,7 +118,7 @@ MonoBehaviour:
       m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
-    hintText: //  PRESS SPACE  //
+    hintText: // Press SPACE to select //
     hintFont: {fileID: 12800000, guid: 2783af3c8d951ef5e8c19a312b92856e, type: 3}
     hintFontSize: 22
     hintFontStyle: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
     color: {r: 0.84, g: 0.82, b: 1, a: 0.9}
     alignment: 4
     lineSpacing: 1
-    text: PRESS SPACE
+    text: // Press SPACE to select //
     dynamicText: 0
   - name: TitleScene/Title Canvas/Title
     font: {fileID: 12800000, guid: 08e912f05e45047ecabb90fbc0936391, type: 3}

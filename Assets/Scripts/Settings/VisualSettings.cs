@@ -215,7 +215,7 @@ namespace Jam50033
             [Range(0.1f, 0.99f), Tooltip("Higher values reduce the bounce.")]
             public float bounceDamping = 0.55f;
             [Header("Title Screen Hint")]
-            public string hintText = "//  PRESS SPACE  //";
+            public string hintText = "// Press SPACE to select //";
             public Font hintFont;
             [Min(1)] public int hintFontSize = 22;
             public FontStyle hintFontStyle = FontStyle.Italic;
