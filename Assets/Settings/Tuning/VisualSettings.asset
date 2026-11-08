@@ -23,9 +23,9 @@ MonoBehaviour:
     glowColor: {r: 1, g: 0.7, b: 0.3, a: 0.18}
     glowSize: 0.25
     shadowColor: {r: 0.09579099, g: 0.056603774, b: 0.2264151, a: 0.8235294}
-    shadowOffset: {x: 0.51, y: -0.75}
-    shadowSpread: 0.869
-    shadowSoftness: 0.369
+    shadowOffset: {x: 0.34, y: -1.3}
+    shadowSpread: 1
+    shadowSoftness: 0.373
   stageOutline:
     dashLength: 0.2
     lineWidth: 0.03
