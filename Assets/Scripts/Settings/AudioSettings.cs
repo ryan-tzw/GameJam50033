@@ -21,13 +21,24 @@ namespace Jam50033
         [Header("Music")]
         public AudioClip titleMusic;
         [Range(0f, 1f)] public float titleMusicVolume = 0.7f;
+        [Min(0f), Tooltip("Initial playback offset in seconds. Subsequent loops play the full clip.")]
+        public float titleMusicStartOffset;
         public AudioClip gameMusic;
         [Range(0f, 1f)] public float gameMusicVolume = 0.25f;
+        [Min(0f), Tooltip("Initial playback offset in seconds. Subsequent loops play the full clip.")]
+        public float gameMusicStartOffset;
         [Range(0f, 1f), Tooltip("Music volume multiplier while the pause menu is open.")]
         public float pausedMusicMultiplier = 0.35f;
+        [Header("Music Transitions")]
+        [Min(0f), Tooltip("Fade-in time in real seconds, including while gameplay is paused.")]
+        public float musicFadeInDuration = 0.15f;
+        [Min(0f), Tooltip("Fade-out time before track or scene changes, in real seconds.")]
+        public float musicFadeOutDuration = 0.15f;
         [Header("Game Over Music")]
         public AudioClip gameOverMusic;
         [Range(0f, 1f)] public float gameOverMusicVolume = 0.4f;
+        [Min(0f), Tooltip("Initial playback offset in seconds. Subsequent loops play the full clip.")]
+        public float gameOverMusicStartOffset;
         [Header("Score Milestones")]
         public AudioClip milestoneClip;
         [Range(0f, 1f)] public float milestoneVolume = 0.7f;

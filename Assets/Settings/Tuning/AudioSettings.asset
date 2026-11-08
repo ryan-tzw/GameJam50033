@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82eb1a5011f2f85989a35031567cdd6, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.AudioSettings
-  milestoneClip: {fileID: 0}
-  milestoneVolume: 0.7
-  gameOverMusic: {fileID: 8300000, guid: 521c6480dfd94ce9581d2837cae5e274, type: 3}
-  gameOverMusicVolume: 0.4
   menu:
     selectClip: {fileID: 8300000, guid: 7f293147b2479cb3dadbfeadfae83c32, type: 3}
     selectVolume: 0.3
@@ -52,12 +48,21 @@ MonoBehaviour:
     pickupVolume: 0.428
     arrivalClip: {fileID: 8300000, guid: 8544dfa319b610e4fa0644acd651fbbe, type: 3}
     arrivalVolume: 0.514
-    chestOpenClip: {fileID: 8300000, guid: 16a392f0cbda61f7cb324785b55a39ff, type: 3}
-    chestOpenVolume: 0.518
+    chestOpenClip: {fileID: 8300000, guid: 3205d0c0332640b8997c48c9c83b908c, type: 3}
+    chestOpenVolume: 0.484
   effectsMixer: {fileID: -9189990099448920877, guid: 274b3b5ae8782b3e5914e5627895d25b, type: 2}
   musicMixer: {fileID: 3354677552789489752, guid: 274b3b5ae8782b3e5914e5627895d25b, type: 2}
   titleMusic: {fileID: 8300000, guid: 0e52114e36a94fd42a8c51ac363423c9, type: 3}
   titleMusicVolume: 1
+  titleMusicStartOffset: 0
   gameMusic: {fileID: 8300000, guid: 006a32a0a642a9374be4b29b6b5eca08, type: 3}
   gameMusicVolume: 0.4
+  gameMusicStartOffset: 1
   pausedMusicMultiplier: 0.35
+  musicFadeInDuration: 0.15
+  musicFadeOutDuration: 0.15
+  gameOverMusic: {fileID: 8300000, guid: 521c6480dfd94ce9581d2837cae5e274, type: 3}
+  gameOverMusicVolume: 0.4
+  gameOverMusicStartOffset: 0
+  milestoneClip: {fileID: 0}
+  milestoneVolume: 0.7

@@ -42,7 +42,12 @@ namespace Jam50033
             Time.timeScale = 0f;
             PauseMenus();
             CreateStrips();
+            SettingsMusic outgoingMusic = FindFirstObjectByType<SettingsMusic>();
+            if (outgoingMusic != null && outgoingMusic.isActiveAndEnabled) outgoingMusic.FadeOutForScene();
             yield return Wipe(false);
+            // Usually the short fade finishes during the cover; respect longer Inspector tuning too.
+            while (outgoingMusic != null && outgoingMusic.isActiveAndEnabled && !outgoingMusic.IsSilent)
+                yield return null;
 
             // The overlay survives unloading and remains fully covered until the destination is ready.
             SceneManager.sceneLoaded += OnSceneLoaded;
