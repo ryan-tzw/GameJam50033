@@ -16,6 +16,8 @@ namespace Jam50033
         private RectTransform canvasRect;
         private RectTransform[] strips;
         private float resumeTimeScale;
+        private bool ownsPause;
+        public static bool IsRunning => active != null;
 
         public static void Load(string sceneName, VisualSettings visuals)
         {
@@ -36,6 +38,7 @@ namespace Jam50033
         private IEnumerator ChangeScene(string sceneName)
         {
             resumeTimeScale = Time.timeScale > 0f ? Time.timeScale : 1f;
+            ownsPause = true;
             Time.timeScale = 0f;
             PauseMenus();
             CreateStrips();
@@ -59,8 +62,9 @@ namespace Jam50033
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            // GameOverController restores time while unloading; pause the new scene again before Start.
-            Time.timeScale = 0f;
+            // Start the destination beneath the covered screen, so it is moving throughout the reveal.
+            Time.timeScale = resumeTimeScale;
+            ownsPause = false;
             PauseMenus();
         }
 
@@ -136,7 +140,12 @@ namespace Jam50033
                 if (menu != null) menu.enabled = true;
             }
             pausedMenus.Clear();
-            Time.timeScale = resumeTimeScale;
+            // Once the destination is running, preserve any pause it creates (for example, a death).
+            if (ownsPause)
+            {
+                Time.timeScale = resumeTimeScale;
+                ownsPause = false;
+            }
         }
 
         private void OnDestroy()

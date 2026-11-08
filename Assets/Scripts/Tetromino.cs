@@ -356,7 +356,8 @@ namespace Jam50033
 
             float cellSize = stageArea.CellSize;
             RefreshOccupiedCells();
-            Keyboard keyboard = Keyboard.current;
+            // The world moves during scene reveals, but held menu keys must not control the piece.
+            Keyboard keyboard = StripSceneTransition.IsRunning ? null : Keyboard.current;
             if (keyboard != null)
             {
                 if (keyboard.qKey.wasPressedThisFrame)
