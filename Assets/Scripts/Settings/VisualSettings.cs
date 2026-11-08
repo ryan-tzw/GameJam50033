@@ -9,6 +9,8 @@ namespace Jam50033
     {
         [Header("Scene Transition")]
         public TransitionData sceneTransition = new();
+        [Header("Title Outline, Glow and Shadow")]
+        public TitleStyleData titleStyle = new();
         [Header("Stage Outline")]
         public StageOutlineData stageOutline = new();
         [Header("Bridge Gizmos")]
@@ -323,6 +325,21 @@ namespace Jam50033
             public float scaleMultiplier = 1f;
             [Tooltip("World-space adjustment from the camera centre.")]
             public Vector2 offset;
+        }
+
+        [Serializable]
+        public sealed class TitleStyleData
+        {
+            public Color outlineColor = new Color(0.65f, 0.38f, 0.12f, 1f);
+            [Range(0f, 1f)] public float outlineWidth = 0.08f;
+            public Color glowColor = new Color(1f, 0.7f, 0.3f, 0.18f);
+            [Range(0f, 1f)] public float glowSize = 0.25f;
+            public Color shadowColor = new Color(0.03f, 0.02f, 0.07f, 0.95f);
+            [Tooltip("TextMeshPro shadow offset in normalized font-material units, independent of the gameplay grid.")]
+            public Vector2 shadowOffset = new Vector2(0.25f, -0.4f);
+            [Range(0f, 1f), Tooltip("Expands the solid shadow before softening its edges. TextMeshPro normalized material units.")]
+            public float shadowSpread = 0.45f;
+            [Range(0f, 1f)] public float shadowSoftness = 0.65f;
         }
 
         [Serializable]

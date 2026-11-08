@@ -14,9 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.VisualSettings
   sceneTransition:
     color: {r: 0.055, g: 0.045, b: 0.13, a: 1}
-    stripCount: 12
+    stripCount: 6
     duration: 0.28
-    stripStagger: 0.01
+    stripStagger: 0.04
+  titleStyle:
+    outlineColor: {r: 0.65, g: 0.38, b: 0.12, a: 1}
+    outlineWidth: 0.08
+    glowColor: {r: 1, g: 0.7, b: 0.3, a: 0.18}
+    glowSize: 0.25
+    shadowColor: {r: 0.09579099, g: 0.056603774, b: 0.2264151, a: 0.8235294}
+    shadowOffset: {x: 0.51, y: -0.75}
+    shadowSpread: 0.869
+    shadowSoftness: 0.369
   stageOutline:
     dashLength: 0.2
     lineWidth: 0.03

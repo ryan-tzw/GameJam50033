@@ -1,0 +1,2561 @@
+fileFormatVersion: 2
+guid: e5591992ff0a1ca81b21b0df72c741ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5400248800612817599
+    second: Fraunces Title Atlas_0
+  - first:
+      213: 2940074976312336594
+    second: Fraunces Title Atlas_1
+  - first:
+      213: -1994851892159454827
+    second: Fraunces Title Atlas_2
+  - first:
+      213: 1386946418780739819
+    second: Fraunces Title Atlas_3
+  - first:
+      213: -7047647394504177639
+    second: Fraunces Title Atlas_4
+  - first:
+      213: 1082521264175687229
+    second: Fraunces Title Atlas_5
+  - first:
+      213: -7573629968052955495
+    second: Fraunces Title Atlas_6
+  - first:
+      213: -6150886434811039490
+    second: Fraunces Title Atlas_7
+  - first:
+      213: 2898710707166564027
+    second: Fraunces Title Atlas_8
+  - first:
+      213: 1053229948953929534
+    second: Fraunces Title Atlas_9
+  - first:
+      213: -3478003136527025596
+    second: Fraunces Title Atlas_10
+  - first:
+      213: -7240184330339763755
+    second: Fraunces Title Atlas_11
+  - first:
+      213: 1109304255368268866
+    second: Fraunces Title Atlas_12
+  - first:
+      213: 5627095873821869842
+    second: Fraunces Title Atlas_13
+  - first:
+      213: -1664378843539314922
+    second: Fraunces Title Atlas_14
+  - first:
+      213: 7098999258633458382
+    second: Fraunces Title Atlas_15
+  - first:
+      213: -3534436615547040665
+    second: Fraunces Title Atlas_16
+  - first:
+      213: 987123297326967020
+    second: Fraunces Title Atlas_17
+  - first:
+      213: -3875547506823923434
+    second: Fraunces Title Atlas_18
+  - first:
+      213: -4287832658072887566
+    second: Fraunces Title Atlas_19
+  - first:
+      213: 2371063070847155745
+    second: Fraunces Title Atlas_20
+  - first:
+      213: -3360744468041131120
+    second: Fraunces Title Atlas_21
+  - first:
+      213: 2726354329401285247
+    second: Fraunces Title Atlas_22
+  - first:
+      213: -3441752579236630782
+    second: Fraunces Title Atlas_23
+  - first:
+      213: 1047464146314327086
+    second: Fraunces Title Atlas_24
+  - first:
+      213: -8142014467115684434
+    second: Fraunces Title Atlas_25
+  - first:
+      213: 1611129944898137900
+    second: Fraunces Title Atlas_26
+  - first:
+      213: 2483684734935731132
+    second: Fraunces Title Atlas_27
+  - first:
+      213: -3310130775952151375
+    second: Fraunces Title Atlas_28
+  - first:
+      213: -629669496107724837
+    second: Fraunces Title Atlas_29
+  - first:
+      213: -5775990847520771574
+    second: Fraunces Title Atlas_30
+  - first:
+      213: 8281989726414148495
+    second: Fraunces Title Atlas_31
+  - first:
+      213: -1180073712346093064
+    second: Fraunces Title Atlas_32
+  - first:
+      213: -179924335913586271
+    second: Fraunces Title Atlas_33
+  - first:
+      213: -7828876100840428564
+    second: Fraunces Title Atlas_34
+  - first:
+      213: -4482604823403703242
+    second: Fraunces Title Atlas_35
+  - first:
+      213: 9067836256520210292
+    second: Fraunces Title Atlas_36
+  - first:
+      213: 3826554770068603347
+    second: Fraunces Title Atlas_37
+  - first:
+      213: 1531870086701289350
+    second: Fraunces Title Atlas_38
+  - first:
+      213: 514395288036480598
+    second: Fraunces Title Atlas_39
+  - first:
+      213: 5253129648178878054
+    second: Fraunces Title Atlas_40
+  - first:
+      213: 6491166865521359362
+    second: Fraunces Title Atlas_41
+  - first:
+      213: -8515198101312397413
+    second: Fraunces Title Atlas_42
+  - first:
+      213: -8984152687000570988
+    second: Fraunces Title Atlas_43
+  - first:
+      213: -4090503650073273291
+    second: Fraunces Title Atlas_44
+  - first:
+      213: 7051628383807555121
+    second: Fraunces Title Atlas_45
+  - first:
+      213: -4529620005049747542
+    second: Fraunces Title Atlas_46
+  - first:
+      213: -7464175277270144227
+    second: Fraunces Title Atlas_47
+  - first:
+      213: -4211249451407999161
+    second: Fraunces Title Atlas_48
+  - first:
+      213: 7096709261552604651
+    second: Fraunces Title Atlas_49
+  - first:
+      213: -376783882061813886
+    second: Fraunces Title Atlas_50
+  - first:
+      213: -1783296783218971699
+    second: Fraunces Title Atlas_51
+  - first:
+      213: 4979081999718919933
+    second: Fraunces Title Atlas_52
+  - first:
+      213: 6963201773043119368
+    second: Fraunces Title Atlas_53
+  - first:
+      213: -3041762714012795320
+    second: Fraunces Title Atlas_54
+  - first:
+      213: 3107999491631117818
+    second: Fraunces Title Atlas_55
+  - first:
+      213: 3908293852419756424
+    second: Fraunces Title Atlas_56
+  - first:
+      213: -3012363432296163898
+    second: Fraunces Title Atlas_57
+  - first:
+      213: -5481005576931205191
+    second: Fraunces Title Atlas_58
+  - first:
+      213: 6799738944045726461
+    second: Fraunces Title Atlas_59
+  - first:
+      213: -3432498837714568148
+    second: Fraunces Title Atlas_60
+  - first:
+      213: 3334160094294923263
+    second: Fraunces Title Atlas_61
+  - first:
+      213: 2482661542532967039
+    second: Fraunces Title Atlas_62
+  - first:
+      213: 3164476191970193994
+    second: Fraunces Title Atlas_63
+  - first:
+      213: 4460387144843523177
+    second: Fraunces Title Atlas_64
+  - first:
+      213: -381906629013886936
+    second: Fraunces Title Atlas_65
+  - first:
+      213: -3941565438853991093
+    second: Fraunces Title Atlas_66
+  - first:
+      213: 811923494447095685
+    second: Fraunces Title Atlas_67
+  - first:
+      213: 8615660855235014902
+    second: Fraunces Title Atlas_68
+  - first:
+      213: 5572909837522359869
+    second: Fraunces Title Atlas_69
+  - first:
+      213: -4119365818973234618
+    second: Fraunces Title Atlas_70
+  - first:
+      213: -1779445817122493093
+    second: Fraunces Title Atlas_71
+  - first:
+      213: 1130184070235510591
+    second: Fraunces Title Atlas_72
+  - first:
+      213: 1612360714157739189
+    second: Fraunces Title Atlas_73
+  - first:
+      213: -1568994466072837980
+    second: Fraunces Title Atlas_74
+  - first:
+      213: -8754849145582431776
+    second: Fraunces Title Atlas_75
+  - first:
+      213: -914232172785825011
+    second: Fraunces Title Atlas_76
+  - first:
+      213: -130064049203836127
+    second: Fraunces Title Atlas_77
+  - first:
+      213: -1137733725064853923
+    second: Fraunces Title Atlas_78
+  - first:
+      213: -4752424689568274522
+    second: Fraunces Title Atlas_79
+  - first:
+      213: 8241069180334744264
+    second: Fraunces Title Atlas_80
+  - first:
+      213: 1322863369469028956
+    second: Fraunces Title Atlas_81
+  - first:
+      213: 3464863926776345198
+    second: Fraunces Title Atlas_82
+  - first:
+      213: -7228320027750367633
+    second: Fraunces Title Atlas_83
+  - first:
+      213: -9163821426387872355
+    second: Fraunces Title Atlas_84
+  - first:
+      213: -2814386797806857825
+    second: Fraunces Title Atlas_85
+  - first:
+      213: 7276074375610134719
+    second: Fraunces Title Atlas_86
+  - first:
+      213: -2801895780422659041
+    second: Fraunces Title Atlas_87
+  - first:
+      213: 2270917284874768090
+    second: Fraunces Title Atlas_88
+  - first:
+      213: -4970375954527903071
+    second: Fraunces Title Atlas_89
+  - first:
+      213: -1538871379608668481
+    second: Fraunces Title Atlas_90
+  - first:
+      213: 8760665805960423845
+    second: Fraunces Title Atlas_91
+  - first:
+      213: -1237171559101026790
+    second: Fraunces Title Atlas_92
+  - first:
+      213: 8234052060507549679
+    second: Fraunces Title Atlas_93
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 10
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1950
+        width: 101
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba91432ca981fa40800000000000000
+      internalID: 5400248800612817599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1850
+        width: 71
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0ac102d9e3dc820800000000000000
+      internalID: 2940074976312336594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1927
+        width: 72
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 591e154f5ccd054e0800000000000000
+      internalID: -1994851892159454827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_3
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 1913
+        width: 76
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be81de56b6c6f3310800000000000000
+      internalID: 1386946418780739819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1733
+        width: 75
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9180f54e80ab13e90800000000000000
+      internalID: -7047647394504177639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_5
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 1850
+        width: 77
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d36aff4ba53e50f00800000000000000
+      internalID: 1082521264175687229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_6
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 1837
+        width: 72
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99653fdbbaf05e690800000000000000
+      internalID: -7573629968052955495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1633
+        width: 84
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0b1575069a3aaa0800000000000000
+      internalID: -6150886434811039490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_8
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1733
+        width: 87
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbec847b70a4a3820800000000000000
+      internalID: 2898710707166564027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 1718
+        width: 65
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37a33eee03dd9e00800000000000000
+      internalID: 1053229948953929534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1521
+        width: 77
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44abc971396abbfc0800000000000000
+      internalID: -3478003136527025596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_11
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1521
+        width: 84
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9bfb136b2b58b90800000000000000
+      internalID: -7240184330339763755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_12
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1621
+        width: 79
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c0e09c75a056f00800000000000000
+      internalID: 1109304255368268866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1423
+        width: 102
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 217083432e5771e40800000000000000
+      internalID: 5627095873821869842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_14
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 1423
+        width: 79
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 617e9239240f6e8e0800000000000000
+      internalID: -1664378843539314922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_15
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 1499
+        width: 79
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec2db9fa636b48260800000000000000
+      internalID: 7098999258633458382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_16
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 1423
+        width: 80
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c4f29df9823fec0800000000000000
+      internalID: -3534436615547040665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1325
+        width: 97
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8afaea867f2bd00800000000000000
+      internalID: 987123297326967020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1225
+        width: 106
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 619fb99731a473ac0800000000000000
+      internalID: -3875547506823923434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 1325
+        width: 89
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fe1f375aee8e74c0800000000000000
+      internalID: -4287832658072887566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_20
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1309
+        width: 103
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e34edec45b7e020800000000000000
+      internalID: 2371063070847155745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_21
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 1209
+        width: 94
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09b9c8956bc3c51d0800000000000000
+      internalID: -3360744468041131120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_22
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 1209
+        width: 84
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7adfc751d4f5d520800000000000000
+      internalID: 2726354329401285247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_23
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 1182
+        width: 79
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20fe0dda3407c30d0800000000000000
+      internalID: -3441752579236630782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_24
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1258
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e24f5046717598e00800000000000000
+      internalID: 1047464146314327086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1111
+        width: 82
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead6a7bfaf0c10f80800000000000000
+      internalID: -8142014467115684434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1003
+        width: 109
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2fe5a41622eb5610800000000000000
+      internalID: 1611129944898137900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_27
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1111
+        width: 81
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb87e77b12d77220800000000000000
+      internalID: 2483684734935731132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_28
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1097
+        width: 77
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bca84bd89d0012d0800000000000000
+      internalID: -3310130775952151375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_29
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 1084
+        width: 91
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdf899eede6f247f0800000000000000
+      internalID: -629669496107724837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_30
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 1062
+        width: 63
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a02fd9b3dee87dfa0800000000000000
+      internalID: -5775990847520771574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 903
+        width: 77
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f83995cb6c98fe270800000000000000
+      internalID: 8281989726414148495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_32
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 903
+        width: 94
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f9a5def5398f9fe0800000000000000
+      internalID: -1180073712346093064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_33
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 999
+        width: 106
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a13c6f05c7c08df0800000000000000
+      internalID: -179924335913586271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_34
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 954
+        width: 54
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceb6cda5aae3a5390800000000000000
+      internalID: -7828876100840428564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_35
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 950
+        width: 76
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 634d198b9a69ac1c0800000000000000
+      internalID: -4482604823403703242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_36
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 854
+        width: 96
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4778b47280d67dd70800000000000000
+      internalID: 9067836256520210292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_37
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 909
+        width: 77
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d104871a47aa1530800000000000000
+      internalID: 3826554770068603347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_38
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 843
+        width: 70
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68f80e74abb424510800000000000000
+      internalID: 1531870086701289350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 803
+        width: 88
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6569c810acf732700800000000000000
+      internalID: 514395288036480598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_40
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 754
+        width: 91
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66656ce259dd6e840800000000000000
+      internalID: 5253129648178878054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_41
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 747
+        width: 96
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20abf2d5fd1451a50800000000000000
+      internalID: 6491166865521359362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_42
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 730
+        width: 78
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9f913b3170f3d980800000000000000
+      internalID: -8515198101312397413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_43
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 806
+        width: 84
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 493b5733bb0e15380800000000000000
+      internalID: -8984152687000570988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_44
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 730
+        width: 72
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53c91f84a9c9b37c0800000000000000
+      internalID: -4090503650073273291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 683
+        width: 84
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13649e867aa6cd160800000000000000
+      internalID: 7051628383807555121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 603
+        width: 82
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa7b187ba9e8321c0800000000000000
+      internalID: -4529620005049747542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_47
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 656
+        width: 84
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1b6f09d12ce96890800000000000000
+      internalID: -7464175277270144227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_48
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 651
+        width: 100
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74f7444afe2ae85c0800000000000000
+      internalID: -4211249451407999161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_49
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 615
+        width: 96
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5511139739c7260800000000000000
+      internalID: 7096709261552604651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_50
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 586
+        width: 95
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 287ec983e0565caf0800000000000000
+      internalID: -376783882061813886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_51
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 488
+        width: 70
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcbe22326057047e0800000000000000
+      internalID: -1783296783218971699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_52
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 512
+        width: 50
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfea9ccc2b0491540800000000000000
+      internalID: 4979081999718919933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_53
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 558
+        width: 73
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 805fa95be1342a060800000000000000
+      internalID: 6963201773043119368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_54
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 551
+        width: 90
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84e3d347dec79c5d0800000000000000
+      internalID: -3041762714012795320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_55
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 515
+        width: 94
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af574cc1215d12b20800000000000000
+      internalID: 3107999491631117818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_56
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 488
+        width: 96
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 881925f3d8c0d3630800000000000000
+      internalID: 3908293852419756424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_57
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 376
+        width: 70
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c55c932b6fe136d0800000000000000
+      internalID: -3012363432296163898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_58
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 451
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf9417a77e8fe3b0800000000000000
+      internalID: -5481005576931205191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_59
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 376
+        width: 76
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa3c350b868d5e50800000000000000
+      internalID: 6799738944045726461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_60
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 451
+        width: 91
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cf4164e705d50d0800000000000000
+      internalID: -3432498837714568148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_61
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 415
+        width: 89
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff75bbcc0f0554e20800000000000000
+      internalID: 3334160094294923263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_62
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 390
+        width: 92
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7a633ce48f247220800000000000000
+      internalID: 2482661542532967039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_63
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 351
+        width: 89
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a42709a945a7aeb20800000000000000
+      internalID: 3164476191970193994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_64
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 451
+        width: 73
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 964fd11e97a76ed30800000000000000
+      internalID: 4460387144843523177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 276
+        width: 96
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 828a240c1f133baf0800000000000000
+      internalID: -381906629013886936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_66
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 261
+        width: 88
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45b62edd1fbc49c0800000000000000
+      internalID: -3941565438853991093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_67
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 317
+        width: 84
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58f105fcd18844b00800000000000000
+      internalID: 811923494447095685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_68
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 219
+        width: 91
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f0758d66e9f09770800000000000000
+      internalID: 8615660855235014902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_69
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 317
+        width: 56
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d36dcce78f3f65d40800000000000000
+      internalID: 5572909837522359869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_70
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 251
+        width: 94
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64ad63cec9215d6c0800000000000000
+      internalID: -4119365818973234618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_71
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 294
+        width: 76
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5deb5d05732e47e0800000000000000
+      internalID: -1779445817122493093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 87
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3751358c683faf00800000000000000
+      internalID: 1130184070235510591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_73
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 219
+        width: 62
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bcca21e681406610800000000000000
+      internalID: 1612360714157739189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_74
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 252
+        width: 80
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a0cc2398dfc93ae0800000000000000
+      internalID: -1568994466072837980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_75
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 164
+        width: 61
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e15d675617808680800000000000000
+      internalID: -8754849145582431776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_76
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 154
+        width: 91
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b0ed2ceaeff43f0800000000000000
+      internalID: -914232172785825011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_77
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 192
+        width: 90
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b0825bf6be13ef0800000000000000
+      internalID: -130064049203836127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_78
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 192
+        width: 84
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d56078c7435f530f0800000000000000
+      internalID: -1137733725064853923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_79
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a7ac7c9ceefb0eb0800000000000000
+      internalID: -4752424689568274522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_80
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 98
+        width: 106
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c2a547a1c82e5270800000000000000
+      internalID: 8241069180334744264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_81
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 164
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ae397c931cb5210800000000000000
+      internalID: 1322863369469028956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_82
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 64
+        width: 91
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e62b19e326ba51030800000000000000
+      internalID: 3464863926776345198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_83
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 96
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6ef8176b39dfab90800000000000000
+      internalID: -7228320027750367633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_84
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 96
+        width: 92
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d959907f6f093d080800000000000000
+      internalID: -9163821426387872355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_85
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 96
+        width: 60
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f915c206e1a41f8d0800000000000000
+      internalID: -2814386797806857825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_86
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb07095281fc9f460800000000000000
+      internalID: 7276074375610134719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_87
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 95
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14dd3ef1aaad19d0800000000000000
+      internalID: -2801895780422659041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_88
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 77
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade414f1d3be38f10800000000000000
+      internalID: 2270917284874768090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_89
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 0
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a2a83e476da50bb0800000000000000
+      internalID: -4970375954527903071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_90
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 0
+        width: 110
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb6f86f22a4d4aae0800000000000000
+      internalID: -1538871379608668481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_91
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 0
+        width: 116
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a9ae207223249970800000000000000
+      internalID: 8760665805960423845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_92
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 0
+        width: 122
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1e2195950fa4dee0800000000000000
+      internalID: -1237171559101026790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fraunces Title Atlas_93
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 0
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fef20a029ba354270800000000000000
+      internalID: 8234052060507549679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Fraunces Title Atlas_0: 5400248800612817599
+      Fraunces Title Atlas_1: 2940074976312336594
+      Fraunces Title Atlas_10: -3478003136527025596
+      Fraunces Title Atlas_11: -7240184330339763755
+      Fraunces Title Atlas_12: 1109304255368268866
+      Fraunces Title Atlas_13: 5627095873821869842
+      Fraunces Title Atlas_14: -1664378843539314922
+      Fraunces Title Atlas_15: 7098999258633458382
+      Fraunces Title Atlas_16: -3534436615547040665
+      Fraunces Title Atlas_17: 987123297326967020
+      Fraunces Title Atlas_18: -3875547506823923434
+      Fraunces Title Atlas_19: -4287832658072887566
+      Fraunces Title Atlas_2: -1994851892159454827
+      Fraunces Title Atlas_20: 2371063070847155745
+      Fraunces Title Atlas_21: -3360744468041131120
+      Fraunces Title Atlas_22: 2726354329401285247
+      Fraunces Title Atlas_23: -3441752579236630782
+      Fraunces Title Atlas_24: 1047464146314327086
+      Fraunces Title Atlas_25: -8142014467115684434
+      Fraunces Title Atlas_26: 1611129944898137900
+      Fraunces Title Atlas_27: 2483684734935731132
+      Fraunces Title Atlas_28: -3310130775952151375
+      Fraunces Title Atlas_29: -629669496107724837
+      Fraunces Title Atlas_3: 1386946418780739819
+      Fraunces Title Atlas_30: -5775990847520771574
+      Fraunces Title Atlas_31: 8281989726414148495
+      Fraunces Title Atlas_32: -1180073712346093064
+      Fraunces Title Atlas_33: -179924335913586271
+      Fraunces Title Atlas_34: -7828876100840428564
+      Fraunces Title Atlas_35: -4482604823403703242
+      Fraunces Title Atlas_36: 9067836256520210292
+      Fraunces Title Atlas_37: 3826554770068603347
+      Fraunces Title Atlas_38: 1531870086701289350
+      Fraunces Title Atlas_39: 514395288036480598
+      Fraunces Title Atlas_4: -7047647394504177639
+      Fraunces Title Atlas_40: 5253129648178878054
+      Fraunces Title Atlas_41: 6491166865521359362
+      Fraunces Title Atlas_42: -8515198101312397413
+      Fraunces Title Atlas_43: -8984152687000570988
+      Fraunces Title Atlas_44: -4090503650073273291
+      Fraunces Title Atlas_45: 7051628383807555121
+      Fraunces Title Atlas_46: -4529620005049747542
+      Fraunces Title Atlas_47: -7464175277270144227
+      Fraunces Title Atlas_48: -4211249451407999161
+      Fraunces Title Atlas_49: 7096709261552604651
+      Fraunces Title Atlas_5: 1082521264175687229
+      Fraunces Title Atlas_50: -376783882061813886
+      Fraunces Title Atlas_51: -1783296783218971699
+      Fraunces Title Atlas_52: 4979081999718919933
+      Fraunces Title Atlas_53: 6963201773043119368
+      Fraunces Title Atlas_54: -3041762714012795320
+      Fraunces Title Atlas_55: 3107999491631117818
+      Fraunces Title Atlas_56: 3908293852419756424
+      Fraunces Title Atlas_57: -3012363432296163898
+      Fraunces Title Atlas_58: -5481005576931205191
+      Fraunces Title Atlas_59: 6799738944045726461
+      Fraunces Title Atlas_6: -7573629968052955495
+      Fraunces Title Atlas_60: -3432498837714568148
+      Fraunces Title Atlas_61: 3334160094294923263
+      Fraunces Title Atlas_62: 2482661542532967039
+      Fraunces Title Atlas_63: 3164476191970193994
+      Fraunces Title Atlas_64: 4460387144843523177
+      Fraunces Title Atlas_65: -381906629013886936
+      Fraunces Title Atlas_66: -3941565438853991093
+      Fraunces Title Atlas_67: 811923494447095685
+      Fraunces Title Atlas_68: 8615660855235014902
+      Fraunces Title Atlas_69: 5572909837522359869
+      Fraunces Title Atlas_7: -6150886434811039490
+      Fraunces Title Atlas_70: -4119365818973234618
+      Fraunces Title Atlas_71: -1779445817122493093
+      Fraunces Title Atlas_72: 1130184070235510591
+      Fraunces Title Atlas_73: 1612360714157739189
+      Fraunces Title Atlas_74: -1568994466072837980
+      Fraunces Title Atlas_75: -8754849145582431776
+      Fraunces Title Atlas_76: -914232172785825011
+      Fraunces Title Atlas_77: -130064049203836127
+      Fraunces Title Atlas_78: -1137733725064853923
+      Fraunces Title Atlas_79: -4752424689568274522
+      Fraunces Title Atlas_8: 2898710707166564027
+      Fraunces Title Atlas_80: 8241069180334744264
+      Fraunces Title Atlas_81: 1322863369469028956
+      Fraunces Title Atlas_82: 3464863926776345198
+      Fraunces Title Atlas_83: -7228320027750367633
+      Fraunces Title Atlas_84: -9163821426387872355
+      Fraunces Title Atlas_85: -2814386797806857825
+      Fraunces Title Atlas_86: 7276074375610134719
+      Fraunces Title Atlas_87: -2801895780422659041
+      Fraunces Title Atlas_88: 2270917284874768090
+      Fraunces Title Atlas_89: -4970375954527903071
+      Fraunces Title Atlas_9: 1053229948953929534
+      Fraunces Title Atlas_90: -1538871379608668481
+      Fraunces Title Atlas_91: 8760665805960423845
+      Fraunces Title Atlas_92: -1237171559101026790
+      Fraunces Title Atlas_93: 8234052060507549679
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
