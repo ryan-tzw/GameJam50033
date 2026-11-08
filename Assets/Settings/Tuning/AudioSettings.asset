@@ -15,6 +15,8 @@ MonoBehaviour:
   menu:
     selectClip: {fileID: 8300000, guid: 7f293147b2479cb3dadbfeadfae83c32, type: 3}
     selectVolume: 0.3
+    pressClip: {fileID: 8300000, guid: 923ade01b0bc43a9a845e49bc2fedfcf, type: 3}
+    pressVolume: 0.5
     gameStartClip: {fileID: 8300000, guid: b41d97493256cbca6b9ba04b2edeabe2, type: 3}
     gameStartVolume: 0.18
   player:

@@ -27,6 +27,12 @@ namespace Jam50033
                 instance.source.ignoreListenerPause = true;
             }
             instance.settings = audioSettings;
+            // Include closed submenus, and avoid duplicate listeners when several menus initialize.
+            foreach (Button button in FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                button.onClick.RemoveListener(instance.PlayButtonPress);
+                button.onClick.AddListener(instance.PlayButtonPress);
+            }
         }
 
         public static void PlayGameStart(AudioSettings audioSettings)
@@ -57,6 +63,11 @@ namespace Jam50033
             if (clip == null || volume <= 0f) return;
             source.outputAudioMixerGroup = settings.effectsMixer;
             source.PlayOneShot(clip, volume);
+        }
+
+        private void PlayButtonPress()
+        {
+            if (settings != null) Play(settings.menu.pressClip, settings.menu.pressVolume);
         }
 
         private void OnDestroy()
