@@ -9,6 +9,7 @@ namespace Jam50033
     public sealed class GameOverController : MonoBehaviour
     {
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private AudioSettings audioSettings;
         [SerializeField] private PlayerSettings playerSettings;
         private static readonly PlayerSettings.FallDeathData defaultPlayerFallDeath = new();
         private PlayerSettings.FallDeathData playerFallDeath => playerSettings != null ? playerSettings.fallDeath : defaultPlayerFallDeath;
@@ -33,6 +34,7 @@ namespace Jam50033
 
         private void Awake()
         {
+            MenuAudio.Initialize(audioSettings);
             playerCollider = player != null ? player.GetComponent<Collider2D>() : null;
             deathEffect = player != null ? player.GetComponent<PlayerDeathEffect>() : null;
             gameOverPanel.SetActive(false);

@@ -9,10 +9,16 @@ namespace Jam50033
     public sealed class TitleScreenController : MonoBehaviour
     {
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private AudioSettings audioSettings;
         [SerializeField] private Button startButton;
         [SerializeField] private string gameSceneName = "GameScene";
 
         private bool loading;
+
+        private void Awake()
+        {
+            MenuAudio.Initialize(audioSettings);
+        }
 
         private void Start()
         {
@@ -30,6 +36,7 @@ namespace Jam50033
             }
 
             loading = true;
+            MenuAudio.PlayGameStart(audioSettings);
             startButton.interactable = false;
             StartCoroutine(LoadGame());
         }

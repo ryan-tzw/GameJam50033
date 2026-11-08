@@ -7,6 +7,8 @@ namespace Jam50033
     [CreateAssetMenu(fileName = "AudioSettings", menuName = "Neverland/Settings/Audio")]
     public sealed class AudioSettings : ScriptableObject
     {
+        [Header("Menu")]
+        public MenuData menu = new();
         [Header("Player")]
         public PlayerData player = new();
         [Header("Tetromino")]
@@ -21,6 +23,15 @@ namespace Jam50033
         [Range(0f, 1f)] public float titleMusicVolume = 0.7f;
         public AudioClip gameMusic;
         [Range(0f, 1f)] public float gameMusicVolume = 0.25f;
+
+        [Serializable]
+        public sealed class MenuData
+        {
+            public AudioClip selectClip;
+            [Range(0f, 1f)] public float selectVolume = 0.7f;
+            public AudioClip gameStartClip;
+            [Range(0f, 1f)] public float gameStartVolume = 0.7f;
+        }
 
         [Serializable]
         public sealed class CollectibleData
