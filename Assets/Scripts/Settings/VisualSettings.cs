@@ -123,14 +123,14 @@ namespace Jam50033
         {
             public Vector2 buttonSize = new Vector2(280f, 72f);
             [InspectorName("First Button Position")]
-            public Vector2 rowPosition = new Vector2(0f, -75f);
-            [Min(0f)] public float buttonGap = 24f;
+            public Vector2 rowPosition = new Vector2(0f, -165f);
+            [Min(0f)] public float buttonGap = 12f;
             [Min(1f)] public float iconSize = 48f;
             [Min(0f)] public float horizontalPadding = 20f;
             [Min(0f)] public float iconTextGap = 12f;
             [Min(1)] public int fontSize = 26;
             [Header("Score Breakdown")]
-            public Vector2 breakdownPosition = new Vector2(0f, -90f);
+            public Vector2 breakdownPosition = new Vector2(0f, -48f);
             public Vector2 breakdownSize = new Vector2(340f, 112f);
             [Min(1)] public int breakdownFontSize = 18;
             public Color breakdownLabelColor = new Color(0.84f, 0.82f, 1f, 1f);
