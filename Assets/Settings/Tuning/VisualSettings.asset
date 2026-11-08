@@ -65,14 +65,30 @@ MonoBehaviour:
     tileGap: 0
     labelFontSize: 14
     labelWidth: 120
+  scorePanel:
+    rollDuration: 0.2
+    rollUp: 1
+    digitHeightMultiplier: 1.15
+    digitSpacing: 0
+    useCommaSeparators: 1
+    minimumWidth: 240
+    horizontalPadding: 24
+    height: 64
+    topMargin: 16
+    panelColor: {r: 0.100000024, g: 0.05, b: 0.2, a: 1}
+    panelOpacity: 0.7
+    outlineColor: {r: 0.84, g: 0.82, b: 1, a: 1}
+    outlineWidth: 2
+    cornerRadius: 14
+    labelWidth: 120
   menuButtons:
     size: {x: 280, y: 72}
-    panelColor: {r: 0.1, g: 0.07, b: 0.24, a: 1}
-    panelOpacity: 0.85
+    panelColor: {r: 0.16705541, g: 0.10439658, b: 0.3207547, a: 1}
+    panelOpacity: 0.95
     outlineColor: {r: 0.84, g: 0.82, b: 1, a: 1}
     outlineWidth: 3
     cornerRadius: 18
-    font: {fileID: 12800000, guid: a6d559bb6675c14cb8892d98d5875e5d, type: 3}
+    font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 36
     fontStyle: 0
     textColor: {r: 1, g: 0.95, b: 0.84, a: 1}
@@ -87,21 +103,8 @@ MonoBehaviour:
     hintText: //  PRESS SPACE  //
     hintFont: {fileID: 12800000, guid: 2783af3c8d951ef5e8c19a312b92856e, type: 3}
     hintFontSize: 22
-    hintFontStyle: 2
+    hintFontStyle: 0
     hintColor: {r: 0.84, g: 0.82, b: 1, a: 0.95}
-  scorePanel:
-    rollDuration: 0.2
-    useCommaSeparators: 1
-    minimumWidth: 240
-    horizontalPadding: 24
-    height: 64
-    topMargin: 16
-    panelColor: {r: 0.100000024, g: 0.05, b: 0.2, a: 1}
-    panelOpacity: 0.7
-    outlineColor: {r: 0.84, g: 0.82, b: 1, a: 1}
-    outlineWidth: 2
-    cornerRadius: 14
-    labelWidth: 120
   milestones:
     duration: 1
     offset: {x: 0, y: -85}

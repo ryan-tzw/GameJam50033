@@ -95,8 +95,13 @@ namespace Jam50033
         [Serializable]
         public sealed class ScorePanelData
         {
-            [Min(0f), Tooltip("Seconds for the score number to count up. Zero makes changes instant.")]
+            [Min(0f), Tooltip("Seconds for a digit reel to reach its next value. Zero makes changes instant.")]
             public float rollDuration = 0.2f;
+            public bool rollUp = true;
+            [Range(0.8f, 1.6f), Tooltip("Reel line spacing and clipping height relative to the score font size.")]
+            public float digitHeightMultiplier = 1.15f;
+            [Min(0f), Tooltip("Extra horizontal space between digits in Canvas UI units.")]
+            public float digitSpacing = 0f;
             public bool useCommaSeparators = true;
             [Min(1f), Tooltip("Minimum width in Canvas units. The panel grows to fit larger scores.")]
             public float minimumWidth = 180f;

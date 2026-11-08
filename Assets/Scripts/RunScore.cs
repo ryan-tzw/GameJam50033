@@ -26,15 +26,12 @@ namespace Jam50033
         private int bonusPoints;
         private int pendingCoinPoints;
         private bool formattedWithCommas;
-        private int displayedScore;
         private int displayTarget;
-        private int rollFrom;
-        private float rollElapsed;
-        private float RollDuration => visualSettings != null ? Mathf.Max(0f, visualSettings.scorePanel.rollDuration) : 0.2f;
+        private OdometerScore odometer;
         private bool UseCommaSeparators => visualSettings == null || visualSettings.scorePanel.useCommaSeparators;
 
         public bool HasFlyingCoins => coinAnimation != null && coinAnimation.HasFlyingCoins;
-        public bool HasPendingScoreFeedback => HasFlyingCoins || displayedScore != displayTarget;
+        public bool HasPendingScoreFeedback => HasFlyingCoins || (odometer != null && odometer.IsAnimating);
 
         public int Score => tilesPassed * gameplayScoring.pointsPerTile + bonusPoints;
 
@@ -45,6 +42,12 @@ namespace Jam50033
             {
                 coinAnimation = GetComponentInChildren<CoinScoreAnimation>(true);
             }
+            if (Application.IsPlaying(gameObject) && scoreLabel != null)
+            {
+                odometer = scoreLabel.GetComponent<OdometerScore>();
+                if (odometer == null) odometer = scoreLabel.gameObject.AddComponent<OdometerScore>();
+                odometer.Configure(visualSettings);
+            }
         }
 
         private void Start()
@@ -53,8 +56,8 @@ namespace Jam50033
             tilesPassed = 0;
             bonusPoints = 0;
             pendingCoinPoints = 0;
-            displayedScore = displayTarget = rollFrom = 0;
-            rollElapsed = 0f;
+            displayTarget = 0;
+            odometer?.SetValue(0, UseCommaSeparators, instant: true);
             finished = false;
             RefreshLabels();
         }
@@ -69,7 +72,6 @@ namespace Jam50033
             {
                 RecordProgress();
             }
-            UpdateDisplayedScore();
         }
 
         private float GetPlayerColumn()
@@ -218,39 +220,15 @@ namespace Jam50033
             formattedWithCommas = UseCommaSeparators;
             string format = formattedWithCommas ? "N0" : "0";
             string text = Score.ToString(format, CultureInfo.InvariantCulture);
-            int target = Score - pendingCoinPoints;
-            if (target != displayTarget)
-            {
-                rollFrom = displayedScore;
-                displayTarget = target;
-                rollElapsed = 0f;
-            }
-            if (RollDuration <= 0f) displayedScore = displayTarget;
-            WriteDisplayedScore();
+            displayTarget = Score - pendingCoinPoints;
+            // Retain this Text as the shared font, layout and coin-flight anchor; reels render its value.
+            if (scoreLabel != null) scoreLabel.text = displayTarget.ToString(format, CultureInfo.InvariantCulture);
+            odometer?.SetValue(displayTarget, UseCommaSeparators);
 
             if (finalScoreLabel != null)
             {
                 finalScoreLabel.text = text;
             }
-        }
-
-        private void UpdateDisplayedScore()
-        {
-            if (displayedScore != displayTarget)
-            {
-                rollElapsed += Time.unscaledDeltaTime;
-                float t = RollDuration <= 0f ? 1f : Mathf.Clamp01(rollElapsed / RollDuration);
-                float progress = 1f - Mathf.Pow(1f - t, 3f);
-                displayedScore = t >= 1f ? displayTarget : rollFrom +
-                    (int)System.Math.Floor(((double)displayTarget - rollFrom) * progress);
-            }
-            WriteDisplayedScore();
-        }
-
-        private void WriteDisplayedScore()
-        {
-            if (scoreLabel != null)
-                scoreLabel.text = displayedScore.ToString(UseCommaSeparators ? "N0" : "0", CultureInfo.InvariantCulture);
         }
 
     }

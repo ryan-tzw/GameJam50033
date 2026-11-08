@@ -26,7 +26,9 @@ namespace Jam50033
         {
             if (visualSettings == null || panel == null || score == null || label == null) return;
             VisualSettings.ScorePanelData settings = visualSettings.scorePanel;
-            float desired = Mathf.Max(settings.minimumWidth, score.preferredWidth + settings.horizontalPadding * 2f,
+            OdometerScore odometer = score.GetComponent<OdometerScore>();
+            float numberWidth = Mathf.Max(score.preferredWidth, odometer != null ? odometer.PreferredWidth : 0f);
+            float desired = Mathf.Max(settings.minimumWidth, numberWidth + settings.horizontalPadding * 2f,
                 settings.labelWidth + settings.cornerRadius * 2f + settings.outlineWidth * 2f);
             // Growing only during a run prevents proportional digits and score pulses from wobbling the frame.
             width = Application.isPlaying ? Mathf.Max(width, desired) : desired;
