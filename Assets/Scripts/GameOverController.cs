@@ -10,6 +10,7 @@ namespace Jam50033
     {
         [SerializeField] private VisualSettings visualSettings;
         [SerializeField] private AudioSettings audioSettings;
+        [SerializeField] private SettingsMusic music;
         [SerializeField] private PlayerSettings playerSettings;
         private static readonly PlayerSettings.FallDeathData defaultPlayerFallDeath = new();
         private PlayerSettings.FallDeathData playerFallDeath => playerSettings != null ? playerSettings.fallDeath : defaultPlayerFallDeath;
@@ -124,6 +125,7 @@ namespace Jam50033
 
         private void OpenMenu()
         {
+            music?.PlayGameOver();
             // Open after this frame's UI update, so a gameplay Space press cannot submit the new menu.
             gameOverPanel.SetActive(true);
             if (runScore != null)

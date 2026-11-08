@@ -10,6 +10,7 @@ namespace Jam50033
         [SerializeField] private AudioSettings audioSettings;
         [SerializeField] private bool titleScreen;
         private AudioSource source;
+        private bool gameOver;
 
         private void OnEnable()
         {
@@ -30,10 +31,12 @@ namespace Jam50033
         {
             if (audioSettings == null || source == null) return;
 
-            AudioClip clip = titleScreen ? audioSettings.titleMusic : audioSettings.gameMusic;
+            AudioClip clip = gameOver ? audioSettings.gameOverMusic :
+                titleScreen ? audioSettings.titleMusic : audioSettings.gameMusic;
             bool changed = source.clip != clip;
             if (changed) source.clip = clip;
-            source.volume = titleScreen ? audioSettings.titleMusicVolume : audioSettings.gameMusicVolume;
+            source.volume = gameOver ? audioSettings.gameOverMusicVolume :
+                titleScreen ? audioSettings.titleMusicVolume : audioSettings.gameMusicVolume;
             source.outputAudioMixerGroup = audioSettings.musicMixer;
             source.loop = true;
             source.playOnAwake = false;
@@ -41,6 +44,19 @@ namespace Jam50033
             {
                 source.Play();
             }
+        }
+
+        public void PlayGameOver()
+        {
+            if (!Application.IsPlaying(gameObject) || titleScreen || gameOver || audioSettings == null) return;
+            gameOver = true;
+            ApplySettings();
+        }
+
+        private void OnDisable()
+        {
+            if (source != null) source.Stop();
+            gameOver = false;
         }
     }
 }
