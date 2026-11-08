@@ -44,5 +44,5 @@ MonoBehaviour:
     points: 50
     gemPoints: 150
   entryZone:
-    tilesFromRight: 10
+    tilesFromRight: 13
     noBuildX: 6
