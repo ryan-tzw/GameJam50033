@@ -17,6 +17,11 @@ namespace Jam50033
         [SerializeField] private PlayerController player;
         [SerializeField] private Text scoreLabel;
         [SerializeField] private Text finalScoreLabel;
+        [SerializeField] private RectTransform breakdownRoot;
+        [SerializeField] private Text[] breakdownLabels = System.Array.Empty<Text>();
+        [SerializeField] private Text[] breakdownValues = System.Array.Empty<Text>();
+        [SerializeField] private Image[] breakdownIcons = System.Array.Empty<Image>();
+        private static readonly string[] scoreSources = { "Distance", "Milestones", "Coins", "Treasure", "Other" };
 
         [SerializeField] private CoinScoreAnimation coinAnimation;
 
@@ -24,6 +29,7 @@ namespace Jam50033
         private int tilesPassed;
         private bool finished;
         private int bonusPoints;
+        private int milestonePoints, coinPoints, treasurePoints;
         private int pendingCoinPoints;
         private bool formattedWithCommas;
         private int displayTarget;
@@ -34,6 +40,11 @@ namespace Jam50033
         public bool HasPendingScoreFeedback => HasFlyingCoins || (odometer != null && odometer.IsAnimating);
 
         public int Score => tilesPassed * gameplayScoring.pointsPerTile + bonusPoints;
+        public int DistancePoints => tilesPassed * gameplayScoring.pointsPerTile;
+        public int MilestonePoints => milestonePoints;
+        public int CoinPoints => coinPoints;
+        public int TreasurePoints => treasurePoints;
+        public int OtherPoints => bonusPoints - milestonePoints - coinPoints - treasurePoints;
 
         private void OnEnable()
         {
@@ -55,6 +66,7 @@ namespace Jam50033
             startingColumn = GetPlayerColumn();
             tilesPassed = 0;
             bonusPoints = 0;
+            milestonePoints = coinPoints = treasurePoints = 0;
             pendingCoinPoints = 0;
             displayTarget = 0;
             odometer?.SetValue(0, UseCommaSeparators, instant: true);
@@ -64,6 +76,7 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (breakdownRoot != null && breakdownRoot.gameObject.activeInHierarchy) StyleBreakdown();
             if (formattedWithCommas != UseCommaSeparators)
             {
                 RefreshLabels();
@@ -119,6 +132,7 @@ namespace Jam50033
         private void AwardMilestone(int distance, GameplaySettings.MilestoneData tier)
         {
             bonusPoints += tier.bonus;
+            milestonePoints += tier.bonus;
             coinAnimation?.ShowMilestone(distance, tier.bonus, tier.emphasize);
             if (audioSettings != null) PlayCollectibleSound(audioSettings.milestoneClip, audioSettings.milestoneVolume);
         }
@@ -159,6 +173,8 @@ namespace Jam50033
 
             // Secure the reward immediately; only its HUD presentation waits for arrival.
             bonusPoints += points;
+            if (worldPickup) coinPoints += points;
+            else treasurePoints += points;
             if (worldPickup && audioSettings != null)
             {
                 PlayCollectibleSound(audioSettings.collectibles.pickupClip, audioSettings.collectibles.pickupVolume);
@@ -228,6 +244,52 @@ namespace Jam50033
             if (finalScoreLabel != null)
             {
                 finalScoreLabel.text = text;
+            }
+            for (int i = 0; i < breakdownLabels.Length; i++)
+            {
+                breakdownLabels[i].text = scoreSources[i];
+                int points = i == 0 ? DistancePoints : i == 1 ? MilestonePoints : i == 2 ? CoinPoints
+                    : i == 3 ? TreasurePoints : OtherPoints;
+                breakdownValues[i].text = points.ToString(format, CultureInfo.InvariantCulture);
+            }
+            StyleBreakdown();
+        }
+
+        private void StyleBreakdown()
+        {
+            if (visualSettings == null || breakdownRoot == null) return;
+            var style = visualSettings.gameOverMenu;
+            breakdownRoot.anchoredPosition = style.breakdownPosition;
+            breakdownRoot.sizeDelta = style.breakdownSize;
+            // Generic AddPoints rewards remain visible if used, so the rows always reconcile to Score.
+            int count = OtherPoints > 0 ? 5 : 4;
+            float height = style.breakdownSize.y / count;
+            for (int i = 0; i < breakdownLabels.Length; i++)
+            {
+                var row = (RectTransform)breakdownLabels[i].transform.parent;
+                row.gameObject.SetActive(i < count);
+                row.anchoredPosition = Vector2.up * (style.breakdownSize.y * 0.5f - height * (i + 0.5f));
+                row.sizeDelta = new Vector2(style.breakdownSize.x, height);
+                for (int column = 0; column < 2; column++)
+                {
+                    Text target = column == 0 ? breakdownLabels[i] : breakdownValues[i];
+                    target.font = visualSettings.menuButtons.font;
+                    target.fontStyle = FontStyle.Normal;
+                    target.fontSize = target.resizeTextMaxSize = style.breakdownFontSize;
+                    target.resizeTextForBestFit = true;
+                    target.resizeTextMinSize = 12;
+                    target.color = column == 0 ? style.breakdownLabelColor : visualSettings.menuButtons.textColor;
+                    target.alignment = column == 0 ? TextAnchor.MiddleLeft : TextAnchor.MiddleRight;
+                }
+                breakdownLabels[i].rectTransform.offsetMin = new Vector2(style.breakdownIconSize + style.breakdownIconGap, 0f);
+                Image icon = breakdownIcons[i];
+                icon.sprite = i == 0 ? style.distanceIcon : i == 1 ? style.milestoneIcon : i == 2 ? style.coinIcon
+                    : i == 3 ? style.treasureIcon : null;
+                icon.enabled = icon.sprite != null;
+                icon.color = Color.white;
+                icon.preserveAspect = true;
+                icon.rectTransform.anchoredPosition = Vector2.right * (style.breakdownIconSize * 0.5f);
+                icon.rectTransform.sizeDelta = Vector2.one * Mathf.Min(style.breakdownIconSize, height);
             }
         }
 

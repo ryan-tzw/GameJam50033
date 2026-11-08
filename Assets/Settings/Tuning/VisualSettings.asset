@@ -179,12 +179,22 @@ MonoBehaviour:
     pageButtonSize: {x: 64, y: 54}
   gameOverMenu:
     buttonSize: {x: 280, y: 72}
-    rowPosition: {x: 0, y: -75}
+    rowPosition: {x: 0, y: -205}
     buttonGap: 24
     iconSize: 48
     horizontalPadding: 20
     iconTextGap: 12
     fontSize: 26
+    breakdownPosition: {x: 0, y: -90}
+    breakdownSize: {x: 340, y: 112}
+    breakdownFontSize: 18
+    breakdownLabelColor: {r: 0.84, g: 0.82, b: 1, a: 1}
+    breakdownIconSize: 24
+    breakdownIconGap: 10
+    distanceIcon: {fileID: 5865670524570963042, guid: 0eb0e64912a3c80c4b3b05ebe9a7ffae, type: 3}
+    milestoneIcon: {fileID: 21300000, guid: 2b9e0e36395cad53aac74c83035037a5, type: 3}
+    coinIcon: {fileID: -8122072913242413145, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}
+    treasureIcon: {fileID: 5930751672855658006, guid: 2fa5a6e3bcb57ea268798901c4d7c0f1, type: 3}
   audioMenu:
     headingPosition: {x: 0, y: 190}
     rowSize: {x: 600, y: 64}

@@ -43,6 +43,16 @@ namespace Jam50033
             StartCoroutine(LoadGame());
         }
 
+        public void ExitGame()
+        {
+            if (loading || StripSceneTransition.IsRunning || AudioMenuController.IsOpen || ControlsMenuController.IsOpen) return;
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+
         private void LateUpdate()
         {
             var style = visualSettings.pauseMenu;
@@ -57,7 +67,7 @@ namespace Jam50033
                 caption.rectTransform.anchorMin = caption.rectTransform.anchorMax = caption.rectTransform.pivot = Vector2.one * 0.5f;
                 caption.rectTransform.sizeDelta = new Vector2(style.iconButtonSize + style.iconButtonGap, height);
                 caption.rectTransform.anchoredPosition = Vector2.down * (style.iconButtonSize * 0.5f + style.captionGap + height * 0.5f);
-                icons[i].sprite = i == 0 ? style.audioIcon : style.controlsIcon;
+                icons[i].sprite = i == 0 ? style.audioIcon : i == 1 ? style.controlsIcon : style.mainMenuIcon;
                 icons[i].color = style.iconColor;
                 icons[i].preserveAspect = true;
                 icons[i].rectTransform.sizeDelta = Vector2.one * style.iconSize;

@@ -123,6 +123,17 @@ namespace Jam50033
             [Min(0f)] public float horizontalPadding = 20f;
             [Min(0f)] public float iconTextGap = 12f;
             [Min(1)] public int fontSize = 26;
+            [Header("Score Breakdown")]
+            public Vector2 breakdownPosition = new Vector2(0f, -90f);
+            public Vector2 breakdownSize = new Vector2(340f, 112f);
+            [Min(1)] public int breakdownFontSize = 18;
+            public Color breakdownLabelColor = new Color(0.84f, 0.82f, 1f, 1f);
+            [Min(1f)] public float breakdownIconSize = 24f;
+            [Min(0f)] public float breakdownIconGap = 10f;
+            public Sprite distanceIcon;
+            public Sprite milestoneIcon;
+            public Sprite coinIcon;
+            public Sprite treasureIcon;
         }
 
         [Serializable]
