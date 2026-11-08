@@ -62,7 +62,7 @@ MonoBehaviour:
   titleMusic: {fileID: 8300000, guid: 0e52114e36a94fd42a8c51ac363423c9, type: 3}
   titleMusicVolume: 1
   titleMusicStartOffset: 0
-  gameMusic: {fileID: 8300000, guid: 006a32a0a642a9374be4b29b6b5eca08, type: 3}
+  gameMusic: {fileID: 8300000, guid: 5a133d4fd875fe507b28aa69d94f6c39, type: 3}
   gameMusicVolume: 0.4
   gameMusicStartOffset: 1
   pausedMusicMultiplier: 0.35
