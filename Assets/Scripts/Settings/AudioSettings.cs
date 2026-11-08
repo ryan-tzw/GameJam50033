@@ -48,6 +48,8 @@ namespace Jam50033
         {
             public AudioClip selectClip;
             [Range(0f, 1f)] public float selectVolume = 0.7f;
+            [Min(0f), Tooltip("Minimum real seconds between volume adjustment sounds while dragging a slider.")]
+            public float adjustmentSoundInterval = 0.08f;
             public AudioClip pressClip;
             [Range(0f, 1f)] public float pressVolume = 0.5f;
             public AudioClip gameStartClip;

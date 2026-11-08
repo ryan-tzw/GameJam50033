@@ -42,6 +42,12 @@ namespace Jam50033
             instance.Play(audioSettings.menu.gameStartClip, audioSettings.menu.gameStartVolume);
         }
 
+        public static void PlaySelect()
+        {
+            if (instance != null && instance.settings != null)
+                instance.Play(instance.settings.menu.selectClip, instance.settings.menu.selectVolume);
+        }
+
         private void LateUpdate()
         {
             GameObject selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
@@ -53,7 +59,7 @@ namespace Jam50033
             if (selected != previousSelection && previousSelection != null && selected != null &&
                 selected.activeInHierarchy && selected.GetComponent<Selectable>() != null && navigating && settings != null)
             {
-                Play(settings.menu.selectClip, settings.menu.selectVolume);
+                PlaySelect();
             }
             previousSelection = selected;
         }

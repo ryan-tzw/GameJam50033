@@ -35,6 +35,7 @@ namespace Jam50033
         private static AudioMenuController active;
         private bool[] sourceStates;
         private bool open, opening, closing;
+        private float nextAdjustmentSoundTime;
         private AudioMixer Mixer => audioSettings.musicMixer.audioMixer;
         public static bool IsOpen => active != null && active.open;
 
@@ -67,6 +68,7 @@ namespace Jam50033
             active = this;
             open = opening = true;
             closing = false;
+            nextAdjustmentSoundTime = 0f;
         }
 
         public void Back()
@@ -102,7 +104,16 @@ namespace Jam50033
             value = Mathf.Clamp01(value);
             Mixer.SetFloat(parameters[index], value <= 0f ? -80f : Mathf.Log10(value) * 20f);
             rows[index].value.text = Mathf.RoundToInt(value * 100f) + "%";
-            if (save) PlayerPrefs.SetFloat(preferencePrefix + parameters[index], value);
+            if (save)
+            {
+                PlayerPrefs.SetFloat(preferencePrefix + parameters[index], value);
+                // Apply the mixer first so the preview reflects the newly selected level.
+                if (open && Time.unscaledTime >= nextAdjustmentSoundTime)
+                {
+                    MenuAudio.PlaySelect();
+                    nextAdjustmentSoundTime = Time.unscaledTime + audioSettings.menu.adjustmentSoundInterval;
+                }
+            }
         }
 
         private void ApplyStyle()
