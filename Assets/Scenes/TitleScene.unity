@@ -1612,6 +1612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698050ea0baa6187580d4882c0e12549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.TitleScreenController
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
   startButton: {fileID: 1014169770}
   gameSceneName: GameScene
 --- !u!224 &1911365648

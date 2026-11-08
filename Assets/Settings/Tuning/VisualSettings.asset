@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9c949e34ef6afdf882290c75a4661b, type: 3}
   m_Name: VisualSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.VisualSettings
+  sceneTransition:
+    color: {r: 0.055, g: 0.045, b: 0.13, a: 1}
+    stripCount: 12
+    duration: 0.28
+    stripStagger: 0.01
   stageOutline:
     dashLength: 0.2
     lineWidth: 0.03

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Jam50033
@@ -9,6 +8,7 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class TitleScreenController : MonoBehaviour
     {
+        [SerializeField] private VisualSettings visualSettings;
         [SerializeField] private Button startButton;
         [SerializeField] private string gameSceneName = "GameScene";
 
@@ -43,7 +43,7 @@ namespace Jam50033
                 yield return null;
             }
 
-            yield return SceneManager.LoadSceneAsync(gameSceneName);
+            StripSceneTransition.Load(gameSceneName, visualSettings);
         }
     }
 }

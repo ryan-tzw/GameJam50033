@@ -7,6 +7,8 @@ namespace Jam50033
     [CreateAssetMenu(fileName = "VisualSettings", menuName = "Neverland/Settings/Visual")]
     public sealed class VisualSettings : ScriptableObject
     {
+        [Header("Scene Transition")]
+        public TransitionData sceneTransition = new();
         [Header("Stage Outline")]
         public StageOutlineData stageOutline = new();
         [Header("Bridge Gizmos")]
@@ -321,6 +323,17 @@ namespace Jam50033
             public float scaleMultiplier = 1f;
             [Tooltip("World-space adjustment from the camera centre.")]
             public Vector2 offset;
+        }
+
+        [Serializable]
+        public sealed class TransitionData
+        {
+            public Color color = new Color(0.055f, 0.045f, 0.13f, 1f);
+            [Range(1, 64)] public int stripCount = 12;
+            [Min(0.01f), Tooltip("Seconds for each strip to cover or reveal the screen.")]
+            public float duration = 0.28f;
+            [Min(0f), Tooltip("Delay in seconds between neighbouring horizontal strips.")]
+            public float stripStagger = 0.01f;
         }
 
         private void OnValidate()

@@ -759,6 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5322c0d01cba4b6da91d47a2f8f6f2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.GameOverController
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
   playerSettings: {fileID: 11400000, guid: 9485760b34afda5a2a5be7b5b2c70a79, type: 2}
   player: {fileID: 1321940082}
   runScore: {fileID: 0}

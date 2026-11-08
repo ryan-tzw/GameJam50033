@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Jam50033
@@ -9,6 +8,7 @@ namespace Jam50033
     [DisallowMultipleComponent]
     public sealed class GameOverController : MonoBehaviour
     {
+        [SerializeField] private VisualSettings visualSettings;
         [SerializeField] private PlayerSettings playerSettings;
         private static readonly PlayerSettings.FallDeathData defaultPlayerFallDeath = new();
         private PlayerSettings.FallDeathData playerFallDeath => playerSettings != null ? playerSettings.fallDeath : defaultPlayerFallDeath;
@@ -162,7 +162,7 @@ namespace Jam50033
                 yield return null;
             }
 
-            yield return SceneManager.LoadSceneAsync(sceneName);
+            StripSceneTransition.Load(sceneName, visualSettings);
         }
 
         private void OnDestroy()
