@@ -74,6 +74,12 @@ namespace Jam50033
         public sealed class TitleMenuData
         {
             public Vector2 iconRowPosition = new Vector2(0f, -180f);
+            [Header("Title Subtitle")]
+            public string subtitleText = "~ An Endless Journey ~";
+            [Tooltip("Offset from the title centre, in Canvas UI units.")]
+            public Vector2 subtitleOffset = new Vector2(0f, -64f);
+            [Min(1)] public int subtitleFontSize = 22;
+            public Color subtitleColor = new Color(1f, 0.95f, 0.84f, 0.95f);
         }
 
         [Serializable]

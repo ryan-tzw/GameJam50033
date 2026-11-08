@@ -11,6 +11,7 @@ namespace Jam50033
         [SerializeField] private VisualSettings visualSettings;
         [SerializeField] private AudioSettings audioSettings;
         [SerializeField] private Button startButton;
+        [SerializeField] private Text titleSubtitle;
         [SerializeField] private Button[] iconButtons = System.Array.Empty<Button>();
         [SerializeField] private Image[] icons = System.Array.Empty<Image>();
         [SerializeField] private string gameSceneName = "GameScene";
@@ -55,6 +56,15 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (titleSubtitle != null)
+            {
+                var title = visualSettings.titleMenu;
+                titleSubtitle.text = title.subtitleText;
+                titleSubtitle.font = visualSettings.menuButtons.font;
+                titleSubtitle.fontSize = title.subtitleFontSize;
+                titleSubtitle.color = title.subtitleColor;
+                titleSubtitle.rectTransform.anchoredPosition = title.subtitleOffset;
+            }
             var style = visualSettings.pauseMenu;
             for (int i = 0; i < iconButtons.Length; i++)
             {

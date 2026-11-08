@@ -130,6 +130,10 @@ MonoBehaviour:
     bounceDamping: 0.55
   titleMenu:
     iconRowPosition: {x: 0, y: -180}
+    subtitleText: ~ An Endless Journey ~
+    subtitleOffset: {x: 0, y: -64}
+    subtitleFontSize: 22
+    subtitleColor: {r: 1, g: 0.95, b: 0.84, a: 0.95}
   pauseMenu:
     overlayColor: {r: 0.025, g: 0.045, b: 0.08, a: 0.8}
     headingFont: {fileID: 12800000, guid: 08e912f05e45047ecabb90fbc0936391, type: 3}
