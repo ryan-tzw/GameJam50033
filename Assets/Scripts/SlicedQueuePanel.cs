@@ -90,9 +90,15 @@ namespace Jam50033
             return texture;
         }
 
-        private void OnDisable() => ReleaseGenerated();
+        // Hidden menus reuse their artwork; release it only when the panel is destroyed.
+        private void OnDestroy() => ReleaseGenerated();
 
-        private void ReleaseGenerated()
+        private void OnDisable()
+        {
+            if (!Application.isPlaying) ReleaseGenerated();
+        }
+
+        internal void ReleaseGenerated()
         {
             Release(generatedFill);
             Release(generatedOutline);

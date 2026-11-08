@@ -123,6 +123,8 @@ MonoBehaviour:
     hintFontSize: 22
     hintFontStyle: 0
     hintColor: {r: 0.84, g: 0.82, b: 1, a: 0.95}
+  titleMenu:
+    iconRowPosition: {x: 0, y: -180}
   pauseMenu:
     overlayColor: {r: 0.025, g: 0.045, b: 0.08, a: 0.8}
     headingFont: {fileID: 12800000, guid: 08e912f05e45047ecabb90fbc0936391, type: 3}
@@ -130,8 +132,8 @@ MonoBehaviour:
     headingColor: {r: 1, g: 0.95, b: 0.86, a: 1}
     headingPosition: {x: 0, y: 165}
     firstButtonY: 35
-    audioIcon: {fileID: 21300000, guid: 928237ab047940199df13653632b0734, type: 3}
-    controlsIcon: {fileID: 21300000, guid: c046839e215840b828b0840a5a556686, type: 3}
+    audioIcon: {fileID: 21300000, guid: d3afa3ae61df2de0bb328d3d36abbca7, type: 3}
+    controlsIcon: {fileID: 21300000, guid: 51c4d174da33ebedab6196cc675b65be, type: 3}
     restartIcon: {fileID: 21300000, guid: a7eba9bd29c24267a22394170d21254b, type: 3}
     mainMenuIcon: {fileID: 21300000, guid: 434f35c256074769882643b43996f76a, type: 3}
     iconButtonSize: 72

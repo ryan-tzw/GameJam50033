@@ -27,9 +27,12 @@ namespace Jam50033
         public ScorePanelData scorePanel = new();
         [Header("Menu Button Panels")]
         public MenuButtonData menuButtons = new();
+        [Header("Title Menu")]
+        public TitleMenuData titleMenu = new();
         [Header("Pause Menu")]
         public PauseMenuData pauseMenu = new();
-        [Header("Audio Menu")]
+        [Header("Settings Menu")]
+        [InspectorName("Settings")]
         public AudioMenuData audioMenu = new();
         [Header("Controls Page")]
         public ControlsPageData controlsPage = new();
@@ -64,6 +67,12 @@ namespace Jam50033
         public OutlineData[] outlines = Array.Empty<OutlineData>();
         [Header("UI Images")]
         public ImageData[] images = Array.Empty<ImageData>();
+
+        [Serializable]
+        public sealed class TitleMenuData
+        {
+            public Vector2 iconRowPosition = new Vector2(0f, -180f);
+        }
 
         [Serializable]
         public sealed class ControlsPageData
@@ -117,7 +126,7 @@ namespace Jam50033
             [Tooltip("Resume button Y in Canvas UI units.")]
             public float firstButtonY = 35f;
             [Header("Icon Row")]
-            public Sprite audioIcon;
+            [InspectorName("Settings Icon")] public Sprite audioIcon;
             public Sprite controlsIcon;
             public Sprite restartIcon;
             public Sprite mainMenuIcon;

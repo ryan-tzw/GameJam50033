@@ -27,7 +27,17 @@ namespace Jam50033
         private bool open, opening, closing;
         public static bool IsOpen => active != null && active.open;
 
-        private void Awake() => panel.SetActive(false);
+        private void Awake()
+        {
+            panel.SetActive(false);
+            // Generate rounded panel art and load glyphs before the player opens this page.
+            ApplyStyle();
+            foreach (Text text in panel.GetComponentsInChildren<Text>(true))
+            {
+                if (text.font != null && text.font.dynamic)
+                    text.font.RequestCharactersInTexture(text.text, text.fontSize, text.fontStyle);
+            }
+        }
 
         public void Open()
         {
@@ -71,6 +81,9 @@ namespace Jam50033
         private void ApplyStyle()
         {
             VisualSettings.ControlsPageData style = visualSettings.controlsPage;
+            // The pause widgets (including their dimmer) are hidden while this page is open.
+            panel.GetComponent<Image>().color = PauseMenuController.IsPaused
+                ? visualSettings.pauseMenu.overlayColor : Color.clear;
             var art = visualSettings.nextPreview;
             frame.GetComponent<RectTransform>().sizeDelta = style.panelSize;
             Color fill = style.panelColor;
@@ -147,5 +160,13 @@ namespace Jam50033
         }
 
         private void OnDisable() => Close();
+
+        private void OnDestroy()
+        {
+            if (panel == null) return;
+            // Prewarmed children may never have been activated, so their OnDestroy may not run.
+            foreach (SlicedQueuePanel artwork in panel.GetComponentsInChildren<SlicedQueuePanel>(true))
+                artwork.ReleaseGenerated();
+        }
     }
 }
