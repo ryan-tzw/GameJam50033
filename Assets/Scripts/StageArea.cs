@@ -133,7 +133,8 @@ namespace Jam50033
             outline.numCornerVertices = 0;
             outline.shadowCastingMode = ShadowCastingMode.Off;
             outline.receiveShadows = false;
-            outline.sortingOrder = 100;
+            // Match zone boundaries: above fills (-10), behind gameplay and ghosts (-1).
+            outline.sortingOrder = -9;
         }
 
         private void DrawOutline()

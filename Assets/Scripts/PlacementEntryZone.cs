@@ -20,6 +20,7 @@ namespace Jam50033
         private StageArea stage;
         private GameObject visual;
         private Mesh mesh;
+        private Mesh fillMesh;
         private Material material;
         private Vector4 previousGeometry;
         private Color previousColor;
@@ -28,6 +29,7 @@ namespace Jam50033
         private Color previousNoBuildColor;
         private readonly List<Vector3> vertices = new();
         private readonly List<int> triangles = new();
+        private readonly List<int> fillTriangles = new();
         private readonly List<Color> colors = new();
 
         private float PlacementRightX => (stage.Columns * 0.5f -
@@ -58,9 +60,20 @@ namespace Jam50033
             visual.AddComponent<MeshFilter>().sharedMesh = mesh;
             MeshRenderer renderer = visual.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = material;
-            renderer.sortingOrder = 90;
+            // Boundaries remain above zone fills (-10), but behind gameplay and ghosts (-1).
+            renderer.sortingOrder = -9;
             renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             renderer.receiveShadows = false;
+            // Fills sit above the background (-100 to -95) and behind gameplay, including ghosts (-1).
+            GameObject fillVisual = new GameObject("Zone Fills") { hideFlags = HideFlags.HideAndDontSave };
+            fillVisual.transform.SetParent(visual.transform, false);
+            fillMesh = new Mesh { name = "Zone Fills", hideFlags = HideFlags.HideAndDontSave };
+            fillVisual.AddComponent<MeshFilter>().sharedMesh = fillMesh;
+            MeshRenderer fillRenderer = fillVisual.AddComponent<MeshRenderer>();
+            fillRenderer.sharedMaterial = material;
+            fillRenderer.sortingOrder = -10;
+            fillRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            fillRenderer.receiveShadows = false;
             DrawZone(true);
         }
 
@@ -101,12 +114,13 @@ namespace Jam50033
             previousNoBuildColor = noBuildStyle.color;
             vertices.Clear();
             triangles.Clear();
+            fillTriangles.Clear();
             colors.Clear();
             if (right > left)
             {
                 Color fill = new Color(visualEntryZone.color.r, visualEntryZone.color.g, visualEntryZone.color.b, visualEntryZone.fillOpacity);
                 AddQuad(new Vector2(left, -halfHeight), new Vector2(right, -halfHeight),
-                    new Vector2(right, halfHeight), new Vector2(left, halfHeight), fill);
+                    new Vector2(right, halfHeight), new Vector2(left, halfHeight), fill, isFill: true);
                 Vector2 bottomLeft = new Vector2(left, -halfHeight);
                 Vector2 topLeft = new Vector2(left, halfHeight);
                 Vector2 bottomRight = new Vector2(right, -halfHeight);
@@ -123,7 +137,7 @@ namespace Jam50033
                 Color fill = noBuildStyle.color;
                 fill.a = noBuildStyle.fillOpacity;
                 AddQuad(new Vector2(buildLeft, -halfHeight), new Vector2(right, -halfHeight),
-                    new Vector2(right, halfHeight), new Vector2(buildLeft, halfHeight), fill);
+                    new Vector2(right, halfHeight), new Vector2(buildLeft, halfHeight), fill, isFill: true);
                 Color line = noBuildStyle.color;
                 line.a = noBuildStyle.lineOpacity;
                 float halfWidth = noBuildStyle.lineWidth * 0.5f / transform.lossyScale.x;
@@ -136,6 +150,11 @@ namespace Jam50033
             mesh.SetColors(colors);
             mesh.SetTriangles(triangles, 0);
             mesh.RecalculateBounds();
+            fillMesh.Clear();
+            fillMesh.SetVertices(vertices);
+            fillMesh.SetColors(colors);
+            fillMesh.SetTriangles(fillTriangles, 0);
+            fillMesh.RecalculateBounds();
         }
 
         private float previousDashLength;
@@ -155,19 +174,21 @@ namespace Jam50033
             }
         }
 
-        private void AddQuad(Vector2 a, Vector2 b, Vector2 c, Vector2 d, Color tint)
+        private void AddQuad(Vector2 a, Vector2 b, Vector2 c, Vector2 d, Color tint, bool isFill = false)
         {
             int first = vertices.Count;
             vertices.Add(a); vertices.Add(b); vertices.Add(c); vertices.Add(d);
             for (int i = 0; i < 4; i++) colors.Add(tint);
-            triangles.Add(first); triangles.Add(first + 1); triangles.Add(first + 2);
-            triangles.Add(first); triangles.Add(first + 2); triangles.Add(first + 3);
+            List<int> target = isFill ? fillTriangles : triangles;
+            target.Add(first); target.Add(first + 1); target.Add(first + 2);
+            target.Add(first); target.Add(first + 2); target.Add(first + 3);
         }
 
         private void OnDisable()
         {
             RemoveGenerated(visual);
             RemoveGenerated(mesh);
+            RemoveGenerated(fillMesh);
             RemoveGenerated(material);
         }
 
