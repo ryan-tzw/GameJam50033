@@ -31,6 +31,8 @@ namespace Jam50033
         public PauseMenuData pauseMenu = new();
         [Header("Audio Menu")]
         public AudioMenuData audioMenu = new();
+        [Header("Controls Page")]
+        public ControlsPageData controlsPage = new();
         [Header("Score Milestones")]
         public MilestoneData milestones = new();
         [Header("Coin")]
@@ -64,6 +66,34 @@ namespace Jam50033
         public ImageData[] images = Array.Empty<ImageData>();
 
         [Serializable]
+        public sealed class ControlsPageData
+        {
+            public Vector2 panelSize = new Vector2(800f, 660f);
+            public Color panelColor = new Color(0.1f, 0.07f, 0.24f, 1f);
+            [Range(0f, 1f)] public float panelOpacity = 0.9f;
+            public Color outlineColor = new Color(0.75f, 0.65f, 0.95f, 1f);
+            [Min(0f)] public float outlineWidth = 3f;
+            [Min(0f)] public float cornerRadius = 40f;
+            public Font headingFont;
+            [Min(1)] public int headingSize = 44;
+            [Min(1), InspectorName("Body Font Size")] public int descriptionSize = 17;
+            [Min(1f), Tooltip("Keycap height and square key size, in Canvas UI units.")]
+            public float keySize = 56f;
+            [Min(1f)] public float spaceKeyWidth = 160f;
+            [Min(1f)] public float escapeKeyWidth = 84f;
+            [Min(0f)] public float keyCornerRadius = 12f;
+            [Min(1)] public int keyFontSize = 28;
+            public Vector2 arrowSize = new Vector2(20f, 26f);
+            [Range(0.25f, 2f), Tooltip("Anti-aliased arrow edge width in screen pixels.")]
+            public float arrowEdgeSoftness = 1f;
+            public Color keyColor = new Color(1f, 0.95f, 0.84f, 1f);
+            public Color keyInkColor = new Color(0.1f, 0.07f, 0.24f, 1f);
+            [Range(0f, 1f)] public float calloutOpacity = 0.15f;
+            public Vector2 backButtonSize = new Vector2(300f, 54f);
+            [Min(1)] public int backFontSize = 30;
+        }
+
+        [Serializable]
         public sealed class AudioMenuData
         {
             public Vector2 headingPosition = new Vector2(0f, 190f);
@@ -88,6 +118,7 @@ namespace Jam50033
             public float firstButtonY = 35f;
             [Header("Icon Row")]
             public Sprite audioIcon;
+            public Sprite controlsIcon;
             public Sprite restartIcon;
             public Sprite mainMenuIcon;
             [Min(1f)] public float iconButtonSize = 72f;

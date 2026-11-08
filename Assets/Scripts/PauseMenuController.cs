@@ -17,6 +17,7 @@ namespace Jam50033
         [SerializeField] private Text heading;
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button audioButton;
+        [SerializeField] private Button controlsButton;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
         [SerializeField] private Image[] icons;
@@ -28,14 +29,14 @@ namespace Jam50033
 
         private void Awake()
         {
-            buttons = new[] { resumeButton, audioButton, restartButton, mainMenuButton };
+            buttons = new[] { resumeButton, audioButton, controlsButton, restartButton, mainMenuButton };
             panel.SetActive(false);
             MenuAudio.Initialize(audioSettings);
         }
 
         private void Update()
         {
-            if (AudioMenuController.IsOpen || StripSceneTransition.IsRunning || leaving || (gameOver != null && gameOver.IsGameOver)) return;
+            if (ControlsMenuController.IsOpen || AudioMenuController.IsOpen || StripSceneTransition.IsRunning || leaving || (gameOver != null && gameOver.IsGameOver)) return;
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 if (paused) Resume();
@@ -60,7 +61,7 @@ namespace Jam50033
             if (!paused) return;
             VisualSettings.PauseMenuData style = visualSettings.pauseMenu;
             panel.GetComponent<Image>().color = style.overlayColor;
-            heading.text = "PAUSED";
+            heading.text = "Paused";
             heading.font = style.headingFont;
             heading.fontSize = style.headingSize;
             heading.color = style.headingColor;
@@ -69,7 +70,7 @@ namespace Jam50033
             {
                 buttons[i].GetComponent<RectTransform>().anchoredPosition = i == 0
                     ? new Vector2(0f, style.firstButtonY)
-                    : new Vector2((i - 2) * (style.iconButtonSize + style.iconButtonGap), style.iconRowY);
+                    : new Vector2((i - 1 - (buttons.Length - 2) * 0.5f) * (style.iconButtonSize + style.iconButtonGap), style.iconRowY);
                 Text text = buttons[i].GetComponentInChildren<Text>();
                 text.font = visualSettings.menuButtons.font;
                 text.fontSize = i == 0 ? visualSettings.menuButtons.fontSize : style.captionFontSize;
@@ -82,7 +83,7 @@ namespace Jam50033
                 text.rectTransform.sizeDelta = new Vector2(style.iconButtonSize + style.iconButtonGap, captionHeight);
                 text.rectTransform.anchoredPosition = Vector2.down * (style.iconButtonSize * 0.5f + style.captionGap + captionHeight * 0.5f);
                 Image icon = icons[i - 1];
-                icon.sprite = i == 1 ? style.audioIcon : i == 2 ? style.restartIcon : style.mainMenuIcon;
+                icon.sprite = i == 1 ? style.audioIcon : i == 2 ? style.controlsIcon : i == 3 ? style.restartIcon : style.mainMenuIcon;
                 icon.color = style.iconColor;
                 icon.preserveAspect = true;
                 icon.rectTransform.sizeDelta = Vector2.one * style.iconSize;

@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonStyle
   visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+  squareIcon: 0
 --- !u!1 &470184972097537216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,7 +1442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AUDIO
+  m_Text: Audio
 --- !u!1 &4246964831231293343
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ namespace Jam50033
 
         public void Open()
         {
-            if (IsOpen || StripSceneTransition.IsRunning) return;
+            if (IsOpen || ControlsMenuController.IsOpen || StripSceneTransition.IsRunning) return;
             sourceStates = new bool[sourceWidgets.Length];
             for (int i = 0; i < sourceWidgets.Length; i++)
             {

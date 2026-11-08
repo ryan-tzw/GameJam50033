@@ -367,12 +367,12 @@ namespace Jam50033
                     spawner.TryHold(this);
                     return;
                 }
-                if (keyboard.qKey.wasPressedThisFrame)
+                if (keyboard.zKey.wasPressedThisFrame)
                 {
                     TryRotate(-1);
                 }
 
-                if (keyboard.eKey.wasPressedThisFrame)
+                if (keyboard.xKey.wasPressedThisFrame)
                 {
                     TryRotate(1);
                 }
