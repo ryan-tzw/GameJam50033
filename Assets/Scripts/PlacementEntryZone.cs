@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Jam50033
 {
@@ -22,6 +23,7 @@ namespace Jam50033
         private Mesh mesh;
         private Mesh fillMesh;
         private Material material;
+        private Text entryLabel, noBuildLabel;
         private Vector4 previousGeometry;
         private Color previousColor;
         private Vector3 previousStyle;
@@ -74,7 +76,43 @@ namespace Jam50033
             fillRenderer.sortingOrder = -10;
             fillRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             fillRenderer.receiveShadows = false;
+            entryLabel = CreateLabel("Entry Zone Label");
+            noBuildLabel = CreateLabel("No-Build Zone Label");
             DrawZone(true);
+        }
+
+        private Text CreateLabel(string name)
+        {
+            GameObject label = new GameObject(name, typeof(RectTransform), typeof(Canvas), typeof(CanvasRenderer), typeof(Text))
+                { hideFlags = HideFlags.HideAndDontSave };
+            label.transform.SetParent(visual.transform, false);
+            Canvas canvas = label.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = -8;
+            Text text = label.GetComponent<Text>();
+            text.alignment = TextAnchor.MiddleCenter;
+            text.horizontalOverflow = HorizontalWrapMode.Overflow;
+            text.verticalOverflow = VerticalWrapMode.Overflow;
+            text.raycastTarget = false;
+            text.fontSize = 48;
+            text.rectTransform.sizeDelta = new Vector2(1200f, 120f);
+            return text;
+        }
+
+        private void UpdateLabel(Text text, VisualSettings.ZoneLabelData settings, Color color, float boundary, bool zoneVisible)
+        {
+            text.enabled = settings.visible && zoneVisible && settings.font != null;
+            if (!text.enabled) return;
+            text.text = settings.text;
+            text.font = settings.font;
+            color.a = settings.opacity;
+            text.color = color;
+            // Keep label size and its gap in world units while the boundary follows its existing zone rule.
+            Vector3 position = transform.TransformPoint(new Vector3(boundary, 0f, 0f)) +
+                transform.right * (settings.rightOffset + settings.fontSize * 0.5f) + transform.up * settings.verticalOffset;
+            text.rectTransform.SetPositionAndRotation(position, transform.rotation * Quaternion.Euler(0f, 0f, 90f));
+            text.rectTransform.localScale = Vector3.one * (settings.fontSize / (48f * Mathf.Abs(transform.lossyScale.x)));
         }
 
         private void LateUpdate()
@@ -97,6 +135,8 @@ namespace Jam50033
             Vector3 style = new Vector3(visualEntryZone.fillOpacity, visualEntryZone.outlineOpacity, visualEntryZone.lineWidth);
             float buildLeft = transform.InverseTransformPoint(new Vector3(gameplayEntryZone.noBuildX,
                 transform.position.y, transform.position.z)).x;
+            UpdateLabel(entryLabel, visualEntryZone.label, visualEntryZone.color, left, left < right);
+            UpdateLabel(noBuildLabel, noBuildStyle.label, noBuildStyle.color, buildLeft, buildLeft < right);
             Vector4 buildStyle = new Vector4(buildLeft, noBuildStyle.fillOpacity,
                 noBuildStyle.lineOpacity, noBuildStyle.lineWidth);
             if (!force && geometry == previousGeometry && visualEntryZone.color == previousColor && style == previousStyle &&

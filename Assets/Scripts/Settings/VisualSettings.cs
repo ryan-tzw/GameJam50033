@@ -360,6 +360,21 @@ namespace Jam50033
         }
 
         [Serializable]
+        public sealed class ZoneLabelData
+        {
+            public bool visible = true;
+            public Font font;
+            public string text;
+            [Min(0.01f), Tooltip("Text size in Unity world units; independent of grid size.")]
+            public float fontSize = 0.28f;
+            [Range(0f, 1f)] public float opacity = 0.25f;
+            [Min(0f), Tooltip("Gap to the right of the boundary, in Unity world units.")]
+            public float rightOffset = 0.08f;
+            [Tooltip("Offset above the stage centre, in Unity world units.")]
+            public float verticalOffset;
+        }
+
+        [Serializable]
         public sealed class NoBuildZoneData
         {
             public Color color = new Color(0.8f, 0.7f, 1f, 1f);
@@ -367,6 +382,7 @@ namespace Jam50033
             [Range(0f, 1f)] public float lineOpacity = 0.45f;
             [Min(0.001f), Tooltip("Solid boundary thickness in Unity units.")]
             public float lineWidth = 0.025f;
+            public ZoneLabelData label = new() { text = "NO-BUILD ZONE" };
         }
 
         [Serializable]
@@ -381,6 +397,7 @@ namespace Jam50033
             public float lineWidth = 0.04f;
             [Min(0.01f), Tooltip("Dash length and gap in cells.")]
             public float dashLength = 0.35f;
+            public ZoneLabelData label = new() { text = "ENTRY ZONE" };
         }
 
         [Serializable]
