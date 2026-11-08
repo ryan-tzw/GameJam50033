@@ -42,10 +42,11 @@ namespace Jam50033
                     target.text = menu.hintText;
                     continue;
                 }
-                if (target.GetComponentInParent<MenuButtonStyle>(true) != null)
+                MenuButtonStyle buttonStyle = target.GetComponentInParent<MenuButtonStyle>(true);
+                if (buttonStyle != null)
                 {
                     target.font = menu.font != null ? menu.font : style.font;
-                    target.fontSize = menu.fontSize;
+                    target.fontSize = buttonStyle.IsGameOverButton ? visualSettings.gameOverMenu.fontSize : menu.fontSize;
                     target.fontStyle = menu.fontStyle;
                     target.color = menu.textColor;
                     target.text = style.text;

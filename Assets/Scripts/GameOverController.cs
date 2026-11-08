@@ -21,6 +21,8 @@ namespace Jam50033
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
+        [SerializeField] private Image restartIcon;
+        [SerializeField] private Image mainMenuIcon;
         [SerializeField] private string titleSceneName = "TitleScene";
 
         private Collider2D playerCollider;
@@ -44,6 +46,7 @@ namespace Jam50033
         private void LateUpdate()
         {
             if (PauseMenuController.IsPaused) return;
+            if (gameOverPanel.activeSelf) StyleButtons();
             if (menuPending)
             {
                 menuPending = false;
@@ -76,6 +79,36 @@ namespace Jam50033
 
             PauseGameplay();
             return true;
+        }
+
+        private void StyleButtons()
+        {
+            var style = visualSettings.gameOverMenu;
+            float spacing = style.buttonSize.y + style.buttonGap;
+            StyleButton(restartButton, restartIcon, visualSettings.pauseMenu.restartIcon, 0f);
+            StyleButton(mainMenuButton, mainMenuIcon, visualSettings.pauseMenu.mainMenuIcon, -spacing);
+        }
+
+        private void StyleButton(Button button, Image icon, Sprite sprite, float y)
+        {
+            var style = visualSettings.gameOverMenu;
+            button.GetComponent<RectTransform>().anchoredPosition = style.rowPosition + Vector2.up * y;
+            button.GetComponent<RectTransform>().sizeDelta = style.buttonSize;
+            button.colors = visualSettings.menuButtons.colors;
+            icon.sprite = sprite;
+            icon.color = visualSettings.pauseMenu.iconColor;
+            icon.preserveAspect = true;
+            icon.rectTransform.anchorMin = icon.rectTransform.anchorMax = new Vector2(0f, 0.5f);
+            icon.rectTransform.anchoredPosition = Vector2.right * (style.horizontalPadding + style.iconSize * 0.5f);
+            icon.rectTransform.sizeDelta = Vector2.one * style.iconSize;
+            Text label = button.GetComponentInChildren<Text>();
+            label.enabled = true;
+            label.alignment = TextAnchor.MiddleLeft;
+            label.fontSize = style.fontSize;
+            label.rectTransform.anchorMin = Vector2.zero;
+            label.rectTransform.anchorMax = Vector2.one;
+            label.rectTransform.offsetMin = new Vector2(style.horizontalPadding + style.iconSize + style.iconTextGap, 0f);
+            label.rectTransform.offsetMax = new Vector2(-style.horizontalPadding, 0f);
         }
 
         public void FinishFatalHit()
@@ -127,6 +160,7 @@ namespace Jam50033
         private void OpenMenu()
         {
             music?.PlayGameOver();
+            StyleButtons();
             // Open after this frame's UI update, so a gameplay Space press cannot submit the new menu.
             gameOverPanel.SetActive(true);
             if (runScore != null)

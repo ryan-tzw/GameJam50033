@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 2427326195433408252}
   - component: {fileID: 2961309626488659865}
   - component: {fileID: 4178608489516334957}
+  - component: {fileID: 1802746418670067699}
   m_Layer: 0
   m_Name: RESTART Button
   m_TagString: Untagged
@@ -646,6 +647,7 @@ GameObject:
   - component: {fileID: 3215270320912854926}
   - component: {fileID: 1983105192327088588}
   - component: {fileID: 530326883976619911}
+  - component: {fileID: 1180412388453051369}
   m_Layer: 0
   m_Name: AUDIO Button
   m_TagString: Untagged
@@ -1055,6 +1057,7 @@ GameObject:
   - component: {fileID: 5819882690277332254}
   - component: {fileID: 5872350953586051974}
   - component: {fileID: 4276208818452349715}
+  - component: {fileID: 4382308462676075019}
   m_Layer: 0
   m_Name: MAIN MENU Button
   m_TagString: Untagged
@@ -1543,6 +1546,7 @@ GameObject:
   - component: {fileID: 5729212929758520450}
   - component: {fileID: 6666537776091172832}
   - component: {fileID: 322764020752692435}
+  - component: {fileID: 136288303436668338}
   m_Layer: 0
   m_Name: RESUME Button
   m_TagString: Untagged
@@ -1916,3 +1920,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9e16041d3c456f80878218fac4d9f4, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.AudioMenuController
+--- !u!114 &1802746418670067699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458506453527779115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &1180412388453051369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2939010603402791050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &4382308462676075019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497521727273549455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &136288303436668338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5648843462664258058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}

@@ -857,6 +857,7 @@ GameObject:
   - component: {fileID: 6347441185652961383}
   - component: {fileID: 6009180374984532285}
   - component: {fileID: 7487555436071707437}
+  - component: {fileID: 3121465648218381096}
   m_Layer: 0
   m_Name: BACK Button
   m_TagString: Untagged
@@ -7530,6 +7531,7 @@ GameObject:
   - component: {fileID: 4786402300024864245}
   - component: {fileID: 1227950318911746220}
   - component: {fileID: 538412987980165453}
+  - component: {fileID: 4384857217870152404}
   m_Layer: 0
   m_Name: Next Page
   m_TagString: Untagged
@@ -8473,6 +8475,7 @@ GameObject:
   - component: {fileID: 2390088141394941983}
   - component: {fileID: 3341788402045055618}
   - component: {fileID: 7016153036540077783}
+  - component: {fileID: 4561887285604983087}
   m_Layer: 0
   m_Name: Previous Page
   m_TagString: Untagged
@@ -8909,3 +8912,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3121465648218381096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151725439671856783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &4384857217870152404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392265698061139628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &4561887285604983087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179242021680171144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}

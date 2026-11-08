@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 3736085441067154349}
   - component: {fileID: 272351654669649584}
   - component: {fileID: 8385496891292927051}
+  - component: {fileID: 2353107893747585204}
   m_Layer: 0
   m_Name: BACK Button
   m_TagString: Untagged
@@ -2433,3 +2434,16 @@ MonoBehaviour:
   backButton: {fileID: 3736085441067154349}
   returnButton: {fileID: 0}
   sourceWidgets: []
+--- !u!114 &2353107893747585204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460896385709274102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}

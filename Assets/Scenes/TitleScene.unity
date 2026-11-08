@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 1014169770}
   - component: {fileID: 1014169776}
   - component: {fileID: 1014169775}
+  - component: {fileID: 1809938432077907949}
   m_Layer: 0
   m_Name: Start Button
   m_TagString: Untagged
@@ -2358,6 +2359,7 @@ GameObject:
   - component: {fileID: 1314632477}
   - component: {fileID: 1314632473}
   - component: {fileID: 1314632472}
+  - component: {fileID: 3343493033369713551}
   m_Layer: 0
   m_Name: SETTINGS Button
   m_TagString: Untagged
@@ -2833,6 +2835,7 @@ GameObject:
   - component: {fileID: 1698306743}
   - component: {fileID: 1698306739}
   - component: {fileID: 1698306738}
+  - component: {fileID: 2087617639607704996}
   m_Layer: 0
   m_Name: CONTROLS Button
   m_TagString: Untagged
@@ -3135,6 +3138,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1809938432077907949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014169769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &3343493033369713551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314632471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
+--- !u!114 &2087617639607704996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698306737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507a7f82a9524b1c9307b1490cda48f4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Jam50033.MenuButtonMotion
+  visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

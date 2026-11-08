@@ -123,6 +123,11 @@ MonoBehaviour:
     hintFontSize: 22
     hintFontStyle: 0
     hintColor: {r: 0.84, g: 0.82, b: 1, a: 0.95}
+    hoverScale: 1.06
+    pressScale: 0.92
+    pressDuration: 0.08
+    bounceFrequency: 7
+    bounceDamping: 0.55
   titleMenu:
     iconRowPosition: {x: 0, y: -180}
   pauseMenu:
@@ -172,6 +177,14 @@ MonoBehaviour:
     entryHelpColor: {r: 0.65, g: 0.9, b: 1, a: 1}
     noBuildHelpColor: {r: 1, g: 0.8, b: 0.45, a: 1}
     pageButtonSize: {x: 64, y: 54}
+  gameOverMenu:
+    buttonSize: {x: 280, y: 72}
+    rowPosition: {x: 0, y: -75}
+    buttonGap: 24
+    iconSize: 48
+    horizontalPadding: 20
+    iconTextGap: 12
+    fontSize: 26
   audioMenu:
     headingPosition: {x: 0, y: 190}
     rowSize: {x: 600, y: 64}

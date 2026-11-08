@@ -31,6 +31,8 @@ namespace Jam50033
         public TitleMenuData titleMenu = new();
         [Header("Pause Menu")]
         public PauseMenuData pauseMenu = new();
+        [Header("Game Over Buttons")]
+        public GameOverMenuData gameOverMenu = new();
         [Header("Settings Menu")]
         [InspectorName("Settings")]
         public AudioMenuData audioMenu = new();
@@ -111,6 +113,19 @@ namespace Jam50033
         }
 
         [Serializable]
+        public sealed class GameOverMenuData
+        {
+            public Vector2 buttonSize = new Vector2(280f, 72f);
+            [InspectorName("First Button Position")]
+            public Vector2 rowPosition = new Vector2(0f, -75f);
+            [Min(0f)] public float buttonGap = 24f;
+            [Min(1f)] public float iconSize = 48f;
+            [Min(0f)] public float horizontalPadding = 20f;
+            [Min(0f)] public float iconTextGap = 12f;
+            [Min(1)] public int fontSize = 26;
+        }
+
+        [Serializable]
         public sealed class AudioMenuData
         {
             public Vector2 headingPosition = new Vector2(0f, 190f);
@@ -174,6 +189,14 @@ namespace Jam50033
                 colorMultiplier = 1f,
                 fadeDuration = 0.08f
             };
+            [Header("Button Motion")]
+            [Range(1f, 1.2f)] public float hoverScale = 1.06f;
+            [Range(0.75f, 1f)] public float pressScale = 0.92f;
+            [Min(0f)] public float pressDuration = 0.08f;
+            [Min(0.1f), Tooltip("Spring oscillations per second. Higher values settle faster.")]
+            public float bounceFrequency = 7f;
+            [Range(0.1f, 0.99f), Tooltip("Higher values reduce the bounce.")]
+            public float bounceDamping = 0.55f;
             [Header("Title Screen Hint")]
             public string hintText = "//  PRESS SPACE  //";
             public Font hintFont;
