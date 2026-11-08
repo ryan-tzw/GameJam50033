@@ -95,6 +95,7 @@ namespace Jam50033
             {
                 opened = true;
                 elapsed = 0f;
+                runScore?.PlayChestOpenSound();
                 ReleaseRewards();
             }
         }

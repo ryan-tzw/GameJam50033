@@ -29,6 +29,8 @@ namespace Jam50033
             [Range(0f, 1f)] public float pickupVolume = 0.7f;
             public AudioClip arrivalClip;
             [Range(0f, 1f)] public float arrivalVolume = 0.7f;
+            public AudioClip chestOpenClip;
+            [Range(0f, 1f)] public float chestOpenVolume = 0.7f;
         }
 
         [Serializable]

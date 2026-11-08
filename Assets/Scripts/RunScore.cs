@@ -128,6 +128,14 @@ namespace Jam50033
             }
         }
 
+        public void PlayChestOpenSound()
+        {
+            if (audioSettings != null)
+            {
+                PlayCollectibleSound(audioSettings.collectibles.chestOpenClip, audioSettings.collectibles.chestOpenVolume);
+            }
+        }
+
         private void PlayCollectibleSound(AudioClip clip, float volume)
         {
             if (clip == null || volume <= 0f) return;
