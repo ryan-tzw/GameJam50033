@@ -541,11 +541,20 @@ namespace Jam50033
         {
             // Find contact against active terrain, then validate the destination against every brick.
             HashSet<Vector2Int> blockers = checkPlayer ? allOccupiedCells : occupiedCells;
+            PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
+            Vector3 halfTile = stageArea.transform.TransformVector(Vector3.right * stageArea.CellSize * 0.5f);
             for (int i = 0; i < 4; i++)
             {
                 Vector2Int cell = position + GetRotatedCell(i, rotationSteps);
                 if (blockers.Contains(cell) || cell.y < 0 || cell.y >= stageArea.Rows ||
                     (checkPlayer && OverlapsPlayer(cell)))
+                {
+                    return false;
+                }
+
+                // Keep restricted destinations visible as red ghosts; reject only final placement.
+                if (checkPlayer && entryZone != null &&
+                    !entryZone.IsBuildPositionAllowed(stageArea.CellToWorldPosition(cell) + halfTile))
                 {
                     return false;
                 }
@@ -711,8 +720,6 @@ namespace Jam50033
             attachmentCells.Clear();
             allOccupiedCells.Clear();
             PlacementEntryZone entryZone = stageArea.GetComponent<PlacementEntryZone>();
-            // An attachment tile becomes eligible only when its trailing edge clears the zone.
-            Vector3 halfTile = stageArea.transform.TransformVector(Vector3.right * stageArea.CellSize * 0.5f);
             foreach (Brick brick in Brick.ActiveBricks)
             {
                 if (brick == null || brick.gameObject.scene != gameObject.scene)
@@ -735,10 +742,7 @@ namespace Jam50033
                     if (structure == null || structure.HasCrossedEntryZone(entryZone))
                     {
                         occupiedCells.Add(cell);
-                        if (entryZone == null || entryZone.IsActivePlacementPosition(brick.transform.position + halfTile))
-                        {
-                            attachmentCells.Add(cell);
-                        }
+                        attachmentCells.Add(cell);
                     }
                 }
                 else if (brick.StageArea == stageArea)
@@ -751,10 +755,7 @@ namespace Jam50033
                         continue;
                     }
                     occupiedCells.Add(cell);
-                    if (entryZone == null || entryZone.IsActivePlacementPosition(stageArea.CellToWorldPosition(cell) + halfTile))
-                    {
-                        attachmentCells.Add(cell);
-                    }
+                    attachmentCells.Add(cell);
                 }
             }
         }

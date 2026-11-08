@@ -27,8 +27,10 @@ namespace Jam50033
         public IslandData island = new();
         [Header("Coin Flight")]
         public CoinFlightData coinFlight = new();
-        [Header("Entry Zone")]
+        [Header("Natural Entry Buffer")]
         public EntryZoneData entryZone = new();
+        [Header("No-Build Zone")]
+        public NoBuildZoneData noBuildZone = new();
         [Header("Hazard")]
         public HazardData hazard = new();
         [Header("Camera Shake")]
@@ -232,6 +234,16 @@ namespace Jam50033
             [Min(0f), Tooltip("Minimum time between treasure starting attraction, in seconds.")]
             public float minimumArrivalStagger = 0.03f;
             [Min(0f)] public float maximumArrivalStagger = 0.06f;
+        }
+
+        [Serializable]
+        public sealed class NoBuildZoneData
+        {
+            public Color color = new Color(0.8f, 0.7f, 1f, 1f);
+            [Range(0f, 1f)] public float fillOpacity = 0.07f;
+            [Range(0f, 1f)] public float lineOpacity = 0.45f;
+            [Min(0.001f), Tooltip("Solid boundary thickness in Unity units.")]
+            public float lineWidth = 0.025f;
         }
 
         [Serializable]

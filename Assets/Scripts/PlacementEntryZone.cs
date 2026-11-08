@@ -14,6 +14,8 @@ namespace Jam50033
         private GameplaySettings.EntryZoneData gameplayEntryZone => gameplaySettings != null ? gameplaySettings.entryZone : defaultGameplayEntryZone;
         private static readonly VisualSettings.EntryZoneData defaultVisualEntryZone = new();
         private VisualSettings.EntryZoneData visualEntryZone => visualSettings != null ? visualSettings.entryZone : defaultVisualEntryZone;
+        private static readonly VisualSettings.NoBuildZoneData defaultNoBuildZone = new();
+        private VisualSettings.NoBuildZoneData noBuildStyle => visualSettings != null ? visualSettings.noBuildZone : defaultNoBuildZone;
 
         private StageArea stage;
         private GameObject visual;
@@ -22,6 +24,8 @@ namespace Jam50033
         private Vector4 previousGeometry;
         private Color previousColor;
         private Vector3 previousStyle;
+        private Vector4 previousNoBuildStyle;
+        private Color previousNoBuildColor;
         private readonly List<Vector3> vertices = new();
         private readonly List<int> triangles = new();
         private readonly List<Color> colors = new();
@@ -33,6 +37,11 @@ namespace Jam50033
         {
             return !isActiveAndEnabled || stage == null ||
                 transform.InverseTransformPoint(worldPosition).x <= PlacementRightX + 0.0001f;
+        }
+
+        public bool IsBuildPositionAllowed(Vector3 worldRightEdge)
+        {
+            return !isActiveAndEnabled || worldRightEdge.x <= gameplayEntryZone.noBuildX + 0.0001f;
         }
 
         private void OnEnable()
@@ -73,7 +82,12 @@ namespace Jam50033
             float halfHeight = stage.Rows * size * 0.5f;
             Vector4 geometry = new Vector4(left, right, halfHeight, size);
             Vector3 style = new Vector3(visualEntryZone.fillOpacity, visualEntryZone.outlineOpacity, visualEntryZone.lineWidth);
+            float buildLeft = transform.InverseTransformPoint(new Vector3(gameplayEntryZone.noBuildX,
+                transform.position.y, transform.position.z)).x;
+            Vector4 buildStyle = new Vector4(buildLeft, noBuildStyle.fillOpacity,
+                noBuildStyle.lineOpacity, noBuildStyle.lineWidth);
             if (!force && geometry == previousGeometry && visualEntryZone.color == previousColor && style == previousStyle &&
+                buildStyle == previousNoBuildStyle && noBuildStyle.color == previousNoBuildColor &&
                 previousDashLength == visualEntryZone.dashLength)
             {
                 return;
@@ -83,6 +97,8 @@ namespace Jam50033
             previousColor = visualEntryZone.color;
             previousStyle = style;
             previousDashLength = visualEntryZone.dashLength;
+            previousNoBuildStyle = buildStyle;
+            previousNoBuildColor = noBuildStyle.color;
             vertices.Clear();
             triangles.Clear();
             colors.Clear();
@@ -99,6 +115,20 @@ namespace Jam50033
                 AddDashedEdge(topLeft, topRight, size);
                 AddDashedEdge(topRight, bottomRight, size);
                 AddDashedEdge(bottomRight, bottomLeft, size);
+            }
+
+            // Only one solid boundary: the dashed rectangle still identifies the natural buffer.
+            if (buildLeft < right)
+            {
+                Color fill = noBuildStyle.color;
+                fill.a = noBuildStyle.fillOpacity;
+                AddQuad(new Vector2(buildLeft, -halfHeight), new Vector2(right, -halfHeight),
+                    new Vector2(right, halfHeight), new Vector2(buildLeft, halfHeight), fill);
+                Color line = noBuildStyle.color;
+                line.a = noBuildStyle.lineOpacity;
+                float halfWidth = noBuildStyle.lineWidth * 0.5f / transform.lossyScale.x;
+                AddQuad(new Vector2(buildLeft - halfWidth, -halfHeight), new Vector2(buildLeft + halfWidth, -halfHeight),
+                    new Vector2(buildLeft + halfWidth, halfHeight), new Vector2(buildLeft - halfWidth, halfHeight), line);
             }
 
             mesh.Clear();

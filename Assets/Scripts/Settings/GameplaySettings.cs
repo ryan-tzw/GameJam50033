@@ -17,7 +17,7 @@ namespace Jam50033
         public TetrominoData tetromino = new();
         [Header("Scoring")]
         public ScoringData scoring = new();
-        [Header("Entry Zone")]
+        [Header("Natural Entry Buffer and No-Build Zone")]
         public EntryZoneData entryZone = new();
 
         [Serializable]
@@ -101,6 +101,8 @@ namespace Jam50033
         {
             [Min(0f), Tooltip("Width of the entry zone, measured in tiles inward from the stage's right edge. Larger values move the threshold left.")]
             public float tilesFromRight = 5f;
+            [Tooltip("Absolute Unity world X. The entire placed piece must be at or left of this boundary; independent of grid size.")]
+            public float noBuildX = 6f;
         }
 
         private void OnValidate()

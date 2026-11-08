@@ -180,7 +180,8 @@ namespace Jam50033
                     worldPosition = stageArea.CellToWorldPosition(brick.GetGridCell());
                 }
 
-                if (entryZone != null && !entryZone.IsActivePlacementPosition(worldPosition))
+                NaturalStructure structure = brick.GetComponentInParent<NaturalStructure>();
+                if (structure != null && !structure.HasCrossedEntryZone(entryZone))
                 {
                     continue;
                 }
