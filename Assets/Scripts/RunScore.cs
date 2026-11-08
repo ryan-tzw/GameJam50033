@@ -26,9 +26,15 @@ namespace Jam50033
         private int bonusPoints;
         private int pendingCoinPoints;
         private bool formattedWithCommas;
+        private int displayedScore;
+        private int displayTarget;
+        private int rollFrom;
+        private float rollElapsed;
+        private float RollDuration => visualSettings != null ? Mathf.Max(0f, visualSettings.scorePanel.rollDuration) : 0.2f;
         private bool UseCommaSeparators => visualSettings == null || visualSettings.scorePanel.useCommaSeparators;
 
         public bool HasFlyingCoins => coinAnimation != null && coinAnimation.HasFlyingCoins;
+        public bool HasPendingScoreFeedback => HasFlyingCoins || displayedScore != displayTarget;
 
         public int Score => tilesPassed * gameplayScoring.pointsPerTile + bonusPoints;
 
@@ -47,6 +53,8 @@ namespace Jam50033
             tilesPassed = 0;
             bonusPoints = 0;
             pendingCoinPoints = 0;
+            displayedScore = displayTarget = rollFrom = 0;
+            rollElapsed = 0f;
             finished = false;
             RefreshLabels();
         }
@@ -61,6 +69,7 @@ namespace Jam50033
             {
                 RecordProgress();
             }
+            UpdateDisplayedScore();
         }
 
         private float GetPlayerColumn()
@@ -80,10 +89,52 @@ namespace Jam50033
             // Keep the furthest progress so being pushed back and catching up cannot score twice.
             if (passed > tilesPassed)
             {
+                int previous = tilesPassed;
                 tilesPassed = passed;
+                AwardMilestones(previous, passed);
                 RefreshLabels();
             }
         }
+
+        private void AwardMilestones(int previous, int passed)
+        {
+            if (gameplayScoring.milestones == null) return;
+            // Process every crossed tile, including several milestones in a single update.
+            for (int distance = previous + 1; distance <= passed; distance++)
+            {
+                GameplaySettings.MilestoneData best = null;
+                foreach (GameplaySettings.MilestoneData tier in gameplayScoring.milestones)
+                {
+                    if (tier == null || tier.intervalInTiles <= 0 || tier.bonus <= 0 || distance % tier.intervalInTiles != 0) continue;
+                    if (best == null || tier.intervalInTiles > best.intervalInTiles ||
+                        (tier.intervalInTiles == best.intervalInTiles && tier.bonus > best.bonus)) best = tier;
+                }
+                if (best == null) continue;
+                AwardMilestone(distance, best);
+            }
+        }
+
+        private void AwardMilestone(int distance, GameplaySettings.MilestoneData tier)
+        {
+            bonusPoints += tier.bonus;
+            coinAnimation?.ShowMilestone(distance, tier.bonus, tier.emphasize);
+            if (audioSettings != null) PlayCollectibleSound(audioSettings.milestoneClip, audioSettings.milestoneVolume);
+        }
+
+#if UNITY_EDITOR
+        public GameplaySettings.MilestoneData[] TestMilestones => gameplayScoring.milestones;
+        public bool CanTestMilestones => Application.IsPlaying(gameObject) && isActiveAndEnabled && !finished && Time.timeScale > 0f;
+
+        public void TestMilestone(int index)
+        {
+            if (!CanTestMilestones || TestMilestones == null || index < 0 || index >= TestMilestones.Length) return;
+            GameplaySettings.MilestoneData tier = TestMilestones[index];
+            if (tier == null || tier.intervalInTiles <= 0 || tier.bonus <= 0) return;
+            // Repeatable feedback testing leaves real distance and automatic milestone tracking untouched.
+            AwardMilestone(tier.intervalInTiles, tier);
+            RefreshLabels();
+        }
+#endif
 
         public void AddPoints(int points)
         {
@@ -167,15 +218,39 @@ namespace Jam50033
             formattedWithCommas = UseCommaSeparators;
             string format = formattedWithCommas ? "N0" : "0";
             string text = Score.ToString(format, CultureInfo.InvariantCulture);
-            if (scoreLabel != null)
+            int target = Score - pendingCoinPoints;
+            if (target != displayTarget)
             {
-                scoreLabel.text = (Score - pendingCoinPoints).ToString(format, CultureInfo.InvariantCulture);
+                rollFrom = displayedScore;
+                displayTarget = target;
+                rollElapsed = 0f;
             }
+            if (RollDuration <= 0f) displayedScore = displayTarget;
+            WriteDisplayedScore();
 
             if (finalScoreLabel != null)
             {
                 finalScoreLabel.text = text;
             }
+        }
+
+        private void UpdateDisplayedScore()
+        {
+            if (displayedScore != displayTarget)
+            {
+                rollElapsed += Time.unscaledDeltaTime;
+                float t = RollDuration <= 0f ? 1f : Mathf.Clamp01(rollElapsed / RollDuration);
+                float progress = 1f - Mathf.Pow(1f - t, 3f);
+                displayedScore = t >= 1f ? displayTarget : rollFrom +
+                    (int)System.Math.Floor(((double)displayTarget - rollFrom) * progress);
+            }
+            WriteDisplayedScore();
+        }
+
+        private void WriteDisplayedScore()
+        {
+            if (scoreLabel != null)
+                scoreLabel.text = displayedScore.ToString(UseCommaSeparators ? "N0" : "0", CultureInfo.InvariantCulture);
         }
 
     }

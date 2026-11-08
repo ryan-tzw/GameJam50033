@@ -11,6 +11,8 @@ namespace Jam50033
         [SerializeField] private VisualSettings visualSettings;
         private static readonly VisualSettings.CoinFlightData defaultVisualCoinFlight = new();
         private VisualSettings.CoinFlightData visualCoinFlight => visualSettings != null ? visualSettings.coinFlight : defaultVisualCoinFlight;
+        private static readonly VisualSettings.MilestoneData defaultMilestones = new();
+        private VisualSettings.MilestoneData milestoneStyle => visualSettings != null ? visualSettings.milestones : defaultMilestones;
         [SerializeField] private RectTransform effectLayer;
         [SerializeField] private RectTransform scoreTarget;
 
@@ -36,9 +38,19 @@ namespace Jam50033
 
         private readonly List<Flight> flights = new();
         private readonly List<Popup> popups = new();
+        private sealed class Milestone
+        {
+            public int tiles, points;
+            public bool major;
+        }
+        private readonly Queue<Milestone> milestoneQueue = new();
+        private Text milestoneText;
+        private CanvasGroup milestoneGroup;
+        private float milestoneElapsed;
         private Canvas canvas;
         private Vector3 originalTargetScale;
         private float pulseRemaining;
+        private float pulseScale = 1f;
         public bool HasFlyingCoins => flights.Count > 0;
 
         private void Awake()
@@ -148,7 +160,7 @@ namespace Jam50033
                     Destroy(flight.image.gameObject);
                     flight.arrived(true);
                     ShowPopup(flight.points);
-                    pulseRemaining = visualCoinFlight.pulseDuration;
+                    PulseScore();
                 }
             }
 
@@ -170,12 +182,72 @@ namespace Jam50033
                 }
             }
 
+            UpdateMilestone(delta);
             if (scoreTarget != null)
             {
                 pulseRemaining = Mathf.Max(0f, pulseRemaining - delta);
                 float pulse = Mathf.Sin(Mathf.PI * pulseRemaining / visualCoinFlight.pulseDuration);
-                scoreTarget.localScale = originalTargetScale * (1f + visualCoinFlight.pulseStrength * pulse);
+                scoreTarget.localScale = originalTargetScale * (1f + visualCoinFlight.pulseStrength * pulseScale * pulse);
+                if (pulseRemaining <= 0f) pulseScale = 1f;
             }
+        }
+
+        private void PulseScore(float scale = 1f)
+        {
+            pulseRemaining = visualCoinFlight.pulseDuration;
+            pulseScale = Mathf.Max(pulseScale, scale);
+        }
+
+        public void ShowMilestone(int tiles, int points, bool major)
+        {
+            if (!isActiveAndEnabled || effectLayer == null || scoreTarget == null) return;
+            // Bonuses are already awarded; queue only presentation so crossed milestones stay readable.
+            milestoneQueue.Enqueue(new Milestone { tiles = tiles, points = points, major = major });
+            if (milestoneText == null) BeginMilestonePopup();
+        }
+
+        private void BeginMilestonePopup()
+        {
+            Milestone milestone = milestoneQueue.Dequeue();
+            GameObject go = new GameObject("Distance Milestone", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text), typeof(CanvasGroup));
+            go.transform.SetParent(effectLayer, false);
+            milestoneText = go.GetComponent<Text>();
+            Text scoreStyle = scoreTarget.GetComponent<Text>();
+            milestoneText.font = scoreStyle != null ? scoreStyle.font : null;
+            milestoneText.fontSize = milestoneStyle.fontSize;
+            milestoneText.alignment = TextAnchor.MiddleCenter;
+            milestoneText.color = Color.white;
+            milestoneText.supportRichText = true;
+            milestoneText.raycastTarget = false;
+            string format = visualSettings == null || visualSettings.scorePanel.useCommaSeparators ? "N0" : "0";
+            string tiles = milestone.tiles.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
+            string points = milestone.points.ToString(format, System.Globalization.CultureInfo.InvariantCulture);
+            milestoneText.text = $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.headingColor)}>{tiles} TILES!</color>\n" +
+                $"<color=#{ColorUtility.ToHtmlStringRGB(milestoneStyle.bonusColor)}>+{points}</color>";
+            RectTransform rect = milestoneText.rectTransform;
+            rect.sizeDelta = new Vector2(320f, milestoneStyle.fontSize * 3f);
+            float scale = milestone.major ? milestoneStyle.majorScale : 1f;
+            rect.localScale = Vector3.one * scale;
+            rect.anchoredPosition = TargetPosition() + milestoneStyle.offset;
+            milestoneGroup = go.GetComponent<CanvasGroup>();
+            milestoneGroup.blocksRaycasts = false;
+            milestoneGroup.interactable = false;
+            milestoneElapsed = 0f;
+            PulseScore(scale);
+        }
+
+        private void UpdateMilestone(float delta)
+        {
+            if (milestoneText == null) return;
+            milestoneElapsed += delta;
+            float t = Mathf.Clamp01(milestoneElapsed / Mathf.Max(0.05f, milestoneStyle.duration));
+            milestoneGroup.alpha = 1f - Mathf.InverseLerp(0.5f, 1f, t);
+            milestoneText.rectTransform.anchoredPosition = TargetPosition() + milestoneStyle.offset + Vector2.up * milestoneStyle.rise * t;
+            if (t < 1f) return;
+            Destroy(milestoneText.gameObject);
+            milestoneText = null;
+            milestoneGroup = null;
+            if (milestoneQueue.Count > 0) BeginMilestonePopup();
         }
 
         private void ShowPopup(int points)
@@ -222,7 +294,12 @@ namespace Jam50033
                 Destroy(popup.text.gameObject);
             }
             popups.Clear();
+            milestoneQueue.Clear();
+            if (milestoneText != null) Destroy(milestoneText.gameObject);
+            milestoneText = null;
+            milestoneGroup = null;
             pulseRemaining = 0f;
+            pulseScale = 1f;
             if (scoreTarget != null)
             {
                 scoreTarget.localScale = originalTargetScale;

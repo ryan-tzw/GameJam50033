@@ -94,6 +94,21 @@ namespace Jam50033
             [Min(1), InspectorName("Coin Points")]
             public int points = 50;
             [Min(1)] public int gemPoints = 150;
+            public MilestoneData[] milestones =
+            {
+                new() { intervalInTiles = 50, bonus = 100 },
+                new() { intervalInTiles = 100, bonus = 250 },
+                new() { intervalInTiles = 500, bonus = 750, emphasize = true }
+            };
+        }
+
+        [Serializable]
+        public sealed class MilestoneData
+        {
+            [Min(1), Tooltip("Repeats every this many tiles. The highest matching interval wins.")]
+            public int intervalInTiles;
+            [Min(0)] public int bonus;
+            public bool emphasize;
         }
 
         [Serializable]

@@ -104,7 +104,7 @@ namespace Jam50033
             }
 
             // Flights keep using unscaled time while gameplay and the final score are frozen.
-            while (runScore != null && runScore.HasFlyingCoins)
+            while (runScore != null && runScore.HasPendingScoreFeedback)
             {
                 yield return null;
             }

@@ -66,6 +66,7 @@ MonoBehaviour:
     labelFontSize: 14
     labelWidth: 120
   scorePanel:
+    rollDuration: 0.2
     useCommaSeparators: 1
     minimumWidth: 240
     horizontalPadding: 24
@@ -77,6 +78,14 @@ MonoBehaviour:
     outlineWidth: 2
     cornerRadius: 14
     labelWidth: 120
+  milestones:
+    duration: 1
+    offset: {x: 0, y: -85}
+    fontSize: 28
+    headingColor: {r: 0.84, g: 0.82, b: 1, a: 1}
+    bonusColor: {r: 1, g: 0.95, b: 0.86, a: 1}
+    rise: 12
+    majorScale: 1.2
   coin:
     frames:
     - {fileID: -8122072913242413145, guid: 98ba8baccf9a0249b87fad25b654f92a, type: 3}

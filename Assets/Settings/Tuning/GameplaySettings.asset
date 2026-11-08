@@ -43,6 +43,16 @@ MonoBehaviour:
     pointsPerTile: 10
     points: 50
     gemPoints: 150
+    milestones:
+    - intervalInTiles: 50
+      bonus: 100
+      emphasize: 0
+    - intervalInTiles: 100
+      bonus: 250
+      emphasize: 0
+    - intervalInTiles: 500
+      bonus: 750
+      emphasize: 1
   entryZone:
     tilesFromRight: 13
     noBuildX: 6

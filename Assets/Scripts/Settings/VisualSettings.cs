@@ -23,6 +23,8 @@ namespace Jam50033
         public NextPreviewData nextPreview = new();
         [Header("Score Panel")]
         public ScorePanelData scorePanel = new();
+        [Header("Score Milestones")]
+        public MilestoneData milestones = new();
         [Header("Coin")]
         public CoinData coin = new();
         [Header("Gem")]
@@ -55,6 +57,8 @@ namespace Jam50033
         [Serializable]
         public sealed class ScorePanelData
         {
+            [Min(0f), Tooltip("Seconds for the score number to count up. Zero makes changes instant.")]
+            public float rollDuration = 0.2f;
             public bool useCommaSeparators = true;
             [Min(1f), Tooltip("Minimum width in Canvas units. The panel grows to fit larger scores.")]
             public float minimumWidth = 180f;
@@ -67,6 +71,21 @@ namespace Jam50033
             [Min(0f)] public float outlineWidth = 2f;
             [Min(0f)] public float cornerRadius = 14f;
             [Min(1f)] public float labelWidth = 120f;
+        }
+
+        [Serializable]
+        public sealed class MilestoneData
+        {
+            [Min(0.05f)] public float duration = 1f;
+            [Tooltip("Offset from the score number in Canvas UI units.")]
+            public Vector2 offset = new Vector2(0f, -85f);
+            [Min(1)] public int fontSize = 28;
+            public Color headingColor = new Color(0.84f, 0.82f, 1f, 1f);
+            public Color bonusColor = new Color(1f, 0.95f, 0.86f, 1f);
+            [Min(0f), Tooltip("Popup upward travel in Canvas UI units.")]
+            public float rise = 12f;
+            [Min(1f), Tooltip("Popup size and score pulse multiplier for emphasized tiers.")]
+            public float majorScale = 1.2f;
         }
 
         [Serializable]

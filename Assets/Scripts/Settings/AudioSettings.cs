@@ -26,6 +26,9 @@ namespace Jam50033
         [Header("Game Over Music")]
         public AudioClip gameOverMusic;
         [Range(0f, 1f)] public float gameOverMusicVolume = 0.4f;
+        [Header("Score Milestones")]
+        public AudioClip milestoneClip;
+        [Range(0f, 1f)] public float milestoneVolume = 0.7f;
 
         [Serializable]
         public sealed class MenuData
