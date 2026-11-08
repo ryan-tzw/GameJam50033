@@ -9,6 +9,8 @@ namespace Jam50033
     {
         [SerializeField] private GameplaySettings gameplaySettings;
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private AudioSettings audioSettings;
+        private AudioSource collectibleAudio;
         private static readonly GameplaySettings.ScoringData defaultGameplayScoring = new();
         private GameplaySettings.ScoringData gameplayScoring => gameplaySettings != null ? gameplaySettings.scoring : defaultGameplayScoring;
         [SerializeField] private StageArea stageArea;
@@ -95,7 +97,7 @@ namespace Jam50033
         }
 
         public void CollectCoin(int points, Vector3 position, float height, Sprite[] frames, float fps,
-            bool scatter = false, float attractionDelay = 0f)
+            bool scatter = false, float attractionDelay = 0f, bool worldPickup = false)
         {
             if (finished || Time.timeScale <= 0f || points <= 0)
             {
@@ -104,18 +106,40 @@ namespace Jam50033
 
             // Secure the reward immediately; only its HUD presentation waits for arrival.
             bonusPoints += points;
+            if (worldPickup && audioSettings != null)
+            {
+                PlayCollectibleSound(audioSettings.collectibles.pickupClip, audioSettings.collectibles.pickupVolume);
+            }
             if (coinAnimation != null && coinAnimation.TryFly(position, height, frames, fps, points,
-                () => RevealCoinPoints(points), scatter, attractionDelay))
+                arrived => RevealCoinPoints(points, arrived), scatter, attractionDelay))
             {
                 pendingCoinPoints += points;
             }
             RefreshLabels();
         }
 
-        private void RevealCoinPoints(int points)
+        private void RevealCoinPoints(int points, bool arrived)
         {
             pendingCoinPoints = Mathf.Max(0, pendingCoinPoints - points);
             RefreshLabels();
+            if (arrived && audioSettings != null)
+            {
+                PlayCollectibleSound(audioSettings.collectibles.arrivalClip, audioSettings.collectibles.arrivalVolume);
+            }
+        }
+
+        private void PlayCollectibleSound(AudioClip clip, float volume)
+        {
+            if (clip == null || volume <= 0f) return;
+            // Keep playback on the score object: the collected world coin is destroyed immediately.
+            if (collectibleAudio == null)
+            {
+                collectibleAudio = gameObject.AddComponent<AudioSource>();
+                collectibleAudio.playOnAwake = false;
+                collectibleAudio.spatialBlend = 0f;
+            }
+            collectibleAudio.outputAudioMixerGroup = audioSettings.effectsMixer;
+            collectibleAudio.PlayOneShot(clip, volume);
         }
 
         public void FinishRun()

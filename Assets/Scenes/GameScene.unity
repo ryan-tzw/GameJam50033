@@ -1340,6 +1340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef869610e984855976631f66f1480c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.RunScore
+  audioSettings: {fileID: 11400000, guid: 76f8f369c97de19a19d7853912976721, type: 2}
   gameplaySettings: {fileID: 11400000, guid: dfbe9b2acec748abea94d3ca9368def3, type: 2}
   visualSettings: {fileID: 11400000, guid: 89d35a04d29f868d98621a46ef1d8177, type: 2}
   stageArea: {fileID: 1098233640}

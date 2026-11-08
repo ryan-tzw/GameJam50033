@@ -11,6 +11,8 @@ namespace Jam50033
         public PlayerData player = new();
         [Header("Tetromino")]
         public TetrominoData tetromino = new();
+        [Header("Collectibles")]
+        public CollectibleData collectibles = new();
         [Header("Mixer Routing")]
         public AudioMixerGroup effectsMixer;
         public AudioMixerGroup musicMixer;
@@ -19,6 +21,15 @@ namespace Jam50033
         [Range(0f, 1f)] public float titleMusicVolume = 0.7f;
         public AudioClip gameMusic;
         [Range(0f, 1f)] public float gameMusicVolume = 0.25f;
+
+        [Serializable]
+        public sealed class CollectibleData
+        {
+            public AudioClip pickupClip;
+            [Range(0f, 1f)] public float pickupVolume = 0.7f;
+            public AudioClip arrivalClip;
+            [Range(0f, 1f)] public float arrivalVolume = 0.7f;
+        }
 
         [Serializable]
         public sealed class PlayerData

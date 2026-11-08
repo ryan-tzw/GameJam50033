@@ -75,6 +75,11 @@ MonoBehaviour:
     rejectVolume: 0.5
     connectClips: []
     connectVolume: 1
+  collectibles:
+    pickupClip: {fileID: 8300000, guid: 38d00373031e00cb2871251b33bdebfd, type: 3}
+    pickupVolume: 0.7
+    arrivalClip: {fileID: 8300000, guid: 8544dfa319b610e4fa0644acd651fbbe, type: 3}
+    arrivalVolume: 0.7
   effectsMixer:
     fileID: -9189990099448920877
     guid: 274b3b5ae8782b3e5914e5627895d25b

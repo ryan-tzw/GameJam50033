@@ -142,7 +142,8 @@ namespace Jam50033
             }
 
             collected = true;
-            runScore.CollectCoin(gameplayScoring.points, transform.position, visual.bounds.size.y, visualCoin.frames, visualCoin.framesPerSecond);
+            runScore.CollectCoin(gameplayScoring.points, transform.position, visual.bounds.size.y,
+                visualCoin.frames, visualCoin.framesPerSecond, worldPickup: true);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

@@ -23,7 +23,7 @@ namespace Jam50033
             public Vector2 viewportStart;
             public Vector2 launchVelocity;
             public float scatterGravity, scatterDuration, attractionDelay;
-            public Action arrived;
+            public Action<bool> arrived;
         }
 
         private sealed class Popup
@@ -51,7 +51,7 @@ namespace Jam50033
         }
 
         public bool TryFly(Vector3 worldPosition, float worldHeight, Sprite[] frames, float fps,
-            int points, Action arrived, bool scatter = false, float attractionDelay = 0f)
+            int points, Action<bool> arrived, bool scatter = false, float attractionDelay = 0f)
         {
             Camera camera = Camera.main;
             if (!isActiveAndEnabled || canvas == null || effectLayer == null || scoreTarget == null ||
@@ -146,7 +146,7 @@ namespace Jam50033
                 {
                     flights.RemoveAt(i);
                     Destroy(flight.image.gameObject);
-                    flight.arrived();
+                    flight.arrived(true);
                     ShowPopup(flight.points);
                     pulseRemaining = visualCoinFlight.pulseDuration;
                 }
@@ -214,7 +214,7 @@ namespace Jam50033
                 {
                     Destroy(flight.image.gameObject);
                 }
-                flight.arrived();
+                flight.arrived(false);
             }
             flights.Clear();
             foreach (Popup popup in popups)
