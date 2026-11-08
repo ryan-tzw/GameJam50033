@@ -25,6 +25,8 @@ namespace Jam50033
         public void PlaySoftDrop() => Play(audioTetromino.softDropClip, audioTetromino.softDropVolume);
         public void PlayHardDrop() => Play(audioTetromino.hardDropClip, audioTetromino.hardDropVolume);
         public void PlayReject() => Play(audioTetromino.rejectClip, audioTetromino.rejectVolume);
+        public void PlayHold() => Play(audioTetromino.holdClip, audioTetromino.holdVolume);
+        public void PlayNoHold() => Play(audioTetromino.noHoldClip, audioTetromino.noHoldVolume);
         public void PlayConnect()
         {
             if (audioTetromino.connectClips != null && audioTetromino.connectClips.Length > 0)

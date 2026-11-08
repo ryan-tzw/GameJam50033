@@ -109,6 +109,12 @@ namespace Jam50033
             public AudioClip rejectClip;
             [Range(0f, 1f)]
             public float rejectVolume = 0.5f;
+            public AudioClip holdClip;
+            [Range(0f, 1f)]
+            public float holdVolume = 0.5f;
+            public AudioClip noHoldClip;
+            [Range(0f, 1f)]
+            public float noHoldVolume = 0.5f;
             public AudioClip[] connectClips = new AudioClip[0];
             [Range(0f, 1f)]
             public float connectVolume = 0.8f;

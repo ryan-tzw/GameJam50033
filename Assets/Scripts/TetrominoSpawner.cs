@@ -94,7 +94,7 @@ namespace Jam50033
             lastHoldAttemptFrame = Time.frameCount;
             if (HoldLocked || !TryFindSpawnRow(out int row))
             {
-                GetComponent<TetrominoAudio>().PlayReject();
+                GetComponent<TetrominoAudio>().PlayNoHold();
                 return false;
             }
 
@@ -113,6 +113,7 @@ namespace Jam50033
                 upcoming.RemoveAt(0);
                 FillQueue();
             }
+            GetComponent<TetrominoAudio>().PlayHold();
             return true;
         }
 

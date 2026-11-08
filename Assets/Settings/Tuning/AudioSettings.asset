@@ -41,6 +41,10 @@ MonoBehaviour:
     hardDropVolume: 0.316
     rejectClip: {fileID: 8300000, guid: 2df09c31ca7071fa8ae56ec05c8ea789, type: 3}
     rejectVolume: 0.5
+    holdClip: {fileID: 8300000, guid: 2a519e45ad8a5b7c68dda8261b88d2d0, type: 3}
+    holdVolume: 0.5
+    noHoldClip: {fileID: 8300000, guid: 3b8c5711f314ceb79a7ccbf4f26a5be2, type: 3}
+    noHoldVolume: 0.5
     connectClips: []
     connectVolume: 1
   collectibles:
