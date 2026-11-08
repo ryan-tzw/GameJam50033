@@ -33,9 +33,8 @@ namespace Jam50033
             // Growing only during a run prevents proportional digits and score pulses from wobbling the frame.
             width = Application.isPlaying ? Mathf.Max(width, desired) : desired;
             var rect = (RectTransform)transform;
-            rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 1f);
-            rect.pivot = new Vector2(0.5f, 1f);
-            rect.anchoredPosition = new Vector2(0f, -settings.topMargin);
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 1f);
+            rect.anchoredPosition = new Vector2(settings.leftMargin, -settings.topMargin);
             rect.sizeDelta = new Vector2(width, settings.height);
 
             score.rectTransform.anchorMin = score.rectTransform.anchorMax = score.rectTransform.pivot = Vector2.one * 0.5f;

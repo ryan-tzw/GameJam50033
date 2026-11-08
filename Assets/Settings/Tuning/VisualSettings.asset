@@ -91,6 +91,7 @@ MonoBehaviour:
     minimumWidth: 240
     horizontalPadding: 24
     height: 64
+    leftMargin: 16
     topMargin: 16
     panelColor: {r: 0.100000024, g: 0.05, b: 0.2, a: 1}
     panelOpacity: 0.7

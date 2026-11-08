@@ -110,6 +110,8 @@ namespace Jam50033
             [Min(0f)] public float horizontalPadding = 24f;
             [Min(1f)] public float height = 82f;
             public float topMargin = 20f;
+            [Min(0f), Tooltip("Inset from the left edge in Canvas UI units.")]
+            public float leftMargin = 16f;
             public Color panelColor = new Color(0.06f, 0.04f, 0.13f, 1f);
             [Range(0f, 1f)] public float panelOpacity = 0.45f;
             public Color outlineColor = new Color(0.84f, 0.82f, 1f, 1f);
@@ -142,7 +144,7 @@ namespace Jam50033
             public Sprite panelOutlineSprite;
             [Tooltip("Panel width and height in Canvas units.")]
             public Vector2 panelSize = new Vector2(400f, 82f);
-            [Tooltip("Inset from the top-right corner in Canvas units.")]
+            [Tooltip("Canvas UI units. NEXT: inset from the top-right. HOLD: X is the gap before NEXT; Y is the top inset.")]
             public Vector2 margin = new Vector2(18f, 20f);
             public Color panelColor = new Color(0.06f, 0.04f, 0.13f, 1f);
             [Range(0f, 1f)] public float panelOpacity = 0.45f;

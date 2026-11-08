@@ -24,8 +24,11 @@ namespace Jam50033
                 hazardOverlays == null || hazardOverlays.Length != 20) return;
             VisualSettings.NextPreviewData settings = holdPreview ? visualSettings.holdPreview : visualSettings.nextPreview;
             RectTransform root = (RectTransform)transform;
-            root.anchorMin = root.anchorMax = root.pivot = new Vector2(holdPreview ? 0f : 1f, 1f);
-            root.anchoredPosition = new Vector2(holdPreview ? settings.margin.x : -settings.margin.x, -settings.margin.y);
+            root.anchorMin = root.anchorMax = root.pivot = Vector2.one;
+            float rightInset = holdPreview
+                ? visualSettings.nextPreview.margin.x + visualSettings.nextPreview.panelSize.x + settings.margin.x
+                : settings.margin.x;
+            root.anchoredPosition = new Vector2(-rightInset, -settings.margin.y);
             root.sizeDelta = settings.panelSize;
             Color fill = settings.panelColor;
             fill.a = settings.panelOpacity;
