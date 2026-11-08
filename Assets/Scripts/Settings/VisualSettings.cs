@@ -23,6 +23,8 @@ namespace Jam50033
         public NextPreviewData nextPreview = new();
         [Header("Score Panel")]
         public ScorePanelData scorePanel = new();
+        [Header("Menu Button Panels")]
+        public MenuButtonData menuButtons = new();
         [Header("Score Milestones")]
         public MilestoneData milestones = new();
         [Header("Coin")]
@@ -48,11 +50,47 @@ namespace Jam50033
         [Header("UI Text")]
         public TextData[] texts = Array.Empty<TextData>();
         [Header("UI Buttons")]
+        [Tooltip("Presets for buttons without MenuButtonStyle. The themed menu buttons use Menu Button Panels above.")]
         public ButtonData[] buttons = Array.Empty<ButtonData>();
         [Header("UI Outlines")]
         public OutlineData[] outlines = Array.Empty<OutlineData>();
         [Header("UI Images")]
         public ImageData[] images = Array.Empty<ImageData>();
+
+        [Serializable]
+        public sealed class MenuButtonData
+        {
+            [Header("Shape")]
+            [Tooltip("Button width and height in Canvas UI units.")]
+            public Vector2 size = new Vector2(280f, 72f);
+            public Color panelColor = new Color(0.1f, 0.07f, 0.24f, 1f);
+            [Range(0f, 1f)] public float panelOpacity = 0.85f;
+            public Color outlineColor = new Color(0.84f, 0.82f, 1f, 1f);
+            [Min(0f)] public float outlineWidth = 3f;
+            [Min(0f)] public float cornerRadius = 18f;
+            [Header("Labels")]
+            public Font font;
+            [Min(1)] public int fontSize = 36;
+            public FontStyle fontStyle;
+            public Color textColor = new Color(1f, 0.95f, 0.84f, 1f);
+            [Header("Hover and Keyboard Selection")]
+            public ColorBlock colors = new ColorBlock
+            {
+                normalColor = new Color(0.7f, 0.7f, 0.85f, 0.8f),
+                highlightedColor = Color.white,
+                selectedColor = Color.white,
+                pressedColor = new Color(0.8f, 0.75f, 1f, 1f),
+                disabledColor = new Color(0.4f, 0.4f, 0.5f, 0.4f),
+                colorMultiplier = 1f,
+                fadeDuration = 0.08f
+            };
+            [Header("Title Screen Hint")]
+            public string hintText = "//  PRESS SPACE  //";
+            public Font hintFont;
+            [Min(1)] public int hintFontSize = 22;
+            public FontStyle hintFontStyle = FontStyle.Italic;
+            public Color hintColor = new Color(0.84f, 0.82f, 1f, 0.95f);
+        }
 
         [Serializable]
         public sealed class ScorePanelData

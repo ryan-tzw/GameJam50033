@@ -65,6 +65,30 @@ MonoBehaviour:
     tileGap: 0
     labelFontSize: 14
     labelWidth: 120
+  menuButtons:
+    size: {x: 280, y: 72}
+    panelColor: {r: 0.1, g: 0.07, b: 0.24, a: 1}
+    panelOpacity: 0.85
+    outlineColor: {r: 0.84, g: 0.82, b: 1, a: 1}
+    outlineWidth: 3
+    cornerRadius: 18
+    font: {fileID: 12800000, guid: a6d559bb6675c14cb8892d98d5875e5d, type: 3}
+    fontSize: 36
+    fontStyle: 0
+    textColor: {r: 1, g: 0.95, b: 0.84, a: 1}
+    colors:
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
+      m_ColorMultiplier: 1
+      m_FadeDuration: 0.08
+    hintText: //  PRESS SPACE  //
+    hintFont: {fileID: 12800000, guid: 2783af3c8d951ef5e8c19a312b92856e, type: 3}
+    hintFontSize: 22
+    hintFontStyle: 2
+    hintColor: {r: 0.84, g: 0.82, b: 1, a: 0.95}
   scorePanel:
     rollDuration: 0.2
     useCommaSeparators: 1
@@ -311,7 +335,7 @@ MonoBehaviour:
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 32
     fontStyle: 0
-    color: {r: 0.101960786, g: 0.16862746, b: 0.27450982, a: 1}
+    color: {r: 1, g: 0.95, b: 0.86, a: 1}
     alignment: 4
     lineSpacing: 1
     text: Main Menu
@@ -329,7 +353,7 @@ MonoBehaviour:
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 32
     fontStyle: 0
-    color: {r: 0.101960786, g: 0.16862746, b: 0.27450982, a: 1}
+    color: {r: 1, g: 0.95, b: 0.86, a: 1}
     alignment: 4
     lineSpacing: 1
     text: Restart
@@ -365,10 +389,10 @@ MonoBehaviour:
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 20
     fontStyle: 0
-    color: {r: 0.9098039, g: 0.9098039, b: 0.8980392, a: 0.8627451}
+    color: {r: 0.84, g: 0.82, b: 1, a: 0.9}
     alignment: 4
     lineSpacing: 1
-    text: Space to start
+    text: PRESS SPACE
     dynamicText: 0
   - name: TitleScene/Title Canvas/Title
     font: {fileID: 12800000, guid: 08e912f05e45047ecabb90fbc0936391, type: 3}
@@ -383,16 +407,16 @@ MonoBehaviour:
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 32
     fontStyle: 0
-    color: {r: 0.101960786, g: 0.16862746, b: 0.27450982, a: 1}
+    color: {r: 1, g: 0.95, b: 0.86, a: 1}
     alignment: 4
     lineSpacing: 1
-    text: Start
+    text: START
     dynamicText: 0
   - name: TestScene/Game Over Canvas/Game Over Panel/Main Menu Button/Label
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 32
     fontStyle: 0
-    color: {r: 0.101960786, g: 0.16862746, b: 0.27450982, a: 1}
+    color: {r: 1, g: 0.95, b: 0.86, a: 1}
     alignment: 4
     lineSpacing: 1
     text: Main Menu
@@ -401,7 +425,7 @@ MonoBehaviour:
     font: {fileID: 12800000, guid: 4af7eb6e6dbff3c749a008bf168a9e1a, type: 3}
     fontSize: 32
     fontStyle: 0
-    color: {r: 0.101960786, g: 0.16862746, b: 0.27450982, a: 1}
+    color: {r: 1, g: 0.95, b: 0.86, a: 1}
     alignment: 4
     lineSpacing: 1
     text: Restart
@@ -427,70 +451,50 @@ MonoBehaviour:
   buttons:
   - name: GameScene/Game Over Canvas/Game Over Panel/Main Menu Button
     colors:
-      m_NormalColor: {r: 0.7764706, g: 0.65882355, b: 0.44313726, a: 1}
-      m_HighlightedColor: {r: 1, g: 0.8980392, b: 0.6627451, a: 1}
-      m_PressedColor: {r: 0.7254902, g: 0.5921569, b: 0.35686275, a: 1}
-      m_SelectedColor: {r: 0.9843137, g: 0.8392157, b: 0.5686275, a: 1}
-      m_DisabledColor: {r: 0.5411765, g: 0.54509807, b: 0.56078434, a: 1}
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
   - name: GameScene/Game Over Canvas/Game Over Panel/Restart Button
     colors:
-      m_NormalColor: {r: 0.7764706, g: 0.65882355, b: 0.44313726, a: 1}
-      m_HighlightedColor: {r: 1, g: 0.8980392, b: 0.6627451, a: 1}
-      m_PressedColor: {r: 0.7254902, g: 0.5921569, b: 0.35686275, a: 1}
-      m_SelectedColor: {r: 0.9843137, g: 0.8392157, b: 0.5686275, a: 1}
-      m_DisabledColor: {r: 0.5411765, g: 0.54509807, b: 0.56078434, a: 1}
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
   - name: TitleScene/Title Canvas/Start Button
     colors:
-      m_NormalColor: {r: 0.7764706, g: 0.65882355, b: 0.44313726, a: 1}
-      m_HighlightedColor: {r: 1, g: 0.8980392, b: 0.6627451, a: 1}
-      m_PressedColor: {r: 0.7254902, g: 0.5921569, b: 0.35686275, a: 1}
-      m_SelectedColor: {r: 0.9843137, g: 0.8392157, b: 0.5686275, a: 1}
-      m_DisabledColor: {r: 0.5411765, g: 0.54509807, b: 0.56078434, a: 1}
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
   - name: TestScene/Game Over Canvas/Game Over Panel/Main Menu Button
     colors:
-      m_NormalColor: {r: 0.7764706, g: 0.65882355, b: 0.44313726, a: 1}
-      m_HighlightedColor: {r: 1, g: 0.8980392, b: 0.6627451, a: 1}
-      m_PressedColor: {r: 0.7254902, g: 0.5921569, b: 0.35686275, a: 1}
-      m_SelectedColor: {r: 0.9843137, g: 0.8392157, b: 0.5686275, a: 1}
-      m_DisabledColor: {r: 0.5411765, g: 0.54509807, b: 0.56078434, a: 1}
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
   - name: TestScene/Game Over Canvas/Game Over Panel/Restart Button
     colors:
-      m_NormalColor: {r: 0.7764706, g: 0.65882355, b: 0.44313726, a: 1}
-      m_HighlightedColor: {r: 1, g: 0.8980392, b: 0.6627451, a: 1}
-      m_PressedColor: {r: 0.7254902, g: 0.5921569, b: 0.35686275, a: 1}
-      m_SelectedColor: {r: 0.9843137, g: 0.8392157, b: 0.5686275, a: 1}
-      m_DisabledColor: {r: 0.5411765, g: 0.54509807, b: 0.56078434, a: 1}
+      m_NormalColor: {r: 0.7, g: 0.7, b: 0.85, a: 0.8}
+      m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_PressedColor: {r: 0.8, g: 0.75, b: 1, a: 1}
+      m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+      m_DisabledColor: {r: 0.4, g: 0.4, b: 0.5, a: 0.4}
       m_ColorMultiplier: 1
       m_FadeDuration: 0.08
-  outlines:
-  - name: GameScene/Game Over Canvas/Game Over Panel/Main Menu Button
-    color: {r: 0.2809274, g: 0.38743868, b: 0.5566038, a: 1}
-    distance: {x: 4, y: -4}
-    useGraphicAlpha: 1
-  - name: GameScene/Game Over Canvas/Game Over Panel/Restart Button
-    color: {r: 0.2809274, g: 0.38743868, b: 0.5566038, a: 1}
-    distance: {x: 4, y: -4}
-    useGraphicAlpha: 1
-  - name: TitleScene/Title Canvas/Start Button
-    color: {r: 0.2809274, g: 0.38743868, b: 0.5566038, a: 1}
-    distance: {x: 4, y: -4}
-    useGraphicAlpha: 1
-  - name: TestScene/Game Over Canvas/Game Over Panel/Main Menu Button
-    color: {r: 0.2809274, g: 0.38743868, b: 0.5566038, a: 1}
-    distance: {x: 4, y: -4}
-    useGraphicAlpha: 1
-  - name: TestScene/Game Over Canvas/Game Over Panel/Restart Button
-    color: {r: 0.2809274, g: 0.38743868, b: 0.5566038, a: 1}
-    distance: {x: 4, y: -4}
-    useGraphicAlpha: 1
+  outlines: []
   images:
   - name: GameScene/Game Over Canvas/Game Over Panel
     sprite: {fileID: 0}
