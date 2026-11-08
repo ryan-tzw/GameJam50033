@@ -43,6 +43,7 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (PauseMenuController.IsPaused) return;
             if (menuPending)
             {
                 menuPending = false;

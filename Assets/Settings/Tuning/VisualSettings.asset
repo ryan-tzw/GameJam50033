@@ -99,6 +99,14 @@ MonoBehaviour:
     outlineWidth: 2
     cornerRadius: 14
     labelWidth: 120
+  pauseMenu:
+    overlayColor: {r: 0.025, g: 0.045, b: 0.08, a: 0.8}
+    headingFont: {fileID: 12800000, guid: 08e912f05e45047ecabb90fbc0936391, type: 3}
+    headingSize: 70
+    headingColor: {r: 1, g: 0.95, b: 0.86, a: 1}
+    headingPosition: {x: 0, y: 165}
+    firstButtonY: 35
+    buttonSpacing: 90
   menuButtons:
     size: {x: 280, y: 72}
     panelColor: {r: 0.16705541, g: 0.10439658, b: 0.3207547, a: 1}

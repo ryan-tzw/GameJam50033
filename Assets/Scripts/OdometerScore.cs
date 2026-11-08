@@ -107,6 +107,7 @@ namespace Jam50033
 
         private void LateUpdate()
         {
+            if (PauseMenuController.IsPaused) return;
             foreach (Reel reel in reels)
             {
                 if (reel.position == reel.target) continue;

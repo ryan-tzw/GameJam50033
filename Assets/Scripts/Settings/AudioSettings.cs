@@ -23,6 +23,8 @@ namespace Jam50033
         [Range(0f, 1f)] public float titleMusicVolume = 0.7f;
         public AudioClip gameMusic;
         [Range(0f, 1f)] public float gameMusicVolume = 0.25f;
+        [Range(0f, 1f), Tooltip("Music volume multiplier while the pause menu is open.")]
+        public float pausedMusicMultiplier = 0.35f;
         [Header("Game Over Music")]
         public AudioClip gameOverMusic;
         [Range(0f, 1f)] public float gameOverMusicVolume = 0.4f;

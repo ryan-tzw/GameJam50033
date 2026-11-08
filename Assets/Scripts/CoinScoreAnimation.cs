@@ -118,6 +118,7 @@ namespace Jam50033
 
         private void Update()
         {
+            if (PauseMenuController.IsPaused) return;
             float delta = Time.unscaledDeltaTime;
             for (int i = flights.Count - 1; i >= 0; i--)
             {

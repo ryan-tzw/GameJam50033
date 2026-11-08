@@ -27,6 +27,8 @@ namespace Jam50033
         public ScorePanelData scorePanel = new();
         [Header("Menu Button Panels")]
         public MenuButtonData menuButtons = new();
+        [Header("Pause Menu")]
+        public PauseMenuData pauseMenu = new();
         [Header("Score Milestones")]
         public MilestoneData milestones = new();
         [Header("Coin")]
@@ -58,6 +60,18 @@ namespace Jam50033
         public OutlineData[] outlines = Array.Empty<OutlineData>();
         [Header("UI Images")]
         public ImageData[] images = Array.Empty<ImageData>();
+
+        [Serializable]
+        public sealed class PauseMenuData
+        {
+            public Color overlayColor = new Color(0.025f, 0.045f, 0.08f, 0.8f);
+            public Font headingFont;
+            [Min(1)] public int headingSize = 70;
+            public Color headingColor = new Color(1f, 0.95f, 0.86f, 1f);
+            public Vector2 headingPosition = new Vector2(0f, 165f);
+            public float firstButtonY = 35f;
+            [Min(1f)] public float buttonSpacing = 90f;
+        }
 
         [Serializable]
         public sealed class MenuButtonData
