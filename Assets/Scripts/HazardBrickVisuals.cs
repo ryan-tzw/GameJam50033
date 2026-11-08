@@ -15,7 +15,6 @@ namespace Jam50033
         [SerializeField, HideInInspector] private Material originalMaterial;
         private MaterialPropertyBlock properties;
         private MaterialPropertyBlock originalProperties;
-        private float phase;
         private float hitFlashRemaining;
 
         private static readonly int GlowColor = Shader.PropertyToID("_GlowColor");
@@ -36,7 +35,6 @@ namespace Jam50033
             properties = new MaterialPropertyBlock();
             originalProperties = new MaterialPropertyBlock();
             spriteRenderer.GetPropertyBlock(originalProperties);
-            phase = 0f;
             hitFlashRemaining = 0f;
             ApplyVisuals();
         }
@@ -46,12 +44,6 @@ namespace Jam50033
             if (Application.IsPlaying(gameObject))
             {
                 hitFlashRemaining = Mathf.Max(0f, hitFlashRemaining - Time.unscaledDeltaTime);
-            }
-
-            if (Application.IsPlaying(gameObject) && Time.timeScale > 0f)
-            {
-                // Scaled time keeps the pulse still when game over pauses gameplay.
-                phase = Mathf.Repeat(phase + Time.deltaTime * visualHazard.pulseSpeed, 1f);
             }
 
             ApplyVisuals();
@@ -72,6 +64,10 @@ namespace Jam50033
 
             spriteRenderer.sharedMaterial = visualHazard.hazardMaterial;
             spriteRenderer.GetPropertyBlock(properties);
+            // A shared scaled clock synchronizes newly spawned hazards and freezes during pauses.
+            float phase = Application.IsPlaying(gameObject)
+                ? Mathf.Repeat(Time.time * visualHazard.pulseSpeed, 1f)
+                : 0f;
             float pulse = 0.5f - Mathf.Cos(phase * Mathf.PI * 2f) * 0.5f;
             float flash = Mathf.Clamp01(hitFlashRemaining / Mathf.Max(0.01f, visualHazard.hitFlashDuration));
             properties.SetColor(GlowColor, Color.Lerp(visualHazard.outlineColor, Color.white, flash));
