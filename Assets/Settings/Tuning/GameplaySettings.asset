@@ -40,18 +40,18 @@ MonoBehaviour:
     verticalRepeatDelay: 0.13
     verticalRepeatInterval: 0.03
   scoring:
-    pointsPerTile: 10
+    pointsPerTile: 20
     points: 50
     gemPoints: 150
     milestones:
     - intervalInTiles: 50
-      bonus: 100
+      bonus: 1000
       emphasize: 0
     - intervalInTiles: 100
-      bonus: 250
+      bonus: 2000
       emphasize: 0
     - intervalInTiles: 500
-      bonus: 750
+      bonus: 10000
       emphasize: 1
   entryZone:
     tilesFromRight: 13
