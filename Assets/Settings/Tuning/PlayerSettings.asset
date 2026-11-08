@@ -24,7 +24,7 @@ MonoBehaviour:
     groundLayers:
       serializedVersion: 2
       m_Bits: 4294967295
-    climbSpeed: 1.5
+    climbSpeed: 1.7
     stepSpeed: 4
     wallProbeDistance: 0.15
     climbGapAllowance: 1

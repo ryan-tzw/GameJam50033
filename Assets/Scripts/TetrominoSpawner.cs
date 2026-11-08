@@ -15,6 +15,10 @@ namespace Jam50033
         private Tetromino activePiece;
         private int preferredSpawnRow;
         private RunDifficulty difficulty;
+        private QueuedPiece activeData;
+        private int lastHoldAttemptFrame = -1;
+        public QueuedPiece? HeldPiece { get; private set; }
+        public bool HoldLocked { get; private set; }
         public readonly struct QueuedPiece
         {
             public readonly Tetromino.Shape shape;
@@ -37,6 +41,8 @@ namespace Jam50033
             spawnedCount = 0;
             preferredSpawnRow = spawnPieces.spawnRow;
             upcoming.Clear();
+            HeldPiece = null;
+            HoldLocked = false;
             FillQueue();
         }
 
@@ -57,6 +63,7 @@ namespace Jam50033
             if (activePiece != null && activePiece.IsPlaced)
             {
                 preferredSpawnRow = activePiece.PlacedRow;
+                HoldLocked = false;
             }
 
             if (activePiece == null || activePiece.IsPlaced || activePiece.IsDiscarded)
@@ -72,16 +79,53 @@ namespace Jam50033
                 return;
             }
 
-            QueuedPiece next = upcoming[0];
-            Tetromino.Shape shape = next.shape;
-            activePiece = Instantiate(spawnPieces.tetrominoPrefab);
-            activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
-            activePiece.name = $"Tetromino {shape}";
-            activePiece.Initialize(stageArea, shape, row, spawnPieces.spawnInset - spawnPieces.spawnRightOffset);
-            activePiece.AssignHazardMask(next.hazardMask, spawnPieces.hazardBrickPrefab);
+            CreatePiece(upcoming[0], row);
             spawnedCount++;
             upcoming.RemoveAt(0);
             FillQueue();
+        }
+
+        internal bool TryHold(Tetromino piece)
+        {
+            if (Time.timeScale <= 0f || StripSceneTransition.IsRunning || piece == null || piece != activePiece ||
+                piece.IsPlaced || piece.IsDiscarded) return false;
+            // A replacement created this frame must not consume the same C press again.
+            if (lastHoldAttemptFrame == Time.frameCount) return false;
+            lastHoldAttemptFrame = Time.frameCount;
+            if (HoldLocked || !TryFindSpawnRow(out int row))
+            {
+                GetComponent<TetrominoAudio>().PlayReject();
+                return false;
+            }
+
+            QueuedPiece outgoing = activeData;
+            QueuedPiece? incoming = HeldPiece;
+            // Disable immediately so the old piece and its ghost cannot receive input this frame.
+            piece.gameObject.SetActive(false);
+            Destroy(piece.gameObject);
+            HeldPiece = outgoing;
+            HoldLocked = true;
+            if (incoming.HasValue) CreatePiece(incoming.Value, row);
+            else
+            {
+                CreatePiece(upcoming[0], row);
+                spawnedCount++;
+                upcoming.RemoveAt(0);
+                FillQueue();
+            }
+            return true;
+        }
+
+        private void CreatePiece(QueuedPiece next, int row)
+        {
+            activeData = next;
+            Tetromino.Shape shape = next.shape;
+            activePiece = Instantiate(spawnPieces.tetrominoPrefab);
+            activePiece.SetSoundEffects(GetComponent<TetrominoAudio>());
+            activePiece.SetSpawner(this);
+            activePiece.name = $"Tetromino {shape}";
+            activePiece.Initialize(stageArea, shape, row, spawnPieces.spawnInset - spawnPieces.spawnRightOffset);
+            activePiece.AssignHazardMask(next.hazardMask, spawnPieces.hazardBrickPrefab);
         }
 
         private void FillQueue()

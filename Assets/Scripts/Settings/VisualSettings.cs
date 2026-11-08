@@ -21,6 +21,8 @@ namespace Jam50033
         public TetrominoData tetromino = new();
         [Header("Next Piece Preview")]
         public NextPreviewData nextPreview = new();
+        [Header("Hold Piece Preview")]
+        public HoldPreviewData holdPreview = new();
         [Header("Score Panel")]
         public ScorePanelData scorePanel = new();
         [Header("Menu Button Panels")]
@@ -132,7 +134,7 @@ namespace Jam50033
         }
 
         [Serializable]
-        public sealed class NextPreviewData
+        public class NextPreviewData
         {
             public Font font;
             public Sprite blockSprite;
@@ -151,6 +153,19 @@ namespace Jam50033
             [Min(0f)] public float tileGap = 0f;
             [Min(1)] public int labelFontSize = 14;
             [Min(1f)] public float labelWidth = 120f;
+        }
+
+        [Serializable]
+        public sealed class HoldPreviewData : NextPreviewData
+        {
+            [Range(0f, 1f), Tooltip("Opacity multiplier for the pocketed piece while hold is locked.")]
+            public float lockedOpacity = 0.4f;
+
+            public HoldPreviewData()
+            {
+                panelSize = new Vector2(160f, 64f);
+                margin = new Vector2(16f, 16f);
+            }
         }
 
         [Serializable]

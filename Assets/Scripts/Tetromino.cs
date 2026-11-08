@@ -37,6 +37,8 @@ namespace Jam50033
         private int heldVerticalDirection;
         private float verticalRepeatRemaining;
         private TetrominoAudio soundEffects;
+        private TetrominoSpawner spawner;
+        internal void SetSpawner(TetrominoSpawner owner) => spawner = owner;
         private bool wasSoftDropping;
         private float softDropDistance;
         private float rejectShakeRemaining;
@@ -360,6 +362,11 @@ namespace Jam50033
             Keyboard keyboard = StripSceneTransition.IsRunning ? null : Keyboard.current;
             if (keyboard != null)
             {
+                if (keyboard.cKey.wasPressedThisFrame && spawner != null)
+                {
+                    spawner.TryHold(this);
+                    return;
+                }
                 if (keyboard.qKey.wasPressedThisFrame)
                 {
                     TryRotate(-1);

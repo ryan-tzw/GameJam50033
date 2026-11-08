@@ -65,6 +65,23 @@ MonoBehaviour:
     tileGap: 0
     labelFontSize: 14
     labelWidth: 120
+  holdPreview:
+    font: {fileID: 12800000, guid: 2783af3c8d951ef5e8c19a312b92856e, type: 3}
+    blockSprite: {fileID: 5865670524570963042, guid: 0eb0e64912a3c80c4b3b05ebe9a7ffae, type: 3}
+    panelFillSprite: {fileID: 21300000, guid: 6bbb283a21ec6e8a8be88faf51f05895, type: 3}
+    panelOutlineSprite: {fileID: 21300000, guid: d32fcc799a1323690b63b6a02363dc33, type: 3}
+    panelSize: {x: 160, y: 64}
+    margin: {x: 16, y: 16}
+    panelColor: {r: 0.100000024, g: 0.05, b: 0.2, a: 1}
+    panelOpacity: 0.7
+    outlineColor: {r: 0.84, g: 0.82, b: 1, a: 1}
+    outlineWidth: 2
+    cornerRadius: 14
+    tileSize: 14
+    tileGap: 0
+    labelFontSize: 14
+    labelWidth: 120
+    lockedOpacity: 0.4
   scorePanel:
     rollDuration: 0.2
     rollUp: 1

@@ -8,6 +8,7 @@ namespace Jam50033
     public sealed class NextQueueUI : MonoBehaviour
     {
         [SerializeField] private VisualSettings visualSettings;
+        [SerializeField] private bool holdPreview;
         [SerializeField] private TetrominoSpawner spawner;
         [SerializeField] private SlicedQueuePanel panel;
         [SerializeField] private Text label;
@@ -21,17 +22,16 @@ namespace Jam50033
         {
             if (visualSettings == null || panel == null || label == null || tiles == null || tiles.Length != 20 ||
                 hazardOverlays == null || hazardOverlays.Length != 20) return;
-            VisualSettings.NextPreviewData settings = visualSettings.nextPreview;
+            VisualSettings.NextPreviewData settings = holdPreview ? visualSettings.holdPreview : visualSettings.nextPreview;
             RectTransform root = (RectTransform)transform;
-            root.anchorMin = root.anchorMax = Vector2.one;
-            root.pivot = Vector2.one;
-            root.anchoredPosition = new Vector2(-settings.margin.x, -settings.margin.y);
+            root.anchorMin = root.anchorMax = root.pivot = new Vector2(holdPreview ? 0f : 1f, 1f);
+            root.anchoredPosition = new Vector2(holdPreview ? settings.margin.x : -settings.margin.x, -settings.margin.y);
             root.sizeDelta = settings.panelSize;
             Color fill = settings.panelColor;
             fill.a = settings.panelOpacity;
             panel.Configure(fill, settings.outlineColor, settings.outlineWidth, settings.cornerRadius,
                 settings.labelWidth, settings.panelFillSprite, settings.panelOutlineSprite);
-            label.text = "//   NEXT   //";
+            label.text = holdPreview ? "//   HOLD   //" : "//   NEXT   //";
             label.font = settings.font;
             label.fontSize = settings.labelFontSize;
             label.color = settings.outlineColor;
@@ -40,9 +40,21 @@ namespace Jam50033
 
             for (int slot = 0; slot < 5; slot++)
             {
+                bool visible = !holdPreview || (slot == 0 && (!Application.isPlaying ||
+                    (spawner != null && spawner.HeldPiece.HasValue)));
+                for (int i = 0; i < 4; i++)
+                {
+                    tiles[slot * 4 + i].gameObject.SetActive(visible);
+                    if (!visible) hazardOverlays[slot * 4 + i].gameObject.SetActive(false);
+                }
+                if (!visible) continue;
                 bool queued = Application.isPlaying && spawner != null && spawner.Upcoming.Count > slot;
-                Tetromino.Shape shape = queued ? spawner.Upcoming[slot].shape : (Tetromino.Shape)slot;
-                int mask = queued ? spawner.Upcoming[slot].hazardMask : 0;
+                TetrominoSpawner.QueuedPiece piece = holdPreview && spawner != null && spawner.HeldPiece.HasValue
+                    ? spawner.HeldPiece.Value : queued ? spawner.Upcoming[slot] : new TetrominoSpawner.QueuedPiece((Tetromino.Shape)slot, 0);
+                Tetromino.Shape shape = piece.shape;
+                int mask = piece.hazardMask;
+                float opacity = holdPreview && Application.isPlaying && spawner != null && spawner.HoldLocked
+                    ? visualSettings.holdPreview.lockedOpacity : 1f;
                 Vector2Int minimum = Tetromino.GetShapeCell(shape, 0, 0);
                 Vector2Int maximum = minimum;
                 for (int i = 1; i < 4; i++)
@@ -53,7 +65,7 @@ namespace Jam50033
                 }
                 Vector2 centre = ((Vector2)minimum + maximum) * 0.5f;
                 float slotWidth = (settings.panelSize.x - 36f) / 5f;
-                Vector2 position = new Vector2((slot - 2) * slotWidth, 3f);
+                Vector2 position = new Vector2(holdPreview ? 0f : (slot - 2) * slotWidth, 3f);
                 for (int i = 0; i < 4; i++)
                 {
                     bool hazard = (mask & (1 << i)) != 0;
@@ -64,16 +76,22 @@ namespace Jam50033
                     tile.rectTransform.anchoredPosition = position +
                         ((Vector2)Tetromino.GetShapeCell(shape, i, 0) - centre) * (settings.tileSize + settings.tileGap);
                     tile.sprite = settings.blockSprite;
-                    tile.color = hazard ? visualSettings.hazard.baseColor : ShapeColor(shape);
+                    tile.color = WithOpacity(hazard ? visualSettings.hazard.baseColor : ShapeColor(shape), opacity);
                     hazardOverlays[index].gameObject.SetActive(hazard);
                     if (hazard)
                     {
-                        hazardOverlays[index].Configure(Color.clear, visualSettings.hazard.outlineColor,
-                            1f, 0f, 0f, true, visualSettings.hazard.symbolColor,
-                            visualSettings.hazard.exclamationColor);
+                        hazardOverlays[index].Configure(Color.clear, WithOpacity(visualSettings.hazard.outlineColor, opacity),
+                            1f, 0f, 0f, true, WithOpacity(visualSettings.hazard.symbolColor, opacity),
+                            WithOpacity(visualSettings.hazard.exclamationColor, opacity));
                     }
                 }
             }
+        }
+
+        private static Color WithOpacity(Color color, float opacity)
+        {
+            color.a *= opacity;
+            return color;
         }
 
         private Color ShapeColor(Tetromino.Shape shape)
