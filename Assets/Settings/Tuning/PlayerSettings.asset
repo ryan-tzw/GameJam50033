@@ -3,20 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: a599b8a5aace4d36bb687d0468ea1b9e
-    type: 3
+  m_Script: {fileID: 11500000, guid: a599b8a5aace4d36bb687d0468ea1b9e, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.PlayerSettings
   movement:
@@ -37,10 +30,7 @@ MonoBehaviour:
     climbGapAllowance: 1
     staggerFallDistance: 2
     staggerDuration: 0.375
-    staggerClip:
-      fileID: 7400000
-      guid: b919ceb1190c88e74a18aa72b42b1ac3
-      type: 2
+    staggerClip: {fileID: 7400000, guid: b919ceb1190c88e74a18aa72b42b1ac3, type: 2}
     initialMomentum: 0
     momentumBuildTime: 5
     climbMomentumDecay: 0.35
@@ -50,19 +40,10 @@ MonoBehaviour:
     maximumMomentumSpeedBonus: 0.3
     fastRunStartSpeed: 1.2
     fastRunStopSpeed: 1.1
-    standingSprite:
-      fileID: 1768599190028779529
-      guid: a11535981f9df56ae82e6f61eca4e78d
-      type: 3
+    standingSprite: {fileID: 1768599190028779529, guid: a11535981f9df56ae82e6f61eca4e78d, type: 3}
   hurt:
-    hurtClip:
-      fileID: 7400000
-      guid: b1021fe8ae816ed8f8f061323777fc60
-      type: 2
-    flashMaterial:
-      fileID: 2100000
-      guid: f4d86c8a332209fbfb9c32a93fff27fd
-      type: 2
+    hurtClip: {fileID: 7400000, guid: b1021fe8ae816ed8f8f061323777fc60, type: 2}
+    flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
     hurtDuration: 0.5
     whiteFlashDuration: 0.5
     shakeStrength: 0.03
@@ -70,14 +51,8 @@ MonoBehaviour:
     knockbackDistance: 1.2
     knockbackDuration: 0.4
   death:
-    flashMaterial:
-      fileID: 2100000
-      guid: f4d86c8a332209fbfb9c32a93fff27fd
-      type: 2
-    burstPrefab:
-      fileID: 315514531842761780
-      guid: 9694f3a19985d12ab9b0c950c7ac24fb
-      type: 3
+    flashMaterial: {fileID: 2100000, guid: f4d86c8a332209fbfb9c32a93fff27fd, type: 2}
+    burstPrefab: {fileID: 315514531842761780, guid: 9694f3a19985d12ab9b0c950c7ac24fb, type: 3}
     flashDuration: 0.035
   deathBurst:
     particleCount: 18
@@ -88,59 +63,25 @@ MonoBehaviour:
     minimumSize: 0.14
     maximumSize: 0.22
     palette:
-    - r: 1
-      g: 1
-      b: 1
-      a: 1
-    - r: 0.85882354
-      g: 0.8039216
-      b: 0.74509805
-      a: 1
-    - r: 0.2901961
-      g: 0.42745098
-      b: 0.5882353
-      a: 1
-    - r: 0.50980395
-      g: 0.72156864
-      b: 0.8156863
-      a: 1
-    - r: 0.94509804
-      g: 0.83137256
-      b: 0.74509805
-      a: 1
-    - r: 0.16862746
-      g: 0.18431373
-      b: 0.37254903
-      a: 1
+    - {r: 1, g: 1, b: 1, a: 1}
+    - {r: 0.85882354, g: 0.8039216, b: 0.74509805, a: 1}
+    - {r: 0.2901961, g: 0.42745098, b: 0.5882353, a: 1}
+    - {r: 0.50980395, g: 0.72156864, b: 0.8156863, a: 1}
+    - {r: 0.94509804, g: 0.83137256, b: 0.74509805, a: 1}
+    - {r: 0.16862746, g: 0.18431373, b: 0.37254903, a: 1}
   dust:
     frames:
-    - fileID: 1931290762606268786
-      guid: 2133fc4c32669c5088ca61f91c39e778
-      type: 3
-    - fileID: -2110224601219122855
-      guid: 2133fc4c32669c5088ca61f91c39e778
-      type: 3
-    - fileID: -662114749134144608
-      guid: 2133fc4c32669c5088ca61f91c39e778
-      type: 3
-    - fileID: 3935753800758297965
-      guid: 2133fc4c32669c5088ca61f91c39e778
-      type: 3
-    - fileID: -2981551147060892193
-      guid: 2133fc4c32669c5088ca61f91c39e778
-      type: 3
+    - {fileID: 1931290762606268786, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
+    - {fileID: -2110224601219122855, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
+    - {fileID: -662114749134144608, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
+    - {fileID: 3935753800758297965, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
+    - {fileID: -2981551147060892193, guid: 2133fc4c32669c5088ca61f91c39e778, type: 3}
     flipX: 0
     framesPerSecond: 12
     burstSize: 1.5
-    offsetInCells:
-      x: -0.45
-      y: 0
+    offsetInCells: {x: -0.45, y: 0}
     opacity: 0.7
-    spawnGizmoColor:
-      r: 0
-      g: 1
-      b: 1
-      a: 1
+    spawnGizmoColor: {r: 0, g: 1, b: 1, a: 1}
     spawnGizmoSize: 0.33
   fallDeath:
     fallMargin: 0.25

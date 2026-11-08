@@ -3,23 +3,54 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject:
-    fileID: 0
-  m_PrefabInstance:
-    fileID: 0
-  m_PrefabAsset:
-    fileID: 0
-  m_GameObject:
-    fileID: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script:
-    fileID: 11500000
-    guid: 3abb6ffeb4ba38b2e961997d5b75833b
-    type: 3
+  m_Script: {fileID: 11500000, guid: 3abb6ffeb4ba38b2e961997d5b75833b, type: 3}
   m_Name: SpawnSettings
   m_EditorClassIdentifier: Assembly-CSharp::Jam50033.SpawnSettings
   minimumGroupGapInTiles: 1
+  pieces:
+    tetrominoPrefab: {fileID: 7053026960480931781, guid: c122ef960befc3b9a89b95a07a05145e, type: 3}
+    hazardBrickPrefab: {fileID: 3973176616428203104, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+    hazardFreePieces: 5
+    spawnRow: 7
+    spawnInset: 0
+    spawnRightOffset: 2
+    spawnGizmoColor: {r: 0.3, g: 1, b: 1, a: 0.7}
+  difficulty:
+    progressionDuration: 120
+    initialOneHazardChance: 0.075
+    initialTwoHazardChance: 0.025
+    finalOneHazardChance: 0.125
+    finalTwoHazardChance: 0.075
+    maximumSpeedMultiplier: 1.8
+  hazardClusters:
+    tetrominoPrefab: {fileID: 7053026960480931781, guid: c122ef960befc3b9a89b95a07a05145e, type: 3}
+    hazardBrickPrefab: {fileID: 3973176616428203104, guid: 380dd6541e65108238e07b8c37475377, type: 3}
+    initialDelay: 8
+    minimumSpawnInterval: 6
+    maximumSpawnInterval: 10
+    minimumSpawnRow: 1
+    maximumSpawnRow: 12
+    spawnOffset: 2
+    spawnGizmoColor: {r: 1, g: 0.3, b: 0.3, a: 0.8}
+  coins:
+    coinPrefab: {fileID: 3701432770085358338, guid: b773ae4b3b2df86a298ce22b94d18032, type: 3}
+    initialDelay: 1
+    minimumSpawnInterval: 3
+    maximumSpawnInterval: 5
+    minimumSpawnRow: 3
+    maximumSpawnRow: 12
+    spawnOffset: 2
+    lineWeight: 50
+    singleOrPairWeight: 25
+    tetrominoWeight: 15
+    minimumLineLength: 3
+    maximumLineLength: 6
   islands:
     islandPrefab: {fileID: 1966309135127576212, guid: 96e467f3b4b7f6650882c825a5dbc102, type: 3}
     initialDelay: 12
@@ -32,64 +63,3 @@ MonoBehaviour:
     maximumChestCoins: 10
     minimumChestGems: 1
     maximumChestGems: 3
-  pieces:
-    tetrominoPrefab:
-      fileID: 7053026960480931781
-      guid: c122ef960befc3b9a89b95a07a05145e
-      type: 3
-    hazardBrickPrefab:
-      fileID: 3973176616428203104
-      guid: 380dd6541e65108238e07b8c37475377
-      type: 3
-    hazardFreePieces: 5
-    spawnRow: 7
-    spawnInset: 0
-    spawnRightOffset: 2
-    spawnGizmoColor:
-      r: 0.3
-      g: 1
-      b: 1
-      a: 0.7
-  difficulty:
-    progressionDuration: 120
-    initialOneHazardChance: 0.075
-    initialTwoHazardChance: 0.025
-    finalOneHazardChance: 0.125
-    finalTwoHazardChance: 0.075
-    maximumSpeedMultiplier: 1.8
-  hazardClusters:
-    tetrominoPrefab:
-      fileID: 7053026960480931781
-      guid: c122ef960befc3b9a89b95a07a05145e
-      type: 3
-    hazardBrickPrefab:
-      fileID: 3973176616428203104
-      guid: 380dd6541e65108238e07b8c37475377
-      type: 3
-    initialDelay: 8
-    minimumSpawnInterval: 6
-    maximumSpawnInterval: 10
-    minimumSpawnRow: 1
-    maximumSpawnRow: 12
-    spawnOffset: 2
-    spawnGizmoColor:
-      r: 1
-      g: 0.3
-      b: 0.3
-      a: 0.8
-  coins:
-    coinPrefab:
-      fileID: 3701432770085358338
-      guid: b773ae4b3b2df86a298ce22b94d18032
-      type: 3
-    initialDelay: 1
-    minimumSpawnInterval: 3
-    maximumSpawnInterval: 5
-    minimumSpawnRow: 3
-    maximumSpawnRow: 12
-    spawnOffset: 2
-    lineWeight: 50
-    singleOrPairWeight: 25
-    tetrominoWeight: 15
-    minimumLineLength: 3
-    maximumLineLength: 6
