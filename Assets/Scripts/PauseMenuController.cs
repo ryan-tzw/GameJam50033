@@ -17,7 +17,6 @@ namespace Jam50033
         [SerializeField] private Text heading;
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button audioButton;
-        [SerializeField] private Button controlsButton;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button mainMenuButton;
         [SerializeField] private Image[] icons;
@@ -29,7 +28,7 @@ namespace Jam50033
 
         private void Awake()
         {
-            buttons = new[] { resumeButton, audioButton, controlsButton, restartButton, mainMenuButton };
+            buttons = new[] { resumeButton, audioButton, restartButton, mainMenuButton };
             panel.SetActive(false);
             MenuAudio.Initialize(audioSettings);
         }
@@ -83,7 +82,7 @@ namespace Jam50033
                 text.rectTransform.sizeDelta = new Vector2(style.iconButtonSize + style.iconButtonGap, captionHeight);
                 text.rectTransform.anchoredPosition = Vector2.down * (style.iconButtonSize * 0.5f + style.captionGap + captionHeight * 0.5f);
                 Image icon = icons[i - 1];
-                icon.sprite = i == 1 ? style.audioIcon : i == 2 ? style.controlsIcon : i == 3 ? style.restartIcon : style.mainMenuIcon;
+                icon.sprite = i == 1 ? style.audioIcon : i == 2 ? style.restartIcon : style.mainMenuIcon;
                 icon.color = style.iconColor;
                 icon.preserveAspect = true;
                 icon.rectTransform.sizeDelta = Vector2.one * style.iconSize;
